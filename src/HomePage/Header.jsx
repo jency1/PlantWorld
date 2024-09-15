@@ -14,8 +14,8 @@ function Header() {
               className={`${styles["image1"]}`}
             />
             <div className="d-flex flex-column justify-content-center align-items-center">
-              <div className="h1">Trees Plants to Grow in</div>
-              <div className="h1">Your Living Room</div>
+              <div className="h1 text-center">Trees Plants to Grow in</div>
+              <div className="h1 text-center">Your Living Room</div>
               <button
                 className={`py-1 mt-4 mb-2 btn btn-success btn-block ${styles["btn"]}`}
               >
