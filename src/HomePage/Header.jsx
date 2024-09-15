@@ -41,7 +41,7 @@ function Header() {
                 generally for forestry, land reclamation. It deffers from the
                 transplantation of larger trees in arboriculture.
               </p>
-              <div className="mt-3 text-success pointer-cursor">Learn More</div>
+              <div className="mt-1 text-success pointer-cursor">Learn More</div>
               <div className="d-flex flex-column flex-md-row gap-5 mt-5">
                 <div className="text-center text-md-start">
                   <h5>
