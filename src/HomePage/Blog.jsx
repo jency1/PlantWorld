@@ -1,14 +1,15 @@
-
-import React from 'react';
-import './Blog.css';
+import React from "react";
+import "./Blog.css";
 
 function Blog() {
   return (
     <div className="App">
       <header className="header">
-        <h1>From Our Blog</h1>
+        <div className="h1 mt-5 text-success text-center">
+          Follow us on Instagram
+        </div>
       </header>
-      
+
       <div className="blog-container">
         <BlogCard
           imageUrl="https://images.thdstatic.com/productImages/aeb01cb3-de79-41e0-b77c-a479f963d3d5/svn/united-nursery-house-plants-zz10hw-64_300.jpg"
@@ -71,7 +72,9 @@ const BlogCard = ({ imageUrl, date, title, description }) => (
       <h3>{title}</h3>
       <p>{description}</p>
       <br />
-      <button>Read More</button>
+      <button className={`py-1 mt-4 mb-2 btn btn-success btn-block`}>
+        Shop Now
+      </button>
     </div>
   </div>
 );
