@@ -71,7 +71,7 @@ const BlogCard = ({ imageUrl, date, title, description }) => (
       <p>{description}</p>
       <br />
       <button className={`py-1 mt-4 mb-2 btn btn-success btn-block`}>
-        Shop Now
+        Read More
       </button>
     </div>
   </div>
