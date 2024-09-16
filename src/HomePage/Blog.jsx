@@ -5,9 +5,7 @@ function Blog() {
   return (
     <div className="App">
       <header className="header">
-        <div className="h1 mt-5 text-success text-center">
-          Follow us on Instagram
-        </div>
+        <div className="h1 mt-5 text-success text-center">From our Blog</div>
       </header>
 
       <div className="blog-container">
