@@ -4,6 +4,8 @@ import FeaturedProducts from "./FeaturedProducts";
 import ShopByCategory from "./ShopByCategory";
 import FollowOnInstagram from "./FollowOnInstagram";
 import Feedback from "./Feedback";
+import Blog from "./Blog";
+
 
 function HomePage() {
   return (
@@ -14,6 +16,7 @@ function HomePage() {
       <ShopByCategory />
       <Feedback />
       <FollowOnInstagram />
+      <Blog />
     </>
   );
 }
