@@ -1,5 +1,7 @@
 import "../index.css";
 
+import { FaLongArrowAltRight } from "react-icons/fa";
+
 function ShopByCategory() {
   return (
     <div className="d-flex flex-column align-items-center ">
@@ -45,8 +47,12 @@ function ShopByCategory() {
           </div>
         </div>
       </div>
-      <button className="w-30 mt-4 mb-2 btn btn-success btn-block">
-        View All
+
+      <button className="d-flex align-items-center w-30 mt-4 mb-2 btn btn-success btn-block">
+        <span> View All</span>
+        <span className="ms-2 mb-1">
+          <FaLongArrowAltRight />
+        </span>
       </button>
     </div>
   );

@@ -3,6 +3,7 @@ import Header from "./Header";
 import FeaturedProducts from "./FeaturedProducts";
 import ShopByCategory from "./ShopByCategory";
 import FollowOnInstagram from "./FollowOnInstagram";
+import Feedback from "./Feedback";
 
 function HomePage() {
   return (
@@ -11,6 +12,7 @@ function HomePage() {
       <Header />
       <FeaturedProducts />
       <ShopByCategory />
+      <Feedback />
       <FollowOnInstagram />
     </>
   );

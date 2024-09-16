@@ -4,9 +4,12 @@ function FollowOnInstagram() {
       <div className="h1 mt-5 text-success text-center">
         Follow us on Instagram
       </div>
-      <div className="container mt-2 mb-5">
+      <div
+        className="container mt-2 mb-5 "
+        style={{ padding: "0 9rem 0 9rem" }}
+      >
         <div className="row">
-          <div className="col-8 container p-10">
+          <div className="col-8 container p-8">
             <div className="row ">
               <div className="col-5 text-center mt-3">
                 <img
