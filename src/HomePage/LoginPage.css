@@ -1,0 +1,54 @@
+/* LoginPage.css */
+
+body {
+  margin: 0;
+  padding: 0;
+  /* background-image: url('https://img.freepik.com/free-photo/houseplants-border-wooden-white-background_53876-128835.jpg'); */
+  background-size: cover; /* Cover the entire background */
+  background-position: center; /* Center the background image */
+  background-attachment: fixed; /* Fix the background image */
+  /* background-image: url('https://thumb.photo-ac.com/61/6180a8979e13387fff612a8863782b30_t.jpeg'); */
+  background-image: url('https://static.vecteezy.com/system/resources/thumbnails/032/840/658/small_2x/green-plant-on-wooden-table-with-blurred-generative-ai-background-photo.jpeg');
+  /* background-image: url('https://img.freepik.com/premium-photo/wooden-table-with-blur-background-nature-forest_1421-1910.jpg'); */
+}
+
+.container {
+  /* background-color: rgb(213, 242, 213);  */
+  border-radius: 10px; /* Rounded corners for the container */
+  padding: 20px; /* Padding inside the container */
+}
+
+.card {
+  border-radius: 10px; /* Rounded corners for the card */
+  background-color: #d8f3dcab;
+}
+
+.card-body {
+  padding: 20px; /* Padding inside the card */
+}
+
+.btn-primary {
+  background-color: #28a745; /* Custom green color for the button */
+  border-color: #28a745;
+}
+
+.btn-primary:hover {
+  background-color: #218838; /* Darker green on hover */
+  border-color: #1e7e34;
+}
+
+.text-primary {
+  color: #28a745; /* Custom green color for primary text */
+}
+
+.text-secondary {
+  color: #6c757d; /* Gray color for secondary text */
+}
+
+.card.shadow-lg {
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Larger shadow for card */
+}
+
+.card.border-primary {
+  border-color: #28a745; /* Custom green border color */
+}
