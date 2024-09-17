@@ -5,9 +5,7 @@ function Blog() {
   return (
     <div className="App">
       <header className="header">
-        <div className="h1 mt-5 text-success text-center">
-          Follow us on Instagram
-        </div>
+        <div className="h1 mt-5 text-success text-center">From our Blog</div>
       </header>
 
       <div className="blog-container">
@@ -73,7 +71,7 @@ const BlogCard = ({ imageUrl, date, title, description }) => (
       <p>{description}</p>
       <br />
       <button className={`py-1 mt-4 mb-2 btn btn-success btn-block`}>
-        Shop Now
+        Read More
       </button>
     </div>
   </div>
