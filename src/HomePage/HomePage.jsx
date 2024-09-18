@@ -5,7 +5,7 @@ import ShopByCategory from "./ShopByCategory";
 import FollowOnInstagram from "./FollowOnInstagram";
 import Feedback from "./Feedback";
 import Blog from "./Blog";
-
+import LoginPage from "./LoginPage";
 
 function HomePage() {
   return (
@@ -18,6 +18,8 @@ function HomePage() {
       <FollowOnInstagram />
       <Blog />
 
+      <br />
+      <LoginPage />
     </>
   );
 }
