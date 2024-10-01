@@ -57,7 +57,7 @@ function Feedback() {
         Our Customer Feedback
       </div>
       <div className="row justify-content-center">
-        <div className="mt-3 w-75">
+        <div className="mt-3 col-9">
           <div className={`${styles["testimonial-card"]} position-relative`}>
             <div
               className={`${styles["testimonial-arrow"]} ${styles["left-arrow"]}`}
@@ -66,82 +66,84 @@ function Feedback() {
               <FaArrowLeft />
             </div>
 
-            <div className={`${styles["testimonial-content"]} d-flex`}>
-              <div className={`${styles["testimonial-image"]}`}>
-                <img
-                  src={feedbacks[current].image}
-                  className="img-fluid rounded-circle"
-                  alt="Customer"
-                />
-                <div
-                  className={`${styles["quote"]}`}
-                  onClick={handleRightClick}
-                >
-                  <FaQuoteRight />
+            <div className="container">
+              <div className={`${styles["testimonial-content"]} d-flex`}>
+                <div className={`${styles["testimonial-image"]} `}>
+                  <img
+                    src={feedbacks[current].image}
+                    className="img-fluid rounded-circle"
+                    alt="Customer"
+                  />
+                  <div
+                    className={`${styles["quote"]}`}
+                    onClick={handleRightClick}
+                  >
+                    <FaQuoteRight />
+                  </div>
                 </div>
-              </div>
-              <div className={`ml-4 ${styles["testimonial-text"]}`}>
-                <div
-                  className={`${styles["testimonial-rating"]} d-flex align-items-center`}
-                >
-                  <span
-                    className={`${styles["stars"]} ${
-                      1 <= feedbacks[current].rating
-                        ? styles.filled
-                        : styles["not-filled"]
-                    }`}
+                <div className={`ml-4 ${styles["testimonial-text"]}`}>
+                  <div
+                    className={`${styles["testimonial-rating"]} d-flex align-items-center`}
                   >
-                    ★
-                  </span>
-                  <span
-                    className={`${styles["stars"]} ${
-                      2 <= feedbacks[current].rating
-                        ? styles.filled
-                        : styles["not-filled"]
-                    }`}
-                  >
-                    ★
-                  </span>
-                  <span
-                    className={`${styles["stars"]} ${
-                      3 <= feedbacks[current].rating
-                        ? styles.filled
-                        : styles["not-filled"]
-                    }`}
-                  >
-                    ★
-                  </span>
-                  <span
-                    className={`${styles["stars"]} ${
-                      4 <= feedbacks[current].rating
-                        ? styles.filled
-                        : styles["not-filled"]
-                    }`}
-                  >
-                    ★
-                  </span>
-                  <span
-                    className={`${styles["stars"]} ${
-                      5 <= feedbacks[current].rating
-                        ? styles.filled
-                        : styles["not-filled"]
-                    }`}
-                  >
-                    ★
-                  </span>
-                  <span className={`${styles["rating-value"]} ml-2`}>
-                    {feedbacks[current].rating}.0
-                  </span>
+                    <span
+                      className={`${styles["stars"]} ${
+                        1 <= feedbacks[current].rating
+                          ? styles.filled
+                          : styles["not-filled"]
+                      }`}
+                    >
+                      ★
+                    </span>
+                    <span
+                      className={`${styles["stars"]} ${
+                        2 <= feedbacks[current].rating
+                          ? styles.filled
+                          : styles["not-filled"]
+                      }`}
+                    >
+                      ★
+                    </span>
+                    <span
+                      className={`${styles["stars"]} ${
+                        3 <= feedbacks[current].rating
+                          ? styles.filled
+                          : styles["not-filled"]
+                      }`}
+                    >
+                      ★
+                    </span>
+                    <span
+                      className={`${styles["stars"]} ${
+                        4 <= feedbacks[current].rating
+                          ? styles.filled
+                          : styles["not-filled"]
+                      }`}
+                    >
+                      ★
+                    </span>
+                    <span
+                      className={`${styles["stars"]} ${
+                        5 <= feedbacks[current].rating
+                          ? styles.filled
+                          : styles["not-filled"]
+                      }`}
+                    >
+                      ★
+                    </span>
+                    <span className={`${styles["rating-value"]} ml-2`}>
+                      {feedbacks[current].rating}.0
+                    </span>
+                  </div>
+                  <p className={`${styles["testimonial-quote"]}`}>
+                    {feedbacks[current].content}
+                  </p>
+                  <div className={`${styles["testimonial-name"]}`}>
+                    {feedbacks[current].name}
+                  </div>
+                  <p className={`${styles["testimonial-title"]}`}>
+                    {feedbacks[current].occupation}
+                  </p>
                 </div>
-                <p className={`${styles["testimonial-quote"]}`}>
-                  {feedbacks[current].content}
-                </p>
-                <div className={`${styles["testimonial-name"]}`}>
-                  {feedbacks[current].name}
-                </div>
-                <p className={`${styles["testimonial-title"]}`}>
-                  {feedbacks[current].occupation}
-                </p>
               </div>
             </div>
 

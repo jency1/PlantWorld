@@ -70,7 +70,7 @@
   font-size: 20px;
   cursor: pointer;
   position: absolute;
-  top: 2%;
+  top: -4%;
   right: 10%;
 }
 .testimonial-image img {
@@ -119,4 +119,23 @@
 .testimonial-title {
   font-size: 14px;
   color: #777;
+}
+
+@media only screen and (max-width: 61.99875em) {
+  .testimonial-content {
+    flex-direction: column;
+  }
+
+  .testimonial-text {
+    margin-left: 0;
+  }
+
+  .testimonial-image img {
+    width: 180px;
+    height: 180px;
+  }
+
+  .testimonial-card {
+    padding: 5px;
+  }
 }
