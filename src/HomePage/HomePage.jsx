@@ -17,7 +17,6 @@ function HomePage() {
       <Feedback />
       <FollowOnInstagram />
       <Blog />
-
       <br />
       <LoginPage />
     </>
