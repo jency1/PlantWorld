@@ -1,5 +1,6 @@
 import { useState } from "react";
-import "./Feedback.css";
+import styles from "./Feedback.module.css";
+
 import { FaArrowRight, FaArrowLeft, FaQuoteRight } from "react-icons/fa";
 
 const feedbacks = [
@@ -51,86 +52,101 @@ function Feedback() {
   }
 
   return (
-    <div className="container testimonial-container">
+    <div className={`container ${styles["testimonial-container"]}`}>
       <div className="h1 mt-5 text-success text-center">
         Our Customer Feedback
       </div>
       <div className="row justify-content-center">
         <div className="mt-3 w-75">
-          <div className="testimonial-card position-relative">
+          <div className={`${styles["testimonial-card"]} position-relative`}>
             <div
-              className="testimonial-arrow left-arrow"
+              className={`${styles["testimonial-arrow"]} ${styles["left-arrow"]}`}
               onClick={handleLeftClick}
             >
               <FaArrowLeft />
             </div>
 
-            <div className="testimonial-content d-flex">
-              <div className="testimonial-image">
+            <div className={`${styles["testimonial-content"]} d-flex`}>
+              <div className={`${styles["testimonial-image"]}`}>
                 <img
                   src={feedbacks[current].image}
                   className="img-fluid rounded-circle"
                   alt="Customer"
                 />
-                <div className="quote" onClick={handleRightClick}>
+                <div
+                  className={`${styles["quote"]}`}
+                  onClick={handleRightClick}
+                >
                   <FaQuoteRight />
                 </div>
               </div>
-              <div className="ml-4 testimonial-text">
-                <div className="testimonial-rating d-flex align-items-center">
+              <div className={`ml-4 ${styles["testimonial-text"]}`}>
+                <div
+                  className={`${styles["testimonial-rating"]} d-flex align-items-center`}
+                >
                   <span
-                    className={`stars ${
-                      1 <= feedbacks[current].rating ? "filled" : "not-filled"
+                    className={`${styles["stars"]} ${
+                      1 <= feedbacks[current].rating
+                        ? styles.filled
+                        : styles["not-filled"]
                     }`}
                   >
                     ★
                   </span>
                   <span
-                    className={`stars ${
-                      2 <= feedbacks[current].rating ? "filled" : "not-filled"
+                    className={`${styles["stars"]} ${
+                      2 <= feedbacks[current].rating
+                        ? styles.filled
+                        : styles["not-filled"]
                     }`}
                   >
                     ★
                   </span>
                   <span
-                    className={`stars ${
-                      3 <= feedbacks[current].rating ? "filled" : "not-filled"
+                    className={`${styles["stars"]} ${
+                      3 <= feedbacks[current].rating
+                        ? styles.filled
+                        : styles["not-filled"]
                     }`}
                   >
                     ★
                   </span>
                   <span
-                    className={`stars ${
-                      4 <= feedbacks[current].rating ? "filled" : "not-filled"
+                    className={`${styles["stars"]} ${
+                      4 <= feedbacks[current].rating
+                        ? styles.filled
+                        : styles["not-filled"]
                     }`}
                   >
                     ★
                   </span>
                   <span
-                    className={`stars ${
-                      5 <= feedbacks[current].rating ? "filled" : "not-filled"
+                    className={`${styles["stars"]} ${
+                      5 <= feedbacks[current].rating
+                        ? styles.filled
+                        : styles["not-filled"]
                     }`}
                   >
                     ★
                   </span>
-                  <span className="rating-value ml-2">
+                  <span className={`${styles["rating-value"]} ml-2`}>
                     {feedbacks[current].rating}.0
                   </span>
                 </div>
-                <p className="testimonial-quote">
+                <p className={`${styles["testimonial-quote"]}`}>
                   {feedbacks[current].content}
                 </p>
-                <div className="testimonial-name">
+                <div className={`${styles["testimonial-name"]}`}>
                   {feedbacks[current].name}
                 </div>
-                <p className="testimonial-title">
+                <p className={`${styles["testimonial-title"]}`}>
                   {feedbacks[current].occupation}
                 </p>
               </div>
             </div>
 
             <div
-              className="testimonial-arrow right-arrow"
+              className={`${styles["testimonial-arrow"]} ${styles["right-arrow"]}`}
               onClick={handleRightClick}
             >
               <FaArrowRight />
