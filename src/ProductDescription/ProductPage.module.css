@@ -1,0 +1,88 @@
+/* Adjusted the container padding */
+.container {
+  padding-left: 30px;
+  padding-right: 30px;
+}
+
+/* Larger product image */
+.productImage {
+  width: 100%;
+  max-width: 450px; /* Adjusted the max width for larger images */
+  margin-bottom: 20px;
+}
+
+/* Thumbnail wrapper and individual thumbnails */
+.thumbnailWrapper {
+  display: flex;
+  justify-content: center;
+}
+
+.thumbnail {
+  width: 80px; /* Increased thumbnail size */
+  height: 80px;
+  margin: 0 10px; /* Added more spacing between thumbnails */
+  border: 1px solid #ddd;
+  border-radius: 5px;
+}
+
+/* Product Title */
+.productTitle {
+  font-size: 2.2rem;
+  font-weight: bold;
+  margin-bottom: 20px;
+}
+
+/* Product Description */
+.productDescription {
+  font-size: 1.2rem;
+  margin-bottom: 20px;
+}
+
+/* Product Price */
+.productPrice {
+  font-size: 1.8rem;
+  color: #4d933e;
+  margin-bottom: 20px;
+}
+
+/* Quantity input styling */
+.quantityInput {
+  width: 80px;
+  text-align: center;
+}
+
+/* Product details list */
+.productDetails {
+  list-style: none;
+  padding: 0;
+}
+
+.productDetails li {
+  font-size: 1.1rem;
+  margin-bottom: 10px;
+}
+
+.sectionTitle {
+  font-size: 2rem;
+  font-weight: bold;
+  color: #333;
+}
+
+/* Styling for the description text */
+.descriptionText {
+  font-size: 1.2rem;
+  line-height: 1.6;
+  color: #555;
+}
+
+/* Styling for the list items (topics) */
+.topicItem {
+  font-size: 1.1rem;
+  display: flex;
+  align-items: center;
+}
+
+.topicItem i {
+  margin-right: 10px;
+  font-size: 1.2rem;
+}

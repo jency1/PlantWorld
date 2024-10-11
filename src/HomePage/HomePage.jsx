@@ -6,6 +6,7 @@ import FollowOnInstagram from "./FollowOnInstagram";
 import Feedback from "./Feedback";
 import Blog from "./Blog";
 import LoginPage from "./LoginPage";
+import FeatureSection from "./FeatureSection";
 
 function HomePage() {
   return (
@@ -16,6 +17,7 @@ function HomePage() {
       <ShopByCategory />
       <Feedback />
       <FollowOnInstagram />
+      <FeatureSection />
       <Blog />
       <br />
       <LoginPage />
