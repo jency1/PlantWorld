@@ -1,5 +1,5 @@
 import React from "react";
-import styles from './Footer.module.css'; // Importing the CSS module
+import styles from "./Footer.module.css"; // Importing the CSS module
 
 const Footer = () => {
   return (
@@ -16,8 +16,9 @@ const Footer = () => {
           <h2>PlantWorld</h2>
           <br />
           <p>
-            The seed of gardening is a love that never dies, but it never grows to the
-            enduring happiness that the love of gardening provides to nature.
+            The seed of gardening is a love that never dies, but it never grows
+            to the enduring happiness that the love of gardening provides to
+            nature.
           </p>
           {/* <div className={styles.socialIcons}>
             <a href="#"><i className="fab fa-instagram"></i></a>
@@ -27,20 +28,32 @@ const Footer = () => {
         </div>
 
         <div className={styles.footerSection}>
-        <div>
-        <h3>Pages</h3>
-        <ul>
-            <li><a href="#">Home</a></li>
-            <li><a href="#">About</a></li>
-            <li><a href="#">Blog</a></li>
-            <li><a href="#">Team</a></li>
-            <li><a href="#">Contact</a></li>
-            <li><a href="#">Services</a></li>
-          </ul>
-        </div>
+          <div>
+            <h3>Pages</h3>
+            <ul>
+              <li>
+                <a href="#">Home</a>
+              </li>
+              <li>
+                <a href="#">About</a>
+              </li>
+              <li>
+                <a href="#">Blog</a>
+              </li>
+              <li>
+                <a href="#">Team</a>
+              </li>
+              <li>
+                <a href="#">Contact</a>
+              </li>
+              <li>
+                <a href="#">Services</a>
+              </li>
+            </ul>
+          </div>
 
-        {/* <div className={styles.footerSection}> */}
-        {/* <div>
+          {/* <div className={styles.footerSection}> */}
+          {/* <div>
           <h3>Utility Pages</h3>
           <ul>
             <li><a href="#">Style Guide</a></li>
@@ -50,11 +63,11 @@ const Footer = () => {
             <li><a href="#">Changelog</a></li>
           </ul>
         </div> */}
-      </div>
+        </div>
       </div>
 
       <div className={styles.footerBottom}>
-        <p>Copyright © 2024 Lustria. All Rights Reserved</p>
+        <p>Copyright © 2024 PlantWorld. All Rights Reserved</p>
       </div>
     </footer>
   );

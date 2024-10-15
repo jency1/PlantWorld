@@ -13,12 +13,12 @@
   padding: 20px;
 }
 
-.blogContainer {
+/* .blogContainer { */
   /* display: flex;
   justify-content: space-around;
   flex-wrap: wrap; */
   /* padding: 20px; */
-}
+/* } */
 
 .blogCard {
   background-color: #f4f4f4;

@@ -1,7 +1,9 @@
 import "./App.css";
-import HomePage from "./HomePage/HomePage";
-import LoginPage from "./LoginPage/LoginPage";
 import Navbar from "./Navbar/Navbar";
+import HomePage from "./HomePage/HomePage";
+import ShopPageLayout from "./ShopPage/ShopPageLayout";
+import DescriptionLayout from "./ProductDescription/DescriptionLayout";
+import LoginPage from "./LoginPage/LoginPage";
 
 function App() {
   return (

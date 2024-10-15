@@ -2,7 +2,7 @@ import Navbar from "../Navbar/Navbar";
 import ProductDescription from "./ProductDescription";
 import SimilarProducts from "./SimilarProducts";
 import FeatureSection from "../HomePage/FeatureSection";
-// import Footer from "../Footer/Footer";
+import Footer from "../Footer/Footer";
 
 function DescriptionLayout() {
   return (
@@ -11,7 +11,7 @@ function DescriptionLayout() {
       <ProductDescription />
       <SimilarProducts />
       <FeatureSection />
-      {/* <Footer /> */}
+      <Footer />
     </div>
   );
 }
