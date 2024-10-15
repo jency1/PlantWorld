@@ -5,6 +5,7 @@ import ShopByCategory from "./ShopByCategory";
 import FollowOnInstagram from "./FollowOnInstagram";
 import Feedback from "./Feedback";
 import Blog from "./Blog";
+import LoginPage from "../LoginPage/LoginPage";
 import FeatureSection from "./FeatureSection";
 
 // import LoginPage from "./LoginPage";
@@ -24,13 +25,6 @@ function HomePage() {
       <FollowOnInstagram />
       <FeatureSection />
       <Blog />
-
-      {/* <DescriptionLayout /> */}
-
-      {/* <ShopPageLayout /> */}
-
-      {/* <br />
-      <LoginPage /> */}
     </>
   );
 }

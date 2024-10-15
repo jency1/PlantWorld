@@ -1,0 +1,54 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.App {
+  font-family: Arial, sans-serif;
+  text-align: center;
+}
+
+.header {
+  padding: 20px;
+}
+
+.blogContainer {
+  /* display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap; */
+  /* padding: 20px; */
+}
+
+.blogCard {
+  background-color: #f4f4f4;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  /* max-width: 380px; */
+  margin-bottom: 10px;
+  padding: 15px;
+  text-align: left;
+}
+
+.blogCard img {
+  width: 100%;
+  height: 100%;
+  border-radius: 10px;
+}
+
+.blogContent {
+  padding: 10px 0;
+}
+
+.blogContent h3 {
+  font-size: 1.5em;
+  margin-top: 10px;
+}
+
+.blogContent button {
+  color: white;
+  border: none;
+  padding: 10px;
+  border-radius: 5px;
+  cursor: pointer;
+}
