@@ -7,8 +7,8 @@ function App() {
   return (
     <>
       {/* <Navbar /> */}
-      {/* <HomePage /> */}
-      <LoginPage />
+      <HomePage />
+      {/* <LoginPage /> */}
     </>
   );
 }

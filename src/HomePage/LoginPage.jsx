@@ -1,47 +1,59 @@
 import React from 'react';
-import 'bootstrap/dist/css/bootstrap.min.css';
-import './LoginPage.css'; 
+import styles from './LoginPage.module.css'; // Importing CSS module
 
 const LoginPage = () => {
   return (
-    <div className="container">
-      <div className="row justify-content-center mt-5">
-        <div className="col-md-6">
-          <div className="card shadow-lg border-sucess">
-            <div className="card-body">
-              <h2 className="text-center text-success">Welcome to PlantWorld</h2>
-              <p className="text-center text-secondary">One stop for all the variety of plants</p>
+    <div className={styles.container}>
+      <div className={styles.overlay}>
+        <div className={styles.left}>
+          <h1>Welcome to PlantWorld</h1>
+          <p>One stop for all the variety of plants</p>
+          <div className={styles.plantImage}>
+            <img
+              src="https://www.thespruce.com/thmb/kZaATDHMKsRqLOK8WXVb1uXSueA=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/GettyImages-1306072284-59622f95871f42a895ad583d471d407a.jpg" // Replace with the actual plant image URL
+              alt="Plant"
+              className={styles.image}
+            />
+          </div>
+        </div>
 
-              <form>
-                <div className="mb-3">
-                  <label htmlFor="username" className="form-label text-success">User Name</label>
-                  <input
-                    type="text"
-                    className="form-control"
-                    id="username"
-                    placeholder="Enter your username"
-                  />
-                </div>
-                <div className="mb-3">
-                  <label htmlFor="password" className="form-label text-success">Password</label>
-                  <input
-                    type="password"
-                    className="form-control"
-                    id="password"
-                    placeholder="Enter your password"
-                  />
-                </div>
-                <div className="text-center mb-3">
-                  <a href="#" className="text-muted">Forgot Password?</a>
-                </div>
-                <div className="text-center mb-3">
-                  <button type="submit" className="btn btn-success">Login</button>
-                </div>
-                <div className="text-center">
-                  <p>Don't have an account? <a href="#">Signup</a></p>
-                </div>
-              </form>
+        <div className={styles.right}>
+          <div className={styles.logo}>
+            <img
+              src="https://img.favpng.com/17/3/25/green-logo-leaf-world-earth-png-favpng-eiAyJTAZY7GivLj4theV84zcw.jpg" // Replace with the actual logo image URL
+              alt="PlantWorld Logo"
+              className={styles.logoImage}
+            />
+            <h1>PlantWorld</h1>
+          </div>
+          <h3>Login in to your PlantWorld Account</h3>
+
+          <form className={styles.form}>
+            <label htmlFor="username">User Name</label>
+            <input
+              type="text"
+              id="username"
+              placeholder="username"
+              className={styles.input}
+            />
+
+            <label htmlFor="password">Password</label>
+            <input
+              type="password"
+              id="password"
+              placeholder="****"
+              className={styles.input}
+            />
+
+            <div className={styles.forgotPassword}>
+              <a href="#">Forgot Password?</a>
             </div>
+
+            <button type="submit" className={styles.loginButton}>Login</button>
+          </form>
+
+          <div className={styles.signup}>
+            Don't have an account? <a href="#">Signup</a>
           </div>
         </div>
       </div>
