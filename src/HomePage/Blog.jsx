@@ -37,7 +37,8 @@ function Blog() {
           </div>
         </div>
       </div>
-
+      <br />
+      <br />
       <Footer />
     </div>
   );
