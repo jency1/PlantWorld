@@ -1,0 +1,33 @@
+/* Full component background */
+.featureSection {
+  /* background-color: #f8f9fa; Light grey background for the whole component */
+  padding: 30px 0;
+}
+
+/* Styling for individual feature items */
+.featureItem {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 10px;
+}
+
+/* Icon styling */
+.icon {
+  color: #4d933e; /* Green color for the icons */
+  font-size: 2.5rem;
+}
+
+/* Feature title styling */
+.featureTitle {
+  font-size: 1.25rem;
+  font-weight: bold;
+  color: #333;
+}
+
+/* Feature subtitle styling */
+.featureSubtitle {
+  font-size: 0.9rem;
+  color: #666;
+}

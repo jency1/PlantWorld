@@ -1,16 +1,16 @@
 import React from 'react';
-import styles from './LoginPage.module.css'; // Importing CSS module
+import styles from './LoginPage.module.css'; 
 
 const LoginPage = () => {
   return (
     <div className={styles.container}>
       <div className={styles.overlay}>
         <div className={styles.left}>
-          <h1>Welcome to PlantWorld</h1>
+          <h2>Welcome to PlantWorld</h2>
           <p>One stop for all the variety of plants</p>
           <div className={styles.plantImage}>
             <img
-              src="https://www.thespruce.com/thmb/kZaATDHMKsRqLOK8WXVb1uXSueA=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/GettyImages-1306072284-59622f95871f42a895ad583d471d407a.jpg" // Replace with the actual plant image URL
+              src="https://www.piedmont.org/media/BlogImages/indoor-plants-and-your-health.jpg" 
               alt="Plant"
               className={styles.image}
             />
@@ -19,12 +19,12 @@ const LoginPage = () => {
 
         <div className={styles.right}>
           <div className={styles.logo}>
-            <img
-              src="https://img.favpng.com/17/3/25/green-logo-leaf-world-earth-png-favpng-eiAyJTAZY7GivLj4theV84zcw.jpg" // Replace with the actual logo image URL
+            {/* <img
+              src="https://cdn.vectorstock.com/i/1000v/54/44/planet-earth-with-plant-logo-design-vector-29145444.jpg"
               alt="PlantWorld Logo"
               className={styles.logoImage}
-            />
-            <h1>PlantWorld</h1>
+            /> */}
+            <h2>PlantWorld</h2>
           </div>
           <h3>Login in to your PlantWorld Account</h3>
 

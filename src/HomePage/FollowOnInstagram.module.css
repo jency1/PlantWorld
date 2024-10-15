@@ -1,0 +1,13 @@
+.main-container {
+  padding: 0 9rem 0 9rem;
+}
+
+@media only screen and (max-width: 48em) {
+  .longImage {
+    height: 0;
+  }
+
+  .main-container {
+    padding: 0 4rem 0 4rem;
+  }
+}
