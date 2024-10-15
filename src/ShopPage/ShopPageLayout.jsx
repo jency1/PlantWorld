@@ -1,19 +1,19 @@
 import Navbar from "../Navbar/Navbar";
-import ProductDescription from "./ProductDescription";
-import SimilarProducts from "./SimilarProducts";
+import ShopHeader from "./ShopHeader";
+import ShopPlants from "./ShopPlants";
 import FeatureSection from "../HomePage/FeatureSection";
 // import Footer from "../Footer/Footer";
 
-function DescriptionLayout() {
+function ShopPageLayout() {
   return (
     <div>
       <Navbar />
-      <ProductDescription />
-      <SimilarProducts />
+      <ShopHeader />
+      <ShopPlants />
       <FeatureSection />
       {/* <Footer /> */}
     </div>
   );
 }
 
-export default DescriptionLayout;
+export default ShopPageLayout;

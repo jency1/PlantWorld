@@ -5,8 +5,13 @@ import ShopByCategory from "./ShopByCategory";
 import FollowOnInstagram from "./FollowOnInstagram";
 import Feedback from "./Feedback";
 import Blog from "./Blog";
-import LoginPage from "./LoginPage";
 import FeatureSection from "./FeatureSection";
+
+// import LoginPage from "./LoginPage";
+
+import DescriptionLayout from "../ProductDescription/DescriptionLayout";
+
+import ShopPageLayout from "../ShopPage/ShopPageLayout";
 
 function HomePage() {
   return (
@@ -19,8 +24,13 @@ function HomePage() {
       <FollowOnInstagram />
       <FeatureSection />
       <Blog />
-      <br />
-      <LoginPage />
+
+      {/* <DescriptionLayout /> */}
+
+      {/* <ShopPageLayout /> */}
+
+      {/* <br />
+      <LoginPage /> */}
     </>
   );
 }

@@ -1,0 +1,14 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.containerr {
+    background-color: #d8f3dca8;
+}
+
+.image1{
+    margin-top: 2rem;
+    width: 15rem;
+}
