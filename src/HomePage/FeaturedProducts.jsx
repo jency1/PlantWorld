@@ -16,7 +16,7 @@ function FeaturedProducts() {
         <div className="row">
           <div className="col-6 col-md-3 text-center mt-5">
             <img
-              src="/public/Featured Products/image1.jpg"
+              src="/Featured Products/image1.jpg"
               alt=""
               className="img-fluid custom-img"
             />
@@ -26,7 +26,7 @@ function FeaturedProducts() {
 
           <div className="col-6 col-md-3 text-center mt-5">
             <img
-              src="/public/Featured Products/image2.jpg"
+              src="/Featured Products/image2.jpg"
               alt=""
               className="img-fluid custom-img"
             />
@@ -36,7 +36,7 @@ function FeaturedProducts() {
 
           <div className="col-6 col-md-3 text-center mt-5">
             <img
-              src="/public/Featured Products/image3.jpg"
+              src="/Featured Products/image3.jpg"
               alt=""
               className="img-fluid custom-img"
             />
@@ -46,7 +46,7 @@ function FeaturedProducts() {
 
           <div className="col-6 col-md-3 text-center mt-5">
             <img
-              src="/public/Featured Products/image4.jpg"
+              src="/Featured Products/image4.jpg"
               alt=""
               className="img-fluid custom-img"
             />
@@ -56,7 +56,7 @@ function FeaturedProducts() {
 
           <div className="col-6 col-md-3 text-center mt-5">
             <img
-              src="/public/Featured Products/image5.jpg"
+              src="/Featured Products/image5.jpg"
               alt=""
               className="img-fluid custom-img"
             />
@@ -66,7 +66,7 @@ function FeaturedProducts() {
 
           <div className="col-6 col-md-3 text-center mt-5">
             <img
-              src="/public/Featured Products/image6.jpg"
+              src="/Featured Products/image6.jpg"
               alt=""
               className="img-fluid custom-img"
             />
@@ -76,7 +76,7 @@ function FeaturedProducts() {
 
           <div className="col-6 col-md-3 text-center mt-5">
             <img
-              src="/public/Featured Products/image7.jpg"
+              src="/Featured Products/image7.jpg"
               alt=""
               className="img-fluid custom-img"
             />
@@ -86,7 +86,7 @@ function FeaturedProducts() {
 
           <div className="col-6 col-md-3 text-center mt-5">
             <img
-              src="/public/Featured Products/image8.jpg"
+              src="/Featured Products/image8.jpg"
               alt=""
               className="img-fluid custom-img"
             />

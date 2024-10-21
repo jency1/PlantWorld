@@ -84,6 +84,8 @@ const ProductDescription = () => {
           </ul>
         </div>
       </div>
+      <br />
+      <br />
       <div className="container-fluid">
         <div className="row justify-content-center">
           <div className="col-lg-10 col-md-12">

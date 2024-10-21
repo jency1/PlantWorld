@@ -15,7 +15,7 @@ function ShopByCategory() {
         <div className="row">
           <div className="col-6 col-md-3 text-center mt-5">
             <img
-              src="/public/Shop By Category/outdoor.png"
+              src="/Shop By Category/outdoor.png"
               alt=""
               className="img-fluid rounded"
             />
@@ -23,7 +23,7 @@ function ShopByCategory() {
           </div>
           <div className="col-6 col-md-3 text-center mt-5">
             <img
-              src="/public/Shop By Category/indoor.png"
+              src="/Shop By Category/indoor.png"
               alt=""
               className="img-fluid rounded"
             />
@@ -31,7 +31,7 @@ function ShopByCategory() {
           </div>
           <div className="col-6 col-md-3 text-center mt-5">
             <img
-              src="/public/Shop By Category/terracebalcony.png"
+              src="/Shop By Category/terracebalcony.png"
               alt=""
               className="img-fluid rounded"
             />
@@ -39,7 +39,7 @@ function ShopByCategory() {
           </div>
           <div className="col-6 col-md-3 text-center mt-5">
             <img
-              src="/public/Shop By Category/officedesk.png"
+              src="/Shop By Category/officedesk.png"
               alt=""
               className="img-fluid rounded"
             />

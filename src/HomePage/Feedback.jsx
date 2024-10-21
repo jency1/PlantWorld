@@ -5,7 +5,7 @@ import { FaArrowRight, FaArrowLeft, FaQuoteRight } from "react-icons/fa";
 
 const feedbacks = [
   {
-    image: "/public/Feedback/testimonial3.jpg",
+    image: "/Feedback/testimonial3.jpg",
     content:
       "The plants I ordered have transformed my living space. They arrived perfectly packaged and in great condition. It's clear that the team really cares about plant health, and their website has tons of helpful care tips. I'll definitely be back for more!",
     name: "Sarah Patel",
@@ -13,7 +13,7 @@ const feedbacks = [
     occupation: "Owner, Maceba Restaurant ",
   },
   {
-    image: "/public/Feedback/testimonial2.jpeg",
+    image: "/Feedback/testimonial2.jpeg",
     content:
       "Great selection of plants! My monstera arrived with a slight bend, but the team guided me on how to care for it, and it's thriving now. The only reason I'm not giving 5 stars is that I wish the packaging was a bit more eco-friendly. Overall, a fantastic experience!",
     name: "Dhyey Dave",
@@ -21,7 +21,7 @@ const feedbacks = [
     occupation: "Owner, BSN Cafe",
   },
   {
-    image: "/public/Feedback/testimonial1.jpg",
+    image: "/Feedback/testimonial1.jpg",
     content:
       "I can't believe how much life these plants have brought to my home! The quality is exceptional, and the delivery was quick and seamless. I've bought plants from several places before, but nothing compares to the health and vibrancy of the ones from here. Highly recommended!",
     name: "Dianne Russell",

@@ -9,7 +9,7 @@ function Header() {
             className={`d-flex flex-column flex-md-row justify-content-evenly align-items-center ${styles["heading"]}`}
           >
             <img
-              src="/public/Home Page/header image.jpg"
+              src="/Home Page/header image.jpg"
               alt="Plant"
               className={`${styles["image1"]}`}
             />
@@ -23,7 +23,7 @@ function Header() {
               </button>
             </div>
             <img
-              src="/public/Home Page/header leaf.jpg"
+              src="/Home Page/header leaf.jpg"
               alt="Plant"
               className={`${styles["image2"]} img-fluid d-none d-md-block`}
             />
@@ -59,7 +59,7 @@ function Header() {
             </div>
             <div className="mt-4 ">
               <img
-                src="/public/Home Page/header image 3.jpg"
+                src="/Home Page/header image 3.jpg"
                 alt="Plant"
                 className="rounded-4 img-fluid mx-auto d-block"
               />
