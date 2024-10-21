@@ -4,9 +4,10 @@
     justify-content: center;
     align-items: center;
     height: 100vh;
-    background-image: url('https://www.thespruce.com/thmb/LcFPMZ1Bk2PiHXNJfvUhO4k7i24=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/grow-areca-palms-indoors-1902876-11-3b51235065c948c2bcc082e81ba08ca3.jpg'); /* Replace with actual background image URL */
+    /* background-image: url('https://www.thespruce.com/thmb/LcFPMZ1Bk2PiHXNJfvUhO4k7i24=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/grow-areca-palms-indoors-1902876-11-3b51235065c948c2bcc082e81ba08ca3.jpg'); */
     background-size: cover;
     background-position: center;
+    background-color: #ecffed;
   }
   
   .overlay {

@@ -1,5 +1,5 @@
 import React from "react";
-import styles from "./Footer.module.css"; // Importing the CSS module
+import styles from "./Footer.module.css"; 
 
 const Footer = () => {
   return (
@@ -7,9 +7,9 @@ const Footer = () => {
       <div className={styles.footerContent}>
         <div className={styles.footerSection}>
           <h3>Garden Care</h3>
-          <p>123 Bang Street Leviko, CA 8034, USA</p>
-          <p>+8801776438935</p>
-          <p>info@plantscare.com</p>
+          <p>123 Bang Street, CA 8034, Ahmedabad</p>
+          <p>+911776438935</p>
+          <p>info@plantworld.com</p>
         </div>
 
         <div className={styles.footerSection}>

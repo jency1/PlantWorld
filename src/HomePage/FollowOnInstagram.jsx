@@ -12,14 +12,14 @@ function FollowOnInstagram() {
             <div className="row">
               <div className="col-6 text-center mt-3">
                 <img
-                  src="/public/Shop By Category/image-1.jpg"
+                  src="/Shop By Category/image-1.jpg"
                   alt=""
                   className="w-100 h-100 img-fluid rounded"
                 />
               </div>
               <div className="col-6 text-center mt-3">
                 <img
-                  src="/public/Shop By Category/image-2.jpg"
+                  src="/Shop By Category/image-2.jpg"
                   alt=""
                   className="w-100  h-100 img-fluid rounded"
                 />
@@ -28,14 +28,14 @@ function FollowOnInstagram() {
             <div className="row">
               <div className="col-8 text-center mt-3">
                 <img
-                  src="/public/Shop By Category/image-3.jpg"
+                  src="/Shop By Category/image-3.jpg"
                   alt=""
                   className="w-100  h-100 img-fluid rounded"
                 />
               </div>
               <div className="col-4 text-center mt-3">
                 <img
-                  src="/public/Shop By Category/image-4.jpg"
+                  src="/Shop By Category/image-4.jpg"
                   alt=""
                   className="w-100 h-100 img-fluid rounded"
                 />
@@ -44,14 +44,14 @@ function FollowOnInstagram() {
             <div className="row">
               <div className="col-6 text-center mt-3">
                 <img
-                  src="/public/Shop By Category/image-5.jpg"
+                  src="/Shop By Category/image-5.jpg"
                   alt=""
                   className="w-100 h-100 img-fluid rounded"
                 />
               </div>
               <div className="col-6 text-center mt-3">
                 <img
-                  src="/public/Shop By Category/image-6.jpg"
+                  src="/Shop By Category/image-6.jpg"
                   alt=""
                   className="w-100 h-100 img-fluid rounded"
                 />
@@ -60,7 +60,7 @@ function FollowOnInstagram() {
           </div>
           <div className={`${styles.longImage} col-4 text-center mt-2`}>
             <img
-              src="/public/Shop By Category/long-image.jpg"
+              src="/Shop By Category/long-image.jpg"
               alt=""
               className="h-100 w-100 img-fluid rounded "
             />

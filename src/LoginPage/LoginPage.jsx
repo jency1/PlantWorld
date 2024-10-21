@@ -10,7 +10,7 @@ const LoginPage = () => {
           <p>One stop for all the variety of plants</p>
           <div className={styles.plantImage}>
             <img
-              src="https://www.piedmont.org/media/BlogImages/indoor-plants-and-your-health.jpg" 
+              src="/Shop By Category/image-3.jpg" 
               alt="Plant"
               className={styles.image}
             />
@@ -36,6 +36,14 @@ const LoginPage = () => {
               placeholder="username"
               className={styles.input}
             />
+
+            {/* <label htmlFor="contact">Contact Number</label>
+            <input
+              type="tel"
+              id="contact"
+              placeholder="(123) 456-7890"
+              className={styles.input}
+            /> */}
 
             <label htmlFor="password">Password</label>
             <input
