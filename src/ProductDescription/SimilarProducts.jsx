@@ -1,7 +1,9 @@
 function SimilarProducts() {
   return (
     <div className="container mb-5">
-      <div className="h1 text-center">Similar Products</div>
+      <div className="h1 text-center" style={{ color: "#4d933e" }}>
+        Similar Products
+      </div>
       <div className="row">
         <div className="col-6 col-md-3 text-center mt-5">
           <img

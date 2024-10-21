@@ -6,6 +6,7 @@ import FollowOnInstagram from "./FollowOnInstagram";
 import Feedback from "./Feedback";
 import Blog from "./Blog";
 import FeatureSection from "./FeatureSection";
+import Footer from "../Footer/Footer";
 
 // import DescriptionLayout from "../ProductDescription/DescriptionLayout";
 // import ShopPageLayout from "../ShopPage/ShopPageLayout";
@@ -22,6 +23,7 @@ function HomePage() {
       <FollowOnInstagram />
       <FeatureSection />
       <Blog />
+      <Footer />
     </>
   );
 }

@@ -34,7 +34,9 @@ const ProductDescription = () => {
 
         {/* Product Details */}
         <div className="col-md-6 col-lg-5">
-          <h1 className={styles.productTitle}>Houseplant Philippine</h1>
+          <h1 className={`${styles.productTitle} mt-3`}>
+            Houseplant Philippine
+          </h1>
           <p className={styles.productDescription}>
             Each of our products is hand-selected for its unique aesthetic
             appeal, resilience, and ability to enhance your home or office
@@ -59,21 +61,22 @@ const ProductDescription = () => {
               Add to Cart
             </button>
           </div>
-          <p>Free worldwide shipping on all orders over RS 1000</p>
-          <p>Delivers In: 3-7 Working Days Shipping & Return</p>
+          <p>Free worldwide shipping on all orders over Rs 500</p>
+          <p>Delivers In: 3-7 Working Days</p>
 
           <ul className={styles.productDetails}>
+            {/* <li>
+              <span>SKU:</span> D75482
+            </li> */}
             <li>
-              <strong>SKU:</strong> D75482
+              <span className={`${styles.info}`}>Tag:</span> Indoor
             </li>
             <li>
-              <strong>Tag:</strong> Indoor
+              <span className={`${styles.info}`}>Category:</span> Indoor Plants
             </li>
             <li>
-              <strong>Category:</strong> Indoor Plants
-            </li>
-            <li>
-              <strong>Color:</strong> Black, White, Yellow, Orange
+              <span className={`${styles.info}`}>Color:</span> Black, White,
+              Yellow, Orange
             </li>
             {/* <li>
               <strong>Size:</strong> L, M, S, XL
@@ -106,23 +109,35 @@ const ProductDescription = () => {
             {/* List of Topics */}
             <ul className="list-unstyled">
               <li className={`${styles.topicItem} mb-2`}>
-                <i className="bi bi-check-circle-fill text-success"></i>{" "}
+                <i
+                  className="bi bi-check-circle-fill "
+                  style={{ color: "#4d933e" }}
+                ></i>{" "}
                 {/* Bootstrap icon */}
                 Unraveling the Mysteries of Mycorrhizal Fungi: How Symbiotic
                 Relationships Shape Plant Health and Ecosystem Dynamics
               </li>
               <li className={`${styles.topicItem} mb-2`}>
-                <i className="bi bi-check-circle-fill text-success"></i>
+                <i
+                  className="bi bi-check-circle-fill "
+                  style={{ color: "#4d933e" }}
+                ></i>
                 The art of bonsai: mastering the ancient Japanese practice of
                 cultivating miniature trees
               </li>
               <li className={`${styles.topicItem} mb-2`}>
-                <i className="bi bi-check-circle-fill text-success"></i>
+                <i
+                  className="bi bi-check-circle-fill "
+                  style={{ color: "#4d933e" }}
+                ></i>
                 Harnessing the power of plant-based remedies: exploring herbal
                 medicine and traditional healing practices
               </li>
               <li className={`${styles.topicItem} mb-2`}>
-                <i className="bi bi-check-circle-fill text-success"></i>
+                <i
+                  className="bi bi-check-circle-fill "
+                  style={{ color: "#4d933e" }}
+                ></i>
                 Bridging the gap: integrating biophilic design principles into
                 modern architecture and interior spaces
               </li>

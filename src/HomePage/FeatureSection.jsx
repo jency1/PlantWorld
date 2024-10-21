@@ -15,7 +15,7 @@ const FeatureSection = () => {
               <FaShippingFast className={`${styles.icon} mb-3`} />
               <h5 className={styles.featureTitle}>Free delivery</h5>
               <p className={styles.featureSubtitle}>
-                For all orders above Rs 1000
+                For all orders above Rs 500
               </p>
             </div>
           </div>
@@ -40,8 +40,8 @@ const FeatureSection = () => {
           <div className="col-6 col-md-3 mb-4">
             <div className={styles.featureItem}>
               <FaUndoAlt className={`${styles.icon} mb-3`} />
-              <h5 className={styles.featureTitle}>180 Days Return</h5>
-              <p className={styles.featureSubtitle}>180 Days Return</p>
+              <h5 className={styles.featureTitle}>7 Days Return</h5>
+              <p className={styles.featureSubtitle}>7 Days Return</p>
             </div>
           </div>
         </div>

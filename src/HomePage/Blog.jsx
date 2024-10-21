@@ -1,6 +1,6 @@
 import React from "react";
 import styles from "./Blog.module.css";
-import Footer from "../Footer/Footer.jsx";
+
 import "../Footer/Footer.module.css";
 
 function Blog() {
@@ -39,7 +39,6 @@ function Blog() {
       </div>
       <br />
       <br />
-      <Footer />
     </div>
   );
 }

@@ -1,10 +1,10 @@
 import React from "react";
-import styles from "./Footer.module.css"; 
+import styles from "./Footer.module.css";
 
 const Footer = () => {
   return (
     <footer className={styles.footer}>
-      <div className={styles.footerContent}>
+      <div className={`${styles.footerContent} container`}>
         <div className={styles.footerSection}>
           <h3>Garden Care</h3>
           <p>123 Bang Street, CA 8034, Ahmedabad</p>
@@ -29,7 +29,7 @@ const Footer = () => {
 
         <div className={styles.footerSection}>
           <div>
-            <h3>Pages</h3>
+            <h3 className="text-center">Pages</h3>
             <ul>
               <li>
                 <a href="#">Home</a>

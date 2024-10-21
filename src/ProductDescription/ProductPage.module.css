@@ -1,3 +1,9 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
 /* Adjusted the container padding */
 .container {
   padding-left: 30px;
@@ -9,6 +15,10 @@
   width: 100%;
   max-width: 450px; /* Adjusted the max width for larger images */
   margin-bottom: 20px;
+}
+
+.info {
+  font-weight: 500;
 }
 
 /* Thumbnail wrapper and individual thumbnails */
@@ -30,6 +40,7 @@
   font-size: 2.2rem;
   font-weight: bold;
   margin-bottom: 20px;
+  color: #4d933e;
 }
 
 /* Product Description */
@@ -65,7 +76,7 @@
 .sectionTitle {
   font-size: 2rem;
   font-weight: bold;
-  color: #333;
+  color: #4d933e;
 }
 
 /* Styling for the description text */
