@@ -9,10 +9,10 @@ function App() {
   return (
     <>
       {/* <Navbar /> */}
-      {/* <HomePage /> */}
+      <HomePage />
       {/* <ShopPageLayout /> */}
       {/* <DescriptionLayout /> */}
-      <LoginPage />
+      {/* <LoginPage /> */}
       {/* <LP /> */}
     </>
   );
