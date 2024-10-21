@@ -1,4 +1,4 @@
-import "./App.css";
+// import "./App.css";
 import Navbar from "./Navbar/Navbar";
 import HomePage from "./HomePage/HomePage";
 import ShopPageLayout from "./ShopPage/ShopPageLayout";
@@ -9,10 +9,10 @@ function App() {
   return (
     <>
       {/* <Navbar /> */}
-      <HomePage />
+      {/* <HomePage /> */}
       {/* <ShopPageLayout /> */}
       {/* <DescriptionLayout /> */}
-      {/* <LoginPage /> */}
+      <LoginPage />
       {/* <LP /> */}
     </>
   );

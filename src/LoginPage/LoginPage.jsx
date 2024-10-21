@@ -1,5 +1,5 @@
-import React from 'react';
-import styles from './LoginPage.module.css'; 
+import React from "react";
+import styles from "./LoginPage.module.css";
 
 const LoginPage = () => {
   return (
@@ -10,7 +10,7 @@ const LoginPage = () => {
           <p>One stop for all the variety of plants</p>
           <div className={styles.plantImage}>
             <img
-              src="/Shop By Category/image-3.jpg" 
+              src="/Shop By Category/image-3.jpg"
               alt="Plant"
               className={styles.image}
             />
@@ -24,7 +24,7 @@ const LoginPage = () => {
               alt="PlantWorld Logo"
               className={styles.logoImage}
             /> */}
-            <h2>PlantWorld</h2>
+            <h2 style={{ color: "#5c865a" }}>PlantWorld</h2>
           </div>
           <h3>Login in to your PlantWorld Account</h3>
 
@@ -57,7 +57,9 @@ const LoginPage = () => {
               <a href="#">Forgot Password?</a>
             </div>
 
-            <button type="submit" className={styles.loginButton}>Login</button>
+            <button type="submit" className={styles.loginButton}>
+              Login
+            </button>
           </form>
 
           <div className={styles.signup}>
