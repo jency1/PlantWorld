@@ -34,7 +34,7 @@ const ProductDescription = () => {
 
         {/* Product Details */}
         <div className="col-md-6 col-lg-5">
-          <h1 className={`${styles.productTitle} mt-3`}>
+          <h1 className={`${styles.productTitle} mt-4`}>
             Houseplant Philippine
           </h1>
           <p className={styles.productDescription}>

@@ -13,8 +13,10 @@ import Button from "@mui/material/Button";
 import Tooltip from "@mui/material/Tooltip";
 import MenuItem from "@mui/material/MenuItem";
 import AdbIcon from "@mui/icons-material/Adb";
+import { Link } from "react-router-dom";
 
 const pages = ["Home", "Shop", "About", "FAQ", "Contact", "Blog"];
+const links = ["/", "/shop", "/", "/", "/", "/"];
 const settings = ["Profile", "Account", "Dashboard", "Login", "Logout"];
 
 const theme = createTheme({
@@ -53,7 +55,7 @@ function Navbar() {
               variant="h6"
               noWrap
               component="a"
-              href="HomePage"
+              href="/"
               sx={{
                 mr: 2,
                 display: { xs: "none", md: "flex" },
@@ -137,9 +139,10 @@ function Navbar() {
                 alignItems: "center",
               }}
             >
-              {pages.map((page) => (
+              {pages.map((page, i) => (
                 <Button
                   key={page}
+                  href={links[i]}
                   onClick={handleCloseNavMenu}
                   sx={{ my: 2, color: "white", display: "block" }}
                 >
