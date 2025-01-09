@@ -140,14 +140,22 @@ function Navbar() {
               }}
             >
               {pages.map((page, i) => (
-                <Button
-                  key={page}
-                  href={links[i]}
-                  onClick={handleCloseNavMenu}
-                  sx={{ my: 2, color: "white", display: "block" }}
-                >
-                  {page}
-                </Button>
+                <>
+                  <Link to={links[i]} style={{ textDecoration: "none" }}>
+                    <Button
+                      key={page}
+                      onClick={handleCloseNavMenu}
+                      sx={{
+                        my: 2,
+                        color: "white",
+                        display: "block",
+                        textDecoration: "none",
+                      }}
+                    >
+                      {page}
+                    </Button>
+                  </Link>
+                </>
               ))}
             </Box>
             <Box sx={{ flexGrow: 0 }}>
