@@ -7,19 +7,25 @@ import HomePage from "./HomePage/HomePage";
 import ShopPageLayout from "./ShopPage/ShopPageLayout";
 import DescriptionLayout from "./ProductDescription/DescriptionLayout";
 import LoginPage from "./LoginPage/LoginPage";
+import AppLayout from "./AppLayout";
 
 const router = createBrowserRouter([
   {
-    path: "/",
-    element: <HomePage />,
-  },
-  {
-    path: "/shop",
-    element: <ShopPageLayout />,
-  },
-  {
-    path: "/product/description",
-    element: <DescriptionLayout />,
+    element: <AppLayout />,
+    children: [
+      {
+        path: "/",
+        element: <HomePage />,
+      },
+      {
+        path: "/shop",
+        element: <ShopPageLayout />,
+      },
+      {
+        path: "/product/description",
+        element: <DescriptionLayout />,
+      },
+    ],
   },
   {
     path: "login",

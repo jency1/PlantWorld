@@ -7,11 +7,11 @@ import Footer from "../Footer/Footer";
 function DescriptionLayout() {
   return (
     <div>
-      <Navbar />
+      {/* <Navbar /> */}
       <ProductDescription />
       <SimilarProducts />
       <FeatureSection />
-      <Footer />
+      {/* <Footer /> */}
     </div>
   );
 }

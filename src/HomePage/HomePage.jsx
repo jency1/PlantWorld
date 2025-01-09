@@ -15,7 +15,7 @@ import Footer from "../Footer/Footer";
 function HomePage() {
   return (
     <>
-      <Navbar />
+      {/* <Navbar /> */}
       <Header />
       <FeaturedProducts />
       <ShopByCategory />
@@ -23,7 +23,7 @@ function HomePage() {
       <FollowOnInstagram />
       <FeatureSection />
       <Blog />
-      <Footer />
+      {/* <Footer /> */}
     </>
   );
 }

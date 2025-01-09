@@ -7,11 +7,11 @@ import Footer from "../Footer/Footer";
 function ShopPageLayout() {
   return (
     <div>
-      <Navbar />
+      {/* <Navbar /> */}
       <ShopHeader />
       <ShopPlants />
       <FeatureSection />
-      <Footer />
+      {/* <Footer /> */}
     </div>
   );
 }
