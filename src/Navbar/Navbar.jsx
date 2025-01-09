@@ -103,9 +103,16 @@ function Navbar() {
                 onClose={handleCloseNavMenu}
                 sx={{ display: { xs: "block", md: "none" } }}
               >
-                {pages.map((page) => (
+                {pages.map((page, i) => (
                   <MenuItem key={page} onClick={handleCloseNavMenu}>
-                    <Typography sx={{ textAlign: "center" }}>{page}</Typography>
+                    <Typography sx={{ textAlign: "center" }}>
+                      <Link
+                        to={links[i]}
+                        style={{ textDecoration: "none", color: "black" }}
+                      >
+                        {page}
+                      </Link>
+                    </Typography>
                   </MenuItem>
                 ))}
               </Menu>
