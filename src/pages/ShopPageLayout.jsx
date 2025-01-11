@@ -1,8 +1,6 @@
-import Navbar from "../Navbar/Navbar";
-import ShopHeader from "./ShopHeader";
-import ShopPlants from "./ShopPlants";
-import FeatureSection from "../HomePage/FeatureSection";
-import Footer from "../Footer/Footer";
+import ShopHeader from "../components/ShopPage/ShopHeader";
+import ShopPlants from "../components/ShopPage/ShopPlants";
+import FeatureSection from "../components/HomePage/FeatureSection";
 
 function ShopPageLayout() {
   return (

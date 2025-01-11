@@ -2,11 +2,10 @@
 
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 
-import Navbar from "./Navbar/Navbar";
-import HomePage from "./HomePage/HomePage";
-import ShopPageLayout from "./ShopPage/ShopPageLayout";
-import DescriptionLayout from "./ProductDescription/DescriptionLayout";
-import LoginPage from "./LoginPage/LoginPage";
+import HomePage from "./pages/HomePage";
+import ShopPageLayout from "./pages/ShopPageLayout";
+import DescriptionLayout from "./pages/DescriptionLayout";
+import LoginPage from "./components/LoginPage/LoginPage";
 import AppLayout from "./AppLayout";
 
 const router = createBrowserRouter([
@@ -28,7 +27,7 @@ const router = createBrowserRouter([
     ],
   },
   {
-    path: "login",
+    path: "/login",
     element: <LoginPage />,
   },
 ]);
@@ -36,6 +35,8 @@ const router = createBrowserRouter([
 function App() {
   return <RouterProvider router={router} />;
 }
+
+export default App;
 
 // function App() {
 //   return (
@@ -49,5 +50,3 @@ function App() {
 //     </>
 //   );
 // }
-
-export default App;

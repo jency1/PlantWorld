@@ -1,12 +1,10 @@
-import Navbar from "../Navbar/Navbar";
-import Header from "./Header";
-import FeaturedProducts from "./FeaturedProducts";
-import ShopByCategory from "./ShopByCategory";
-import FollowOnInstagram from "./FollowOnInstagram";
-import Feedback from "./Feedback";
-import Blog from "./Blog";
-import FeatureSection from "./FeatureSection";
-import Footer from "../Footer/Footer";
+import Header from "../components/HomePage/Header";
+import FeaturedProducts from "../components/HomePage/FeaturedProducts";
+import ShopByCategory from "../components/HomePage/ShopByCategory";
+import FollowOnInstagram from "../components/HomePage/FollowOnInstagram";
+import Feedback from "../components/HomePage/Feedback";
+import Blog from "../components/HomePage/Blog";
+import FeatureSection from "../components/HomePage/FeatureSection";
 
 // import DescriptionLayout from "../ProductDescription/DescriptionLayout";
 // import ShopPageLayout from "../ShopPage/ShopPageLayout";
