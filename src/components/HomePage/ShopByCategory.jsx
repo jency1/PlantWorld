@@ -5,14 +5,14 @@ import { FaLongArrowAltRight } from "react-icons/fa";
 function ShopByCategory() {
   return (
     <div className="d-flex flex-column align-items-center ">
-      <div className="h1 mt-3 text-success">Shop by Category</div>
-      <div className="p-2 mt-2 w-50 mx-auto text-center">
+      <div className="h1 mt-5 text-success">Shop by Category</div>
+      <div className="p-2 mt-3 w-50 mx-auto text-center sm:text-lg">
         Discover our top trees, chosen for their beauty and resilience. Add
         color, fruit, or greenaery to your garden with these customer favorites.
         Bring {`nature's`} charm home today.
       </div>
       <div className="container">
-        <div className="row">
+        <div className="row mx-auto flex items-center pl-6">
           <div className="col-6 col-md-3 text-center mt-5">
             <img
               src="/Shop By Category/outdoor.png"
@@ -35,7 +35,7 @@ function ShopByCategory() {
               alt=""
               className="img-fluid rounded"
             />
-            <div className="h5 mt-3">Terrace & Balcony</div>
+            <div className="h5 mt-3">Terrace</div>
           </div>
           <div className="col-6 col-md-3 text-center mt-5">
             <img
