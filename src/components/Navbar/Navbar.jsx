@@ -48,7 +48,7 @@ function Navbar() {
 
   return (
     <ThemeProvider theme={theme}>
-      <AppBar position="static">
+      <AppBar position="sticky">
         <Container maxWidth="xl">
           <Toolbar disableGutters>
             <Typography
@@ -104,7 +104,7 @@ function Navbar() {
                 sx={{ display: { xs: "block", md: "none" } }}
               >
                 {pages.map((page, i) => (
-                  <MenuItem key={page} onClick={handleCloseNavMenu}>
+                  <MenuItem key={page + i} onClick={handleCloseNavMenu}>
                     <Typography sx={{ textAlign: "center" }}>
                       <Link
                         to={links[i]}
@@ -148,9 +148,12 @@ function Navbar() {
             >
               {pages.map((page, i) => (
                 <>
-                  <Link to={links[i]} style={{ textDecoration: "none" }}>
+                  <Link
+                    key={page + i}
+                    to={links[i]}
+                    style={{ textDecoration: "none" }}
+                  >
                     <Button
-                      key={page}
                       onClick={handleCloseNavMenu}
                       sx={{
                         my: 2,
@@ -187,8 +190,8 @@ function Navbar() {
                 open={Boolean(anchorElUser)}
                 onClose={handleCloseUserMenu}
               >
-                {settings.map((setting) => (
-                  <MenuItem key={setting} onClick={handleCloseUserMenu}>
+                {settings.map((setting, index) => (
+                  <MenuItem key={setting + index} onClick={handleCloseUserMenu}>
                     <Typography sx={{ textAlign: "center" }}>
                       {setting}
                     </Typography>
