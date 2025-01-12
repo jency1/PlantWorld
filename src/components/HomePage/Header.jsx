@@ -65,7 +65,7 @@ export default function Header() {
           <img
             src="/Home Page/header 2.jpg"
             alt="Plant"
-            className="absolute inset-0 object-cover ml-[8.2rem] mt-[4.3rem] w-[55%] h-[50%] rounded-tl-[40%] rounded-tr-[40%] lg:mt-[6.33rem] lg:w-[30%] lg:h-[85%] lg:ml-[66%] lg:rounded-tl-[45%] lg:rounded-tr-[45%] shadow-lg"
+            className="absolute inset-0 object-cover ml-[8.2rem] mt-[4.3rem] w-[55%] h-[35%] rounded-tl-[40%] rounded-tr-[40%] lg:mt-[6.33rem] lg:w-[30%] lg:h-[85%] lg:ml-[66%] lg:rounded-tl-[45%] lg:rounded-tr-[45%] shadow-lg"
           />
         </div>
       </div>
