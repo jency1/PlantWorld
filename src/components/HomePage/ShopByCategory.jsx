@@ -31,7 +31,7 @@ function ShopByCategory() {
             <img
               src={category.image}
               alt={category.name}
-              className="rounded-full w-28 h-28 md:w-36 md:h-36 lg:w-60 lg:h-60 object-cover hover:scale-105 transition-transform duration-300 ease-in-out"
+              className="rounded-full w-28 h-28 md:w-36 md:h-36 lg:w-60 lg:h-60 object-cover hover:scale-105 transition-transform duration-300 ease-in-out hover:cursor-pointer"
             />
             <div className="text-base md:text-xl lg:text-xl font-semibold">
               {category.name}

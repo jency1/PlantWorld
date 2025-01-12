@@ -73,7 +73,7 @@ function ProductCard({ imageUrl, name, price }) {
       <img
         src={imageUrl}
         alt={name}
-        className="w-full h-40 md:h-48 lg:h-72 object-cover rounded-md"
+        className="w-full h-40 md:h-48 lg:h-72 object-cover rounded-md hover:cursor-pointer"
       />
       <h3 className="mt-3 text-sm md:text-base lg:text-lg font-medium text-green-700">
         {name}
