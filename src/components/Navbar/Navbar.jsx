@@ -22,7 +22,7 @@ const settings = ["Profile", "Account", "Dashboard", "Login", "Logout"];
 const theme = createTheme({
   palette: {
     primary: {
-      main: "#000", // Black
+      main: "#15803D", // Green
     },
   },
 });
