@@ -43,17 +43,17 @@ export default function FeaturedProducts() {
   ];
 
   return (
-    <div className="text-center">
-      <h1 className="mt-5 text-success font-bold text-3xl">
+    <div className="text-center px-4 lg:px-12">
+      <h1 className="mt-16 text-success font-bold text-2xl md:text-3xl lg:text-4xl">
         Featured Products
       </h1>
-      <p className="w-full md:w-1/2 mx-auto mt-8 text-lg">
+      <p className="w-full md:w-3/4 lg:w-2/3 mx-auto mt-8 text-sm md:text-base lg:text-lg">
         Discover our top trees, chosen for their beauty and resilience. Add
         color, fruit, or greenery to your garden with these customer favorites.
         Bring nature's charm home today.
       </p>
 
-      <div className="flex flex-wrap justify-center gap-8 mt-12 mb-16 mx-4 lg:mx-16">
+      <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-6 mt-8 mb-6">
         {products.map((product, index) => (
           <ProductCard
             key={index}
@@ -69,20 +69,33 @@ export default function FeaturedProducts() {
 
 function ProductCard({ imageUrl, name, price }) {
   return (
-    <div className="bg-white border border-gray-200 rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-300 p-4 w-80">
+    <div className="rounded-md hover:shadow-xl transition-shadow duration-300 p-2 md:p-4 lg:p-5">
       <img
         src={imageUrl}
         alt={name}
-        className="w-full h-52 object-cover mx-auto rounded-lg"
+        className="w-full h-40 md:h-48 lg:h-72 object-cover rounded-md"
       />
-      <h3 className="mt-4 text-xl font-semibold text-green-700">{name}</h3>
-      <div className="text-lg text-gray-700">{price}</div>
-      <button className="mt-4 w-full py-2 bg-green-700 text-white font-semibold rounded-lg hover:bg-green-600 transition-colors duration-300">
-        Add to Cart
-      </button>
+      <h3 className="mt-3 text-sm md:text-base lg:text-lg font-medium text-green-700">
+        {name}
+      </h3>
+      <div className="text-xs md:text-sm lg:text-base text-gray-700">
+        {price}
+      </div>
     </div>
   );
 }
+
+// -------------------------------------------------------------------
+
+// add to cart button -->
+
+// {
+/* <button className="mt-4 w-full py-2 bg-green-700 text-white font-semibold rounded-lg hover:bg-green-600 transition-colors duration-300">
+        Add to Cart
+      </button> */
+// }
+
+// Old Code --->
 
 // import styles from "./FeaturedProducts.module.css";
 

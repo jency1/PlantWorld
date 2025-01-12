@@ -4,10 +4,14 @@ import { FaShippingFast, FaLock, FaHeadset, FaUndoAlt } from "react-icons/fa";
 // FeatureItem Component
 const FeatureItem = ({ icon, title, subtitle }) => {
   return (
-    <div className="flex flex-col items-center justify-center p-4">
-      <div className="text-[#4d933e] text-5xl mb-3">{icon}</div>
-      <h5 className="text-xl font-bold text-[#333]">{title}</h5>
-      <p className="text-sm text-[#666]">{subtitle}</p>
+    <div className="flex flex-col items-center justify-center p-2 sm:p-4">
+      <div className="text-[#4d933e] text-4xl sm:text-5xl mb-2 sm:mb-3 w-8 h-8 sm:w-10 sm:h-10 md:w-12 md:h-12">
+        {icon}
+      </div>
+      <h5 className="text-xs md:text-base lg:text-xl font-bold text-[#333]">
+        {title}
+      </h5>
+      <p className="text-xs md:text-sm text-[#666]">{subtitle}</p>
     </div>
   );
 };
@@ -16,8 +20,8 @@ const FeatureItem = ({ icon, title, subtitle }) => {
 const FeatureSection = () => {
   return (
     <div className="py-8 mx-4">
-      <div className="container px-4 py-1 bg-[#f5f7fa] rounded-lg shadow-lg">
-        <div className="grid grid-cols-2 sm:grid-cols-4 gap-6 text-center">
+      <div className="container px-4 py-3 bg-[#f5f7fa] rounded-lg shadow-lg">
+        <div className="grid grid-cols-2 sm:grid-cols-4 text-center">
           <FeatureItem
             icon={<FaShippingFast />}
             title="Free delivery"
