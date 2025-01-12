@@ -1,6 +1,4 @@
 import { useState } from "react";
-import styles from "./Feedback.module.css";
-
 import { FaArrowRight, FaArrowLeft, FaQuoteRight } from "react-icons/fa";
 
 const feedbacks = [
@@ -10,7 +8,7 @@ const feedbacks = [
       "The plants I ordered have transformed my living space. They arrived perfectly packaged and in great condition. It's clear that the team really cares about plant health, and their website has tons of helpful care tips. I'll definitely be back for more!",
     name: "Sarah Patel",
     rating: 5,
-    occupation: "Owner, Maceba Restaurant ",
+    occupation: "Owner, Maceba Restaurant",
   },
   {
     image: "/Feedback/testimonial2.jpeg",
@@ -34,121 +32,74 @@ function Feedback() {
   const [current, setCurrent] = useState(0);
 
   function handleLeftClick() {
-    console.log(current);
-    if (current == 0) {
-      setCurrent(feedbacks.length - 1);
-    } else {
-      setCurrent(current - 1);
-    }
+    setCurrent(current === 0 ? feedbacks.length - 1 : current - 1);
   }
 
   function handleRightClick() {
-    console.log(current);
-    if (current == feedbacks.length - 1) {
-      setCurrent(0);
-    } else {
-      setCurrent(current + 1);
-    }
+    setCurrent(current === feedbacks.length - 1 ? 0 : current + 1);
   }
 
   return (
-    <div className={`container ${styles["testimonial-container"]}`}>
-      <div className="h1 mt-5 text-success text-center">
+    <div className="container px-5 py-5">
+      <div className="lg:mt-4 mb-4 text-success font-bold text-2xl md:text-3xl lg:text-4xl text-center">
         Our Customer Feedback
       </div>
       <div className="row justify-content-center">
-        <div className="mt-3 col-9">
-          <div className={`${styles["testimonial-card"]} position-relative`}>
+        <div className="mt-3 lg:w-2/3">
+          <div className="rounded-lg shadow-lg flex flex-col md:flex-row items-center p-4 md:p-10 bg-gray-100 relative">
             <div
-              className={`${styles["testimonial-arrow"]} ${styles["left-arrow"]}`}
+              className="bg-green-700 text-white rounded-full w-7 h-7 md:w-10 md:h-10 flex items-center justify-center text-lg cursor-pointer absolute top-1/2 transform -translate-y-1/2 left-[-10px] md:left-[-20px]"
               onClick={handleLeftClick}
             >
               <FaArrowLeft />
             </div>
 
-            <div className="container">
-              <div className={`${styles["testimonial-content"]} d-flex`}>
-                <div className={`${styles["testimonial-image"]} `}>
-                  <img
-                    src={feedbacks[current].image}
-                    className="img-fluid rounded-circle"
-                    alt="Customer"
-                  />
-                  <div
-                    className={`${styles["quote"]}`}
-                    onClick={handleRightClick}
-                  >
-                    <FaQuoteRight />
-                  </div>
+            <div className="flex flex-col md:flex-row items-center w-full">
+              <div className="relative w-36 sm:w-44 md:w-48">
+                <img
+                  src={feedbacks[current].image}
+                  className="w-28 sm:w-44 md:w-48 h-28 sm:h-44 md:h-48 rounded-full object-cover"
+                  alt="Customer"
+                />
+                <div
+                  className="bg-green-700 text-white rounded-full w-8 sm:w-12 h-8 sm:h-12 flex items-center justify-center text-sm sm:text-lg cursor-pointer absolute top-[-3%] right-[23%] sm:top-[-4%] sm:right-[10%]"
+                  onClick={handleRightClick}
+                >
+                  <FaQuoteRight />
                 </div>
-                <div className={`ml-4 ${styles["testimonial-text"]}`}>
-                  <div
-                    className={`${styles["testimonial-rating"]} d-flex align-items-center`}
-                  >
+              </div>
+              <div className="mt-2 md:mt-0 md:ml-5 text-left w-full md:w-3/4">
+                <div className="flex items-center justify-center md:justify-start">
+                  {Array.from({ length: 5 }).map((_, i) => (
                     <span
-                      className={`${styles["stars"]} ${
-                        1 <= feedbacks[current].rating
-                          ? styles.filled
-                          : styles["not-filled"]
+                      key={i}
+                      className={`text-lg sm:text-2xl ${
+                        i < feedbacks[current].rating
+                          ? "text-yellow-400"
+                          : "text-gray-500"
                       }`}
                     >
                       ★
                     </span>
-                    <span
-                      className={`${styles["stars"]} ${
-                        2 <= feedbacks[current].rating
-                          ? styles.filled
-                          : styles["not-filled"]
-                      }`}
-                    >
-                      ★
-                    </span>
-                    <span
-                      className={`${styles["stars"]} ${
-                        3 <= feedbacks[current].rating
-                          ? styles.filled
-                          : styles["not-filled"]
-                      }`}
-                    >
-                      ★
-                    </span>
-                    <span
-                      className={`${styles["stars"]} ${
-                        4 <= feedbacks[current].rating
-                          ? styles.filled
-                          : styles["not-filled"]
-                      }`}
-                    >
-                      ★
-                    </span>
-                    <span
-                      className={`${styles["stars"]} ${
-                        5 <= feedbacks[current].rating
-                          ? styles.filled
-                          : styles["not-filled"]
-                      }`}
-                    >
-                      ★
-                    </span>
-                    <span className={`${styles["rating-value"]} ml-2`}>
-                      {feedbacks[current].rating}.0
-                    </span>
-                  </div>
-                  <p className={`${styles["testimonial-quote"]}`}>
-                    {feedbacks[current].content}
-                  </p>
-                  <div className={`${styles["testimonial-name"]}`}>
-                    {feedbacks[current].name}
-                  </div>
-                  <p className={`${styles["testimonial-title"]}`}>
-                    {feedbacks[current].occupation}
-                  </p>
+                  ))}
+                  <span className="text-sm sm:text-lg ml-2">
+                    {feedbacks[current].rating}.0
+                  </span>
                 </div>
+                <p className="italic my-2 text-xs sm:text-base">
+                  {feedbacks[current].content}
+                </p>
+                <div className="font-bold text-sm sm:text-lg">
+                  {feedbacks[current].name}
+                </div>
+                <p className="text-gray-600 text-xs sm:text-sm">
+                  {feedbacks[current].occupation}
+                </p>
               </div>
             </div>
 
             <div
-              className={`${styles["testimonial-arrow"]} ${styles["right-arrow"]}`}
+              className="bg-green-700 text-white rounded-full w-7 h-7 md:w-10 md:h-10 flex items-center justify-center text-lg cursor-pointer absolute top-1/2 transform -translate-y-1/2 right-[-10px] md:right-[-20px]"
               onClick={handleRightClick}
             >
               <FaArrowRight />
