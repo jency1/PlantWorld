@@ -1,8 +1,28 @@
-exports.getAllPlants = (req, res) => {};
+exports.checkID = (req, res, next, val) => {
+  console.log('Hello from the param middleware');
+  next();
+};
 
-exports.createPlant = (req, res) => {};
+exports.checkBody = (req, res, next) => {
+  console.log('hello from the checkBody middleWare');
+  next();
+};
 
-exports.getPlant = (req, res) => {};
+exports.getAllPlants = (req, res) => {
+  res.send('hello');
+};
 
-exports.updatePlant = (req, res) => {};
-exports.deletePlant = (req, res) => {};
+exports.createPlant = (req, res) => {
+  res.send('hello');
+};
+
+exports.getPlant = (req, res) => {
+  res.send('hello');
+};
+
+exports.updatePlant = (req, res) => {
+  res.send('hello');
+};
+exports.deletePlant = (req, res) => {
+  res.send('hello');
+};
