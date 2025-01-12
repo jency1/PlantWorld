@@ -1,10 +1,14 @@
 /* eslint-disable no-undef */
 const express = require('express');
+
 const morgan = require('morgan');
 const plantRouter = require('./routes/plantRoutes');
 
 const app = express();
-app.use(morgan('dev'));
+
+console.log(process.env.NODE_ENV);
+if (process.env.NODE_ENV === 'development') app.use(morgan('dev'));
+
 app.use(express.json());
 app.use('/api/plants', plantRouter);
 
