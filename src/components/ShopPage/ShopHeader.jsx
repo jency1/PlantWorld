@@ -1,6 +1,6 @@
 function ShopHeader() {
   return (
-    <div className="relative w-full h-[15rem] sm:h-[20rem] md:h-[29rem] bg-[#d4f8d8a8]">
+    <div className="relative w-full h-[15rem] sm:h-[20rem] md:h-[29rem] lg:h-[32rem] bg-[#d4f8d8a8]">
       {/* Single Image with object-cover and object-center */}
       <div className="w-full h-full flex justify-center items-center">
         <img
