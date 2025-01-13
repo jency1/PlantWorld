@@ -1,6 +1,8 @@
 import "../../index.css";
 import { FaLongArrowAltRight } from "react-icons/fa";
 
+import { Link } from "react-router-dom";
+
 function ShopByCategory() {
   const categories = [
     { image: "/Shop By Category/outdoor.png", name: "Outdoor" },
@@ -28,11 +30,13 @@ function ShopByCategory() {
             key={index}
             className="flex flex-col items-center text-center space-y-3"
           >
-            <img
-              src={category.image}
-              alt={category.name}
-              className="rounded-full w-28 h-28 md:w-36 md:h-36 lg:w-60 lg:h-60 object-cover hover:scale-105 transition-transform duration-300 ease-in-out hover:cursor-pointer"
-            />
+            <Link to="/shop">
+              <img
+                src={category.image}
+                alt={category.name}
+                className="rounded-full w-28 h-28 md:w-36 md:h-36 lg:w-60 lg:h-60 object-cover hover:scale-105 transition-transform duration-300 ease-in-out hover:cursor-pointer"
+              />
+            </Link>
             <div className="text-base md:text-xl lg:text-xl font-semibold">
               {category.name}
             </div>
@@ -41,12 +45,14 @@ function ShopByCategory() {
       </div>
 
       {/* View All Button */}
-      <button className="flex items-center mt-8 mb-4 px-3 py-2 bg-green-700 hover:bg-green-600 text-white font-medium rounded-lg text-xs md:text-sm lg:text-base">
-        <span>View All</span>
-        <span className="ml-2">
-          <FaLongArrowAltRight />
-        </span>
-      </button>
+      <Link to="/shop">
+        <button className="flex items-center mt-8 mb-4 px-3 py-2 bg-green-700 hover:bg-green-600 text-white font-medium rounded-lg text-xs md:text-sm lg:text-base">
+          <span>View All</span>
+          <span className="ml-2">
+            <FaLongArrowAltRight />
+          </span>
+        </button>
+      </Link>
     </div>
   );
 }

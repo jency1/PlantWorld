@@ -7,10 +7,16 @@ import ShopPageLayout from "./pages/ShopPageLayout";
 import DescriptionLayout from "./pages/DescriptionLayout";
 import LoginPage from "./components/LoginPage/LoginPage";
 import AppLayout from "./AppLayout";
+import ScrollToTop from "./ScrollToTop";
 
 const router = createBrowserRouter([
   {
-    element: <AppLayout />,
+    element: (
+      <>
+        <ScrollToTop />
+        <AppLayout />
+      </>
+    ),
     children: [
       {
         path: "/",
