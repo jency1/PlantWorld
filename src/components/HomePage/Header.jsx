@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+
 export default function Header() {
   return (
     <>
@@ -26,9 +28,11 @@ export default function Header() {
             </div>
           </div>
 
-          <button className="btn btn-success mt-3 p-2 text-xs md:text-base md:ml-4 lg:text-lg lg:ml-10">
-            Shop Now
-          </button>
+          <Link to="/shop">
+            <button className="btn btn-success mt-3 p-2 text-xs md:text-base md:ml-4 lg:text-lg lg:ml-10">
+              Shop Now
+            </button>
+          </Link>
 
           <div className="container">
             <div className="flex flex-col md:flex-row items-center mt-[1rem] lg:ml-[-8.5rem] lg:mt-[3rem]">
