@@ -160,6 +160,10 @@ function Navbar() {
                         color: "white",
                         display: "block",
                         textDecoration: "none",
+                        transition: "color 0.2s ease, transform 0.2s ease",
+                        "&:hover": {
+                          transform: "scale(1.1)",
+                        },
                       }}
                     >
                       {page}

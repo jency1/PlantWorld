@@ -1,39 +1,39 @@
 export default function Header() {
   return (
     <>
-      <div className="relative w-full h-[30rem] lg:h-[39rem] bg-[#bdf6c5a8]">
+      <div className="relative w-full h-[30rem] lg:h-[39rem] bg-[#d4f8d8a8]">
         <img
           src="/Home Page/landingImage.webp"
           alt="Plant"
-          className="absolute mx-auto inset-0 object-cover shadow-lg w-auto hidden md:block md:mt-[9.74rem] md:rounded-tl-[15%] md:rounded-tr-[15%] md:h-[25%] lg:mt-[9.74rem] lg:rounded-tl-[45%] lg:rounded-tr-[45%] lg:h-[75%] "
+          className="absolute mx-auto inset-0 object-cover shadow-lg w-auto hidden lg:block md:mt-[9.74rem] md:rounded-tl-[15%] md:rounded-tr-[15%] md:h-[25%] lg:mt-[9.74rem] lg:rounded-tl-[45%] lg:rounded-tr-[45%] lg:h-[75%] "
         />
       </div>
 
       <div className="absolute inset-0 flex justify-between px-6">
         {/* Left side - Quote */}
-        <div className="max-w-[45%]">
-          <div className="ml-[1px] mt-[6rem] lg:ml-[2.5rem] lg:mt-[8rem]">
-            <div className="text-green-700 text-sm md:text-3xl font-serif italic md:mb-6">
+        <div className="max-w-[45%] md:max-w-[53%] lg:max-w-[45%]">
+          <div className="ml-[1px] mt-[6rem] md:ml-[1rem] lg:ml-[2.5rem] lg:mt-[8rem]">
+            <div className="text-green-700 md:font-bold text-sm md:text-xl lg:text-3xl font-serif italic lg:mb-6">
               " Plants are not just decoration,
             </div>
 
-            <div className="text-green-700 text-sm md:text-3xl font-serif italic md:mb-6">
+            <div className="text-green-700 md:font-bold text-sm md:text-xl lg:text-3xl font-serif italic lg:mb-6">
               they are life-givers,
             </div>
 
-            <div className="text-green-700 text-sm md:text-3xl font-serif italic">
+            <div className="text-green-700 md:font-bold text-sm md:text-xl lg:text-3xl font-serif italic md:mb-3">
               healers, and friends! "
             </div>
           </div>
 
-          <button className="btn btn-success text-xs mt-4 p-2 lg:text-lg lg:ml-10 lg:mt-5">
+          <button className="btn btn-success mt-3 p-2 text-xs md:text-base md:ml-4 lg:text-lg lg:ml-10">
             Shop Now
           </button>
 
           <div className="container">
-            <div className="flex flex-col md:flex-row items-center lg:ml-[-8.5rem] lg:mt-[3rem]">
-              <div className="flex flex-col p-3 mt-4 ml-[9.5rem] w-[17rem] lg:w-[60%] bg-stone-100 rounded-4">
-                <p className="text-xs md:text-base lh-sm lh-md-1.5">
+            <div className="flex flex-col md:flex-row items-center mt-[1rem] lg:ml-[-8.5rem] lg:mt-[3rem]">
+              <div className="flex flex-col p-3 mt-3 ml-[9.5rem] md:ml-0 lg:ml-[9.5rem] w-[17rem] md:w-[100rem] lg:w-[60%] bg-stone-100 rounded-4">
+                <p className="text-xs md:text-sm lg:text-lg lh-sm lh-md-1.5">
                   Plants are nature’s masterpieces, bringing beauty, serenity,
                   and fresh air into our homes. They do more than just decorate
                   — they heal, calm, and inspire. With every leaf and blossom,
@@ -42,13 +42,13 @@ export default function Header() {
                   earth.
                 </p>
                 <div className="flex flex-row gap-5 mt-4 lg:mt-5">
-                  <div className="text-center text-xs md:text-base md:text-start">
+                  <div className="text-center text-xs md:text-base lg:text-lg md:text-start">
                     <h5>
                       <b>200+</b>
                     </h5>
                     <p className="mb-0">Plant Species</p>
                   </div>
-                  <div className="text-center text-xs md:text-base md:text-start">
+                  <div className="text-center text-xs md:text-base lg:text-lg md:text-start">
                     <h5>
                       <b>1.2K+</b>
                     </h5>
@@ -65,7 +65,7 @@ export default function Header() {
           <img
             src="/Home Page/header 2.jpg"
             alt="Plant"
-            className="absolute inset-0 object-cover ml-[8.2rem] mt-[4.3rem] w-[55%] h-[35%] rounded-tl-[40%] rounded-tr-[40%] lg:mt-[6.33rem] lg:w-[30%] lg:h-[85%] lg:ml-[66%] lg:rounded-tl-[45%] lg:rounded-tr-[45%] shadow-lg"
+            className="absolute inset-0 object-cover ml-[8.2rem] mt-[4.3rem] w-[55%] h-[35%] rounded-tl-[40%] rounded-tr-[40%] md:mt-[5.9rem] md:ml-[27rem] md:w-[20rem] md:h-[28rem] md:rounded-tl-[40%] md:rounded-tr-[40%] lg:mt-[6.33rem] lg:w-[30rem] lg:h-[37rem] lg:ml-[66%] lg:rounded-tl-[45%] lg:rounded-tr-[45%] shadow-lg"
           />
         </div>
       </div>
