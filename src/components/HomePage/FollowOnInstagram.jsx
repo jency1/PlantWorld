@@ -44,7 +44,7 @@ const FollowOnInstagram = () => {
 
   return (
     <div className="flex flex-col items-center">
-      <h1 className="mt-16 md:mb-3 lg:mb-5 text-success font-bold text-xl md:text-3xl lg:text-4xl">
+      <h1 className="mt-6 md:mt-16 md:mb-3 lg:mb-5 text-success font-bold text-xl md:text-3xl lg:text-4xl">
         Follow us on Instagram
       </h1>
       <div className="container mt-2 mb-5 px-16 sm:px-8 lg:px-24">

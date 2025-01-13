@@ -12,7 +12,7 @@ function ShopByCategory() {
   return (
     <div className="flex flex-col items-center">
       {/* Heading Section */}
-      <div className="mt-16 text-success font-bold text-2xl md:text-3xl lg:text-4xl">
+      <div className="mt-6 md:mt-16 text-success font-bold text-2xl md:text-3xl lg:text-4xl">
         Shop by Category
       </div>
       <div className="w-3/4 lg:w-2/3 mx-auto text-center mt-8 text-sm md:text-base lg:text-lg">
