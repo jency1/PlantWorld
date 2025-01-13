@@ -1,9 +1,11 @@
+import { Link } from "react-router-dom";
+
 export default function Footer() {
   const pagesLinks = [
-    { href: "#", text: "Home" },
-    { href: "#", text: "About" },
-    { href: "#", text: "Blog" },
-    { href: "#", text: "Contact" },
+    { to: "/", text: "Home" },
+    { to: "/", text: "About" },
+    { to: "/", text: "Blog" },
+    { to: "/", text: "Contact" },
   ];
 
   return (
@@ -62,12 +64,12 @@ function FooterLinks({ links }) {
     <ul className="md:space-y-2">
       {links.map((link, index) => (
         <li key={index}>
-          <a
-            href={link.href}
+          <Link
+            to={link.to}
             className="text-xs md:text-base text-white hover:underline transition-colors"
           >
             {link.text}
-          </a>
+          </Link>
         </li>
       ))}
     </ul>

@@ -1,48 +1,59 @@
 function SimilarProducts() {
   return (
-    <div className="container mb-5">
-      <div className="h1 text-center" style={{ color: "#4d933e" }}>
+    <div className="container mb-3 md:mb-4 lg:mb-5">
+      <div
+        className="text-xl md:text-2xl lg:text-3xl font-bold text-center mb-3"
+        style={{ color: "#4d933e" }}
+      >
         Similar Products
       </div>
       <div className="row">
-        <div className="col-6 col-md-3 text-center mt-5">
+        <div className="col-6 col-md-3 text-center mt-3 md:mt-4 lg:mt-5">
           <img
-            src="/public/Featured Products/image1.jpg"
+            src="/Featured Products/image1.jpg"
             alt=""
             className="img-fluid custom-img"
           />
-          <div className="h3 mt-1">Plant</div>
-          <div>Rs.500</div>
+          <div className="text-base md:text-lg lg:text-2xl font-semibold mt-2">
+            Plant
+          </div>
+          <div className="text-xs md:text-sm lg:text-lg">Rs.500</div>
         </div>
 
-        <div className="col-6 col-md-3 text-center mt-5">
+        <div className="col-6 col-md-3 text-center mt-3 md:mt-4 lg:mt-5">
           <img
-            src="/public/Featured Products/image2.jpg"
+            src="/Featured Products/image2.jpg"
             alt=""
             className="img-fluid custom-img"
           />
-          <div className="h3 mt-1">Plant</div>
-          <div>Rs.500</div>
+          <div className="text-base md:text-lg lg:text-2xl font-semibold mt-2">
+            Plant
+          </div>
+          <div className="text-xs md:text-sm lg:text-lg">Rs.500</div>
         </div>
 
-        <div className="col-6 col-md-3 text-center mt-5">
+        <div className="col-6 col-md-3 text-center mt-3 md:mt-4 lg:mt-5">
           <img
-            src="/public/Featured Products/image3.jpg"
+            src="/Featured Products/image3.jpg"
             alt=""
             className="img-fluid custom-img"
           />
-          <div className="h3 mt-1">Plant</div>
-          <div>Rs.500</div>
+          <div className="text-base md:text-lg lg:text-2xl font-semibold mt-2">
+            Plant
+          </div>
+          <div className="text-xs md:text-sm lg:text-lg">Rs.500</div>
         </div>
 
-        <div className="col-6 col-md-3 text-center mt-5">
+        <div className="col-6 col-md-3 text-center mt-3 md:mt-4 lg:mt-5">
           <img
-            src="/public/Featured Products/image4.jpg"
+            src="/Featured Products/image4.jpg"
             alt=""
             className="img-fluid custom-img"
           />
-          <div className="h3 mt-1">Plant</div>
-          <div>Rs.500</div>
+          <div className="text-base md:text-lg lg:text-2xl font-semibold mt-2">
+            Plant
+          </div>
+          <div className="text-xs md:text-sm lg:text-lg">Rs.500</div>
         </div>
       </div>
     </div>
