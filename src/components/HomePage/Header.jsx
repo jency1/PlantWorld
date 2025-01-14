@@ -37,7 +37,7 @@ export default function Header() {
           <div className="container">
             <div className="flex flex-col md:flex-row items-center mt-[1rem] lg:ml-[-8.5rem] lg:mt-[3rem]">
               <div className="flex flex-col p-3 mt-3 ml-[9.5rem] md:ml-0 lg:ml-[9.5rem] w-[17rem] md:w-[100rem] lg:w-[60%] bg-stone-100 rounded-4">
-                <p className="text-xs md:text-sm lg:text-lg lh-sm lh-md-1.5">
+                <p className="text-xs md:text-sm lg:text-base lh-sm lh-md-1.5">
                   Plants are nature’s masterpieces, bringing beauty, serenity,
                   and fresh air into our homes. They do more than just decorate
                   — they heal, calm, and inspire. With every leaf and blossom,
@@ -46,13 +46,13 @@ export default function Header() {
                   earth.
                 </p>
                 <div className="flex flex-row gap-5 mt-4 lg:mt-5">
-                  <div className="text-center text-xs md:text-base lg:text-lg md:text-start">
+                  <div className="text-center text-xs md:text-sm lg:text-base md:text-start">
                     <h5>
                       <b>200+</b>
                     </h5>
                     <p className="mb-0">Plant Species</p>
                   </div>
-                  <div className="text-center text-xs md:text-base lg:text-lg md:text-start">
+                  <div className="text-center text-xs md:text-sm lg:text-base md:text-start">
                     <h5>
                       <b>1.2K+</b>
                     </h5>
