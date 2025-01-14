@@ -1,11 +1,12 @@
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 
 export default function Footer() {
   const pagesLinks = [
     { to: "/", text: "Home" },
     { to: "/", text: "About" },
+    { to: "/shop", text: "Shop" },
     { to: "/", text: "Blog" },
-    { to: "/", text: "Contact" },
+    { to: "/contact", text: "Contact" },
   ];
 
   return (
@@ -60,12 +61,22 @@ export default function Footer() {
 }
 
 function FooterLinks({ links }) {
+  const location = useLocation();
+
+  const handleClick = (e, to) => {
+    if (location.pathname === to) {
+      e.preventDefault();
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
+  };
+
   return (
     <ul className="md:space-y-2">
       {links.map((link, index) => (
         <li key={index}>
           <Link
             to={link.to}
+            onClick={(e) => handleClick(e, link.to)}
             className="text-xs md:text-base text-white hover:underline transition-colors"
           >
             {link.text}
