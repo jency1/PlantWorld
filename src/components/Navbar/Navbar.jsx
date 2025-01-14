@@ -16,7 +16,7 @@ import AdbIcon from "@mui/icons-material/Adb";
 import { Link } from "react-router-dom";
 
 const pages = ["Home", "Shop", "About", "FAQ", "Contact", "Blog"];
-const links = ["/", "/shop", "/", "/", "/", "/"];
+const links = ["/", "/shop", "/", "/", "/contact", "/"];
 const settings = ["Profile", "Account", "Dashboard", "Login", "Logout"];
 const settingsLinks = ["/", "/shop", "/", "/login", "/"];
 

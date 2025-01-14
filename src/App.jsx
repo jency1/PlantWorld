@@ -5,7 +5,9 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import HomePage from "./pages/HomePage";
 import ShopPageLayout from "./pages/ShopPageLayout";
 import DescriptionLayout from "./pages/DescriptionLayout";
-import LoginPage from "./components/LoginPage/LoginPage";
+import LoginPage from "./pages/LoginPage";
+import Contact from "./pages/Contact";
+
 import AppLayout from "./AppLayout";
 import ScrollToTop from "./ScrollToTop";
 
@@ -25,6 +27,10 @@ const router = createBrowserRouter([
       {
         path: "/shop",
         element: <ShopPageLayout />,
+      },
+      {
+        path: "/contact",
+        element: <Contact />,
       },
       {
         path: "/product/description",
