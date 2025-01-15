@@ -7,6 +7,8 @@ import ShopPageLayout from "./pages/ShopPageLayout";
 import DescriptionLayout from "./pages/DescriptionLayout";
 import LoginPage from "./components/LoginPage/LoginPage";
 import AppLayout from "./AppLayout";
+import AboutUs from "./components/AboutUs Page/AboutUs";
+import FAQs from "./components/FAQs/FAQs";
 
 const router = createBrowserRouter([
   {
@@ -23,6 +25,14 @@ const router = createBrowserRouter([
       {
         path: "/product/description",
         element: <DescriptionLayout />,
+      },
+      {
+        path: "/about",
+        element: <AboutUs />,
+      }, 
+      {
+        path: "/faqs",
+        element: <FAQs />,
       },
     ],
   },
