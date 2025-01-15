@@ -3,7 +3,7 @@ import { Link, useLocation } from "react-router-dom";
 export default function Footer() {
   const pagesLinks = [
     { to: "/", text: "Home" },
-    { to: "/", text: "About" },
+    { to: "/about", text: "About" },
     { to: "/shop", text: "Shop" },
     { to: "/", text: "Blog" },
     { to: "/contact", text: "Contact" },

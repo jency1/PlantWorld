@@ -7,7 +7,10 @@ import ShopPageLayout from "./pages/ShopPageLayout";
 import DescriptionLayout from "./pages/DescriptionLayout";
 import LoginPage from "./pages/LoginPage";
 import Contact from "./pages/Contact";
+import AboutUs from "./pages/AboutUs";
+import FAQs from "./pages/FAQs";
 
+import ScrollToTop from "./ScrollToTop";
 import AppLayout from "./AppLayout";
 
 const router = createBrowserRouter([
@@ -38,7 +41,7 @@ const router = createBrowserRouter([
       {
         path: "/about",
         element: <AboutUs />,
-      }, 
+      },
       {
         path: "/faqs",
         element: <FAQs />,
