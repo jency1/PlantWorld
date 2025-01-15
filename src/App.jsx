@@ -5,14 +5,19 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import HomePage from "./pages/HomePage";
 import ShopPageLayout from "./pages/ShopPageLayout";
 import DescriptionLayout from "./pages/DescriptionLayout";
-import LoginPage from "./components/LoginPage/LoginPage";
+import LoginPage from "./pages/LoginPage";
+import Contact from "./pages/Contact";
+
 import AppLayout from "./AppLayout";
-import AboutUs from "./components/AboutUs Page/AboutUs";
-import FAQs from "./components/FAQs/FAQs";
 
 const router = createBrowserRouter([
   {
-    element: <AppLayout />,
+    element: (
+      <>
+        <ScrollToTop />
+        <AppLayout />
+      </>
+    ),
     children: [
       {
         path: "/",
@@ -21,6 +26,10 @@ const router = createBrowserRouter([
       {
         path: "/shop",
         element: <ShopPageLayout />,
+      },
+      {
+        path: "/contact",
+        element: <Contact />,
       },
       {
         path: "/product/description",

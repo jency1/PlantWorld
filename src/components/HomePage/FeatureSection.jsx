@@ -19,7 +19,7 @@ const FeatureItem = ({ icon, title, subtitle }) => {
 // FeatureSection Component
 const FeatureSection = () => {
   return (
-    <div className="py-8 mx-5 mt-4 mb-16">
+    <div className="py-8 mx-5 md:mt-4 md:mb-16">
       <div className="container px-4 py-3 bg-[#f5f7fa] rounded-lg shadow-lg">
         <div className="grid grid-cols-2 sm:grid-cols-4 text-center">
           <FeatureItem

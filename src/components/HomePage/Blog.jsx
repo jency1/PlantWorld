@@ -52,7 +52,7 @@ export default function Blog() {
     <div>
       {/* Header Section */}
       <header className="text-center">
-        <h1 className="mt-[40px] md:mt-[50px] lg:mt-[60px] lg:mb-4 text-success font-bold text-2xl md:text-3xl lg:text-4xl">
+        <h1 className="mt-[30px] md:mt-[50px] lg:mt-[60px] lg:mb-4 text-success font-bold text-2xl md:text-3xl lg:text-4xl">
           From Our Blog
         </h1>
       </header>

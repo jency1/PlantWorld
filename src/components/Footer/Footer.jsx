@@ -1,28 +1,41 @@
+import { Link, useLocation } from "react-router-dom";
+
 export default function Footer() {
   const pagesLinks = [
-    { href: "#", text: "Home" },
-    { href: "#", text: "About" },
-    { href: "#", text: "Blog" },
-    { href: "#", text: "Contact" },
+    { to: "/", text: "Home" },
+    { to: "/", text: "About" },
+    { to: "/shop", text: "Shop" },
+    { to: "/", text: "Blog" },
+    { to: "/contact", text: "Contact" },
   ];
 
   return (
     <footer className="bg-[#212823] text-white py-10">
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="container mx-auto px-3 md:px-8">
         {/* Content container */}
-        <div className="flex flex-col items-center sm:items-start sm:flex-row justify-between space-y-10 sm:space-y-0">
+        <div className="flex flex-row items-start justify-between space-y-0">
           {/* Garden Care Section */}
-          <div className="w-full sm:w-1/3 text-center sm:text-left">
-            <h3 className="text-lg font-semibold mb-2">Garden Care</h3>
-            <p className="text-sm mb-1">123 Bang Street, Ahmedabad</p>
-            <p className="text-sm mb-1">+911776438935</p>
-            <p className="text-sm">info@plantworld.com</p>
+          <div className="w-1/3 text-left md:text-center">
+            <h3 className="text-left md:text-center text-base md:text-xl lg:text-2xl font-semibold mb-2">
+              Garden Care
+            </h3>
+            <p className="text-[0.7rem] md:text-sm lg:text-base mb-1">
+              123 Bang Street, Ahmedabad
+            </p>
+            <p className="text-[0.7rem] md:text-sm lg:text-base mb-1">
+              +911776438935
+            </p>
+            <p className="text-[0.7rem] md:text-sm lg:text-base">
+              info@plantworld.com
+            </p>
           </div>
 
           {/* PlantWorld Section */}
-          <div className="w-full sm:w-1/3 text-center">
-            <h2 className="text-2xl font-bold mb-2">PlantWorld</h2>
-            <p className="text-sm">
+          <div className="w-1/3 text-center">
+            <h2 className="text-left md:text-center text-base md:text-xl lg:text-2xl font-semibold mb-2">
+              PlantWorld
+            </h2>
+            <p className="text-center text-[0.7rem] w-[6rem] md:w-auto md:text-sm lg:text-lg">
               The seed of gardening is a love that never dies, but it never
               grows to the enduring happiness that the love of gardening
               provides to nature.
@@ -30,14 +43,16 @@ export default function Footer() {
           </div>
 
           {/* Pages Links Section */}
-          <div className="w-full sm:w-1/3 text-center sm:text-left">
-            <h3 className="text-lg font-semibold mb-2">Pages</h3>
+          <div className="sm:w-1/3 text-center sm:text-left">
+            <h3 className="text-center text-base md:text-xl lg:text-2xl font-semibold mb-2">
+              Pages
+            </h3>
             <FooterLinks links={pagesLinks} />
           </div>
         </div>
 
         {/* Footer Bottom */}
-        <div className="mt-8 border-t border-[#555] pt-4 text-center text-sm">
+        <div className="mt-8 border-t border-[#555] pt-4 text-center text-xs md:text-base lg:text-lg">
           <p>Copyright ©2024 PlantWorld. All Rights Reserved</p>
         </div>
       </div>
@@ -46,16 +61,26 @@ export default function Footer() {
 }
 
 function FooterLinks({ links }) {
+  const location = useLocation();
+
+  const handleClick = (e, to) => {
+    if (location.pathname === to) {
+      e.preventDefault();
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
+  };
+
   return (
-    <ul className="space-y-2">
+    <ul className="md:space-y-2">
       {links.map((link, index) => (
         <li key={index}>
-          <a
-            href={link.href}
-            className="text-sm text-white hover:underline transition-colors"
+          <Link
+            to={link.to}
+            onClick={(e) => handleClick(e, link.to)}
+            className="text-xs md:text-base text-white hover:underline transition-colors"
           >
             {link.text}
-          </a>
+          </Link>
         </li>
       ))}
     </ul>

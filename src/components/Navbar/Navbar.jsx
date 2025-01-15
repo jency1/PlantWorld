@@ -16,8 +16,9 @@ import AdbIcon from "@mui/icons-material/Adb";
 import { Link } from "react-router-dom";
 
 const pages = ["Home", "Shop", "About", "FAQ", "Contact", "Blog"];
-const links = ["/", "/shop", "/", "/", "/", "/"];
+const links = ["/", "/shop", "/", "/", "/contact", "/"];
 const settings = ["Profile", "Account", "Dashboard", "Login", "Logout"];
+const settingsLinks = ["/", "/shop", "/", "/login", "/"];
 
 const theme = createTheme({
   palette: {
@@ -160,6 +161,10 @@ function Navbar() {
                         color: "white",
                         display: "block",
                         textDecoration: "none",
+                        transition: "color 0.2s ease, transform 0.2s ease",
+                        "&:hover": {
+                          transform: "scale(1.1)",
+                        },
                       }}
                     >
                       {page}
@@ -191,11 +196,17 @@ function Navbar() {
                 onClose={handleCloseUserMenu}
               >
                 {settings.map((setting, index) => (
-                  <MenuItem key={setting + index} onClick={handleCloseUserMenu}>
-                    <Typography sx={{ textAlign: "center" }}>
-                      {setting}
-                    </Typography>
-                  </MenuItem>
+                  <Link
+                    to={settingsLinks[index]}
+                    key={setting + index}
+                    style={{ textDecoration: "none", color: "black" }}
+                  >
+                    <MenuItem onClick={handleCloseUserMenu}>
+                      <Typography sx={{ textAlign: "center" }}>
+                        {setting}
+                      </Typography>
+                    </MenuItem>
+                  </Link>
                 ))}
               </Menu>
             </Box>
