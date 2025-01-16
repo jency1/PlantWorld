@@ -18,14 +18,15 @@ const plantSchema = new mongoose.Schema({
     type: Number,
     required: [true, 'A plant must have a price'],
   },
-  description: {
+  shortDescription: {
     type: String,
     trim: true,
     required: [true, 'A plant must have a description'],
   },
-  careInstructions: {
+  description: {
     type: String,
     trim: true,
+    required: [true, 'A plant must have a description'],
   },
   category: {
     type: String,
