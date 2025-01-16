@@ -1,7 +1,22 @@
+const { Tour } = require('@mui/icons-material');
 const Plant = require('./../model/plantModel');
 
-exports.getAllPlants = (req, res) => {
-  res.send('hello');
+exports.getAllPlants = async (req, res) => {
+  try {
+    const plants = await Plant.find();
+    res.status(200).json({
+      status: 'success',
+      results: plants.length,
+      data: {
+        plants,
+      },
+    });
+  } catch (err) {
+    res.status(404).json({
+      status: 'fail',
+      message: err,
+    });
+  }
 };
 
 exports.createPlant = async (req, res) => {
@@ -22,8 +37,23 @@ exports.createPlant = async (req, res) => {
   }
 };
 
-exports.getPlant = (req, res) => {
-  res.send('hello');
+exports.getPlant = async (req, res) => {
+  try {
+    const plant = await Plant.findById(req.params.id);
+    // Plant.findOne({_id:req.params.id})
+
+    res.status(200).json({
+      status: 'success',
+      data: {
+        plant,
+      },
+    });
+  } catch (err) {
+    res.status(404).json({
+      status: 'fail',
+      message: err,
+    });
+  }
 };
 
 exports.updatePlant = (req, res) => {
