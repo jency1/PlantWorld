@@ -2,12 +2,12 @@ const express = require('express');
 const router = express.Router();
 const plantController = require('./../controllers/plantController');
 
-router.param('id', plantController.checkID);
+// router.param('id', plantController.checkID);
 
 router
   .route('/')
   .get(plantController.getAllPlants)
-  .post(plantController.checkBody, plantController.createPlant);
+  .post(plantController.createPlant);
 
 router
   .route('/:id')

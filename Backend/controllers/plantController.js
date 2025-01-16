@@ -1,19 +1,25 @@
-exports.checkID = (req, res, next, val) => {
-  console.log('Hello from the param middleware');
-  next();
-};
-
-exports.checkBody = (req, res, next) => {
-  console.log('hello from the checkBody middleWare');
-  next();
-};
+const Plant = require('./../model/plantModel');
 
 exports.getAllPlants = (req, res) => {
   res.send('hello');
 };
 
-exports.createPlant = (req, res) => {
-  res.send('hello');
+exports.createPlant = async (req, res) => {
+  try {
+    const newTour = await Plant.create(req.body);
+
+    res.status(201).json({
+      status: 'success',
+      data: {
+        tour: newTour,
+      },
+    });
+  } catch (err) {
+    res.status(400).json({
+      status: 'fail',
+      message: 'Invalid data sent',
+    });
+  }
 };
 
 exports.getPlant = (req, res) => {
