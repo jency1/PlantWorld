@@ -1,13 +1,13 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import { FaHome } from "react-icons/fa"; 
+import { FaHome } from "react-icons/fa";
 
 const BackToHomeButton = () => (
   <Link
     to="/"
-    className="absolute top-[10px] left-[10px] text-[#72a876] font-bold p-[6px] md:p-[8px] lg:p-[12px] rounded border border-[#72a876] hover:bg-[#4ead54] hover:text-white transition-colors duration-300"
+    className="absolute top-[10px] left-[10px] md:top-[25px] md:left-[30px] text-[#72a876] font-bold p-[6px] md:p-[8px] lg:p-[12px] rounded border border-[#72a876] hover:bg-[#4ead54] hover:text-white transition-colors duration-300"
   >
-    <FaHome size={24} />
+    <FaHome className="text-base md:text-lg lg:text-2xl" />
   </Link>
 );
 
@@ -107,31 +107,30 @@ const SignupForm = () => (
 const ForgotPasswordModal = ({ handleClose }) => (
   <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50">
     <div className="bg-white p-[20px] rounded-lg w-[90%] max-w-[400px]">
-      <h2 className="text-[1.2rem] font-semibold mb-4">Forgot Password?</h2>
+      <h2 className="font-semibold mb-4 text-[17px] lg:text-[22px] text-center text-[#72A876]">
+        Forgot Password?
+      </h2>
       <form className="flex flex-col">
-        <label
-          htmlFor="email"
-          className="mb-2 text-[0.8rem] lg:text-[1.1rem]"
-        >
+        <label htmlFor="email" className="mb-2 text-[0.8rem] lg:text-[1.1rem]">
           Enter your email to reset your password:
         </label>
         <input
           type="email"
           id="email"
-          placeholder="youremail@example.com"
+          placeholder="xyz@example.com"
           className="w-full px-[6px] py-[3px] lg:px-[12px] lg:py-[8px] mb-3 rounded border border-gray-300 text-[14px] lg:text-[16px]"
         />
 
         <button
           type="submit"
-          className="w-full bg-[#4ead54] text-white font-bold px-[2px] py-[3px] lg:px-[12px] lg:py-[10px] rounded border-none text-[0.8rem] lg:text-[1.1rem] cursor-pointer transition-colors duration-300 hover:bg-[#499a4e]"
+          className=" bg-[#4ead54] text-white font-bold py-[6px] md:py-[8px] lg:py-[7px] rounded border-none text-[0.8rem] lg:text-[1.1rem] cursor-pointer transition-colors duration-300 hover:bg-[#499a4e]"
         >
           Reset Password
         </button>
       </form>
       <button
         onClick={handleClose}
-        className="text-red-500 font-semibold mt-4 w-full"
+        className="text-red-500 font-semibold text-sm md:text-base lg:text-lg mt-4 w-full"
       >
         Close
       </button>
@@ -161,10 +160,16 @@ const RightSection = ({ isSignup, setIsSignup, handleForgotPassword }) => (
   <div className="flex-1 flex flex-col justify-center bg-[#f4f7f4] p-[20px] lg:p-[40px] md:rounded-r-[10px]">
     <Logo />
     <h3 className="text-[0.7rem] lg:text-[1.3rem] text-center mb-[0.7rem] lg:mb-[1.2rem]">
-      {isSignup ? "Create a PlantWorld Account" : "Login to your PlantWorld Account"}
+      {isSignup
+        ? "Create your PlantWorld Account"
+        : "Login to your PlantWorld Account"}
     </h3>
-    {isSignup ? <SignupForm /> : <LoginForm handleForgotPassword={handleForgotPassword} />}
-    <div className="text-center text-[1rem] mt-[20px]">
+    {isSignup ? (
+      <SignupForm />
+    ) : (
+      <LoginForm handleForgotPassword={handleForgotPassword} />
+    )}
+    <div className="text-center text-xs mt-3 md:mt-auto md:text-md lg:text-lg mb-[8px] lg:mb-[15px]">
       {isSignup ? (
         <>
           Already have an account?{" "}
@@ -191,7 +196,7 @@ const RightSection = ({ isSignup, setIsSignup, handleForgotPassword }) => (
 );
 
 const LoginPage = () => {
-  const [isSignup, setIsSignup] = useState(false); 
+  const [isSignup, setIsSignup] = useState(false);
   const [showForgotPasswordModal, setShowForgotPasswordModal] = useState(false);
 
   const handleForgotPassword = (e) => {
