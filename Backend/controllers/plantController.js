@@ -77,6 +77,17 @@ exports.updatePlant = async (req, res) => {
   }
 };
 
-exports.deletePlant = (req, res) => {
-  res.send('hello');
+exports.deletePlant = async (req, res) => {
+  try {
+    await Plant.findByIdAndDelete(req.params.id);
+    res.status(204).json({
+      status: 'success',
+      data: null,
+    });
+  } catch (err) {
+    res.status(404).json({
+      status: 'fail',
+      message: err,
+    });
+  }
 };
