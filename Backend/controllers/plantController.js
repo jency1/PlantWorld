@@ -56,9 +56,27 @@ exports.getPlant = async (req, res) => {
   }
 };
 
-exports.updatePlant = (req, res) => {
-  res.send('hello');
+exports.updatePlant = async (req, res) => {
+  try {
+    const plant = await Plant.findByIdAndUpdate(req.params.id, req.body, {
+      new: true,
+      runValidators: true,
+    });
+
+    res.status(200).json({
+      status: 'success',
+      data: {
+        plant,
+      },
+    });
+  } catch (err) {
+    res.status(404).json({
+      status: 'fail',
+      message: err,
+    });
+  }
 };
+
 exports.deletePlant = (req, res) => {
   res.send('hello');
 };
