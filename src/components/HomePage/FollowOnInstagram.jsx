@@ -74,7 +74,7 @@ import styles from "./FollowOnInstagram.module.css";
 function FollowOnInstagram() {
   return (
     <div className="flex flex-col items-center">
-      <div className="mt-6 md:mt-16 md:mb-3 lg:mb-5 text-success font-bold text-xl md:text-3xl lg:text-4xl">
+      <div className="lg:mt-4 mb-4 text-success font-bold text-2xl md:text-3xl lg:text-4xl text-center">
         Follow us on Instagram
       </div>
       <div
@@ -124,11 +124,11 @@ function FollowOnInstagram() {
             />
           </div>
         </div>
-        <div className={`${styles.longImage} m-1 col-span-4`}>
+        <div className={`${styles.longImage} m-1 col-span-4 `}>
           <img
             src="/Shop By Category/long-image.jpg"
             alt=""
-            className="w-full h-full object-cover rounded hover:shadow-lg"
+            className="md-h-0 w-full h-full object-cover rounded hover:shadow-lg"
           />
         </div>
       </div>

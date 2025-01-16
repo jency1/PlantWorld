@@ -30,16 +30,15 @@ export default function ProductDescription() {
 
         {/* Product Details */}
         <div className="w-full md:w-1/2 lg:w-2/5 mt-6 md:mt-0">
-          <h1 className="text-xl md:text-2xl lg:text-3xl font-bold mb-3 lg:mb-5 text-green-700">
-            Houseplant Philippine
+          <h1 className="text-xl md:text-2xl md:0 mt-4 lg:text-3xl font-bold mb-3 lg:mb-5 text-green-700">
+            Houseplant
           </h1>
           <p className="text-sm md:text-base lg:text-lg mb-2 lg:mb-3 text-gray-600">
-            Each of our products is hand-selected for its unique aesthetic
-            appeal, resilience, and ability to enhance your home or office
-            environment.
+            Houseplants bring nature indoors, improve air quality, and thrive in
+            various light conditions. Perfect for stress relief and decor.
           </p>
           <h2 className="text-lg md:text-xl lg:text-2xl text-green-700 mb-3 lg:mb-4">
-            Rs 800
+            Rs 500
           </h2>
           <div className="flex items-center mb-4 md:mb-5">
             <input
@@ -52,7 +51,7 @@ export default function ProductDescription() {
               Add to Cart
             </button>
           </div>
-          <p className="sm:mb-2 lg:mb-4 text-sm md:text-base">
+          <p className="sm:mb-2 lg:mb-4 mt-5 text-sm md:text-base">
             Free worldwide shipping on all orders over Rs 500!
           </p>
           <p className="mb-2 text-sm md:text-base">
@@ -69,7 +68,7 @@ export default function ProductDescription() {
             </li>
             <li>
               <span className="lg:font-medium font-semibold">Color:</span>{" "}
-              Black, White, Yellow, Orange
+              Green, White, Red
             </li>
           </ul>
         </div>
@@ -80,53 +79,39 @@ export default function ProductDescription() {
           Description
         </h2>
         <p className="text-xs md:text-base lg:text-lg leading-relaxed text-gray-600">
-          We offer a diverse range of botanical wonders carefully to bring
-          natural and vitality into your living spaces. Each of our products is
-          hand-selected for its unique aesthetic appeal, resilience, and ability
-          to enhance your home or office environment. From striking foliage to
-          delicate blooms, our collection encompasses a wide variety of greenery
-          options to suit every taste and style. Whether you're looking to
-          create a lush indoor jungle, add a touch of green to a sunny corner,
-          or infuse a dash of green into a minimalist setting, our diverse range
-          of treasures awaits your exploration. Immerse yourself in the
-          transformative power of nature and embark on a journey of enchantment
-          with exquisite products.
+          Houseplants are versatile and low-maintenance greenery that can
+          transform any indoor space into a lush oasis. They improve air
+          quality, reduce stress, and add aesthetic appeal to homes and offices.
+          With a wide variety of options available, from trailing vines to
+          upright ferns, houseplants cater to different preferences and skill
+          levels. They thrive in varying light conditions, from bright indirect
+          sunlight to low-light environments. By adding houseplants, you can
+          bring a touch of nature indoors, creating a calming and inviting
+          atmosphere that promotes well-being and enhances your decor.
         </p>
+
+        <h2 className="text-xl md:text-2xl lg:text-3xl font-bold text-green-700 mt-4 md:mt-7 lg:mt-10 mb-3 md:mb-4 lg:mb-5">
+          Care Tips for Houseplant
+        </h2>
 
         <ul className="list-none mt-3 md:mt-5 space-y-2 md:space-y-3 lg:space-y-4">
           <li className="flex items-center text-xs md:text-base lg:text-lg">
             <i className="bi bi-check-circle-fill text-green-700 mr-3"></i>
-            Unraveling the Mysteries of Mycorrhizal Fungi: How Symbiotic
-            Relationships Shape Plant Health and Ecosystem Dynamics
+            Place in indirect sunlight or low light, depending on type.
           </li>
           <li className="flex items-center text-xs md:text-base lg:text-lg">
             <i className="bi bi-check-circle-fill text-green-700 mr-3"></i>
-            The art of bonsai: mastering the ancient Japanese practice of
-            cultivating miniature trees
+            Water when the topsoil feels dry to touch.
           </li>
           <li className="flex items-center text-xs md:text-base lg:text-lg">
             <i className="bi bi-check-circle-fill text-green-700 mr-3"></i>
-            Harnessing the power of plant-based remedies: exploring herbal
-            medicine and traditional healing practices
+            Dust leaves regularly to ensure proper photosynthesis.
           </li>
           <li className="flex items-center text-xs md:text-base lg:text-lg">
             <i className="bi bi-check-circle-fill text-green-700 mr-3"></i>
-            Bridging the gap: integrating biophilic design principles into
-            modern architecture and interior spaces
+            Fertilize every month during the growing season.
           </li>
         </ul>
-
-        <h2 className="text-xl md:text-2xl lg:text-3xl font-bold text-green-700 mt-4 md:mt-7 lg:mt-10 mb-3 md:mb-4 lg:mb-5">
-          Description
-        </h2>
-        <p className="text-xs md:text-base lg:text-lg leading-relaxed text-gray-600">
-          Explore our curated selection of botanical wonders, each carefully
-          chosen to enhance your living space and bring the beauty of nature
-          indoors. Our products are sourced from trusted growers and nurseries,
-          ensuring the quality and health of every plant for our customers. From
-          vibrant to delicate blooms, each plant is accompanied by detailed care
-          instructions to help you nurture and maintain its natural beauty.
-        </p>
       </div>
     </div>
   );
