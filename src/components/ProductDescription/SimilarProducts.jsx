@@ -7,7 +7,7 @@ function SimilarProducts() {
       >
         Similar Products
       </div>
-      <div className="row">
+      <div className="row mx-8 px-8">
         <div className="col-6 col-md-3 text-center mt-3 md:mt-4 lg:mt-5">
           <img
             src="/Featured Products/image1.jpg"
