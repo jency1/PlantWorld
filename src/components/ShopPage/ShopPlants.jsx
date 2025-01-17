@@ -23,11 +23,13 @@ function ShopPlants() {
     return (
       <div className="col-6 col-sm-4 col-md-3 col-lg-3 text-center mt-4">
         <div className="card p-3 bg-gray-100 rounded-lg shadow-md">
-          <img
-            src={imageSrc}
-            alt={title}
-            className="img-fluid object-cover rounded-lg w-full md:h-36 lg:h-48 mb-1 md:mb-3"
-          />
+          <Link to="/product/description">
+            <img
+              src={imageSrc}
+              alt={title}
+              className="img-fluid object-cover rounded-lg w-full md:h-36 lg:h-48 mb-1 md:mb-3"
+            />
+          </Link>
           <div className="h6 mt-2 text-sm md:text-base lg:text-lg">{title}</div>
           <div className="text-success text-xs md:text-sm lg:text-base">
             {price}
