@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import FilterComponent from "./FilterComponent"; // Import the filter component
+import { Link } from "react-router-dom";
 
 function ShopPlants() {
   const [showFilter, setShowFilter] = useState(false);
@@ -31,9 +32,11 @@ function ShopPlants() {
           <div className="text-success text-xs md:text-sm lg:text-base">
             {price}
           </div>
-          <button className="btn btn-outline-success mt-2 lg:mt-3 lg:px-4 lg:py-2 text-xs sm:text-sm">
-            Add To Cart
-          </button>
+          <Link to="/product/description">
+            <button className="btn btn-outline-success mt-2 lg:mt-3 lg:px-4 lg:py-2 text-xs sm:text-sm">
+              Add To Cart
+            </button>
+          </Link>
         </div>
       </div>
     );
