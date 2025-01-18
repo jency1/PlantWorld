@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { FaHome } from "react-icons/fa";
 
+// Back to home button component
 const BackToHomeButton = () => (
   <Link
     to="/"
@@ -11,6 +12,7 @@ const BackToHomeButton = () => (
   </Link>
 );
 
+// Logo component
 const Logo = () => (
   <div className="flex items-center justify-center mb-[1rem] lg:mb-[1.5rem]">
     <h2 className="text-[20px] lg:text-[28px] font-bold text-[#72A876]">
@@ -19,15 +21,28 @@ const Logo = () => (
   </div>
 );
 
+// Login Form component (updated for separate rows for email and mobile)
 const LoginForm = ({ handleForgotPassword }) => (
   <form className="flex flex-col w-full">
-    <label htmlFor="username" className="mb-2 text-[0.8rem] lg:text-[1.1rem]">
-      User Name:
+    <label htmlFor="email" className="mb-2 text-[0.8rem] lg:text-[1.1rem]">
+      Email:
     </label>
     <input
-      type="text"
-      id="username"
-      placeholder="username"
+      type="email"
+      id="email"
+      placeholder="xyz@example.com"
+      required
+      className="w-full px-[6px] py-[3px] lg:px-[12px] lg:py-[8px] mb-3 rounded border border-gray-300 text-[14px] lg:text-[16px]"
+    />
+
+    <label htmlFor="mobile" className="mb-2 text-[0.8rem] lg:text-[1.1rem]">
+      Mobile Number:
+    </label>
+    <input
+      type="tel"
+      id="mobile"
+      placeholder="123-456-7890"
+      required
       className="w-full px-[6px] py-[3px] lg:px-[12px] lg:py-[8px] mb-3 rounded border border-gray-300 text-[14px] lg:text-[16px]"
     />
 
@@ -38,6 +53,7 @@ const LoginForm = ({ handleForgotPassword }) => (
       type="password"
       id="password"
       placeholder="*****"
+      required
       className="w-full px-[6px] py-[3px] lg:px-[12px] lg:py-[8px] mb-3 rounded border border-gray-300 text-[14px] lg:text-[16px]"
     />
 
@@ -60,15 +76,28 @@ const LoginForm = ({ handleForgotPassword }) => (
   </form>
 );
 
+// Signup Form component (updated for separate rows for email and mobile)
 const SignupForm = () => (
   <form className="flex flex-col w-full">
-    <label htmlFor="username" className="mb-2 text-[0.8rem] lg:text-[1.1rem]">
-      User Name:
+    <label htmlFor="email" className="mb-2 text-[0.8rem] lg:text-[1.1rem]">
+      Email:
     </label>
     <input
-      type="text"
-      id="username"
-      placeholder="username"
+      type="email"
+      id="email"
+      placeholder="xyz@example.com"
+      required
+      className="w-full px-[6px] py-[3px] lg:px-[12px] lg:py-[8px] mb-3 rounded border border-gray-300 text-[14px] lg:text-[16px]"
+    />
+
+    <label htmlFor="mobile" className="mb-2 text-[0.8rem] lg:text-[1.1rem]">
+      Mobile Number:
+    </label>
+    <input
+      type="tel"
+      id="mobile"
+      placeholder="123-456-7890"
+      required
       className="w-full px-[6px] py-[3px] lg:px-[12px] lg:py-[8px] mb-3 rounded border border-gray-300 text-[14px] lg:text-[16px]"
     />
 
@@ -79,6 +108,7 @@ const SignupForm = () => (
       type="password"
       id="password"
       placeholder="*****"
+      required
       className="w-full px-[6px] py-[3px] lg:px-[12px] lg:py-[8px] mb-3 rounded border border-gray-300 text-[14px] lg:text-[16px]"
     />
 
@@ -92,6 +122,7 @@ const SignupForm = () => (
       type="password"
       id="confirmPassword"
       placeholder="*****"
+      required
       className="w-full px-[6px] py-[3px] lg:px-[12px] lg:py-[8px] mb-3 rounded border border-gray-300 text-[14px] lg:text-[16px]"
     />
 
@@ -104,6 +135,7 @@ const SignupForm = () => (
   </form>
 );
 
+// Forgot Password Modal component
 const ForgotPasswordModal = ({ handleClose }) => (
   <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50">
     <div className="bg-white p-[20px] rounded-lg w-[90%] max-w-[400px]">
@@ -118,6 +150,7 @@ const ForgotPasswordModal = ({ handleClose }) => (
           type="email"
           id="email"
           placeholder="xyz@example.com"
+          required
           className="w-full px-[6px] py-[3px] lg:px-[12px] lg:py-[8px] mb-3 rounded border border-gray-300 text-[14px] lg:text-[16px]"
         />
 
@@ -138,6 +171,7 @@ const ForgotPasswordModal = ({ handleClose }) => (
   </div>
 );
 
+// Left Section (for the image and welcome text)
 const LeftSection = () => (
   <div className="flex-1 flex flex-col justify-center items-center bg-[#72a876] p-[20px] text-white md:rounded-l-[10px]">
     <h2 className="text-center text-[16px] md:text-[22px] lg:text-[32px] font-semibold mb-[10px]">
@@ -156,6 +190,7 @@ const LeftSection = () => (
   </div>
 );
 
+// Right Section (Login/Signup and form handling)
 const RightSection = ({ isSignup, setIsSignup, handleForgotPassword }) => (
   <div className="flex-1 flex flex-col justify-center bg-[#f4f7f4] p-[20px] lg:p-[40px] md:rounded-r-[10px]">
     <Logo />
@@ -195,6 +230,7 @@ const RightSection = ({ isSignup, setIsSignup, handleForgotPassword }) => (
   </div>
 );
 
+// Main LoginPage component
 const LoginPage = () => {
   const [isSignup, setIsSignup] = useState(false);
   const [showForgotPasswordModal, setShowForgotPasswordModal] = useState(false);
