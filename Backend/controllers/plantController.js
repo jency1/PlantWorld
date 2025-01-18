@@ -3,7 +3,34 @@ const Plant = require('./../model/plantModel');
 
 exports.getAllPlants = async (req, res) => {
   try {
-    const plants = await Plant.find();
+    console.log(req.query);
+
+    // BUILD QUERY
+    // 1)filtering
+    const queryObj = { ...req.query };
+    const excludedFields = ['page', 'sort', 'limit', 'fields'];
+
+    excludedFields.forEach((el) => delete queryObj[el]);
+
+    // 2)Advanced filtering
+    let queryString = JSON.stringify(queryObj);
+    queryString = queryString.replace(
+      /\b(gte|gt|lte|lt)\b/g,
+      (match) => `$${match}`
+    );
+
+    console.log(JSON.parse(queryString));
+    // mongoose {tag:'Indoor' , price:{$gte:200}}
+    // req.query { tag: 'Indoor', price: { gte: '200' } }
+
+    const query = Plant.find(JSON.parse(queryString));
+
+    // EXECUTE QUERY
+
+    const plants = await query;
+
+    // SEND RESPONSE
+
     res.status(200).json({
       status: 'success',
       results: plants.length,
