@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { FaHome } from "react-icons/fa";
 
-// Back to home button component
 const BackToHomeButton = () => (
   <Link
     to="/"
@@ -12,7 +11,6 @@ const BackToHomeButton = () => (
   </Link>
 );
 
-// Logo component
 const Logo = () => (
   <div className="flex items-center justify-center mb-[1rem] lg:mb-[1.5rem]">
     <h2 className="text-[20px] lg:text-[28px] font-bold text-[#72A876]">
@@ -21,7 +19,6 @@ const Logo = () => (
   </div>
 );
 
-// Login Form component (updated for separate rows for email and mobile)
 const LoginForm = ({ handleForgotPassword }) => (
   <form className="flex flex-col w-full">
     <label htmlFor="email" className="mb-2 text-[0.8rem] lg:text-[1.1rem]">
@@ -76,7 +73,6 @@ const LoginForm = ({ handleForgotPassword }) => (
   </form>
 );
 
-// Signup Form component (updated for separate rows for email and mobile)
 const SignupForm = () => (
   <form className="flex flex-col w-full">
     <label htmlFor="email" className="mb-2 text-[0.8rem] lg:text-[1.1rem]">
@@ -135,7 +131,6 @@ const SignupForm = () => (
   </form>
 );
 
-// Forgot Password Modal component
 const ForgotPasswordModal = ({ handleClose }) => (
   <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50">
     <div className="bg-white p-[20px] rounded-lg w-[90%] max-w-[400px]">
@@ -171,7 +166,6 @@ const ForgotPasswordModal = ({ handleClose }) => (
   </div>
 );
 
-// Left Section (for the image and welcome text)
 const LeftSection = () => (
   <div className="flex-1 flex flex-col justify-center items-center bg-[#72a876] p-[20px] text-white md:rounded-l-[10px]">
     <h2 className="text-center text-[16px] md:text-[22px] lg:text-[32px] font-semibold mb-[10px]">
@@ -190,7 +184,6 @@ const LeftSection = () => (
   </div>
 );
 
-// Right Section (Login/Signup and form handling)
 const RightSection = ({ isSignup, setIsSignup, handleForgotPassword }) => (
   <div className="flex-1 flex flex-col justify-center bg-[#f4f7f4] p-[20px] lg:p-[40px] md:rounded-r-[10px]">
     <Logo />
@@ -230,7 +223,6 @@ const RightSection = ({ isSignup, setIsSignup, handleForgotPassword }) => (
   </div>
 );
 
-// Main LoginPage component
 const LoginPage = () => {
   const [isSignup, setIsSignup] = useState(false);
   const [showForgotPasswordModal, setShowForgotPasswordModal] = useState(false);

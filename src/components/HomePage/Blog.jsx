@@ -1,4 +1,3 @@
-// BlogCard Component: Reusable card component for displaying blog informations
 function BlogCard({ imageUrl, title, description }) {
   return (
     <div className="bg-gray-100 rounded-lg shadow-md p-3 flex sm:flex-row lg:flex-col items-center lg:w-[500px]">
@@ -23,25 +22,24 @@ function BlogCard({ imageUrl, title, description }) {
 }
 
 export default function Blog() {
-  // Blog data array
   const blogPosts = [
     {
       imageUrl:
-        "https://hips.hearstapps.com/hmg-prod/images/a-set-of-colorful-potted-plants-on-a-patterned-area-royalty-free-image-1716493110.jpg?crop=0.668xw:1.00xh;0.210xw,0&resize=1200:*",
+        "/public/Home Page/Blog1.avif",
       title: "Plant Care Tips & Guides",
       description:
         "Welcome to our Plant Care section, where we share expert advice and practical tips to help you keep your trees and plants healthy and thriving...",
     },
     {
       imageUrl:
-        "https://merchantandgreen.com.au/product_images/uploaded_images/autumn-plant-care-07.png",
+        "/public/Home Page/Blog2.webp",
       title: "Autumn Plant Care",
       description:
         "Discover the best practices to take care of your plants during the autumn season. Keep them blooming and vibrant!",
     },
     {
       imageUrl:
-        "https://thelittlecountrystore.com.au/cdn/shop/collections/download_6d6b0382-bf64-4d93-910a-ae93aa530910_300x300.jpg?v=1696991699",
+        "/public/Home Page/Blog3.avif",
       title: "Decorative Plants for Indoors",
       description:
         "Find out which decorative plants suit your indoor spaces best and how to keep them thriving in different conditions.",
@@ -50,14 +48,12 @@ export default function Blog() {
 
   return (
     <div>
-      {/* Header Section */}
       <header className="text-center">
         <h1 className="mt-[30px] md:mt-[50px] lg:mt-[60px] lg:mb-4 text-success font-bold text-2xl md:text-3xl lg:text-4xl">
           From Our Blog
         </h1>
       </header>
 
-      {/* Blog Cards Container */}
       <div className="container mx-auto mb-5 px-4 py-6 flex flex-col lg:flex-row gap-6">
         {blogPosts.map((post, index) => (
           <BlogCard
