@@ -3,27 +3,38 @@ const Plant = require('./../model/plantModel');
 
 exports.getAllPlants = async (req, res) => {
   try {
-    console.log(req.query);
+    // console.log(req.query);
 
     // BUILD QUERY
-    // 1)filtering
+    // 1A)filtering
     const queryObj = { ...req.query };
     const excludedFields = ['page', 'sort', 'limit', 'fields'];
 
     excludedFields.forEach((el) => delete queryObj[el]);
 
-    // 2)Advanced filtering
+    // 1B)Advanced filtering
     let queryString = JSON.stringify(queryObj);
     queryString = queryString.replace(
       /\b(gte|gt|lte|lt)\b/g,
       (match) => `$${match}`
     );
 
-    console.log(JSON.parse(queryString));
+    // console.log(JSON.parse(queryString));
     // mongoose {tag:'Indoor' , price:{$gte:200}}
     // req.query { tag: 'Indoor', price: { gte: '200' } }
 
-    const query = Plant.find(JSON.parse(queryString));
+    // 2) Sorting
+
+    let query = Plant.find(JSON.parse(queryString));
+
+    if (req.query.sort) {
+      //mongoose sort('price ratingsAverage)
+
+      const sortBy = req.query.sort.split(',').join(' ');
+      query = query.sort(sortBy);
+    } else {
+      query = query.sort('-createdAt');
+    }
 
     // EXECUTE QUERY
 
