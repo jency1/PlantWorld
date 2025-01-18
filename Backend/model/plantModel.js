@@ -5,6 +5,7 @@ const plantSchema = new mongoose.Schema({
     type: String,
     required: [true, 'A plant must have a name'],
     unique: true,
+    trim: true,
   },
   ratingsAverage: {
     type: Number,
@@ -31,10 +32,12 @@ const plantSchema = new mongoose.Schema({
   category: {
     type: String,
     required: [true, 'A plant must have a category'],
+    trim: true,
   },
   tag: {
     type: String,
     required: [true, 'A plant must have a tag'],
+    trim: true,
   },
   color: {
     type: [String],
@@ -53,6 +56,12 @@ const plantSchema = new mongoose.Schema({
       },
       message: 'There should be at least one care tip provided',
     },
+  },
+  images: [String],
+  priceDiscount: Number,
+  createdAt: {
+    type: Date,
+    default: Date.now(),
   },
 });
 
