@@ -21,10 +21,7 @@ export default function AboutUs() {
           {/* Feature 1 */}
           <div className="bg-gray-50 rounded-lg p-0.3 border-r border-b last:border-r-0 last:md:border-b-0 md:last:border-r-0">
             <div className="bg-cover bg-center">
-              <img
-                src="/AboutUS/image1.jpg"
-                alt="Friendly and fast support"
-              />
+              <img src="/AboutUS/image1.jpg" alt="Friendly and fast support" />
             </div>
           </div>
 
@@ -32,7 +29,7 @@ export default function AboutUs() {
           <div className="bg-gray-50 rounded-lg p-6 border-b md:last:border-b-0 flex justify-center flex-col">
             <div className="flex justify-center mb-4">
               <img
-                src="/AboutUS/image2.jpg"
+                src="/AboutUS/image2.png"
                 alt="Organic and seed grown plants"
                 className="w-40 h-40 object-contain"
               />
@@ -51,10 +48,7 @@ export default function AboutUs() {
           {/* Feature 3 */}
           <div className="bg-gray-50 rounded-lg p-0.3 border-b last:border-b-0 md:last:border-r-0">
             <div className="bg-cover bg-center">
-              <img
-                src="/AboutUS/image3.jpg"
-                alt="Friendly and fast support"
-              />
+              <img src="/AboutUS/image3.jpg" alt="Friendly and fast support" />
             </div>
           </div>
 
@@ -62,7 +56,7 @@ export default function AboutUs() {
           <div className="bg-gray-50 rounded-lg p-6 border-r border-b last:border-r-0 md:border-b-0 md:last:border-r-0 flex justify-center flex-col">
             <div className="flex justify-center mb-4">
               <img
-                src="/AboutUS/image4.jpg"
+                src="/AboutUS/image4.png"
                 alt="Friendly and fast support"
                 className="w-40 h-40 object-contain"
               />
@@ -93,7 +87,7 @@ export default function AboutUs() {
           <div className="bg-gray-50 rounded-lg p-6 border-b last:border-b-0 md:last:border-r-0 flex justify-center flex-col">
             <div className="flex justify-center mb-4">
               <img
-                src="/AboutUS/image6.jpg"
+                src="/AboutUS/image6.png"
                 alt="Expert Guidance"
                 className="w-40 h-40 object-contain"
               />

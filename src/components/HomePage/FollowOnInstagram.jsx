@@ -71,11 +71,16 @@
 
 import styles from "./FollowOnInstagram.module.css";
 
+import { RxInstagramLogo } from "react-icons/rx";
+
 function FollowOnInstagram() {
   return (
     <div className="flex flex-col items-center">
-      <div className="lg:mt-4 mb-4 text-success font-bold text-2xl md:text-3xl lg:text-4xl text-center">
-        Follow us on Instagram
+      <div className="mt-9 md:mt-16 mb-4 font-bold text-xl md:text-3xl lg:text-4xl text-center flex justify-center items-center gap-2">
+        <div className="text-success">Follow us on Instagram</div>
+        <div className="cursor-pointer">
+          <RxInstagramLogo />
+        </div>
       </div>
       <div
         className={`${styles["main-container"]} grid h-full w-full md:h-4/6 md:w-5/6 grid-cols-12 px-8 mx-8 mt-2 mb-5`}
