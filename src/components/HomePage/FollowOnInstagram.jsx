@@ -78,45 +78,45 @@ function FollowOnInstagram() {
         Follow us on Instagram
       </div>
       <div
-        className={`${styles["main-container"]} grid h-4/6 w-5/6 grid-cols-12 px-8 mx-8 mt-2 mb-5`}
+        className={`${styles["main-container"]} grid h-full w-full md:h-4/6 md:w-5/6 grid-cols-12 px-8 mx-8 mt-2 mb-5`}
       >
-        <div className="col-span-12 md:col-span-8 grid grid-cols-12">
-          <div className="col-span-6 text-center m-1">
+        <div className="col-span-8 grid grid-cols-12">
+          <div className="col-span-6 text-center m-[0.1rem] md:m-1">
             <img
               src="/Shop By Category/image-1.jpg"
               alt=""
               className="w-full h-full object-cover rounded hover:shadow-lg"
             />
           </div>
-          <div className="col-span-6 text-center m-1 ">
+          <div className="col-span-6 text-center m-[0.1rem] md:m-1">
             <img
               src="/Shop By Category/image-2.jpg"
               alt=""
               className="w-full h-full object-cover rounded hover:shadow-lg"
             />
           </div>
-          <div className="col-span-8 text-center m-1">
+          <div className="col-span-8 text-center m-[0.1rem] md:m-1">
             <img
               src="/Shop By Category/image-3.jpg"
               alt=""
               className="w-full h-full object-cover rounded hover:shadow-lg"
             />
           </div>
-          <div className="col-span-4 text-center m-1 ">
+          <div className="col-span-4 text-center m-[0.1rem] md:m-1">
             <img
               src="/Shop By Category/image-4.jpg"
               alt=""
               className="w-full h-full object-cover rounded hover:shadow-lg"
             />
           </div>
-          <div className="col-span-6 text-center m-1">
+          <div className="col-span-6 text-center m-[0.1rem] md:m-1">
             <img
               src="/Shop By Category/image-5.jpg"
               alt=""
               className="w-full h-full object-cover rounded hover:shadow-lg"
             />
           </div>
-          <div className="col-span-6 text-center m-1">
+          <div className="col-span-6 text-center m-[0.1rem] md:m-1">
             <img
               src="/Shop By Category/image-6.jpg"
               alt=""
@@ -124,7 +124,7 @@ function FollowOnInstagram() {
             />
           </div>
         </div>
-        <div className={`${styles.longImage} m-1 col-span-4 `}>
+        <div className={`${styles.longImage} m-[0.1rem] col-span-4 md:m-1`}>
           <img
             src="/Shop By Category/long-image.jpg"
             alt=""

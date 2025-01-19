@@ -32,7 +32,7 @@ const LoginForm = ({ handleForgotPassword }) => (
       className="w-full px-[6px] py-[3px] lg:px-[12px] lg:py-[8px] mb-3 rounded border border-gray-300 text-[14px] lg:text-[16px]"
     />
 
-    <label htmlFor="mobile" className="mb-2 text-[0.8rem] lg:text-[1.1rem]">
+    {/* <label htmlFor="mobile" className="mb-2 text-[0.8rem] lg:text-[1.1rem]">
       Mobile Number:
     </label>
     <input
@@ -41,7 +41,7 @@ const LoginForm = ({ handleForgotPassword }) => (
       placeholder="123-456-7890"
       required
       className="w-full px-[6px] py-[3px] lg:px-[12px] lg:py-[8px] mb-3 rounded border border-gray-300 text-[14px] lg:text-[16px]"
-    />
+    /> */}
 
     <label htmlFor="password" className="mb-2 text-[0.8rem] lg:text-[1.1rem]">
       Password:
@@ -239,7 +239,7 @@ const LoginPage = () => {
   return (
     <div className="relative flex justify-center items-center min-h-screen bg-[#ecffed] p-2 md:p-4">
       <BackToHomeButton />
-      <div className="flex w-[90%] md:w-[80%] max-w-[1200px] bg-white/80 rounded-[10px] shadow-lg flex-col sm:flex-row mt-10">
+      <div className="flex w-[90%] md:w-[80%] max-w-[1200px] bg-white/80 rounded-[10px] shadow-lg flex-col sm:flex-row mt-10 mb-2 md:mt-3">
         <LeftSection />
         <RightSection
           isSignup={isSignup}
