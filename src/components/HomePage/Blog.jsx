@@ -25,21 +25,21 @@ export default function Blog() {
   const blogPosts = [
     {
       imageUrl:
-        "/public/Home Page/Blog1.avif",
+        "/Home Page/Blog1.jpg",
       title: "Plant Care Tips & Guides",
       description:
         "Welcome to our Plant Care section, where we share expert advice and practical tips to help you keep your trees and plants healthy and thriving...",
     },
     {
       imageUrl:
-        "/public/Home Page/Blog2.webp",
+        "/Home Page/Blog2.jpg",
       title: "Autumn Plant Care",
       description:
         "Discover the best practices to take care of your plants during the autumn season. Keep them blooming and vibrant!",
     },
     {
       imageUrl:
-        "/public/Home Page/Blog3.avif",
+        "/Home Page/Blog3.jpg",
       title: "Decorative Plants for Indoors",
       description:
         "Find out which decorative plants suit your indoor spaces best and how to keep them thriving in different conditions.",

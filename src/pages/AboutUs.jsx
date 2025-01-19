@@ -22,7 +22,7 @@ export default function AboutUs() {
           <div className="bg-gray-50 rounded-lg p-0.3 border-r border-b last:border-r-0 last:md:border-b-0 md:last:border-r-0">
             <div className="bg-cover bg-center">
               <img
-                src="/public/AboutUs/image1.avif"
+                src="/AboutUS/image1.jpg"
                 alt="Friendly and fast support"
               />
             </div>
@@ -32,7 +32,7 @@ export default function AboutUs() {
           <div className="bg-gray-50 rounded-lg p-6 border-b md:last:border-b-0 flex justify-center flex-col">
             <div className="flex justify-center mb-4">
               <img
-                src="/public/AboutUs/image2.png"
+                src="/AboutUS/image2.jpg"
                 alt="Organic and seed grown plants"
                 className="w-40 h-40 object-contain"
               />
@@ -52,7 +52,7 @@ export default function AboutUs() {
           <div className="bg-gray-50 rounded-lg p-0.3 border-b last:border-b-0 md:last:border-r-0">
             <div className="bg-cover bg-center">
               <img
-                src="/public/AboutUs/image3.avif"
+                src="/AboutUS/image3.jpg"
                 alt="Friendly and fast support"
               />
             </div>
@@ -62,7 +62,7 @@ export default function AboutUs() {
           <div className="bg-gray-50 rounded-lg p-6 border-r border-b last:border-r-0 md:border-b-0 md:last:border-r-0 flex justify-center flex-col">
             <div className="flex justify-center mb-4">
               <img
-                src="/public/AboutUS/image4.png"
+                src="/AboutUS/image4.jpg"
                 alt="Friendly and fast support"
                 className="w-40 h-40 object-contain"
               />
@@ -83,7 +83,7 @@ export default function AboutUs() {
           <div className="bg-gray-50 rounded-lg p-0.3 border-b md:last:border-b-0">
             <div className="bg-cover bg-center">
               <img
-                src="/public/AboutUs/image5.jpg"
+                src="/AboutUS/image5.jpg"
                 alt="Five plants you need in your life"
               />
             </div>
@@ -93,7 +93,7 @@ export default function AboutUs() {
           <div className="bg-gray-50 rounded-lg p-6 border-b last:border-b-0 md:last:border-r-0 flex justify-center flex-col">
             <div className="flex justify-center mb-4">
               <img
-                src="/public/AboutUs/image6.png"
+                src="/AboutUS/image6.jpg"
                 alt="Expert Guidance"
                 className="w-40 h-40 object-contain"
               />
