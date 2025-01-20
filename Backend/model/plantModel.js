@@ -10,6 +10,8 @@ const plantSchema = new mongoose.Schema({
   ratingsAverage: {
     type: Number,
     default: 4.5,
+    min: [1, 'Rating must be above 1.0'],
+    max: [5, 'Rating must be below 5.0'],
   },
   ratingsQuantity: {
     type: Number,
@@ -22,7 +24,7 @@ const plantSchema = new mongoose.Schema({
   shortDescription: {
     type: String,
     trim: true,
-    required: [true, 'A plant must have a description'],
+    required: [true, 'A plant must have a short description'],
   },
   description: {
     type: String,
@@ -37,6 +39,7 @@ const plantSchema = new mongoose.Schema({
   tag: {
     type: String,
     required: [true, 'A plant must have a tag'],
+
     trim: true,
   },
   color: {
@@ -58,7 +61,16 @@ const plantSchema = new mongoose.Schema({
     },
   },
   images: [String],
-  priceDiscount: Number,
+  priceDiscount: {
+    type: Number,
+    validate: {
+      validator: function (val) {
+        // this only points to current doc on NEW document creation and not on update
+        return val < this.price; // Ensure discount is less than the price
+      },
+      message: 'Discount price ({VALUE}) should be below the regular price',
+    },
+  },
   createdAt: {
     type: Date,
     default: Date.now(),
