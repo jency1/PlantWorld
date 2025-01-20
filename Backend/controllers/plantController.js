@@ -1,5 +1,5 @@
-const { Tour } = require('@mui/icons-material');
 const Plant = require('./../model/plantModel');
+const APIFeatures = require('./../utils/ApiFeatures');
 
 exports.aliasFeaturedProducts = (req, res, next) => {
   req.query.limit = '8';
@@ -10,65 +10,15 @@ exports.aliasFeaturedProducts = (req, res, next) => {
 
 exports.getAllPlants = async (req, res) => {
   try {
-    // console.log(req.query);
+    const features = new APIFeatures(Plant.find(), req.query)
+      .filter()
+      .sort()
+      .limitFields()
+      .paginate();
 
-    // BUILD QUERY
-    // 1A)filtering
-    const queryObj = { ...req.query };
-    const excludedFields = ['page', 'sort', 'limit', 'fields'];
-
-    excludedFields.forEach((el) => delete queryObj[el]);
-
-    // 1B)Advanced filtering
-    let queryString = JSON.stringify(queryObj);
-    queryString = queryString.replace(
-      /\b(gte|gt|lte|lt)\b/g,
-      (match) => `$${match}`
-    );
-
-    // console.log(JSON.parse(queryString));
-    // mongoose {tag:'Indoor' , price:{$gte:200}}
-    // req.query { tag: 'Indoor', price: { gte: '200' } }
-    let query = Plant.find(JSON.parse(queryString));
-
-    // 2) Sorting
-
-    if (req.query.sort) {
-      //mongoose sort('price ratingsAverage)
-
-      const sortBy = req.query.sort.split(',').join(' ');
-      query = query.sort(sortBy);
-    } else {
-      query = query.sort('-createdAt');
-    }
-
-    // 3) Field limiting
-
-    if (req.query.fields) {
-      const fields = req.query.fields.split(',').join(' ');
-      query = query.select(fields);
-    } else {
-      query = query.select('-__v');
-    }
-
-    // 4) Pagination
-    const page = req.query.page * 1 || 1;
-    const limit = req.query.limit * 1 || 12;
-    const skip = (page - 1) * limit;
-    // page=2&limit=10  , 1-10 , page-1 , 11-20 , page-2
-    query = query.skip(skip).limit(limit);
-
-    if (req.query.page) {
-      const numPlants = await Plant.countDocuments();
-      if (skip >= numPlants) throw new Error('This page does not exist');
-    }
-
-    // EXECUTE QUERY
-
-    const plants = await query;
+    const plants = await features.query;
 
     // SEND RESPONSE
-
     res.status(200).json({
       status: 'success',
       results: plants.length,
