@@ -22,10 +22,9 @@ exports.getAllPlants = async (req, res) => {
     // console.log(JSON.parse(queryString));
     // mongoose {tag:'Indoor' , price:{$gte:200}}
     // req.query { tag: 'Indoor', price: { gte: '200' } }
+    let query = Plant.find(JSON.parse(queryString));
 
     // 2) Sorting
-
-    let query = Plant.find(JSON.parse(queryString));
 
     if (req.query.sort) {
       //mongoose sort('price ratingsAverage)
@@ -43,6 +42,18 @@ exports.getAllPlants = async (req, res) => {
       query = query.select(fields);
     } else {
       query = query.select('-__v');
+    }
+
+    // 4) Pagination
+    const page = req.query.page * 1 || 1;
+    const limit = req.query.limit * 1 || 12;
+    const skip = (page - 1) * limit;
+    // page=2&limit=10  , 1-10 , page-1 , 11-20 , page-2
+    query = query.skip(skip).limit(limit);
+
+    if (req.query.page) {
+      const numPlants = await Plant.countDocuments();
+      if (skip >= numPlants) throw new Error('This page does not exist');
     }
 
     // EXECUTE QUERY
