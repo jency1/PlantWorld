@@ -5,6 +5,10 @@ const plantController = require('./../controllers/plantController');
 // router.param('id', plantController.checkID);
 
 router
+  .route('/featured-products')
+  .get(plantController.aliasFeaturedProducts, plantController.getAllPlants);
+
+router
   .route('/')
   .get(plantController.getAllPlants)
   .post(plantController.createPlant);

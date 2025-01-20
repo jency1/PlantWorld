@@ -1,6 +1,13 @@
 const { Tour } = require('@mui/icons-material');
 const Plant = require('./../model/plantModel');
 
+exports.aliasFeaturedProducts = (req, res, next) => {
+  req.query.limit = '8';
+  req.query.sort = '-ratingsAverage,price';
+  req.query.fields = 'name,price,imageCover';
+  next();
+};
+
 exports.getAllPlants = async (req, res) => {
   try {
     // console.log(req.query);
