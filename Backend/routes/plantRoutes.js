@@ -8,6 +8,8 @@ router
   .route('/featured-products')
   .get(plantController.aliasFeaturedProducts, plantController.getAllPlants);
 
+router.route('/plant-stats').get(plantController.getPlantStats);
+
 router
   .route('/')
   .get(plantController.getAllPlants)

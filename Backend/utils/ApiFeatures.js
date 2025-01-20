@@ -30,8 +30,6 @@ class APIFeatures {
 
   sort() {
     if (this.queryString.sort) {
-      //mongoose sort('price ratingsAverage)
-
       const sortBy = this.queryString.sort.split(',').join(' ');
       this.query = this.query.sort(sortBy);
     } else {
