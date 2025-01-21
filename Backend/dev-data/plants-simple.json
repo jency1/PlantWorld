@@ -16,7 +16,7 @@
     "description": "Sunflowers are vibrant and cheerful flowers that symbolize adoration, loyalty, and longevity. They are characterized by their large, bright yellow petals surrounding a dark brown or black center. Sunflowers are heliotropic, meaning they track the sun's movement during the day, a trait that adds to their allure. Perfect for gardens or as a statement flower in bouquets, sunflowers thrive in full sunlight and well-drained soil. Their seeds are not only edible but also highly nutritious, making them a valuable addition to any garden. Sunflowers bring positivity and warmth to any space they adorn.",
     "category": "Flowering Plants",
     "tag": "Outdoor",
-    "imageCover": "sunflower.jpg",
+    "imageCover": "/backend/plants/sunflower.jpg",
     "__v": 0
   },
   {
@@ -36,7 +36,7 @@
     "description": "Lilies are elegant and fragrant flowers known for their large, trumpet-shaped blooms. With a wide variety of colors and patterns, lilies are a favorite in gardens and floral arrangements. These perennials are easy to care for, requiring only moderate sunlight and well-drained soil. Lilies symbolize purity, devotion, and rebirth, making them a meaningful addition to any setting. Their exquisite beauty and captivating fragrance bring an air of sophistication to any environment, whether indoors or outdoors. Lilies thrive in a slightly acidic soil and make excellent cut flowers for arrangements.",
     "category": "Flowering Plants",
     "tag": "Indoor",
-    "imageCover": "lily.jpg",
+    "imageCover": "/backend/plants/lily.jpg",
     "__v": 0
   },
   {
@@ -56,7 +56,7 @@
     "description": "Aloe Vera is a hardy succulent prized for its medicinal and cosmetic benefits. Its fleshy, green leaves are filled with a gel known for soothing burns, moisturizing skin, and promoting wound healing. Aloe Vera thrives in warm climates and requires minimal care, making it an ideal plant for beginners. This drought-resistant plant prefers bright, indirect sunlight and sandy, well-drained soil. Aloe Vera is not only a functional plant but also an attractive addition to any indoor or outdoor space. Its low-maintenance nature and health benefits make it a must-have in every home.",
     "category": "Succulents",
     "tag": "Indoor",
-    "imageCover": "aloevera.jpg",
+    "imageCover": "/backend/plants/aloevera.jpg",
     "__v": 0
   },
   {
@@ -76,7 +76,7 @@
     "description": "Houseplants are versatile and low-maintenance greenery that can transform any indoor space into a lush oasis. They improve air quality, reduce stress, and add aesthetic appeal to homes and offices. With a wide variety of options available, from trailing vines to upright ferns, houseplants cater to different preferences and skill levels. They thrive in varying light conditions, from bright indirect sunlight to low-light environments. By adding houseplants, you can bring a touch of nature indoors, creating a calming and inviting atmosphere that promotes well-being and enhances your decor.",
     "category": "Indoor Plants",
     "tag": "Indoor",
-    "imageCover": "houseplant.jpg",
+    "imageCover": "/backend/plants/houseplant.jpg",
     "__v": 0
   },
   {
@@ -96,7 +96,7 @@
     "description": "Money plants, also known as pothos or devil's ivy, are popular indoor plants that are easy to grow and maintain. Their vibrant green, heart-shaped leaves add a touch of elegance to any space, and they are believed to bring good luck and financial prosperity. Money plants thrive in a variety of conditions, from low light to bright indirect sunlight, and require minimal watering. They are excellent air purifiers, removing toxins and improving air quality. With their trailing vines and adaptability, money plants are perfect for homes, offices, and balconies.",
     "category": "Indoor Plants",
     "tag": "Indoor",
-    "imageCover": "moneyplant.jpg",
+    "imageCover": "/backend/plants/moneyplant.jpg",
     "__v": 0
   },
   {
@@ -116,7 +116,7 @@
     "description": "Jasmine is a highly fragrant, flowering plant with small white or yellow blooms that are popular in gardens, aromatherapy, and as ornamental houseplants. Known for their intoxicating fragrance, jasmine flowers are often used to make perfumes and teas. The plant is relatively easy to care for, requiring bright indirect sunlight, regular watering, and well-drained soil. Jasmine symbolizes purity, beauty, and love, making it a perfect gift or addition to any garden. Its soothing fragrance and delicate blooms bring an aura of calm and elegance to any space.",
     "category": "Flowering Plants",
     "tag": "Outdoor",
-    "imageCover": "jasmine.jpg",
+    "imageCover": "/backend/plants/jasmine.jpg",
     "__v": 0
   },
   {
@@ -136,7 +136,7 @@
     "description": "Marigolds are cheerful, vibrant annual flowers with bright yellow, orange, or red petals. Known for their ability to brighten up gardens and flower beds, marigolds are easy to grow and care for. They thrive in full sunlight and well-drained soil, and their bright, striking colors symbolize passion, creativity, and vibrant energy. Marigolds are often used in traditional Indian celebrations, especially during festivals like Diwali. In addition to their aesthetic appeal, marigolds are also known for their pest-repellent properties, making them a valuable addition to vegetable and herb gardens.",
     "category": "Flowering Plants",
     "tag": "Outdoor",
-    "imageCover": "marigold.jpg",
+    "imageCover": "/backend/plants/marigold.jpg",
     "__v": 0
   },
   {
@@ -156,7 +156,7 @@
     "description": "Ficus plants, including varieties like the Fiddle Leaf Fig and Rubber Plant, are popular indoor plants due to their large, glossy leaves and upright growth habit. They are ideal for adding structure and sophistication to home and office decor. Ficus plants require bright indirect sunlight, well-drained soil, and regular watering. Their broad leaves and strong branches make them an excellent focal point in any room. Ficus trees also purify the air, making them both aesthetically pleasing and functional. With their minimalist beauty and low-maintenance care, they are a perfect addition to any space.",
     "category": "Indoor Plants",
     "tag": "Indoor",
-    "imageCover": "ficus.jpg",
+    "imageCover": "/backend/plants/ficus.jpg",
     "__v": 0
   },
   {
@@ -176,7 +176,7 @@
     "description": "Basil is a fragrant herb known for its aromatic leaves, commonly used in cooking for its fresh, peppery flavor. It's a key ingredient in many culinary dishes, especially Italian and Mediterranean cuisine. Basil is easy to grow and thrives in warm environments with plenty of sunlight. It also has medicinal properties, known for its ability to alleviate digestive issues and reduce stress. This herb is a great choice for indoor herb gardens or small outdoor pots. Basil's vibrant green color and fresh scent make it an excellent addition to any kitchen or garden.",
     "category": "Herbs",
     "tag": "Indoor",
-    "imageCover": "basil.jpg",
+    "imageCover": "/backend/plants/basil.jpg",
     "__v": 0
   },
   {
@@ -196,7 +196,7 @@
     "description": "Bougainvillea is a hardy, flowering plant that is recognized for its vibrant, papery bracts that come in various colors, including pink, purple, red, and orange. It thrives in hot, sunny climates and can be grown as a shrub or allowed to climb trellises, walls, and fences. Bougainvillea requires little water once established and thrives in well-drained soil. It's an excellent choice for adding a splash of color to any garden or balcony. With its fast-growing vines and striking flowers, Bougainvillea is a stunning plant that creates dramatic visual interest.",
     "category": "Flowering Plants",
     "tag": "Outdoor",
-    "imageCover": "bougainvillea.jpg",
+    "imageCover": "/backend/plants/bougainvillea.jpg",
     "__v": 0
   },
   {
@@ -216,7 +216,7 @@
     "description": "Mint is a versatile herb known for its refreshing scent and flavor. It can be used in a variety of culinary dishes, teas, and even as a garnish. Mint is easy to grow, spreading quickly in garden beds or pots. It prefers moderate sunlight and moist, well-drained soil. The plant's aromatic leaves are not only delicious but also have medicinal properties, often used to soothe digestive issues and headaches. Mint is perfect for both indoor herb gardens and outdoor spaces. Its refreshing aroma and cooling effect make it a must-have herb for any home or garden.",
     "category": "Herbs",
     "tag": "Indoor",
-    "imageCover": "mint.jpg",
+    "imageCover": "/backend/plants/mint.jpg",
     "__v": 0
   },
   {
@@ -236,7 +236,7 @@
     "description": "Coriander, also known as cilantro, is a versatile herb commonly used in cooking, especially in Indian, Middle Eastern, and Latin American cuisines. The leaves have a fresh, citrusy flavor, while the seeds have a warm, spicy taste. Coriander is easy to grow in containers or garden beds, preferring moderate sunlight and well-drained soil. It requires regular watering to keep the soil moist but not waterlogged. This herb not only enhances the flavor of food but also has medicinal benefits, helping with digestion and reducing inflammation.",
     "category": "Herbs",
     "tag": "Indoor",
-    "imageCover": "coriander.jpg",
+    "imageCover": "/backend/plants/coriander.jpg",
     "__v": 0
   }
 ]
