@@ -2,6 +2,8 @@ const express = require('express');
 const router = express.Router();
 const plantController = require('./../controllers/plantController');
 
+const authController = require('./../controllers/authController');
+
 // router.param('id', plantController.checkID);
 
 router
@@ -9,6 +11,11 @@ router
   .get(plantController.aliasFeaturedProducts, plantController.getAllPlants);
 
 router.route('/plant-stats').get(plantController.getPlantStats);
+
+// router
+//   .route('/')
+//   .get(authController.protect, plantController.getAllPlants)
+//   .post(plantController.createPlant);
 
 router
   .route('/')
