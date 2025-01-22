@@ -26,6 +26,10 @@ router
   .route('/:id')
   .get(plantController.getPlant)
   .patch(plantController.updatePlant)
-  .delete(plantController.deletePlant);
+  .delete(
+    authController.protect,
+    authController.restrictTo('admin', 'owner'),
+    plantController.deletePlant
+  );
 
 module.exports = router;

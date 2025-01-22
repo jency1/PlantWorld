@@ -3,6 +3,7 @@ const User = require('./../model/userModel');
 const jwt = require('jsonwebtoken');
 const AppError = require('./../utils/appError');
 const { promisify } = require('util');
+const { equal } = require('assert');
 
 const signToken = (id) => {
   return jwt.sign({ id }, process.env.JWT_SECRET, {
@@ -92,3 +93,18 @@ exports.protect = catchAsync(async (req, res, next) => {
   // Grant access to the protected route
   next();
 });
+
+exports.restrictTo = (...roles) => {
+  console.log(roles);
+  return (req, res, next) => {
+    // roles ['admin','owner']
+    console.log(req.user.role);
+    if (!roles.includes(req.user.role)) {
+      return next(
+        new AppError('You do not have permissions to perform this action', 403)
+      );
+    }
+
+    next();
+  };
+};
