@@ -12,6 +12,7 @@ import FAQs from "./pages/FAQs";
 
 import ScrollToTop from "./ScrollToTop";
 import AppLayout from "./AppLayout";
+import Payment from "./components/Payment/Payment";
 
 const router = createBrowserRouter([
   {
@@ -51,6 +52,10 @@ const router = createBrowserRouter([
   {
     path: "/login",
     element: <LoginPage />,
+  },
+  {
+    path: "/payment",
+    element: <Payment />,
   },
 ]);
 
