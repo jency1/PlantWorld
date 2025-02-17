@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useContext } from "react";
 import { Link } from "react-router-dom";
-import FilterComponent from "./FilterComponent"; // Import the filter component
+import FilterComponent from "./FilterComponent.jsx"; // Import the filter component
 import { PlantContext } from "../../context/PlantsContext.jsx";
 
 function ShopPlants() {
