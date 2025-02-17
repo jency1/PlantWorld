@@ -1,8 +1,10 @@
-import React, { useState, useEffect } from "react";
-import FilterComponent from "./FilterComponent"; // Import the filter component
+import React, { useState, useEffect, useContext } from "react";
 import { Link } from "react-router-dom";
+import FilterComponent from "./FilterComponent"; // Import the filter component
+import { PlantContext } from "../../context/PlantsContext.jsx";
 
 function ShopPlants() {
+  const { plants, fetchPlants, isLoading, error } = useContext(PlantContext);
   const [showFilter, setShowFilter] = useState(false);
   const [screenWidth, setScreenWidth] = useState(window.innerWidth);
 
@@ -70,14 +72,28 @@ function ShopPlants() {
           {/* Right-side Product Cards */}
           <div className="col-12 col-md-9">
             <div className="row">
-              {products.map((product) => (
+              {isLoading && (
+                <p className="text-center text-lg">Loading plants...</p>
+              )}
+              {error && <p className="text-center text-red-500">{error}</p>}
+              {!isLoading &&
+                !error &&
+                plants?.plants?.map((plant) => (
+                  <ProductCard
+                    key={plant.id || plant.title}
+                    imageSrc={plant.imageCover}
+                    title={plant.name}
+                    price={plant.price}
+                  />
+                ))}
+              {/* {products.map((product) => (
                 <ProductCard
                   key={product.id}
                   imageSrc={product.imageSrc}
                   title={product.title}
                   price={product.price}
                 />
-              ))}
+              ))} */}
             </div>
           </div>
         </div>

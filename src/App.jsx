@@ -13,13 +13,16 @@ import FAQs from "./pages/FAQs";
 import ScrollToTop from "./ScrollToTop";
 import AppLayout from "./AppLayout";
 import Payment from "./components/Payment/Payment";
+import { PlantContextProvider } from "./context/PlantsContext.jsx";
 
 const router = createBrowserRouter([
   {
     element: (
       <>
         <ScrollToTop />
-        <AppLayout />
+        <PlantContextProvider>
+          <AppLayout />
+        </PlantContextProvider>
       </>
     ),
     children: [
