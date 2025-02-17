@@ -29,12 +29,12 @@ function ShopPlants() {
             <img
               src={imageSrc}
               alt={title}
-              className="img-fluid object-cover rounded-lg w-full md:h-36 lg:h-48 mb-1 md:mb-3"
+              className="img-fluid object-cover rounded-lg w-full h-32 md:h-44 lg:h-56 mb-1 md:mb-3"
             />
           </Link>
           <div className="h6 mt-2 text-sm md:text-base lg:text-lg">{title}</div>
           <div className="text-success text-xs md:text-sm lg:text-base">
-            {price}
+            Rs.{price}
           </div>
           <Link to="/product/description">
             <button className="btn btn-outline-success mt-2 lg:mt-3 lg:px-4 lg:py-2 text-xs sm:text-sm">
@@ -72,6 +72,7 @@ function ShopPlants() {
           {/* Right-side Product Cards */}
           <div className="col-12 col-md-9">
             <div className="row">
+              {/* Fetching data from backend */}
               {isLoading && (
                 <p className="text-center text-lg">Loading plants...</p>
               )}
@@ -86,6 +87,9 @@ function ShopPlants() {
                     price={plant.price}
                   />
                 ))}
+
+              {/* Locally Fetching Data */}
+
               {/* {products.map((product) => (
                 <ProductCard
                   key={product.id}
