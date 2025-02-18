@@ -238,5 +238,165 @@
     "tag": "Indoor",
     "imageCover": "/backend/plants/coriander.jpg",
     "__v": 0
+  },
+  {
+    "ratingsAverage": 4.5,
+    "ratingsQuantity": 98,
+    "color": ["Green"],
+    "plantCareTips": [
+      "Thrives in low light and requires minimal care.",
+      "Water occasionally; allow soil to dry between watering.",
+      "Can tolerate extreme conditions and poor soil.",
+      "Avoid overwatering to prevent root rot."
+    ],
+    "_id": "67b4d7c6620225b42cfdd13a",
+    "name": "Cast Iron",
+    "price": 300,
+    "shortDescription": "The Cast Iron plant is a hardy indoor foliage plant known for its resilience and ability to thrive in neglect.",
+    "description": "The Cast-Iron plant is highly durable and can survive in extreme neglect, making it ideal for beginners. It thrives in low light and requires very little watering. This evergreen plant is perfect for indoor spaces, adding lush greenery without the hassle of constant maintenance.",
+    "category": "Foliage Plants",
+    "tag": "Indoor",
+    "imageCover": "/backend/plants/cast-iron.jpg",
+    "__v": 0
+  },
+  {
+    "ratingsAverage": 4.8,
+    "ratingsQuantity": 150,
+    "color": ["Blue", "Purple", "White"],
+    "plantCareTips": [
+      "Requires full sunlight for 6-8 hours daily.",
+      "Needs well-drained soil to prevent root rot.",
+      "Water moderately; avoid waterlogging.",
+      "Support the plant with stakes as it grows tall."
+    ],
+    "_id": "67b4d92e620225b42cfdd13b",
+    "name": "Delphinium",
+    "price": 350,
+    "shortDescription": "Tall, vibrant, and elegant flowers that add height to any garden.",
+    "description": "Delphiniums are striking perennials known for their tall spires of blue, purple, or white flowers. They are perfect for cottage gardens and require well-drained soil with ample sunlight. These flowers attract butterflies and bees, making them great for pollinator-friendly gardens.",
+    "category": "Flowering Plants",
+    "tag": "Outdoor",
+    "imageCover": "/backend/plants/delphinium.jpg",
+    "__v": 0
+  },
+  {
+    "ratingsAverage": 4.6,
+    "ratingsQuantity": 110,
+    "color": ["Green"],
+    "plantCareTips": [
+      "Prefers indirect light but tolerates low light conditions.",
+      "Water when the soil feels dry to touch.",
+      "Can be grown as a hanging or climbing plant.",
+      "Prune regularly to maintain shape and encourage growth."
+    ],
+    "_id": "67b4d978620225b42cfdd13c",
+    "name": "English Ivy",
+    "price": 280,
+    "shortDescription": "A versatile and hardy vine that adds lush greenery to any space.",
+    "description": "English Ivy is a fast-growing, evergreen climbing plant that thrives indoors and outdoors. It purifies air and adds a classic, elegant look to homes and gardens. Ideal for hanging baskets or vertical gardens, English Ivy is easy to care for with minimal watering and indirect light.",
+    "category": "Foliage Plants",
+    "tag": "Indoor",
+    "imageCover": "/backend/plants/english-ivy.jpg",
+    "__v": 0
+  },
+  {
+    "ratingsAverage": 4.7,
+    "ratingsQuantity": 130,
+    "color": ["Golden", "Green"],
+    "plantCareTips": [
+      "Grows best in partial to full shade.",
+      "Keep soil consistently moist but not soggy.",
+      "Trim older leaves to encourage new growth.",
+      "Use rich, well-drained soil for better growth."
+    ],
+    "_id": "67b4d9d2620225b42cfdd13d",
+    "name": "Golden Fern",
+    "price": 320,
+    "shortDescription": "A graceful, golden-hued fern perfect for shady gardens.",
+    "description": "Golden Ferns are delicate, ornamental plants that thrive in shaded environments. Their golden-green fronds add a lush, tropical feel to gardens and indoor spaces. They require consistent moisture and occasional pruning to maintain their vibrant appearance.",
+    "category": "Ferns",
+    "tag": "Indoor",
+    "imageCover": "/backend/plants/golden-fern.jpg",
+    "__v": 0
+  },
+  {
+    "ratingsAverage": 4.9,
+    "ratingsQuantity": 200,
+    "color": ["Purple"],
+    "plantCareTips": [
+      "Requires full sunlight for at least 6 hours daily.",
+      "Water sparingly; let soil dry between watering.",
+      "Prune stems to encourage new growth.",
+      "Use well-drained, sandy soil for best results."
+    ],
+    "_id": "67b4da00620225b42cfdd13e",
+    "name": "Lavender",
+    "price": 400,
+    "shortDescription": "A fragrant herb known for its calming aroma and medicinal properties.",
+    "description": "Lavender is a popular herb with fragrant purple flowers and aromatic foliage. It is widely used in aromatherapy, herbal medicine, and cosmetics. This drought-tolerant plant thrives in dry, sunny conditions and is ideal for gardens, pots, or as a border plant.",
+    "category": "Herbs",
+    "tag": "Outdoor",
+    "imageCover": "/backend/plants/lavender.jpg",
+    "__v": 0
+  },
+  {
+    "ratingsAverage": 4.8,
+    "ratingsQuantity": 160,
+    "color": ["Pink", "White", "Purple"],
+    "plantCareTips": [
+      "Prefers bright, indirect light and high humidity.",
+      "Water once a week; avoid water on leaves.",
+      "Use a well-draining orchid potting mix.",
+      "Feed with a balanced orchid fertilizer monthly."
+    ],
+    "_id": "67b4da24620225b42cfdd13f",
+    "name": "Orchids",
+    "price": 500,
+    "shortDescription": "Elegant and exotic flowers that symbolize beauty and luxury.",
+    "description": "Orchids are one of the most diverse and beautiful flowering plants, available in a variety of colors and sizes. They require specific care, including high humidity and indirect sunlight. These stunning flowers make a great gift and add sophistication to any space.",
+    "category": "Flowering Plants",
+    "tag": "Indoor",
+    "imageCover": "/backend/plants/orchids.jpg",
+    "__v": 0
+  },
+  {
+    "ratingsAverage": 4.9,
+    "ratingsQuantity": 250,
+    "color": ["Red", "Pink", "White"],
+    "plantCareTips": [
+      "Needs at least 6 hours of direct sunlight daily.",
+      "Water deeply but allow soil to dry between watering.",
+      "Prune regularly to promote continuous blooming.",
+      "Use nutrient-rich, well-draining soil."
+    ],
+    "_id": "67b4da4b620225b42cfdd140",
+    "name": "Rose",
+    "price": 450,
+    "shortDescription": "A timeless symbol of love and beauty, available in multiple colors.",
+    "description": "Roses are among the most beloved flowers, known for their exquisite beauty and fragrance. They require regular care, including pruning and fertilization, to maintain healthy growth. Roses are ideal for gardens and bouquets, adding elegance to any space.",
+    "category": "Flowering Plants",
+    "tag": "Outdoor",
+    "imageCover": "/backend/plants/rose.jpg",
+    "__v": 0
+  },
+  {
+    "ratingsAverage": 4.7,
+    "ratingsQuantity": 140,
+    "color": ["Green"],
+    "plantCareTips": [
+      "Thrives in low light but can tolerate bright, indirect sunlight.",
+      "Water sparingly; allow the soil to dry completely between waterings.",
+      "Highly drought-resistant and requires minimal maintenance.",
+      "Avoid overwatering to prevent root rot."
+    ],
+    "_id": "67b4da9b620225b42cfdd141",
+    "name": "ZZ Plant",
+    "price": 350,
+    "shortDescription": "A hardy, low-maintenance plant perfect for beginners and indoor spaces.",
+    "description": "The ZZ Plant (Zamioculcas zamiifolia) is an easy-to-care-for houseplant known for its glossy, dark green leaves. It is highly drought-resistant and can thrive in low-light conditions, making it ideal for offices and homes. This plant also helps improve indoor air quality by removing toxins.",
+    "category": "Foliage Plants",
+    "tag": "Indoor",
+    "imageCover": "/backend/plants/zz.jpg",
+    "__v": 0
   }
 ]

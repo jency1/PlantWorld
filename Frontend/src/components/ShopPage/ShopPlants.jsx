@@ -37,7 +37,7 @@ function ShopPlants() {
             Rs.{price}
           </div>
           <Link to="/product/description">
-            <button className="btn btn-outline-success mt-2 lg:mt-3 lg:px-4 lg:py-2 text-xs sm:text-sm">
+            <button className="btn btn-success mt-2 lg:mt-3 lg:px-4 lg:py-2 text-xs sm:text-sm">
               Add To Cart
             </button>
           </Link>
