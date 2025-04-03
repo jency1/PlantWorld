@@ -9,7 +9,7 @@ import LoginPage from "./pages/LoginPage";
 import Contact from "./pages/Contact";
 import AboutUs from "./pages/AboutUs";
 import FAQs from "./pages/FAQs";
-
+import BlogPage from "./pages/BlogPage";
 import ScrollToTop from "./ScrollToTop";
 import AppLayout from "./AppLayout";
 import Payment from "./components/Payment/Payment";
@@ -37,6 +37,10 @@ const router = createBrowserRouter([
       {
         path: "/contact",
         element: <Contact />,
+      },
+      {
+        path: "/blog",
+        element: <BlogPage />,
       },
       {
         path: "/product/description",
