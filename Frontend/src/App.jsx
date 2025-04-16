@@ -14,15 +14,25 @@ import ScrollToTop from "./ScrollToTop";
 import AppLayout from "./AppLayout";
 import Payment from "./components/Payment/Payment";
 import { PlantContextProvider } from "./context/PlantsContext";
+import { AuthProvider } from "./context/AuthContext";
+import { CartProvider } from "./context/CartContext";
+import { NotificationProvider } from "./context/NotificationContext";
 
 const router = createBrowserRouter([
   {
     element: (
       <>
         <ScrollToTop />
-        <PlantContextProvider>
-          <AppLayout />
-        </PlantContextProvider>
+
+        <NotificationProvider>
+          <AuthProvider>
+            <PlantContextProvider>
+              <CartProvider>
+                <AppLayout />
+              </CartProvider>
+            </PlantContextProvider>
+          </AuthProvider>
+        </NotificationProvider>
       </>
     ),
     children: [
