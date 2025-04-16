@@ -12,25 +12,30 @@ import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
 import Tooltip from "@mui/material/Tooltip";
 import MenuItem from "@mui/material/MenuItem";
-import AdbIcon from "@mui/icons-material/Adb";
 import { Link } from "react-router-dom";
+import { useContext } from "react";
+import { AuthContext } from "../../context/AuthContext";
+import Drawer from "@mui/material/Drawer";
+import List from "@mui/material/List";
+import ListItem from "@mui/material/ListItem";
+import ListItemText from "@mui/material/ListItemText";
 
 const pages = ["Home", "Shop", "About", "FAQ", "Contact", "Blog"];
 const links = ["/", "/shop", "/about", "/faqs", "/contact", "/"];
-const settings = ["Profile", "Account", "Dashboard", "Login", "Logout"];
-const settingsLinks = ["/", "/shop", "/", "/login", "/"];
 
 const theme = createTheme({
   palette: {
     primary: {
-      main: "#15803D", // Green
+      main: "#15803D",
     },
   },
 });
 
 function Navbar() {
+  const { isAuthenticated, logout } = useContext(AuthContext);
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
+  const [drawerOpen, setDrawerOpen] = React.useState(false);
 
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
@@ -38,13 +43,14 @@ function Navbar() {
   const handleOpenUserMenu = (event) => {
     setAnchorElUser(event.currentTarget);
   };
-
   const handleCloseNavMenu = () => {
     setAnchorElNav(null);
   };
-
   const handleCloseUserMenu = () => {
     setAnchorElUser(null);
+  };
+  const toggleDrawer = (open) => {
+    setDrawerOpen(open);
   };
 
   return (
@@ -52,6 +58,7 @@ function Navbar() {
       <AppBar position="sticky">
         <Container maxWidth="xl">
           <Toolbar disableGutters>
+            {/* Logo */}
             <Typography
               variant="h6"
               noWrap
@@ -59,86 +66,57 @@ function Navbar() {
               href="/"
               sx={{
                 mr: 2,
-                display: { xs: "none", md: "flex" },
+                display: { xs: "inline-flex", md: "flex" },
                 fontFamily: "monospace",
                 fontWeight: 700,
                 color: "inherit",
                 textDecoration: "none",
-                //   letterSpacing: ".3rem",
               }}
             >
               PlantWorld
             </Typography>
 
+            {/* Mobile Right Side Menu Icon and Avatar/Login */}
             <Box
               sx={{
-                flexGrow: 1,
                 display: { xs: "flex", md: "none" },
-                justifyContent: "center",
+                marginLeft: "auto",
                 alignItems: "center",
+                gap: 1,
               }}
             >
               <IconButton
                 size="large"
-                aria-label="account of current user"
-                aria-controls="menu-appbar"
-                aria-haspopup="true"
-                onClick={handleOpenNavMenu}
+                aria-label="menu"
+                onClick={() => toggleDrawer(true)}
                 color="inherit"
               >
                 <MenuIcon />
               </IconButton>
-              <Menu
-                id="menu-appbar"
-                anchorEl={anchorElNav}
-                anchorOrigin={{
-                  vertical: "bottom",
-                  horizontal: "left",
-                }}
-                keepMounted
-                transformOrigin={{
-                  vertical: "top",
-                  horizontal: "left",
-                }}
-                open={Boolean(anchorElNav)}
-                onClose={handleCloseNavMenu}
-                sx={{ display: { xs: "block", md: "none" } }}
-              >
-                {pages.map((page, i) => (
-                  <MenuItem key={page + i} onClick={handleCloseNavMenu}>
-                    <Typography sx={{ textAlign: "center" }}>
-                      <Link
-                        to={links[i]}
-                        style={{ textDecoration: "none", color: "black" }}
-                      >
-                        {page}
-                      </Link>
-                    </Typography>
-                  </MenuItem>
-                ))}
-              </Menu>
+
+              {isAuthenticated ? (
+                <Tooltip title="Open settings">
+                  <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
+                    <Avatar alt="Profile" src="/Profile.jpg" />
+                  </IconButton>
+                </Tooltip>
+              ) : (
+                <Button
+                  onClick={() => (window.location.href = "/login")}
+                  sx={{
+                    color: "white",
+                    fontWeight: 600,
+                    fontSize: "0.875rem",
+                    minWidth: "auto",
+                    padding: "6px 8px",
+                  }}
+                >
+                  Login
+                </Button>
+              )}
             </Box>
 
-            {/* Responsive */}
-
-            <Typography
-              variant="h5"
-              noWrap
-              component="a"
-              href="HomePage"
-              sx={{
-                mr: 2,
-                display: { xs: "flex", md: "none" },
-                flexGrow: 1,
-                fontFamily: "monospace",
-                fontWeight: 700,
-                color: "inherit",
-                textDecoration: "none",
-                // letterSpacing: ".3rem",
-              }}
-            >
-              PlantWorld
-            </Typography>
+            {/* Desktop Navigation */}
             <Box
               sx={{
                 flexGrow: 1,
@@ -148,72 +126,182 @@ function Navbar() {
               }}
             >
               {pages.map((page, i) => (
-                <>
-                  <Link
-                    key={page + i}
-                    to={links[i]}
-                    style={{ textDecoration: "none" }}
+                <Link
+                  key={page + i}
+                  to={links[i]}
+                  style={{ textDecoration: "none" }}
+                >
+                  <Button
+                    onClick={handleCloseNavMenu}
+                    sx={{
+                      my: 2,
+                      color: "white",
+                      display: "block",
+                      textDecoration: "none",
+                      transition: "color 0.2s ease, transform 0.2s ease",
+                      "&:hover": {
+                        transform: "scale(1.1)",
+                      },
+                    }}
                   >
-                    <Button
-                      onClick={handleCloseNavMenu}
-                      sx={{
-                        my: 2,
-                        color: "white",
-                        display: "block",
-                        textDecoration: "none",
-                        transition: "color 0.2s ease, transform 0.2s ease",
-                        "&:hover": {
-                          transform: "scale(1.1)",
-                        },
-                      }}
-                    >
-                      {page}
-                    </Button>
-                  </Link>
-                </>
+                    {page}
+                  </Button>
+                </Link>
               ))}
             </Box>
-            <Box sx={{ flexGrow: 0 }}>
-              <Tooltip title="Open settings">
-                <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                  <Avatar alt="Profile" src="/Profile.jpg" />
-                </IconButton>
-              </Tooltip>
-              <Menu
-                sx={{ mt: "45px" }}
-                id="menu-appbar"
-                anchorEl={anchorElUser}
-                anchorOrigin={{
-                  vertical: "top",
-                  horizontal: "right",
-                }}
-                keepMounted
-                transformOrigin={{
-                  vertical: "top",
-                  horizontal: "right",
-                }}
-                open={Boolean(anchorElUser)}
-                onClose={handleCloseUserMenu}
-              >
-                {settings.map((setting, index) => (
+
+            {/* User Menu for Desktop */}
+            <Box sx={{ display: { xs: "none", md: "flex" }, ml: "auto" }}>
+              {isAuthenticated ? (
+                <Tooltip title="Open settings">
+                  <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
+                    <Avatar alt="Profile" src="/Profile.jpg" />
+                  </IconButton>
+                </Tooltip>
+              ) : (
+                <Button
+                  onClick={() => (window.location.href = "/login")}
+                  sx={{
+                    color: "white",
+                    textDecoration: "none",
+                    fontWeight: 600,
+                  }}
+                >
+                  Login
+                </Button>
+              )}
+            </Box>
+
+            {/* Dropdown Menu */}
+            <Menu
+              sx={{ mt: "45px" }}
+              id="menu-appbar"
+              anchorEl={anchorElUser}
+              anchorOrigin={{
+                vertical: "top",
+                horizontal: "right",
+              }}
+              keepMounted
+              transformOrigin={{
+                vertical: "top",
+                horizontal: "right",
+              }}
+              open={Boolean(anchorElUser)}
+              onClose={handleCloseUserMenu}
+            >
+              {isAuthenticated ? (
+                <>
                   <Link
-                    to={settingsLinks[index]}
-                    key={setting + index}
+                    to="/profile"
                     style={{ textDecoration: "none", color: "black" }}
                   >
                     <MenuItem onClick={handleCloseUserMenu}>
                       <Typography sx={{ textAlign: "center" }}>
-                        {setting}
+                        Profile
                       </Typography>
                     </MenuItem>
                   </Link>
-                ))}
-              </Menu>
-            </Box>
+                  <MenuItem onClick={logout}>
+                    <Typography sx={{ textAlign: "center" }}>Logout</Typography>
+                  </MenuItem>
+                </>
+              ) : (
+                <Link
+                  to="/login"
+                  style={{ textDecoration: "none", color: "black" }}
+                >
+                  <MenuItem onClick={handleCloseUserMenu}>
+                    <Typography
+                      sx={{
+                        my: 2,
+                        color: "white",
+                        display: "block",
+                        textAlign: "center",
+                        transition: "color 0.2s ease, transform 0.2s ease",
+                        "&:hover": {
+                          transform: "scale(1.1)",
+                          color: "yellow",
+                        },
+                      }}
+                    >
+                      Login
+                    </Typography>
+                  </MenuItem>
+                </Link>
+              )}
+            </Menu>
           </Toolbar>
         </Container>
       </AppBar>
+
+      {/* Sidebar Drawer for Mobile */}
+      <Drawer
+        anchor="left"
+        open={drawerOpen}
+        onClose={() => toggleDrawer(false)}
+      >
+        <Box
+          sx={{ width: 200, textAlign: "center", paddingTop: "20px" }}
+          role="presentation"
+          onClick={() => toggleDrawer(false)}
+          onKeyDown={() => toggleDrawer(false)}
+        >
+          <List>
+            {pages.map((page, i) => (
+              <ListItem
+                // button
+                key={page + i}
+                sx={{
+                  "&:hover": {
+                    backgroundColor: "rgba(25, 135, 84, 0.7)",
+                  },
+                  textAlign: "center",
+                  backgroundColor: "rgba(25, 135, 84, 0.1)",
+                  color: "black",
+                  fontSize: "xs",
+                  borderTop: "black",
+                  borderBottom: "black",
+                }}
+              >
+                <Link
+                  to={links[i]}
+                  style={{
+                    textDecoration: "none",
+                    color: "inherit",
+                    fontSize: "inherit",
+                  }}
+                >
+                  <ListItemText primary={page} />
+                </Link>
+              </ListItem>
+            ))}
+          </List>
+          {isAuthenticated ? (
+            <Box sx={{ padding: 2 }}>
+              <Link
+                to="/profile"
+                style={{ textDecoration: "none", color: "black" }}
+              >
+                <Button fullWidth>Profile</Button>
+              </Link>
+              <Button fullWidth onClick={logout}>
+                Logout
+              </Button>
+            </Box>
+          ) : (
+            <Box sx={{ padding: 2 }}>
+              <Link
+                to="/login"
+                style={{ textDecoration: "none", color: "black" }}
+              >
+                <Button fullWidth>Login</Button>
+              </Link>
+            </Box>
+          )}
+        </Box>
+      </Drawer>
     </ThemeProvider>
   );
 }
+
 export default Navbar;
