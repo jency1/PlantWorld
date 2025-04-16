@@ -22,6 +22,8 @@ router
   .get(plantController.getAllPlants)
   .post(plantController.createPlant);
 
+router.route('/plantTotal').get(plantController.getTotalPlants);
+
 router
   .route('/:id')
   .get(plantController.getPlant)
