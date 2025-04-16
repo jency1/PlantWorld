@@ -14,10 +14,10 @@ export default function Footer() {
       <div className="container mx-auto px-3 md:px-8">
         {/* Content container */}
         <div className="flex flex-row items-start justify-between space-y-0">
-          {/* Garden Care Section */}
+          {/* PlantWorld Section */}
           <div className="w-1/3 text-left md:text-center">
             <h3 className="text-left md:text-center text-base md:text-xl lg:text-2xl font-semibold mb-2">
-              Garden Care
+              PlantWorld
             </h3>
             <p className="text-[0.7rem] md:text-sm lg:text-base mb-1">
               123 Bang Street, Ahmedabad

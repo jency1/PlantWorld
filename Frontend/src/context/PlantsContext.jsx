@@ -1,4 +1,4 @@
-import { createContext, useEffect, useState } from "react";
+import { createContext, useState } from "react";
 
 export const PlantContext = createContext({
   plants: [],
@@ -6,28 +6,36 @@ export const PlantContext = createContext({
   getPlantById: (id) => {},
   updatePlantById: (id, updatedData) => {},
   deletePlantById: (id) => {},
+  totalPages: 10, // Hardcoded in context
+  fetchPlants: (page, limit) => {},
 });
 
 export function PlantContextProvider({ children }) {
   const [plants, setPlants] = useState([]);
   const [error, setError] = useState(null);
 
-  useEffect(() => {
-    async function loadPlants() {
-      const response = await fetch("http://localhost:8000/api/plants/");
-      if (!response.ok) {
-        throw new Error("Failed to fetch plants");
-      }
-      // const plantsData = await response.json();
-      const { data } = await response.json();
-      console.log("Plants Data: ", data);
+  const TOTAL_PAGES = 10;
 
-      setPlants(data);
+  // Load Plants from backend - fetch paginated plants from backend
+  async function fetchPlants(page = 1, limit = 12) {
+    try {
+      const response = await fetch(
+        `http://localhost:8000/api/plants/?page=${page}&limit=${limit}`
+      );
+      if (!response.ok) throw new Error("Failed to fetch plants");
+
+      const json = await response.json();
+      //   console.log("Backend Response:", json);
+      const fetchedPlants = json?.data?.plants || [];
+
+      setPlants(fetchedPlants);
+    } catch (error) {
+      console.error("Error fetching plants:", error);
+      setError("Unable to fetch plants. Please try again later.");
     }
+  }
 
-    loadPlants();
-  }, []);
-
+  // Add Plant
   async function addPlant(enteredPlantData) {
     try {
       const response = await fetch("http://localhost:8000/api/plants/", {
@@ -50,10 +58,12 @@ export function PlantContextProvider({ children }) {
     }
   }
 
+  // Get Plant By Id
   function getPlantById(id) {
-    return plants.find((plant) => plant.id === id);
+    return plants.find((plant) => plant._id === id);
   }
 
+  // Update Plant
   async function updatePlantById(id, updatedData) {
     try {
       const response = await fetch(`http://localhost:8000/api/plants/${id}`, {
@@ -70,7 +80,9 @@ export function PlantContextProvider({ children }) {
 
       const updatedPlant = await response.json();
       setPlants((prevPlants) =>
-        prevPlants.map((plant) => (plant.id === id ? updatedPlant : plant))
+        prevPlants.map((plant) =>
+          plant._id === id ? { ...plant, ...updatedPlant } : plant
+        )
       );
     } catch (error) {
       console.error("Error updating plant:", error);
@@ -78,6 +90,7 @@ export function PlantContextProvider({ children }) {
     }
   }
 
+  // Delete Plant
   async function deletePlantById(id) {
     try {
       const response = await fetch(`http://localhost:8000/api/plants/${id}`, {
@@ -88,19 +101,24 @@ export function PlantContextProvider({ children }) {
         throw new Error("Failed to delete plant");
       }
 
-      setPlants((prevPlants) => prevPlants.filter((plant) => plant.id !== id));
+      setPlants((prevPlants) => prevPlants.filter((plant) => plant._id !== id)); // Use _id for consistency
     } catch (error) {
       console.error("Error deleting plant:", error);
       setError("Unable to delete plant. Please try again later.");
     }
   }
 
+  console.log("totalPages:", TOTAL_PAGES);
+
+  // Provide all values via context
   const contextValue = {
     plants: plants,
     addPlant,
     getPlantById,
     updatePlantById,
     deletePlantById,
+    totalPages: TOTAL_PAGES,
+    fetchPlants,
   };
 
   return (

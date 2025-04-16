@@ -13,7 +13,7 @@ import FAQs from "./pages/FAQs";
 import ScrollToTop from "./ScrollToTop";
 import AppLayout from "./AppLayout";
 import Payment from "./components/Payment/Payment";
-import { PlantContextProvider } from "./context/PlantsContext.jsx";
+import { PlantContextProvider } from "./context/PlantsContext";
 
 const router = createBrowserRouter([
   {
@@ -63,7 +63,9 @@ const router = createBrowserRouter([
 ]);
 
 function App() {
-  return <RouterProvider router={router} />;
+  return (
+    <RouterProvider router={router} future={{ v7_startTransition: true }} />
+  );
 }
 
 export default App;

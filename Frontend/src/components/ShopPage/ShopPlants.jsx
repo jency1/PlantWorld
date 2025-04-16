@@ -2,11 +2,15 @@ import React, { useState, useEffect, useContext } from "react";
 import { Link } from "react-router-dom";
 import FilterComponent from "./FilterComponent.jsx"; // Import the filter component
 import { PlantContext } from "../../context/PlantsContext.jsx";
+import Pagination from "../../ui/pagination.jsx";
 
 function ShopPlants() {
-  const { plants, fetchPlants, isLoading, error } = useContext(PlantContext);
+  const { plants, fetchPlants, isLoading, error, totalPages } =
+    useContext(PlantContext);
   const [showFilter, setShowFilter] = useState(false);
   const [screenWidth, setScreenWidth] = useState(window.innerWidth);
+  const [currentPage, setCurrentPage] = useState(1);
+  const limit = 12;
 
   // Update screenWidth when window is resized
   useEffect(() => {
@@ -20,6 +24,15 @@ function ShopPlants() {
       window.removeEventListener("resize", handleResize);
     };
   }, []);
+
+  // Fetch paginated plants
+  useEffect(() => {
+    fetchPlants(currentPage, limit);
+  }, [currentPage]);
+
+  const handlePageChange = (newPage) => {
+    setCurrentPage(newPage);
+  };
 
   const ProductCard = ({ imageSrc, title, price }) => {
     return (
@@ -79,107 +92,116 @@ function ShopPlants() {
               {error && <p className="text-center text-red-500">{error}</p>}
               {!isLoading &&
                 !error &&
-                plants?.plants?.map((plant) => (
+                plants?.map((plant) => (
                   <ProductCard
-                    key={plant.id || plant.title}
+                    key={plant._id || plant.title}
                     imageSrc={plant.imageCover}
                     title={plant.name}
                     price={plant.price}
                   />
                 ))}
-
-              {/* Locally Fetching Data */}
-
-              {/* {products.map((product) => (
-                <ProductCard
-                  key={product.id}
-                  imageSrc={product.imageSrc}
-                  title={product.title}
-                  price={product.price}
-                />
-              ))} */}
             </div>
           </div>
         </div>
       </div>
+
+      {/* Pagination Component */}
+      <Pagination
+        totalPages={totalPages}
+        currentPage={currentPage}
+        onPageChange={handlePageChange}
+      />
+
       <div className="my-5"></div>
     </>
   );
 }
 
-const products = [
-  {
-    id: 1,
-    imageSrc: "/Featured Products/image1.jpg",
-    title: "Plant",
-    price: "Rs.500",
-  },
-  {
-    id: 2,
-    imageSrc: "/Featured Products/image2.jpg",
-    title: "Plant",
-    price: "Rs.500",
-  },
-  {
-    id: 3,
-    imageSrc: "/Featured Products/image3.jpg",
-    title: "Plant",
-    price: "Rs.500",
-  },
-  {
-    id: 4,
-    imageSrc: "/Featured Products/image4.jpg",
-    title: "Plant",
-    price: "Rs.500",
-  },
-  {
-    id: 5,
-    imageSrc: "/Featured Products/image5.jpg",
-    title: "Plant",
-    price: "Rs.500",
-  },
-  {
-    id: 6,
-    imageSrc: "/Featured Products/image6.jpg",
-    title: "Plant",
-    price: "Rs.500",
-  },
-  {
-    id: 7,
-    imageSrc: "/Featured Products/image7.jpg",
-    title: "Plant",
-    price: "Rs.500",
-  },
-  {
-    id: 8,
-    imageSrc: "/Featured Products/image8.jpg",
-    title: "Plant",
-    price: "Rs.500",
-  },
-  {
-    id: 9,
-    imageSrc: "/Featured Products/image1.jpg",
-    title: "Plant",
-    price: "Rs.500",
-  },
-  {
-    id: 10,
-    imageSrc: "/Featured Products/image2.jpg",
-    title: "Plant",
-    price: "Rs.500",
-  },
-  {
-    id: 11,
-    imageSrc: "/Featured Products/image3.jpg",
-    title: "Plant",
-    price: "Rs.500",
-  },
-  {
-    id: 12,
-    imageSrc: "/Featured Products/image4.jpg",
-    title: "Plant",
-    price: "Rs.500",
-  },
-];
-
 export default ShopPlants;
+
+//   /* Locally Fetching Data */
+// {
+//   /* {products.map((product) => (
+//                 <ProductCard
+//                   key={product.id}
+//                   imageSrc={product.imageSrc}
+//                   title={product.title}
+//                   price={product.price}
+//                 />
+//               ))} */
+// }
+
+// const products = [
+//   {
+//     id: 1,
+//     imageSrc: "/Featured Products/image1.jpg",
+//     title: "Plant",
+//     price: "Rs.500",
+//   },
+//   {
+//     id: 2,
+//     imageSrc: "/Featured Products/image2.jpg",
+//     title: "Plant",
+//     price: "Rs.500",
+//   },
+//   {
+//     id: 3,
+//     imageSrc: "/Featured Products/image3.jpg",
+//     title: "Plant",
+//     price: "Rs.500",
+//   },
+//   {
+//     id: 4,
+//     imageSrc: "/Featured Products/image4.jpg",
+//     title: "Plant",
+//     price: "Rs.500",
+//   },
+//   {
+//     id: 5,
+//     imageSrc: "/Featured Products/image5.jpg",
+//     title: "Plant",
+//     price: "Rs.500",
+//   },
+//   {
+//     id: 6,
+//     imageSrc: "/Featured Products/image6.jpg",
+//     title: "Plant",
+//     price: "Rs.500",
+//   },
+//   {
+//     id: 7,
+//     imageSrc: "/Featured Products/image7.jpg",
+//     title: "Plant",
+//     price: "Rs.500",
+//   },
+//   {
+//     id: 8,
+//     imageSrc: "/Featured Products/image8.jpg",
+//     title: "Plant",
+//     price: "Rs.500",
+//   },
+//   {
+//     id: 9,
+//     imageSrc: "/Featured Products/image1.jpg",
+//     title: "Plant",
+//     price: "Rs.500",
+//   },
+//   {
+//     id: 10,
+//     imageSrc: "/Featured Products/image2.jpg",
+//     title: "Plant",
+//     price: "Rs.500",
+//   },
+//   {
+//     id: 11,
+//     imageSrc: "/Featured Products/image3.jpg",
+//     title: "Plant",
+//     price: "Rs.500",
+//   },
+//   {
+//     id: 12,
+//     imageSrc: "/Featured Products/image4.jpg",
+//     title: "Plant",
+//     price: "Rs.500",
+//   },
+// ];
