@@ -119,3 +119,14 @@ exports.getPlantStats = catchAsync(async (req, res, next) => {
     },
   });
 });
+
+exports.getTotalPlants = catchAsync(async (req, res, next) => {
+  const totalPlants = await Plant.countDocuments();
+  console.log(totalPlants);
+
+  res.status(200).json({
+    status: 'success',
+    totalPlants, // 👈 clearer and more meaningful than `results`
+    data: null,
+  });
+});
