@@ -5,11 +5,9 @@ import FeatureSection from "../components/HomePage/FeatureSection";
 function ShopPageLayout() {
   return (
     <div>
-      {/* <Navbar /> */}
       <ShopHeader />
       <ShopPlants />
       <FeatureSection />
-      {/* <Footer /> */}
     </div>
   );
 }

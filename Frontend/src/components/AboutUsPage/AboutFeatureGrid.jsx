@@ -14,7 +14,7 @@ export default function AboutFeatureGrid() {
         imageSrc="/AboutUS/image2.png"
         altText="Organic and seed grown plants"
         title="Organic and seed grown plants"
-        description="we offer organic and seed-grown plants, ensuring eco-friendly,
+        description="We offer organic and seed-grown plants, ensuring eco-friendly,
         chemical-free options for sustainable, healthy gardening."
       />
 
@@ -27,7 +27,7 @@ export default function AboutFeatureGrid() {
         imageSrc="/AboutUS/image4.png"
         altText="Friendly and fast support"
         title="Friendly and fast support"
-        description="we provide friendly and fast support, ensuring your questions
+        description="We provide friendly and fast support, ensuring your questions
         are answered quickly with helpful, knowledgeable assistance
         every time."
       />
@@ -41,7 +41,7 @@ export default function AboutFeatureGrid() {
         imageSrc="/AboutUS/image6.png"
         altText="Expert Guidance"
         title="Expert Guidance & Resources"
-        description="we offer expert guidance to help you choose, care for, and grow
+        description="We offer expert guidance to help you choose, care for, and grow
         your plants successfully, every step."
       />
     </div>
