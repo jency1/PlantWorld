@@ -6,12 +6,24 @@ export function AuthProvider({ children }) {
   const [token, setToken] = useState(localStorage.getItem("token"));
   const [user, setUser] = useState(null);
 
+  // TEMPORARY: Simulate login during development
   useEffect(() => {
-    if (token) {
-      // Optional: fetch user profile with token here
-      setUser({ email: "user@example.com" }); // Replace with actual user info
-    }
-  }, [token]);
+    const dummyToken = "dummyToken123";
+    const dummyUser = { email: "dev@example.com", name: "Developer" };
+
+    setToken(dummyToken);
+    setUser(dummyUser);
+    localStorage.setItem("token", dummyToken);
+  }, []);
+
+  //   USE THIS CODE ONCE THE LOG-IN/LOG-OUT IS DONE
+
+  //   useEffect(() => {
+  //     if (token) {
+  //       // Optional: fetch user profile with token here
+  //       setUser({ email: "user@example.com" }); // Replace with actual user info
+  //     }
+  //   }, [token]);
 
   const login = (token, userData) => {
     setToken(token);

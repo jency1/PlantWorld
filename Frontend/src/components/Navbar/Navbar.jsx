@@ -12,13 +12,15 @@ import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
 import Tooltip from "@mui/material/Tooltip";
 import MenuItem from "@mui/material/MenuItem";
-import { Link } from "react-router-dom";
-import { useContext } from "react";
-import { AuthContext } from "../../context/AuthContext";
 import Drawer from "@mui/material/Drawer";
 import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
 import ListItemText from "@mui/material/ListItemText";
+import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
+
+import { Link } from "react-router-dom";
+import { useContext } from "react";
+import { AuthContext } from "../../context/AuthContext";
 
 const pages = ["Home", "Shop", "About", "FAQ", "Contact", "Blog"];
 const links = ["/", "/shop", "/about", "/faqs", "/contact", "/"];
@@ -71,13 +73,12 @@ function Navbar() {
                 fontWeight: 700,
                 color: "inherit",
                 textDecoration: "none",
-                // letterSpacing: ".3rem",
               }}
             >
               PlantWorld
             </Typography>
 
-            {/* Mobile Right Side Menu Icon and Avatar/Login */}
+            {/* Mobile Right Side Menu Icon */}
             <Box
               sx={{
                 display: { xs: "flex", md: "none" },
@@ -86,6 +87,13 @@ function Navbar() {
                 gap: 1,
               }}
             >
+              {isAuthenticated && (
+                <Link to="/cart" style={{ color: "white" }}>
+                  <ShoppingCartIcon
+                    style={{ fontSize: "24px", cursor: "pointer" }}
+                  />
+                </Link>
+              )}
               <IconButton
                 size="large"
                 aria-label="menu"
@@ -138,7 +146,6 @@ function Navbar() {
                       my: 2,
                       color: "white",
                       display: "block",
-                      textDecoration: "none",
                       transition: "color 0.2s ease, transform 0.2s ease",
                       "&:hover": {
                         transform: "scale(1.1)",
@@ -151,8 +158,24 @@ function Navbar() {
               ))}
             </Box>
 
-            {/* User Menu for Desktop */}
-            <Box sx={{ display: { xs: "none", md: "flex" }, ml: "auto" }}>
+            {/* Desktop Cart and Profile */}
+            <Box
+              sx={{
+                display: { xs: "none", md: "flex" },
+                ml: "auto",
+                alignItems: "center",
+                gap: 2,
+              }}
+            >
+              {isAuthenticated && (
+                <Tooltip title="View Cart">
+                  <Link to="/cart" style={{ color: "white" }}>
+                    <ShoppingCartIcon
+                      style={{ fontSize: "28px", cursor: "pointer" }}
+                    />
+                  </Link>
+                </Tooltip>
+              )}
               {isAuthenticated ? (
                 <Tooltip title="Open settings">
                   <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
@@ -191,21 +214,22 @@ function Navbar() {
               onClose={handleCloseUserMenu}
             >
               {isAuthenticated ? (
-                <>
+                [
                   <Link
-                    to="/profile"
+                    to="/"
                     style={{ textDecoration: "none", color: "black" }}
+                    key="profile"
                   >
                     <MenuItem onClick={handleCloseUserMenu}>
                       <Typography sx={{ textAlign: "center" }}>
                         Profile
                       </Typography>
                     </MenuItem>
-                  </Link>
-                  <MenuItem onClick={logout}>
+                  </Link>,
+                  <MenuItem onClick={logout} key="logout">
                     <Typography sx={{ textAlign: "center" }}>Logout</Typography>
-                  </MenuItem>
-                </>
+                  </MenuItem>,
+                ]
               ) : (
                 <Link
                   to="/login"
@@ -237,7 +261,7 @@ function Navbar() {
 
       {/* Sidebar Drawer for Mobile */}
       <Drawer
-        anchor="left"
+        anchor="right"
         open={drawerOpen}
         onClose={() => toggleDrawer(false)}
       >
@@ -250,7 +274,6 @@ function Navbar() {
           <List>
             {pages.map((page, i) => (
               <ListItem
-                // button
                 key={page + i}
                 sx={{
                   "&:hover": {
@@ -259,9 +282,6 @@ function Navbar() {
                   textAlign: "center",
                   backgroundColor: "rgba(25, 135, 84, 0.1)",
                   color: "black",
-                  fontSize: "xs",
-                  borderTop: "black",
-                  borderBottom: "black",
                 }}
               >
                 <Link
@@ -277,6 +297,21 @@ function Navbar() {
               </ListItem>
             ))}
           </List>
+          {isAuthenticated && (
+            <Tooltip title="View Cart">
+              <Link
+                to="/cart"
+                style={{
+                  display: "block",
+                  padding: "8px 16px",
+                  color: "black",
+                  textDecoration: "none",
+                }}
+              >
+                View Cart
+              </Link>
+            </Tooltip>
+          )}
           {isAuthenticated ? (
             <Box sx={{ padding: 2 }}>
               <Link

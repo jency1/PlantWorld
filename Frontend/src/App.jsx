@@ -10,9 +10,12 @@ import Contact from "./pages/Contact";
 import AboutUs from "./pages/AboutUs";
 import FAQs from "./pages/FAQs";
 import BlogPage from "./pages/BlogPage";
-import ScrollToTop from "./ScrollToTop";
+import CartPage from "./pages/CartPage";
+
 import AppLayout from "./AppLayout";
+import ScrollToTop from "./ScrollToTop";
 import Payment from "./components/Payment/Payment";
+
 import { PlantContextProvider } from "./context/PlantsContext";
 import { AuthProvider } from "./context/AuthContext";
 import { CartProvider } from "./context/CartContext";
@@ -63,6 +66,10 @@ const router = createBrowserRouter([
       {
         path: "/faqs",
         element: <FAQs />,
+      },
+      {
+        path: "/cart",
+        element: <CartPage />,
       },
     ],
   },
