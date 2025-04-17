@@ -26,7 +26,7 @@ const links = ["/", "/shop", "/about", "/faqs", "/contact", "/"];
 const theme = createTheme({
   palette: {
     primary: {
-      main: "#15803D",
+      main: "#15803D", // Green
     },
   },
 });
@@ -71,6 +71,7 @@ function Navbar() {
                 fontWeight: 700,
                 color: "inherit",
                 textDecoration: "none",
+                // letterSpacing: ".3rem",
               }}
             >
               PlantWorld
