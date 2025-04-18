@@ -34,7 +34,7 @@ export function CartProvider({ children }) {
   // Clear Cart
   function clearCart() {
     setCart([]);
-    showNotification("Cart cleared.", "info");
+    showNotification("Cart cleared.", "error");
   }
 
   // Provide all values via context
