@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useContext } from "react";
 import { Link } from "react-router-dom";
-import FilterComponent from "./FilterComponent.jsx"; // Import the filter component
+import FilterComponent from "./FilterComponent.jsx";
 import { PlantContext } from "../../context/PlantsContext.jsx";
 import Pagination from "../../ui/pagination.jsx";
 
@@ -34,11 +34,11 @@ function ShopPlants() {
     setCurrentPage(newPage);
   };
 
-  const ProductCard = ({ imageSrc, title, price }) => {
+  const ProductCard = ({ plantId, imageSrc, title, price }) => {
     return (
       <div className="col-6 col-sm-4 col-md-3 col-lg-3 text-center mt-4">
         <div className="card p-3 bg-gray-100 rounded-lg shadow-md">
-          <Link to="/product/description">
+          <Link to={`/plant/description/${plantId}`}>
             <img
               src={imageSrc}
               alt={title}
@@ -49,7 +49,7 @@ function ShopPlants() {
           <div className="text-success text-xs md:text-sm lg:text-base">
             Rs.{price}
           </div>
-          <Link to="/product/description">
+          <Link to={`/plant/description/${plantId}`}>
             <button className="btn btn-success mt-2 lg:mt-3 lg:px-4 lg:py-2 text-xs sm:text-sm">
               Add To Cart
             </button>
@@ -95,6 +95,7 @@ function ShopPlants() {
                 plants?.map((plant) => (
                   <ProductCard
                     key={plant._id || plant.title}
+                    plantId={plant._id}
                     imageSrc={plant.imageCover}
                     title={plant.name}
                     price={plant.price}

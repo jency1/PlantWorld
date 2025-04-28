@@ -101,7 +101,7 @@ export function PlantContextProvider({ children }) {
         throw new Error("Failed to delete plant");
       }
 
-      setPlants((prevPlants) => prevPlants.filter((plant) => plant._id !== id)); // Use _id for consistency
+      setPlants((prevPlants) => prevPlants.filter((plant) => plant._id !== id));
     } catch (error) {
       console.error("Error deleting plant:", error);
       setError("Unable to delete plant. Please try again later.");

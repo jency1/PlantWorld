@@ -56,7 +56,7 @@ const router = createBrowserRouter([
         element: <BlogPage />,
       },
       {
-        path: "/product/description",
+        path: "/plant/description/:plantId",
         element: <DescriptionLayout />,
       },
       {
