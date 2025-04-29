@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useCallback, useState } from "react";
 import BackToHomeButton from "../components/LoginPage/BackToHomeButton";
 import LeftSection from "../components/LoginPage/LeftSection";
 import RightSection from "../components/LoginPage/RightSection";
@@ -8,14 +8,14 @@ const LoginPage = () => {
   const [isSignup, setIsSignup] = useState(false);
   const [showForgotPasswordModal, setShowForgotPasswordModal] = useState(false);
 
-  const handleForgotPassword = (e) => {
+  const handleForgotPassword = useCallback((e) => {
     e.preventDefault();
     setShowForgotPasswordModal(true);
-  };
+  }, []);
 
-  const handleCloseModal = () => {
+  const handleCloseModal = useCallback(() => {
     setShowForgotPasswordModal(false);
-  };
+  }, []);
 
   return (
     <div className="relative flex justify-center items-center min-h-screen bg-[#ecffed] p-2 md:p-4">

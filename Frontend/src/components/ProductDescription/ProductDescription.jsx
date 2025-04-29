@@ -1,6 +1,5 @@
 import { useState, useEffect } from "react";
 import { useNotification } from "../../context/NotificationContext";
-import { BASE_URL } from "../../utils/api";
 import { FaMinus, FaPlus } from "react-icons/fa";
 import { FcInfo } from "react-icons/fc";
 
@@ -11,6 +10,8 @@ export default function ProductDescription({ plantId }) {
   const [error, setError] = useState(null);
   const [quantity, setQuantity] = useState(1);
   const [addToCartLoading, setAddToCartLoading] = useState(false);
+
+  const BASE_URL = import.meta.env.VITE_BASE_URL;
 
   // Function for Fetching Plant Data
   useEffect(() => {

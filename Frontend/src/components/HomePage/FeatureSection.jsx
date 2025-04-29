@@ -25,7 +25,7 @@ const FeatureSection = () => {
           <FeatureItem
             icon={<FaShippingFast />}
             title="Free delivery"
-            subtitle="For all orders above Rs 500"
+            subtitle="For all orders above Rs 1000"
           />
           <FeatureItem
             icon={<FaLock />}

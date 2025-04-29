@@ -75,11 +75,39 @@ const router = createBrowserRouter([
   },
   {
     path: "/login",
-    element: <LoginPage />,
+    element: (
+      <>
+        <ScrollToTop />
+
+        <NotificationProvider>
+          <AuthProvider>
+            <PlantContextProvider>
+              <CartProvider>
+                <LoginPage />
+              </CartProvider>
+            </PlantContextProvider>
+          </AuthProvider>
+        </NotificationProvider>
+      </>
+    ),
   },
   {
     path: "/payment",
-    element: <Payment />,
+    element: (
+      <>
+        <ScrollToTop />
+
+        <NotificationProvider>
+          <AuthProvider>
+            <PlantContextProvider>
+              <CartProvider>
+                <Payment />
+              </CartProvider>
+            </PlantContextProvider>
+          </AuthProvider>
+        </NotificationProvider>
+      </>
+    ),
   },
 ]);
 
