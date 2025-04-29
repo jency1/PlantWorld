@@ -1,40 +1,50 @@
-import { createContext, useState, useEffect } from "react";
+import { createContext, useState, useEffect, useContext } from "react";
+import { useNavigate } from "react-router-dom";
+import { NotificationContext } from "./NotificationContext";
 
-export const AuthContext = createContext();
+// Context structure
+export const AuthContext = createContext({
+  token: null,
+  user: null,
+  isAuthenticated: false,
+  login: (token, userData) => {},
+  logout: () => {},
+});
 
+// Provider
 export function AuthProvider({ children }) {
   const [token, setToken] = useState(localStorage.getItem("token"));
   const [user, setUser] = useState(null);
 
-  // TEMPORARY: Simulate login during development
+  const navigate = useNavigate();
+  const { showNotification } = useContext(NotificationContext);
+
   useEffect(() => {
-    const dummyToken = "dummyToken123";
-    const dummyUser = { email: "dev@example.com", name: "Developer" };
-
-    setToken(dummyToken);
-    setUser(dummyUser);
-    localStorage.setItem("token", dummyToken);
-  }, []);
-
-  //   USE THIS CODE ONCE THE LOG-IN/LOG-OUT IS DONE
-
-  //   useEffect(() => {
-  //     if (token) {
-  //       // Optional: fetch user profile with token here
-  //       setUser({ email: "user@example.com" }); // Replace with actual user info
-  //     }
-  //   }, [token]);
+    if (token && !user) {
+      // If there's a token, and we don't already have user data,
+      // try to fetch user data directly from the login response
+      const storedUser = localStorage.getItem("user");
+      if (storedUser) {
+        setUser(JSON.parse(storedUser)); // Parse and set user data from localStorage
+      }
+    }
+  }, [token, user]);
 
   const login = (token, userData) => {
     setToken(token);
     setUser(userData);
     localStorage.setItem("token", token);
+    localStorage.setItem("user", JSON.stringify(userData)); // Store user data in localStorage
+    navigate("/");
   };
 
   const logout = () => {
     setToken(null);
     setUser(null);
     localStorage.removeItem("token");
+    localStorage.removeItem("user"); // Remove user data from localStorage
+    showNotification("Logged out successfully!", "success");
+    navigate("/");
   };
 
   return (
