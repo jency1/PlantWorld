@@ -1,12 +1,15 @@
 import React, { useState, useEffect, useContext } from "react";
 import { Link } from "react-router-dom";
 import FilterComponent from "./FilterComponent.jsx";
-import { PlantContext } from "../../context/PlantsContext.jsx";
 import Pagination from "../../ui/pagination.jsx";
+import { PlantContext } from "../../context/PlantsContext.jsx";
+import { CartContext } from "../../context/CartContext.jsx";
 
 function ShopPlants() {
   const { plants, fetchPlants, isLoading, error, totalPages } =
     useContext(PlantContext);
+  const { addToCart } = useContext(CartContext);
+
   const [showFilter, setShowFilter] = useState(false);
   const [screenWidth, setScreenWidth] = useState(window.innerWidth);
   const [currentPage, setCurrentPage] = useState(1);
@@ -35,6 +38,11 @@ function ShopPlants() {
   };
 
   const ProductCard = ({ plantId, imageSrc, title, price }) => {
+    const handleAddToCart = () => {
+      const plant = { _id: plantId, name: title, price, imageCover: imageSrc };
+      addToCart(plant);
+    };
+
     return (
       <div className="col-6 col-sm-4 col-md-3 col-lg-3 text-center mt-4">
         <div className="card p-3 bg-gray-100 rounded-lg shadow-md">
@@ -50,7 +58,10 @@ function ShopPlants() {
             Rs.{price}
           </div>
           <Link to={`/plant/description/${plantId}`}>
-            <button className="btn btn-success mt-2 lg:mt-3 lg:px-4 lg:py-2 text-xs sm:text-sm">
+            <button
+              onClick={handleAddToCart}
+              className="btn btn-success mt-2 lg:mt-3 lg:px-4 lg:py-2 text-xs sm:text-sm"
+            >
               Add To Cart
             </button>
           </Link>
