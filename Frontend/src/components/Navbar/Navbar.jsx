@@ -18,6 +18,8 @@ import ListItem from "@mui/material/ListItem";
 import ListItemText from "@mui/material/ListItemText";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 
+import { FaUserAlt, FaSignOutAlt, FaSignInAlt } from "react-icons/fa";
+
 import { Link } from "react-router-dom";
 import { useContext } from "react";
 import { AuthContext } from "../../context/AuthContext";
@@ -222,12 +224,22 @@ function Navbar() {
                   >
                     <MenuItem onClick={handleCloseUserMenu}>
                       <Typography sx={{ textAlign: "center" }}>
+                        <FaUserAlt style={{ marginRight: "8px" }} />
                         Profile
                       </Typography>
                     </MenuItem>
                   </Link>,
-                  <MenuItem onClick={logout} key="logout">
-                    <Typography sx={{ textAlign: "center" }}>Logout</Typography>
+                  <MenuItem
+                    onClick={() => {
+                      handleCloseUserMenu();
+                      logout();
+                    }}
+                    key="logout"
+                  >
+                    <Typography sx={{ textAlign: "center" }}>
+                      <FaSignOutAlt style={{ marginRight: "8px" }} />
+                      Logout
+                    </Typography>
                   </MenuItem>,
                 ]
               ) : (
@@ -249,6 +261,7 @@ function Navbar() {
                         },
                       }}
                     >
+                      <FaSignInAlt style={{ marginRight: "8px" }} />
                       Login
                     </Typography>
                   </MenuItem>
