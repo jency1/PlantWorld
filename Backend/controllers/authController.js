@@ -25,13 +25,19 @@ const createSendToken = (user, statusCode, res) => {
 };
 
 exports.signup = catchAsync(async (req, res, next) => {
+  console.log('Received data:', req.body);
+
+  const { email, password, passwordConfirm, phoneNumber } = req.body;
+
+  if (!email || !password || !passwordConfirm || !phoneNumber) {
+    return next(new AppError('All fields are required', 400));
+  }
+
   const newUser = await User.create({
-    name: req.body.name,
-    email: req.body.email,
-    password: req.body.password,
-    passwordConfirm: req.body.passwordConfirm,
-    phoneNumber: req.body.phoneNumber,
-    passwordChangedAt: req.body.passwordChangedAt,
+    email,
+    phoneNumber: phoneNumber,
+    password,
+    passwordConfirm,
   });
 
   createSendToken(newUser, 201, res);
