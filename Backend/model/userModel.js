@@ -57,6 +57,25 @@ const userSchema = new mongoose.Schema({
     default: true,
     select: false,
   },
+  cart: [
+    {
+      plantId: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Plant', // Assuming your plant model is called 'Plant'
+        required: true,
+      },
+      quantity: {
+        type: Number,
+        required: true,
+        min: [1, 'Quantity must be at least 1'],
+      },
+      price: {
+        type: Number,
+        required: true,
+        min: [0, 'Price must be positive'],
+      },
+    },
+  ],
 });
 
 userSchema.pre('save', async function (next) {

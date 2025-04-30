@@ -7,6 +7,7 @@ function AppLayout() {
     <>
       <Navbar />
       <Outlet />
+
       <Footer />
     </>
   );
