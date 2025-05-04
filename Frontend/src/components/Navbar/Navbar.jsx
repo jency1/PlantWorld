@@ -25,7 +25,7 @@ import { useContext } from "react";
 import { AuthContext } from "../../context/AuthContext";
 
 const pages = ["Home", "Shop", "About", "FAQ", "Contact", "Blog"];
-const links = ["/", "/shop", "/about", "/faqs", "/contact", "/"];
+const links = ["/", "/shop", "/about", "/faqs", "/contact", "/blog"];
 
 const theme = createTheme({
   palette: {

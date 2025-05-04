@@ -5,7 +5,7 @@ export default function Footer() {
     { to: "/", text: "Home" },
     { to: "/about", text: "About" },
     { to: "/shop", text: "Shop" },
-    { to: "/", text: "Blog" },
+    { to: "/blog", text: "Blog" },
     { to: "/contact", text: "Contact" },
   ];
 
