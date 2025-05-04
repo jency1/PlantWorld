@@ -20,10 +20,10 @@ const Pagination = ({ totalPages, currentPage, onPageChange }) => {
         scrollTop = window.innerHeight * 0.4;
       } else if (screenWidth < 1024) {
         // medium devices (tablet)
-        scrollTop = window.innerHeight * 0.7;
+        scrollTop = window.innerHeight * 0.5;
       } else {
         // large devices (laptop/desktop)
-        scrollTop = window.innerHeight * 0;
+        scrollTop = window.innerHeight * 0.8;
       }
 
       window.scrollTo({ top: scrollTop, behavior: "smooth" });
