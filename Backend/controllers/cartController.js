@@ -141,3 +141,31 @@ exports.getCartTotal = async (req, res) => {
     });
   }
 };
+
+// controllers/cartController.js
+
+exports.getCart = async (req, res) => {
+  try {
+    const userId = req.user.id;
+
+    const user = await User.findById(userId);
+
+    if (!user || !user.cart) {
+      return res.status(404).json({
+        status: 'fail',
+        message: 'User or cart not found',
+      });
+    }
+
+    res.status(200).json({
+      status: 'success',
+      cart: user.cart,
+    });
+  } catch (err) {
+    res.status(500).json({
+      status: 'error',
+      message: 'Failed to retrieve cart',
+      error: err.message,
+    });
+  }
+};
