@@ -64,15 +64,15 @@ function ShopPlants() {
             Rs.{price}
           </div>
 
-          <div className="flex gap-2">
+          <div className="flex flex-col lg:flex-row lg:gap-2">
             <Link to={`/plant/description/${plantId}`}>
-              <button className="btn border border-success text-success mt-2 lg:mt-3 lg:px-4 lg:py-2 text-xs sm:text-sm">
+              <button className="btn border border-success text-success mt-2 lg:mt-3 lg:px-4 lg:py-2 text-xs md:text-sm">
                 View Details
               </button>
             </Link>
             <button
               onClick={handleAddToCart}
-              className="btn btn-success mt-2 lg:mt-3 lg:px-4 lg:py-2 text-xs sm:text-sm"
+              className="btn btn-success mt-2 lg:mt-3 lg:px-4 lg:py-2 text-xs md:text-sm"
             >
               Add To Cart
             </button>

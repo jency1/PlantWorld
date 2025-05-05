@@ -238,15 +238,15 @@ export default function ProductDescription({ plantId }) {
 
           {/* Tag, category, Color */}
           <ul className="list-none mt-3 lg:mt-5 lg:space-y-3">
-            <li>
+            <li className="text-sm md:text-base">
               <span className="lg:font-medium font-semibold">Tag:</span>{" "}
               {plant.tag || "N/A"}
             </li>
-            <li>
+            <li className="text-sm md:text-base">
               <span className="lg:font-medium font-semibold">Category:</span>{" "}
               {plant.category || "N/A"}
             </li>
-            <li>
+            <li className="text-sm md:text-base">
               <span className="lg:font-medium font-semibold">Color:</span>{" "}
               {plant.color?.join(", ") || "N/A"}
             </li>
@@ -259,7 +259,7 @@ export default function ProductDescription({ plantId }) {
         <h2 className="text-xl md:text-2xl lg:text-3xl font-bold text-green-700 mb-3 md:mb-4 lg:mb-5">
           Description
         </h2>
-        <p className="text-xs md:text-base lg:text-lg leading-relaxed text-gray-600">
+        <p className="text-sm md:text-base lg:text-lg leading-relaxed text-gray-600">
           {plant.description}
         </p>
 
