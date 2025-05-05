@@ -52,7 +52,7 @@ const CartItem = ({ item }) => {
 
         {/* Total Price */}
         <div className="w-full md:w-[20%] flex justify-center items-center text-gray-700 font-medium text-xs md:text-sm lg:text-lg mb-2 md:mb-0">
-          Total: ₹{item.price * item.quantity}
+          Total: ₹{item.total}
         </div>
 
         {/* Remove Button */}
