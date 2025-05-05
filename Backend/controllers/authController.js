@@ -15,11 +15,17 @@ const signToken = (id) => {
 const createSendToken = (user, statusCode, res) => {
   const token = signToken(user._id);
 
+  // Convert Mongoose document to plain object (if it's not already)
+  const userObj = user.toObject ? user.toObject() : { ...user };
+
+  // Remove password
+  delete userObj.password;
+
   res.status(statusCode).json({
     status: 'success',
     token,
     data: {
-      user,
+      user: userObj,
     },
   });
 };

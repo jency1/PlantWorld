@@ -74,6 +74,10 @@ const userSchema = new mongoose.Schema({
         required: true,
         min: [0, 'Price must be positive'],
       },
+      total: {
+        type: Number,
+        required: true,
+      },
     },
   ],
 });

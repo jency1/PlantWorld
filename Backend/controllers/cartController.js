@@ -21,6 +21,9 @@ exports.addToCart = async (req, res) => {
       // If item already in cart, update quantity and price
       user.cart[existingItemIndex].quantity += quantity;
       user.cart[existingItemIndex].price = price;
+      user.cart[existingItemIndex].total =
+        user.cart[existingItemIndex].quantity *
+        user.cart[existingItemIndex].price;
     } else {
       // Add new item to cart
       user.cart.push({ plantId, quantity, price });
@@ -62,6 +65,8 @@ exports.updateCart = async (req, res) => {
 
     if (quantity !== undefined) item.quantity = quantity;
     if (price !== undefined) item.price = price;
+
+    item.total = item.quantity * item.price;
 
     await user.save({ validateBeforeSave: false });
 
