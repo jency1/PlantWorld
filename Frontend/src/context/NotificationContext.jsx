@@ -1,5 +1,13 @@
 import { createContext, useState, useContext, useRef } from "react";
 
+import {
+  AiOutlineCheckCircle,
+  AiOutlineInfoCircle,
+  AiOutlineWarning,
+  AiOutlineCloseCircle,
+  AiOutlineClose,
+} from "react-icons/ai";
+
 // NotificationContext with default values
 export const NotificationContext = createContext({
   showNotification: (message, type) => {},
@@ -8,7 +16,7 @@ export const NotificationContext = createContext({
 export function NotificationProvider({ children }) {
   const [notification, setNotification] = useState(null);
   const [progress, setProgress] = useState(100);
-  const duration = 3000;
+  const duration = 4000;
 
   const timerRef = useRef(null);
   const intervalRef = useRef(null);
@@ -71,7 +79,23 @@ export function NotificationProvider({ children }) {
           <div className="flex justify-between items-center gap-2">
             {/* Image and text */}
             <div className="flex items-center gap-2">
-              <img src="/greenTick.jpg" alt="Success" className="w-auto h-5" />
+              {/* icon */}
+              {notification.type === "success" && (
+                <AiOutlineCheckCircle className="text-green-500 w-5 h-5" />
+              )}
+              {notification.type === "info" && (
+                <AiOutlineInfoCircle className="text-blue-500 w-5 h-5" />
+              )}
+              {notification.type === "warning" && (
+                <AiOutlineWarning className="text-yellow-500 w-5 h-5" />
+              )}
+              {notification.type === "error" && (
+                <AiOutlineCloseCircle className="text-red-500 w-5 h-5" />
+              )}
+
+              {/* <img src="/greenTick.jpg" alt="Success" className="w-auto h-5" /> */}
+
+              {/* message */}
               <span className="flex-1 text-xs lg:text-sm font-medium break-words">
                 {notification.message}
               </span>
@@ -82,11 +106,12 @@ export function NotificationProvider({ children }) {
               onClick={closeNotification}
               className="text-black hover:text-gray-600 text-xs font-bold leading-none"
             >
-              <img
+              <AiOutlineClose className="w-4 h-4 lg:w-5 lg:h-5" />
+              {/* <img
                 src="/closeIcon.jpg"
                 alt="Close"
                 className="w-auto h-4 lg:h-5"
-              />
+              /> */}
             </button>
           </div>
 
