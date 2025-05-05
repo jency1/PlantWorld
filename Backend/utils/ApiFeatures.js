@@ -4,6 +4,21 @@ class APIFeatures {
     this.queryString = queryString;
   }
 
+  search() {
+    if (this.queryString.search) {
+      const searchRegex = new RegExp(this.queryString.search, 'i'); // case-insensitive
+      this.query = this.query.find({
+        $or: [
+          { name: searchRegex },
+          { description: searchRegex },
+          { shortDescription: searchRegex },
+        ],
+      });
+    }
+
+    return this;
+  }
+
   filter() {
     // console.log('shreya');
     // 1A)filtering

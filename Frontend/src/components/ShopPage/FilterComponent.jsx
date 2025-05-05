@@ -23,18 +23,18 @@ function FilterComponent({
     const value = e.target.value;
     setSearchTerm(value);
 
-    // Filter plants based on the search term and current filters
-    const filteredPlantsData = plantData.filter(
-      (plant) =>
-        plant.name.toLowerCase().includes(value.toLowerCase()) &&
-        plant.price >= minPrice &&
-        plant.price <= maxPrice &&
-        (tag.length === 0 || tag.includes(plant.category)) &&
-        (categories.length === 0 || categories.includes(plant.category)) &&
-        (availability.length === 0 || availability.includes(plant.availability))
-    );
+    // // Filter plants based on the search term and current filters
+    // const filteredPlantsData = plantData.filter(
+    //   (plant) =>
+    //     plant.name.toLowerCase().includes(value.toLowerCase()) &&
+    //     plant.price >= minPrice &&
+    //     plant.price <= maxPrice &&
+    //     (tag.length === 0 || tag.includes(plant.category)) &&
+    //     (categories.length === 0 || categories.includes(plant.category)) &&
+    //     (availability.length === 0 || availability.includes(plant.availability))
+    // );
 
-    setPlantData(filteredPlantsData);
+    // setPlantData(filteredPlantsData);
   };
 
   // HANDLE CATEGORY CHANGE
@@ -212,6 +212,8 @@ function FilterComponent({
             type="checkbox"
             value="In Stock"
             id="inStock"
+            onChange={handleAvailabilityChange}
+            checked={availability.includes("In Stock")}
           />
           <label className="form-check-label text-sm" htmlFor="inStock">
             In Stock
@@ -221,22 +223,26 @@ function FilterComponent({
           <input
             className="form-check-input"
             type="checkbox"
-            value="Per Order"
-            id="perOrder"
+            value="Out Of Stock"
+            id="outOfStock"
+            onChange={handleAvailabilityChange}
+            checked={availability.includes("Out Of Stock")}
           />
-          <label className="form-check-label text-sm" htmlFor="perOrder">
-            Per Order
+          <label className="form-check-label text-sm" htmlFor="outOfStock">
+            Out Of Stock
           </label>
         </div>
         <div className="form-check">
           <input
             className="form-check-input"
             type="checkbox"
-            value="Up Coming"
+            value="UpComing"
             id="upComing"
+            onChange={handleAvailabilityChange}
+            checked={availability.includes("UpComing")}
           />
           <label className="form-check-label text-sm" htmlFor="upComing">
-            Up Coming
+            UpComing
           </label>
         </div>
       </div>
