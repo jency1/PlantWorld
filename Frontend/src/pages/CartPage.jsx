@@ -1,19 +1,46 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import CartItem from "../components/CartPage/CartItem";
 import { Link } from "react-router-dom";
 import { CartContext } from "../context/CartContext";
 
-// const BASE_URL = import.meta.env.VITE_BASE_URL;
+const BASE_URL = import.meta.env.VITE_BASE_URL;
 
 const CartPage = () => {
   const { cart } = React.useContext(CartContext);
+  const [totalAmount, setTotalAmount] = useState(0);
 
   // console.log("Cart Item data : ", cart);
 
-  const totalAmount = cart.reduce(
-    (amt, item) => amt + item.price * item.quantity,
-    0
-  );
+  // const totalAmount = cart.reduce(
+  //   (amt, item) => amt + item.price * item.quantity,
+  //   0
+  // );
+
+  useEffect(() => {
+    const fetchTotalAmount = async () => {
+      try {
+        const token = localStorage.getItem("token");
+        const response = await fetch(`${BASE_URL}/api/users/cart/total`, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
+
+        if (!response.ok) {
+          throw new Error("Failed to fetch total amount");
+        }
+
+        const data = await response.json();
+        // console.log("TOTAL COST data: ", data);
+
+        setTotalAmount(data.cartTotal || 0);
+      } catch (error) {
+        console.error("Error fetching total amount:", error);
+      }
+    };
+
+    fetchTotalAmount();
+  }, [cart]);
 
   return (
     <div className="relative flex justify-center items-center bg-[#ecffed]">
