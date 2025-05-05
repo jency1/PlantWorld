@@ -77,20 +77,26 @@ export function CartProvider({ children }) {
       return;
     }
 
+    console.log("Plant data in ADD to cart: ", plant);
+
     if (!plant || !plant._id) {
       showNotification("Invalid plant details. Cannot add to cart.", "error");
       return;
     }
 
     // Check if the item is already in the cart
-    const existingItem = cart.find((item) => item._id === plant._id);
+    const existingItem = cart.find(
+      (item) => item?.plantId?._id === plant._id || item.plantId === plant._id
+    );
 
     if (existingItem) {
       showNotification(
-        `${plant.name} is already in your cart. Quantity updated!`,
+        `${plant.name} is already in your cart. Updating the quantity!`,
         "info"
       );
-      updateCartQuantity(plant?._id, quantity);
+      setTimeout(() => {
+        updateCartQuantity(plant._id, quantity);
+      }, 3000);
       return;
     }
 
