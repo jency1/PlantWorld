@@ -35,7 +35,7 @@ const CartItem = ({ item }) => {
         <div className="w-full md:w-[20%] flex justify-center items-center space-x-2 mb-3 md:mb-0">
           <button
             className="bg-[#72a876] hover:bg-[#499a4e] text-white px-2 py-1 rounded"
-            onClick={() => handleDecrease(item.id, item.quantity)}
+            onClick={() => handleDecrease(item.plantId, item.quantity)}
           >
             <FaMinus className="text-[6px] md:text-[8px] lg:text-[12px]" />
           </button>
@@ -44,7 +44,7 @@ const CartItem = ({ item }) => {
           </span>
           <button
             className="bg-[#72a876] hover:bg-[#499a4e] text-white px-2 py-1 rounded"
-            onClick={() => handleIncrease(item.id, item.quantity)}
+            onClick={() => handleIncrease(item.plantId, item.quantity)}
           >
             <FaPlus className="text-[6px] md:text-[8px] lg:text-[12px]" />
           </button>

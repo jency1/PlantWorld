@@ -91,10 +91,6 @@ export function CartProvider({ children }) {
         "info"
       );
       updateCartQuantity(plant?._id, quantity);
-      // showNotification(
-      //   `${plant.name} is already in your cart. To update the quantity, please visit the cart page.`,
-      //   "info"
-      // );
       return;
     }
 
@@ -167,18 +163,7 @@ export function CartProvider({ children }) {
     const token = checkAuthToken();
     if (!token) return;
 
-    console.log("Attempting to update quantity:", { plantId, quantity });
-
-    // Check if the plant is in the cart before updating
-    const plantInCart = cart.find((item) => item._id === plantId);
-
-    if (!plantInCart) {
-      showNotification(
-        "Please add the plant to the cart first, before updating its quantity.",
-        "warning"
-      );
-      return;
-    }
+    // console.log("Attempting to update quantity:", { plantId, quantity });
 
     try {
       const response = await fetch(`${BASE_URL}/api/users/updatecart`, {

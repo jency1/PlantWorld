@@ -8,7 +8,7 @@ import { CartContext } from "../context/CartContext";
 const CartPage = () => {
   const { cart } = React.useContext(CartContext);
 
-  console.log("Cart Item data : ", cart);
+  // console.log("Cart Item data : ", cart);
 
   const totalAmount = cart.reduce(
     (amt, item) => amt + item.price * item.quantity,
