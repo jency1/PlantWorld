@@ -148,8 +148,10 @@ exports.getCart = async (req, res) => {
   try {
     const userId = req.user.id;
 
-    const user = await User.findById(userId);
-
+    const user = await User.findById(userId).populate({
+      path: 'cart.plantId', // Populating the plantId field in each cart item
+      model: 'Plant', // The model we want to populate from (Plant)
+    });
     if (!user || !user.cart) {
       return res.status(404).json({
         status: 'fail',
@@ -157,12 +159,12 @@ exports.getCart = async (req, res) => {
       });
     }
 
-    res.status(200).json({
+    return res.status(200).json({
       status: 'success',
       cart: user.cart,
     });
   } catch (err) {
-    res.status(500).json({
+    return res.status(500).json({
       status: 'error',
       message: 'Failed to retrieve cart',
       error: err.message,

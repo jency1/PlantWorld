@@ -25,7 +25,7 @@ export function AuthProvider({ children }) {
       // try to fetch user data directly from the login response
       const storedUser = localStorage.getItem("user");
       if (storedUser) {
-        setUser(JSON.parse(storedUser)); // Parse and set user data from localStorage
+        setUser(JSON.parse(storedUser));
       }
     }
   }, [token, user]);
@@ -34,7 +34,7 @@ export function AuthProvider({ children }) {
     setToken(token);
     setUser(userData);
     localStorage.setItem("token", token);
-    localStorage.setItem("user", JSON.stringify(userData)); // Store user data in localStorage
+    localStorage.setItem("user", JSON.stringify(userData));
     navigate("/");
   };
 

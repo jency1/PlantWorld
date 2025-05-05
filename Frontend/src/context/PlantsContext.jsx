@@ -1,4 +1,4 @@
-import { createContext, useState } from "react";
+import { createContext, useEffect, useState } from "react";
 
 export const PlantContext = createContext({
   plants: [],
@@ -6,17 +6,42 @@ export const PlantContext = createContext({
   getPlantById: (id) => {},
   updatePlantById: (id, updatedData) => {},
   deletePlantById: (id) => {},
-  totalPages: 10, // Hardcoded in context
+  totalPages: 0,
   fetchPlants: (page, limit) => {},
 });
 
 export function PlantContextProvider({ children }) {
   const [plants, setPlants] = useState([]);
+  const [totalPlants, setTotalPlants] = useState(0);
+  const [totalPages, setTotalPages] = useState(0);
   const [error, setError] = useState(null);
 
-  const TOTAL_PAGES = 10;
+  const BASE_URL = import.meta.env.VITE_BASE_URL;
 
-  // Load Plants from backend - fetch paginated plants from backend
+  // Fetch total plants
+  useEffect(() => {
+    async function fetchTotalPlants() {
+      try {
+        const response = await fetch(`${BASE_URL}/api/plants/plantTotal`);
+        if (!response.ok) {
+          throw new Error("Failed to fetch total plant count.");
+        }
+
+        const json = await response.json();
+        const count = json.totalPlants || 0;
+
+        setTotalPlants(count);
+        setTotalPages(Math.ceil(count / 12));
+      } catch (err) {
+        console.error("Error fetching total plant count:", err);
+        setError("Unable to fetch plant count. Please try again later.");
+      }
+    }
+
+    fetchTotalPlants();
+  }, [BASE_URL]);
+
+  // Load Plants - fetch paginated plants
   async function fetchPlants(page = 1, limit = 12) {
     try {
       const response = await fetch(
@@ -108,8 +133,6 @@ export function PlantContextProvider({ children }) {
     }
   }
 
-  console.log("totalPages:", TOTAL_PAGES);
-
   // Provide all values via context
   const contextValue = {
     plants: plants,
@@ -117,7 +140,7 @@ export function PlantContextProvider({ children }) {
     getPlantById,
     updatePlantById,
     deletePlantById,
-    totalPages: TOTAL_PAGES,
+    totalPages,
     fetchPlants,
   };
 
