@@ -14,6 +14,16 @@ function ShopPlants() {
   const [screenWidth, setScreenWidth] = useState(window.innerWidth);
   const [currentPage, setCurrentPage] = useState(1);
   const [quantity, setQuantity] = useState(1);
+
+  // Filters State
+  const [minPrice, setMinPrice] = useState(0);
+  const [maxPrice, setMaxPrice] = useState(5000);
+  const [availability, setAvailability] = useState([]);
+  const [categories, setCategories] = useState([]);
+  const [searchTerm, setSearchTerm] = useState("");
+
+  const tag = categories.length > 0 ? categories[0] : "";
+
   const limit = 12;
 
   // Update screenWidth when window is resized
@@ -29,15 +39,25 @@ function ShopPlants() {
     };
   }, []);
 
-  // Fetch paginated plants
+  // Fetch paginated plants with filters
   useEffect(() => {
-    fetchPlants(currentPage, limit);
-  }, [currentPage]);
+    fetchPlants(
+      currentPage,
+      limit,
+      minPrice,
+      maxPrice,
+      categories,
+      availability,
+      searchTerm
+    );
+  }, [currentPage, minPrice, maxPrice, categories, availability, searchTerm]);
 
+  // Handle Page Change
   const handlePageChange = (newPage) => {
     setCurrentPage(newPage);
   };
 
+  // Product Card
   const ProductCard = ({ plantId, imageSrc, title, price }) => {
     const handleAddToCart = () => {
       const plant = {
@@ -99,10 +119,36 @@ function ShopPlants() {
             )}
 
             {/* Display Filter Component only on Mobile/Tablet Devices if Button Clicked */}
-            {showFilter && screenWidth <= 768 && <FilterComponent />}
+            {showFilter && screenWidth <= 768 && (
+              <FilterComponent
+                minPrice={minPrice}
+                maxPrice={maxPrice}
+                setMinPrice={setMinPrice}
+                setMaxPrice={setMaxPrice}
+                availability={availability}
+                setAvailability={setAvailability}
+                categories={categories}
+                setCategories={setCategories}
+                searchTerm={searchTerm}
+                setSearchTerm={setSearchTerm}
+              />
+            )}
 
             {/* Always display filter for Medium and Larger Devices (768px and above) */}
-            {screenWidth > 768 && <FilterComponent />}
+            {screenWidth > 768 && (
+              <FilterComponent
+                minPrice={minPrice}
+                maxPrice={maxPrice}
+                setMinPrice={setMinPrice}
+                setMaxPrice={setMaxPrice}
+                availability={availability}
+                setAvailability={setAvailability}
+                categories={categories}
+                setCategories={setCategories}
+                searchTerm={searchTerm}
+                setSearchTerm={setSearchTerm}
+              />
+            )}
           </div>
 
           {/* Right-side Product Cards */}

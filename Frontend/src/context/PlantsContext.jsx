@@ -1,12 +1,13 @@
-import { createContext, useEffect, useState } from "react";
+import { createContext, useContext, useEffect, useState } from "react";
+import { NotificationContext } from "./NotificationContext";
 
 export const PlantContext = createContext({
   plants: [],
+  totalPages: 0,
   addPlant: (plant) => {},
   getPlantById: (id) => {},
   updatePlantById: (id, updatedData) => {},
   deletePlantById: (id) => {},
-  totalPages: 0,
   fetchPlants: (page, limit) => {},
 });
 
@@ -15,6 +16,8 @@ export function PlantContextProvider({ children }) {
   const [totalPlants, setTotalPlants] = useState(0);
   const [totalPages, setTotalPages] = useState(0);
   const [error, setError] = useState(null);
+
+  const { showNotificaton } = useContext(NotificationContext);
 
   const BASE_URL = import.meta.env.VITE_BASE_URL;
 
@@ -41,17 +44,54 @@ export function PlantContextProvider({ children }) {
     fetchTotalPlants();
   }, [BASE_URL]);
 
-  // Load Plants - fetch paginated plants
-  async function fetchPlants(page = 1, limit = 12) {
+  // Load Plants - fetch paginated plants with filters
+  async function fetchPlants(
+    page = 1,
+    limit = 12,
+    minPrice = 0,
+    maxPrice = 5000,
+    categories,
+    availability,
+    searchTerm,
+    tag
+  ) {
     try {
-      const response = await fetch(
-        `http://localhost:8000/api/plants/?page=${page}&limit=${limit}`
-      );
-      if (!response.ok) throw new Error("Failed to fetch plants");
+      console.log("Categories selected:", categories);
 
-      const json = await response.json();
+      // Constructing query parameters
+      let query = `page=${page}&limit=${limit}&price[gte]=${minPrice}&price[lte]=${maxPrice}`;
+
+      if (searchTerm) {
+        query += `&search=${encodeURIComponent(searchTerm)}`;
+      }
+
+      if (categories.length > 0) {
+        query += `&tag=${categories.map(encodeURIComponent).join(",")}`;
+      }
+
+      if (availability.length > 0) {
+        query += `&availability=${availability
+          .map(encodeURIComponent)
+          .join(",")}`;
+      }
+
+      // if (tag) {
+      //   query += `&tag=${encodeURIComponent(tag)}`;
+      // }
+
+      console.log("Fetching with query:", query);
+
+      const response = await fetch(`${BASE_URL}/api/plants/?${query}`);
+
+      if (!response.ok) {
+        showNotificaton("Failed to fetch plants.", error);
+        throw new Error("Failed to fetch plants");
+      }
+
+      const data = await response.json();
       //   console.log("Backend Response:", json);
-      const fetchedPlants = json?.data?.plants || [];
+
+      const fetchedPlants = data?.data?.plants || [];
 
       setPlants(fetchedPlants);
     } catch (error) {
@@ -63,7 +103,7 @@ export function PlantContextProvider({ children }) {
   // Add Plant
   async function addPlant(enteredPlantData) {
     try {
-      const response = await fetch("http://localhost:8000/api/plants/", {
+      const response = await fetch(`${BASE_URL}/api/plants/`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -91,7 +131,7 @@ export function PlantContextProvider({ children }) {
   // Update Plant
   async function updatePlantById(id, updatedData) {
     try {
-      const response = await fetch(`http://localhost:8000/api/plants/${id}`, {
+      const response = await fetch(`${BASE_URL}/api/plants/${id}`, {
         method: "PATCH",
         headers: {
           "Content-Type": "application/json",
@@ -118,7 +158,7 @@ export function PlantContextProvider({ children }) {
   // Delete Plant
   async function deletePlantById(id) {
     try {
-      const response = await fetch(`http://localhost:8000/api/plants/${id}`, {
+      const response = await fetch(`${BASE_URL}/api/plants/${id}`, {
         method: "DELETE",
       });
 
@@ -136,11 +176,11 @@ export function PlantContextProvider({ children }) {
   // Provide all values via context
   const contextValue = {
     plants: plants,
+    totalPages,
     addPlant,
     getPlantById,
     updatePlantById,
     deletePlantById,
-    totalPages,
     fetchPlants,
   };
 
