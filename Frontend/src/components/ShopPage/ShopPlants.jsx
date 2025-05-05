@@ -13,6 +13,7 @@ function ShopPlants() {
   const [showFilter, setShowFilter] = useState(false);
   const [screenWidth, setScreenWidth] = useState(window.innerWidth);
   const [currentPage, setCurrentPage] = useState(1);
+  const [quantity, setQuantity] = useState(1);
   const limit = 12;
 
   // Update screenWidth when window is resized
@@ -39,8 +40,13 @@ function ShopPlants() {
 
   const ProductCard = ({ plantId, imageSrc, title, price }) => {
     const handleAddToCart = () => {
-      const plant = { _id: plantId, name: title, price, imageCover: imageSrc };
-      addToCart(plant);
+      const plant = {
+        _id: plantId,
+        name: title,
+        price,
+        imageCover: imageSrc,
+      };
+      addToCart(plant, quantity);
     };
 
     return (
@@ -57,14 +63,20 @@ function ShopPlants() {
           <div className="text-success text-xs md:text-sm lg:text-base">
             Rs.{price}
           </div>
-          <Link to={`/plant/description/${plantId}`}>
+
+          <div className="flex gap-2">
+            <Link to={`/plant/description/${plantId}`}>
+              <button className="btn border border-success text-success mt-2 lg:mt-3 lg:px-4 lg:py-2 text-xs sm:text-sm">
+                View Details
+              </button>
+            </Link>
             <button
               onClick={handleAddToCart}
               className="btn btn-success mt-2 lg:mt-3 lg:px-4 lg:py-2 text-xs sm:text-sm"
             >
               Add To Cart
             </button>
-          </Link>
+          </div>
         </div>
       </div>
     );
