@@ -1,15 +1,18 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import { useNotification } from "../../context/NotificationContext";
 import { FaMinus, FaPlus } from "react-icons/fa";
 import { FcInfo } from "react-icons/fc";
+import LoadingSpinner from "../../ui/LoadingSpinner";
+import { CartContext } from "../../context/CartContext";
 
 export default function ProductDescription({ plantId }) {
   const { showNotification } = useNotification();
   const [plant, setPlant] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  const [quantity, setQuantity] = useState(1);
-  const [addToCartLoading, setAddToCartLoading] = useState(false);
+  const [quantity, setQuantity] = useState(0);
+  const { cart, addToCart, getPlantQuantity, addToCartLoading } =
+    useContext(CartContext);
 
   const BASE_URL = import.meta.env.VITE_BASE_URL;
 
@@ -89,34 +92,35 @@ export default function ProductDescription({ plantId }) {
     }
   }, [plantId]);
 
-  // Handle Increase
-  const handleIncrease = () => {
-    setQuantity(quantity + 1);
-  };
-
-  // Handle Decrease
-  const handleDecrease = () => {
-    if (quantity > 1) {
-      setQuantity(quantity - 1);
+  // Fetch quantity from CartContext
+  useEffect(() => {
+    if (plant) {
+      const currentQty = getPlantQuantity(plant._id);
+      setQuantity(currentQty || 0);
     }
+  }, [plant, getPlantQuantity]);
+
+  // Handle increase/decrease quantity
+  const handleIncrease = () => {
+    setQuantity((prev) => prev + 1);
   };
 
-  // Handle Add to Cart
+  const handleDecrease = () => {
+    setQuantity((prev) => (prev > 0 ? prev - 1 : 0));
+  };
+
+  // Handle adding plant to cart
   const handleAddToCart = () => {
-    setAddToCartLoading(true);
-    setTimeout(() => {
-      showNotification(`${plant.name} added to cart successfully!`, "success");
-      setAddToCartLoading(false);
-    }, 500);
+    if (quantity === 0) {
+      showNotification("Quantity must be at least 1.", "warning");
+      return;
+    }
+    addToCart(plant, quantity);
   };
 
   // Loading Data - Animate Spinner
   if (loading) {
-    return (
-      <div className="flex justify-center items-center h-64">
-        <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-green-700"></div>
-      </div>
-    );
+    return <LoadingSpinner />;
   }
 
   // Show Error Message
@@ -160,7 +164,7 @@ export default function ProductDescription({ plantId }) {
             <img
               src={plant.imageCover}
               alt={plant.name}
-              className="w-full md:max-w-xs lg:max-w-sm rounded-md shadow-md"
+              className="w-full md:max-w-xs lg:max-w-sm h-80 lg:h-96 rounded-md shadow-md"
               onError={(e) => {
                 e.target.src = "/placeholder-plant.jpg";
               }}
@@ -190,7 +194,7 @@ export default function ProductDescription({ plantId }) {
             <div className="flex items-center space-x-3">
               <button
                 className="px-1 py-1 border-1 border-black hover:bg-gray-200 rounded"
-                onClick={handleDecrease}
+                onClick={() => handleDecrease()}
               >
                 <FaMinus className="text-[6px] md:text-[8px] lg:text-[12px]" />
               </button>
@@ -199,7 +203,7 @@ export default function ProductDescription({ plantId }) {
               </span>
               <button
                 className="px-1 py-1 border-1 border-black hover:bg-gray-200 rounded"
-                onClick={handleIncrease}
+                onClick={() => handleIncrease()}
               >
                 <FaPlus className="text-[6px] md:text-[8px] lg:text-[12px]" />
               </button>
@@ -266,7 +270,7 @@ export default function ProductDescription({ plantId }) {
 
         {plant.plantCareTips?.length > 0 ? (
           <ul className="list-none mt-3 md:mt-5 space-y-2 md:space-y-3 lg:space-y-4">
-            {plant.plantCareTips.map((tip, index) => (
+            {plant?.plantCareTips?.map((tip, index) => (
               <li
                 key={index}
                 className="text-sm md:text-base lg:text-lg text-gray-600"
