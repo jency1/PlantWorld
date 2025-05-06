@@ -12,6 +12,7 @@ exports.aliasFeaturedProducts = (req, res, next) => {
 
 exports.getAllPlants = catchAsync(async (req, res, next) => {
   const features = new APIFeatures(Plant.find(), req.query)
+    .search()
     .filter()
     .sort()
     .limitFields()

@@ -78,6 +78,7 @@ const CartPage = () => {
                       item?.plantId?.imageCover || `/${item?.name}-image.jpg`,
                     price: item?.price,
                     quantity: item?.quantity,
+                    total: item?.total,
                   }}
                 />
               ))}

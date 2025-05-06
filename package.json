@@ -4,6 +4,7 @@
     "@emotion/styled": "^11.14.0",
     "@mui/icons-material": "^7.0.2",
     "@mui/material": "^7.0.2",
+    "rc-slider": "^11.1.8",
     "react-icons": "^5.5.0"
   }
 }
