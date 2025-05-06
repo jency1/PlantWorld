@@ -50,14 +50,12 @@ export function PlantContextProvider({ children }) {
     limit = 12,
     minPrice = 0,
     maxPrice = 5000,
-    categories,
-    availability,
     searchTerm,
-    tag
+    tag,
+    categories,
+    availability
   ) {
     try {
-      console.log("Categories selected:", categories);
-
       // Constructing query parameters
       let query = `page=${page}&limit=${limit}&price[gte]=${minPrice}&price[lte]=${maxPrice}`;
 
@@ -65,8 +63,12 @@ export function PlantContextProvider({ children }) {
         query += `&search=${encodeURIComponent(searchTerm)}`;
       }
 
+      if (tag.length > 0) {
+        query += `&tag=${tag.map(encodeURIComponent).join(",")}`;
+      }
+
       if (categories.length > 0) {
-        query += `&tag=${categories.map(encodeURIComponent).join(",")}`;
+        query += `&category=${categories.map(encodeURIComponent).join(",")}`;
       }
 
       if (availability.length > 0) {
@@ -75,11 +77,7 @@ export function PlantContextProvider({ children }) {
           .join(",")}`;
       }
 
-      // if (tag) {
-      //   query += `&tag=${encodeURIComponent(tag)}`;
-      // }
-
-      console.log("Fetching with query:", query);
+      // console.log("Fetching with query:", query);
 
       const response = await fetch(`${BASE_URL}/api/plants/?${query}`);
 

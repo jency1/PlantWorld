@@ -18,11 +18,10 @@ function ShopPlants() {
   // Filters State
   const [minPrice, setMinPrice] = useState(0);
   const [maxPrice, setMaxPrice] = useState(5000);
-  const [availability, setAvailability] = useState([]);
-  const [categories, setCategories] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
-
-  const tag = categories.length > 0 ? categories[0] : "";
+  const [categories, setCategories] = useState([]);
+  const [tag, setTag] = useState([]);
+  const [availability, setAvailability] = useState([]);
 
   const limit = 12;
 
@@ -46,11 +45,20 @@ function ShopPlants() {
       limit,
       minPrice,
       maxPrice,
+      searchTerm,
+      tag,
       categories,
-      availability,
-      searchTerm
+      availability
     );
-  }, [currentPage, minPrice, maxPrice, categories, availability, searchTerm]);
+  }, [
+    currentPage,
+    minPrice,
+    maxPrice,
+    searchTerm,
+    tag,
+    categories,
+    availability,
+  ]);
 
   // Handle Page Change
   const handlePageChange = (newPage) => {
@@ -125,12 +133,14 @@ function ShopPlants() {
                 maxPrice={maxPrice}
                 setMinPrice={setMinPrice}
                 setMaxPrice={setMaxPrice}
-                availability={availability}
-                setAvailability={setAvailability}
-                categories={categories}
-                setCategories={setCategories}
                 searchTerm={searchTerm}
                 setSearchTerm={setSearchTerm}
+                tag={tag}
+                setTag={setTag}
+                categories={categories}
+                setCategories={setCategories}
+                availability={availability}
+                setAvailability={setAvailability}
               />
             )}
 
@@ -141,12 +151,14 @@ function ShopPlants() {
                 maxPrice={maxPrice}
                 setMinPrice={setMinPrice}
                 setMaxPrice={setMaxPrice}
-                availability={availability}
-                setAvailability={setAvailability}
-                categories={categories}
-                setCategories={setCategories}
                 searchTerm={searchTerm}
                 setSearchTerm={setSearchTerm}
+                tag={tag}
+                setTag={setTag}
+                categories={categories}
+                setCategories={setCategories}
+                availability={availability}
+                setAvailability={setAvailability}
               />
             )}
           </div>
@@ -158,7 +170,15 @@ function ShopPlants() {
               {isLoading && (
                 <p className="text-center text-lg">Loading plants...</p>
               )}
+
               {error && <p className="text-center text-red-500">{error}</p>}
+
+              {!isLoading && !error && plants?.length === 0 && (
+                <p className="text-center text-success font-semibold text-md lg:text-xl w-full mt-8 lg:mt-20 p-5">
+                  Oops! No plants available matching the selected filters.
+                </p>
+              )}
+
               {!isLoading &&
                 !error &&
                 plants?.map((plant) => (

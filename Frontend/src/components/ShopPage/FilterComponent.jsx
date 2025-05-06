@@ -7,49 +7,45 @@ function FilterComponent({
   maxPrice,
   setMinPrice,
   setMaxPrice,
-  tag,
-  setTag,
-  availability,
-  setAvailability,
-  categories,
-  setCategories,
   searchTerm,
   setSearchTerm,
-  plantData,
-  setPlantData,
+  tag,
+  setTag,
+  categories,
+  setCategories,
+  availability,
+  setAvailability,
 }) {
   // HANDLE SEARCH
   const handleSearch = (e) => {
     const value = e.target.value;
     setSearchTerm(value);
+  };
 
-    // // Filter plants based on the search term and current filters
-    // const filteredPlantsData = plantData.filter(
-    //   (plant) =>
-    //     plant.name.toLowerCase().includes(value.toLowerCase()) &&
-    //     plant.price >= minPrice &&
-    //     plant.price <= maxPrice &&
-    //     (tag.length === 0 || tag.includes(plant.category)) &&
-    //     (categories.length === 0 || categories.includes(plant.category)) &&
-    //     (availability.length === 0 || availability.includes(plant.availability))
-    // );
+  // HANDLE TAG CHANGE - indoor, outdoor
+  const handleTagChange = (e) => {
+    const value = e.target.value;
 
-    // setPlantData(filteredPlantsData);
+    // If "All" is selected, clear all categories
+    if (value === "All") {
+      setTag([]);
+    } else {
+      if (e.target.checked) {
+        setTag([...tag, value]);
+      } else {
+        setTag(tag.filter((type) => type !== value));
+      }
+    }
   };
 
   // HANDLE CATEGORY CHANGE
   const handleCategoryChange = (e) => {
     const value = e.target.value;
 
-    // If "All" is selected, clear all categories
-    if (value === "All") {
-      setCategories([]);
+    if (e.target.checked) {
+      setCategories([...categories, value]);
     } else {
-      if (e.target.checked) {
-        setCategories([...categories, value]);
-      } else {
-        setCategories(categories.filter((cat) => cat !== value));
-      }
+      setCategories(categories.filter((cat) => cat !== value));
     }
   };
 
@@ -103,148 +99,87 @@ function FilterComponent({
         </div>
       </div>
 
+      {/* Type Filter */}
+      <div className="bg-gray-100 rounded-lg p-4 mt-4 sm:p-3">
+        <h5 className="sm:text-xs lg:text-lg">Type</h5>
+        {[
+          { label: "All", value: "All", isAllOption: true },
+          { label: "Outdoor", value: "Outdoor" },
+          { label: "Indoor", value: "Indoor" },
+        ].map((type) => (
+          <div className="form-check" key={type.value}>
+            <input
+              className="form-check-input"
+              type="checkbox"
+              value={type.value}
+              id={type.value}
+              onChange={handleTagChange}
+              checked={
+                type.isAllOption ? tag.length === 0 : tag.includes(type.value)
+              }
+            />
+            <label className="form-check-label text-sm" htmlFor={type.value}>
+              {type.label}
+            </label>
+          </div>
+        ))}
+      </div>
+
       {/* Categories Filter */}
       <div className="bg-gray-100 rounded-lg p-4 mt-4 sm:p-3">
         <h5 className="sm:text-xs lg:text-lg">Categories</h5>
-        <div className="form-check">
-          <input
-            className="form-check-input"
-            type="checkbox"
-            value="All"
-            id="all"
-            onChange={handleCategoryChange}
-            checked={categories.length === 0}
-          />
-          <label className="form-check-label text-sm" htmlFor="all">
-            All
-          </label>
-        </div>
-        <div className="form-check">
-          <input
-            className="form-check-input"
-            type="checkbox"
-            value="Outdoor"
-            id="outdoor"
-            onChange={handleCategoryChange}
-            checked={categories.includes("Outdoor")}
-          />
-          <label className="form-check-label text-sm" htmlFor="outdoor">
-            Outdoor
-          </label>
-        </div>
-        <div className="form-check">
-          <input
-            className="form-check-input"
-            type="checkbox"
-            value="Indoor"
-            id="indoor"
-            onChange={handleCategoryChange}
-            checked={categories.includes("Indoor")}
-          />
-          <label className="form-check-label text-sm" htmlFor="indoor">
-            Indoor
-          </label>
-        </div>
-
-        {/* <div className="form-check">
-          <input
-            className="form-check-input"
-            type="checkbox"
-            value="terrace & balcony"
-            id="terrace & balcony"
-            onChange={handleCategoryChange}
-          />
-          <label
-            className="form-check-label text-sm"
-            htmlFor="terrace & balcony"
-          >
-            Terrace and Balcony
-          </label>
-        </div>
-        <div className="form-check">
-          <input
-            className="form-check-input"
-            type="checkbox"
-            value="Office"
-            id="office"
-            onChange={handleCategoryChange}
-          />
-          <label className="form-check-label text-sm" htmlFor="office">
-            Office Desk
-          </label>
-        </div> */}
-
-        {/* <div className="form-check">
-          <input
-            className="form-check-input"
-            type="checkbox"
-            value="flowering plants"
-            id="flowering plants"
-            onChange={handleCategoryChange}
-          />
-          <label
-            className="form-check-label text-sm"
-            htmlFor="flowering plants"
-          >
-            Flowering Plants
-          </label>
-        </div>
-        <div className="form-check">
-          <input
-            className="form-check-input"
-            type="checkbox"
-            value="herbs"
-            id="herbs"
-            onChange={handleCategoryChange}
-          />
-          <label className="form-check-label text-sm" htmlFor="herbs">
-            Herbs
-          </label>
-        </div> */}
+        {[
+          "Flowering Plants",
+          "Foliage Plants",
+          "Ferns",
+          "Herbs",
+          "Fruit Plants",
+          "Succulent Plants",
+          "Vegetables & Herbs",
+          "Climbing Plants",
+          "Creepers",
+          "Succulents & Cacti",
+          "Climbers",
+          // "Indoor Plants",
+        ].map((category) => (
+          <div className="form-check" key={category}>
+            <input
+              className="form-check-input"
+              type="checkbox"
+              value={category}
+              id={category}
+              onChange={handleCategoryChange}
+              checked={categories.includes(category)}
+            />
+            <label className="form-check-label text-sm" htmlFor={category}>
+              {category}
+            </label>
+          </div>
+        ))}
       </div>
 
       {/* Availability Filter */}
       <div className="bg-gray-100 rounded-lg p-4 mt-4 sm:p-3">
         <h5 className="sm:text-xs lg:text-lg">Availability</h5>
-        <div className="form-check">
-          <input
-            className="form-check-input"
-            type="checkbox"
-            value="In Stock"
-            id="inStock"
-            onChange={handleAvailabilityChange}
-            checked={availability.includes("In Stock")}
-          />
-          <label className="form-check-label text-sm" htmlFor="inStock">
-            In Stock
-          </label>
-        </div>
-        <div className="form-check">
-          <input
-            className="form-check-input"
-            type="checkbox"
-            value="Out Of Stock"
-            id="outOfStock"
-            onChange={handleAvailabilityChange}
-            checked={availability.includes("Out Of Stock")}
-          />
-          <label className="form-check-label text-sm" htmlFor="outOfStock">
-            Out Of Stock
-          </label>
-        </div>
-        <div className="form-check">
-          <input
-            className="form-check-input"
-            type="checkbox"
-            value="UpComing"
-            id="upComing"
-            onChange={handleAvailabilityChange}
-            checked={availability.includes("UpComing")}
-          />
-          <label className="form-check-label text-sm" htmlFor="upComing">
-            UpComing
-          </label>
-        </div>
+        {[
+          { label: "In Stock", value: "In Stock" },
+          { label: "Out Of Stock", value: "Out Of Stock" },
+          { label: "Up Coming", value: "UpComing" },
+        ].map((option) => (
+          <div className="form-check" key={option.value}>
+            <input
+              className="form-check-input"
+              type="checkbox"
+              value={option.value}
+              id={option.value}
+              onChange={handleAvailabilityChange}
+              checked={availability.includes(option.value)}
+            />
+            <label className="form-check-label text-sm" htmlFor={option.value}>
+              {option.label}
+            </label>
+          </div>
+        ))}
       </div>
     </div>
   );
