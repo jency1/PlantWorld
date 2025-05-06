@@ -6,11 +6,18 @@ class APIFeatures {
 
   filter() {
     // console.log('shreya');
+
     // 1A)filtering
     const queryObj = { ...this.queryString };
     const excludedFields = ['page', 'sort', 'limit', 'fields'];
-
     excludedFields.forEach((el) => delete queryObj[el]);
+
+    // Handle comma-separated values like 'Indoor,Outdoor'
+    Object.keys(queryObj).forEach((key) => {
+      if (typeof queryObj[key] === 'string' && queryObj[key].includes(',')) {
+        queryObj[key] = { $in: queryObj[key].split(',') };
+      }
+    });
 
     // 1B)Advanced filtering
     let queryString = JSON.stringify(queryObj);
