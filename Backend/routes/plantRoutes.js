@@ -3,6 +3,7 @@ const router = express.Router();
 const plantController = require('./../controllers/plantController');
 
 const authController = require('./../controllers/authController');
+const { upload } = require('../utils/gridfs');
 
 // router.param('id', plantController.checkID);
 
@@ -20,14 +21,14 @@ router.route('/plant-stats').get(plantController.getPlantStats);
 router
   .route('/')
   .get(plantController.getAllPlants)
-  .post(plantController.createPlant);
+  .post(upload.single('imageCover'), plantController.createPlant);
 
 router.route('/plantTotal').get(plantController.getTotalPlants);
 
 router
   .route('/:id')
   .get(plantController.getPlant)
-  .patch(plantController.updatePlant)
+  .patch(upload.single('imageCover'), plantController.updatePlant)
   .delete(
     authController.protect,
     authController.restrictTo('admin', 'owner'),

@@ -30,15 +30,49 @@ exports.getAllPlants = catchAsync(async (req, res, next) => {
   });
 });
 
-exports.createPlant = catchAsync(async (req, res, next) => {
-  const newTour = await Plant.create(req.body);
-  res.status(201).json({
-    status: 'success',
-    data: {
-      tour: newTour,
-    },
-  });
-});
+// exports.createPlant = catchAsync(async (req, res, next) => {
+//   const newTour = await Plant.create(req.body);
+//   res.status(201).json({
+//     status: 'success',
+//     data: {
+//       tour: newTour,
+//     },
+//   });
+// });
+
+exports.createPlant = async (req, res, next) => {
+  try {
+    const imageFile = req.file;
+
+    if (!imageFile) {
+      return res
+        .status(400)
+        .json({ message: 'Image file (imageCover) is required' });
+    }
+
+    const host = req.get('host'); // e.g. localhost:8000
+    const protocol = req.protocol; // e.g. http
+
+    const imageUrl = `${protocol}://${host}/images/${imageFile.filename}`;
+
+    const newPlantData = {
+      ...req.body,
+      imageCover: imageUrl, // ✅ store full access link
+    };
+
+    const newPlant = await Plant.create(newPlantData);
+
+    res.status(201).json({
+      status: 'success',
+      data: {
+        plant: newPlant,
+      },
+    });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ status: 'error', message: err.message });
+  }
+};
 
 exports.getPlant = catchAsync(async (req, res, next) => {
   const plant = await Plant.findById(req.params.id);
@@ -57,21 +91,47 @@ exports.getPlant = catchAsync(async (req, res, next) => {
   });
 });
 
+// exports.updatePlant = catchAsync(async (req, res, next) => {
+//   const plant = await Plant.findByIdAndUpdate(req.params.id, req.body, {
+//     new: true,
+//     runValidators: true,
+//   });
+
+//   if (!plant) {
+//     next(new AppError('No plant found with that ID', 404));
+//     return;
+//   }
+
+//   res.status(200).json({
+//     status: 'success',
+//     data: {
+//       plant,
+//     },
+//   });
+// });
+
 exports.updatePlant = catchAsync(async (req, res, next) => {
-  const plant = await Plant.findByIdAndUpdate(req.params.id, req.body, {
+  // If a new image is uploaded, update imageCover
+  if (req.file) {
+    const host = req.get('host');
+    const protocol = req.protocol;
+    const imageUrl = `${protocol}://${host}/images/${req.file.filename}`;
+    req.body.imageCover = imageUrl;
+  }
+
+  const updatedPlant = await Plant.findByIdAndUpdate(req.params.id, req.body, {
     new: true,
     runValidators: true,
   });
 
-  if (!plant) {
-    next(new AppError('No plant found with that ID', 404));
-    return;
+  if (!updatedPlant) {
+    return next(new AppError('No plant found with that ID', 404));
   }
 
   res.status(200).json({
     status: 'success',
     data: {
-      plant,
+      plant: updatedPlant,
     },
   });
 });
