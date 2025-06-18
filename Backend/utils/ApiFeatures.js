@@ -4,16 +4,35 @@ class APIFeatures {
     this.queryString = queryString;
   }
 
+  // search() {
+  //   if (this.queryString.search) {
+  //     const searchRegex = new RegExp(this.queryString.search, 'i'); // case-insensitive
+  //     console.log(searchRegex);
+  //     this.query = this.query.find({
+  //       $or: [
+  //         { name: searchRegex },
+  //         { description: searchRegex },
+  //         { shortDescription: searchRegex },
+  //       ],
+  //     });
+  //   }
+
+  //   return this;
+  // }
+
   search() {
     if (this.queryString.search) {
       const searchRegex = new RegExp(this.queryString.search, 'i'); // case-insensitive
-      this.query = this.query.find({
-        $or: [
-          { name: searchRegex },
-          { description: searchRegex },
-          { shortDescription: searchRegex },
-        ],
-      });
+      console.log('Regex:', searchRegex);
+      this.query = this.query
+        .find({
+          $or: [
+            { name: searchRegex },
+            { description: searchRegex },
+            { shortDescription: searchRegex },
+          ],
+        })
+        .explain('executionStats'); // To get execution stats and see how MongoDB is interpreting the query
     }
 
     return this;
