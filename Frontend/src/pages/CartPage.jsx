@@ -1,21 +1,25 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { AuthContext } from "../context/AuthContext";
+import { CartContext } from "../context/CartContext";
+
 import CartItem from "../components/CartPage/CartItem";
 import { Link } from "react-router-dom";
-import { CartContext } from "../context/CartContext";
-import { useOrder } from "../context/OrderContext";
+import { FaTrash } from "react-icons/fa";
 
 const BASE_URL = import.meta.env.VITE_BASE_URL;
 
 const CartPage = () => {
-  const { cart } = React.useContext(CartContext);
+  const navigate = useNavigate();
+  const { user } = useContext(AuthContext);
+  const { cart, clearCart } = useContext(CartContext);
   const [totalAmount, setTotalAmount] = useState(0);
-  const { checkoutHandler } = useOrder();
-  // console.log("Cart Item data : ", cart);
 
-  // const totalAmount = cart.reduce(
-  //   (amt, item) => amt + item.price * item.quantity,
-  //   0
-  // );
+  const handleProceedToAddress = () => {
+    const updatedUser = { ...user, cart };
+    localStorage.setItem("user", JSON.stringify(updatedUser));
+    navigate("/cart/address");
+  };
 
   useEffect(() => {
     const fetchTotalAmount = async () => {
@@ -32,7 +36,6 @@ const CartPage = () => {
         }
 
         const data = await response.json();
-        // console.log("TOTAL COST data: ", data);
 
         setTotalAmount(data.cartTotal || 0);
       } catch (error) {
@@ -86,15 +89,27 @@ const CartPage = () => {
             </div>
 
             <div className="mt-8 flex justify-between items-center border-t pt-4">
-              <h3 className="text-sm md:text-md lg:text-xl font-serif font-semibold">
+              <h3 className="text-xs md:text-md lg:text-xl font-serif font-semibold">
                 Total Cost: ₹{totalAmount}
               </h3>
-              <button
-                onClick={checkoutHandler}
-                className="btn btn-success text-white text-xs md:text-base lg:text-md px-3 py-2 rounded-md transform transition duration-300 hover:scale-105"
-              >
-                Proceed to Checkout
-              </button>
+              <div className="flex flex-col md:flex-row gap-2">
+                {/* Clear Cart */}
+                <button
+                  className="text-red-600 hover:text-red-700 font-medium text-xs lg:text-base flex items-center space-x-1"
+                  onClick={() => clearCart()}
+                >
+                  <FaTrash />
+                  <span className="mx-1 inline">Clear Cart</span>
+                </button>
+
+                {/* Next */}
+                <button
+                  onClick={handleProceedToAddress}
+                  className="btn btn-success text-white text-xs md:text-base lg:text-md rounded-md transform transition duration-300 hover:scale-105 cursor-pointer"
+                >
+                  Proceed to Address
+                </button>
+              </div>
             </div>
           </>
         )}

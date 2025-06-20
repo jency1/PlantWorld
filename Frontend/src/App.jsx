@@ -6,11 +6,13 @@ import HomePage from "./pages/HomePage";
 import ShopPageLayout from "./pages/ShopPageLayout";
 import DescriptionLayout from "./pages/DescriptionLayout";
 import LoginPage from "./pages/LoginPage";
-import Contact, { contactFormAction } from "./pages/Contact";
+import Contact from "./pages/Contact";
+import contactFormAction from "./actions/contactFormAction";
 import AboutUs from "./pages/AboutUs";
 import FAQs from "./pages/FAQs";
 import BlogPage from "./pages/BlogPage";
 import CartPage from "./pages/CartPage";
+import OrderSuccessPage from "./pages/OrderSuccessPage";
 import AppLayout from "./AppLayout";
 import ScrollToTop from "./ScrollToTop";
 
@@ -19,7 +21,7 @@ import { AuthProvider } from "./context/AuthContext";
 import { CartProvider } from "./context/CartContext";
 import { NotificationProvider } from "./context/NotificationContext";
 import { OrderProvider } from "./context/OrderContext";
-import OrderSuccess from "./pages/OrderSuccess";
+import AddressFormPage from "./pages/AddressFormPage";
 
 const router = createBrowserRouter([
   {
@@ -75,8 +77,12 @@ const router = createBrowserRouter([
         element: <CartPage />,
       },
       {
+        path: "/cart/address",
+        element: <AddressFormPage />,
+      },
+      {
         path: "/order-success",
-        element: <OrderSuccess />,
+        element: <OrderSuccessPage />,
       },
     ],
   },
@@ -107,16 +113,3 @@ function App() {
 }
 
 export default App;
-
-// function App() {
-//   return (
-//     <>
-//       {/* <Navbar /> */}
-//       <HomePage />
-//       {/* <ShopPageLayout /> */}
-//       {/* <DescriptionLayout /> */}
-//       {/* <LoginPage /> */}
-//       {/* <LP /> */}
-//     </>
-//   );
-// }

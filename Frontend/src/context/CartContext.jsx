@@ -12,12 +12,14 @@ export const CartContext = createContext({
   clearCart: () => {},
   getPlantQuantity: (plantId) => {},
   addToCartLoading: false,
+  cartLoading: true,
 });
 
 const BASE_URL = import.meta.env.VITE_BASE_URL;
 
 export function CartProvider({ children }) {
   const [cart, setCart] = useState([]);
+  const [cartLoading, setCartLoading] = useState(true);
   const [addToCartLoading, setAddToCartLoading] = useState(false);
   const { user, isAuthenticated } = useContext(AuthContext);
   const { showNotification } = useContext(NotificationContext);
@@ -31,6 +33,7 @@ export function CartProvider({ children }) {
 
   // Fetch cart items from the API
   const fetchCartItems = async () => {
+    setCartLoading(true);
     const token = checkAuthToken();
     if (!token) return;
 
@@ -44,7 +47,7 @@ export function CartProvider({ children }) {
       });
 
       const data = await response.json();
-      console.log("Fetched Cart Data : ", data);
+      // console.log("Fetched Cart Data : ", data);
 
       if (!response.ok) {
         showNotification("Failed to fetch cart items.", "error");
@@ -56,6 +59,8 @@ export function CartProvider({ children }) {
     } catch (error) {
       showNotification("Error fetching cart items.", "error");
       console.error("Fetch cart error:", error);
+    } finally {
+      setCartLoading(false);
     }
   };
 
@@ -77,7 +82,7 @@ export function CartProvider({ children }) {
       return;
     }
 
-    console.log("Plant data in ADD to cart: ", plant);
+    // console.log("Plant data in ADD to cart: ", plant);
 
     if (!plant || !plant._id) {
       showNotification("Invalid plant details. Cannot add to cart.", "error");
@@ -133,8 +138,10 @@ export function CartProvider({ children }) {
       setCart((prev) => [
         ...prev,
         {
-          ...plant,
+          plantId: plant._id,
           quantity,
+          price: plant.price,
+          name: plant.name,
         },
       ]);
 
@@ -185,7 +192,7 @@ export function CartProvider({ children }) {
       });
 
       const data = await response.json();
-      console.log("Update Cart API Response: ", data);
+      // console.log("Update Cart API Response: ", data);
 
       if (!response.ok || response.message === "Item not found in cart") {
         showNotification("Failed to update cart", "error");
@@ -258,9 +265,9 @@ export function CartProvider({ children }) {
     return plant ? plant?.quantity : 0;
   };
 
-  useEffect(() => {
-    console.log("Current Cart:", cart);
-  }, [cart]);
+  // useEffect(() => {
+  //   console.log("Current Cart:", cart);
+  // }, [cart]);
 
   const contextValue = {
     cart,
@@ -272,6 +279,7 @@ export function CartProvider({ children }) {
     clearCart,
     getPlantQuantity,
     addToCartLoading,
+    cartLoading,
   };
 
   return (
