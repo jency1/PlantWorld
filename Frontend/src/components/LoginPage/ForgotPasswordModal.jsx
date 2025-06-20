@@ -84,8 +84,8 @@ const ForgotPasswordModal = ({ handleClose }) => {
         </form>
 
         {message && (
-          <div className="mt-4 text-center text-sm md:text-base lg:text-lg">
-            <span className={isSuccess ? "text-green-500" : "text-red-500"}>
+          <div className="mt-4 text-center text-xs md:text-base lg:text-lg">
+            <span className={isSuccess ? "text-success" : "text-red-500"}>
               {message}
             </span>
           </div>

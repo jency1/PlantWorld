@@ -132,11 +132,22 @@ exports.forgetPassword = catchAsync(async (req, res, next) => {
   await user.save({ validateBeforeSave: false });
 
   // 3)send it to user's email
-  const resetURL = `${req.protocol}://${req.get(
-    'host'
-  )}/api/users/resetPassword/${resetToken}`;
 
-  const message = `Forget your password ? Submit a PATCH request with your new password and passwordConfirm to : ${resetURL}\nIf you didn't forget your password, please ignore this email!`;
+  // Use request origin for frontend reset URL
+  const origin = req.headers.origin || process.env.FRONTEND_URL;
+  const resetURL = `${origin}/resetPassword/${resetToken}`;
+
+  const message = `
+  <p>Forgot your password?</p>
+  <p>Click the button below to reset it:</p>
+  <a 
+    href="${resetURL}" 
+    style="padding:10px 20px; color:green; text-decoration:underline; border-radius:5px; font-weight:bold;"
+  >
+    Reset Password
+  </a>
+  <p>If you didn't request a password reset, you can safely ignore this email.</p>
+`;
 
   try {
     await sendEmail({

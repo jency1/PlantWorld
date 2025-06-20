@@ -13,6 +13,7 @@ import FAQs from "./pages/FAQs";
 import BlogPage from "./pages/BlogPage";
 import CartPage from "./pages/CartPage";
 import OrderSuccessPage from "./pages/OrderSuccessPage";
+import ResetPasswordPage from "./pages/ResetPasswordPage";
 import AppLayout from "./AppLayout";
 import ScrollToTop from "./ScrollToTop";
 
@@ -84,6 +85,10 @@ const router = createBrowserRouter([
       {
         path: "/order-success",
         element: <OrderSuccessPage />,
+      },
+      {
+        path: "/resetPassword/:token",
+        element: <ResetPasswordPage />,
       },
     ],
   },
