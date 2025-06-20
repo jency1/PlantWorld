@@ -8,24 +8,8 @@ import {
 
 const Pagination = ({ totalPages, currentPage, onPageChange }) => {
   const handlePageChange = (pageNumber) => {
-    if (pageNumber >= 1 && pageNumber <= totalPages) {
+    if (pageNumber > 0 && pageNumber <= totalPages) {
       onPageChange(pageNumber);
-
-      let scrollTop;
-      const screenWidth = window.innerWidth;
-
-      if (screenWidth < 640) {
-        // small devices
-        scrollTop = window.innerHeight * 0.4;
-      } else if (screenWidth < 1024) {
-        // medium devices (tablet)
-        scrollTop = window.innerHeight * 0.5;
-      } else {
-        // large devices (laptop/desktop)
-        scrollTop = window.innerHeight * 0.8;
-      }
-
-      window.scrollTo({ top: scrollTop, behavior: "smooth" });
     }
   };
 

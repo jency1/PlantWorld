@@ -1,9 +1,9 @@
-import React, { useState, useEffect, useContext } from "react";
+import React, { useState, useEffect, useContext, useRef } from "react";
 import { Link } from "react-router-dom";
 import FilterComponent from "./FilterComponent.jsx";
-import Pagination from "../../ui/pagination.jsx";
 import { PlantContext } from "../../context/PlantsContext.jsx";
 import { CartContext } from "../../context/CartContext.jsx";
+import Pagination from "../../ui/Pagination.jsx";
 
 function ShopPlants() {
   const { plants, fetchPlants, isLoading, error, totalPages } =
@@ -37,6 +37,30 @@ function ShopPlants() {
       window.removeEventListener("resize", handleResize);
     };
   }, []);
+
+  // Scroll to top of plant list - on page change
+  const prevPageRef = useRef(currentPage); // Track previous page
+
+  useEffect(() => {
+    if (prevPageRef.current !== currentPage) {
+      // Page actually changed
+      const screenWidth = window.innerWidth;
+      let scrollTop;
+
+      if (screenWidth < 640) {
+        scrollTop = window.innerHeight * 0.4;
+      } else if (screenWidth < 1024) {
+        scrollTop = window.innerHeight * 0.5;
+      } else {
+        scrollTop = window.innerHeight * 0.8;
+      }
+
+      window.scrollTo({ top: scrollTop, behavior: "smooth" });
+    }
+
+    // Update previous page after scroll check
+    prevPageRef.current = currentPage;
+  }, [currentPage]);
 
   // Fetch paginated plants with filters
   useEffect(() => {
