@@ -22,6 +22,7 @@ import { CartProvider } from "./context/CartContext";
 import { NotificationProvider } from "./context/NotificationContext";
 import { OrderProvider } from "./context/OrderContext";
 import AddressFormPage from "./pages/AddressFormPage";
+import loginAction from "./actions/loginAction";
 
 const router = createBrowserRouter([
   {
@@ -103,6 +104,7 @@ const router = createBrowserRouter([
         </NotificationProvider>
       </>
     ),
+    action: loginAction,
   },
 ]);
 
