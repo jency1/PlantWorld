@@ -12,7 +12,6 @@ const Pagination = ({ totalPages, currentPage, onPageChange }) => {
       onPageChange(pageNumber);
 
       let scrollTop;
-
       const screenWidth = window.innerWidth;
 
       if (screenWidth < 640) {

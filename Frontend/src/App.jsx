@@ -6,7 +6,7 @@ import HomePage from "./pages/HomePage";
 import ShopPageLayout from "./pages/ShopPageLayout";
 import DescriptionLayout from "./pages/DescriptionLayout";
 import LoginPage from "./pages/LoginPage";
-import Contact from "./pages/Contact";
+import Contact, { contactFormAction } from "./pages/Contact";
 import AboutUs from "./pages/AboutUs";
 import FAQs from "./pages/FAQs";
 import BlogPage from "./pages/BlogPage";
@@ -52,6 +52,7 @@ const router = createBrowserRouter([
       {
         path: "/contact",
         element: <Contact />,
+        action: contactFormAction,
       },
       {
         path: "/blog",

@@ -86,7 +86,7 @@ export function CartProvider({ children }) {
 
     // Check if the item is already in the cart
     const existingItem = cart.find(
-      (item) => item?.plantId?._id === plant._id || item.plantId === plant._id
+      (item) => item?.plantId?._id === plant._id || item?.plantId === plant._id
     );
 
     if (existingItem) {
