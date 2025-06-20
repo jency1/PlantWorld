@@ -15,4 +15,9 @@ router.patch(
   orderController.updateOrderStatus
 );
 
+router.patch(
+  '/:orderId/cancel',
+  authController.protect,
+  orderController.cancelOrder
+);
 module.exports = router;

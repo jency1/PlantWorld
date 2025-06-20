@@ -9,6 +9,7 @@ const paymentRouter = require('./routes/paymentRoutes');
 const orderRouter = require('./routes/orderRoutes');
 const imageRouter = require('./routes/imageRoutes');
 const AppError = require('./utils/appError');
+const contactRoutes = require('./routes/contactRoutes');
 const globalErrorHandler = require('./controllers/errorController');
 
 const app = express();
@@ -34,6 +35,7 @@ app.use('/api/plants', plantRouter);
 app.use('/api/users', userRouter);
 app.use('/api/payment', paymentRouter);
 app.use('/images', imageRouter);
+app.use('/api/contact', contactRoutes);
 app.use('/api/orders', orderRouter);
 
 app.all('*', (req, res, next) => {

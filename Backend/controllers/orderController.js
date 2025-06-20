@@ -113,3 +113,46 @@ exports.updateOrderStatus = catchAsync(async (req, res) => {
     order,
   });
 });
+
+exports.cancelOrder = catchAsync(async (req, res) => {
+  const { orderId } = req.params;
+
+  const order = await Order.findById(orderId);
+
+  if (!order) {
+    return res.status(404).json({
+      status: 'fail',
+      message: 'Order not found',
+    });
+  }
+
+  // ✅ Check if the logged-in user owns the order
+  if (order.user.toString() !== req.user.id) {
+    return res.status(403).json({
+      status: 'fail',
+      message: 'You are not authorized to cancel this order',
+    });
+  }
+
+  const currentStatus = order.status[order.status.length - 1]?.stage;
+
+  if (currentStatus !== 'Order Received') {
+    return res.status(400).json({
+      status: 'fail',
+      message: `Cannot cancel order. Current status is "${currentStatus}". Only "Order Received" orders can be cancelled.`,
+    });
+  }
+
+  order.status.push({
+    stage: 'Order Cancelled',
+    changedAt: new Date(),
+  });
+
+  await order.save();
+
+  res.status(200).json({
+    status: 'success',
+    message: 'Order cancelled successfully',
+    order,
+  });
+});
