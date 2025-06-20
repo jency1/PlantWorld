@@ -1,5 +1,5 @@
 import React from "react";
-import { Form } from "react-router-dom";
+import { Form, useNavigation } from "react-router-dom";
 
 const labelClass = "mb-1 ml-1 text-[0.8rem] lg:text-[1.08rem]";
 const inputClass =
@@ -27,46 +27,52 @@ const fields = [
   },
 ];
 
-const LoginForm = () => (
-  <Form method="post" className="flex flex-col w-full">
-    {fields.map(({ label, name, type, placeholder, pattern }) => (
-      <div key={name}>
-        <label htmlFor={name} className={labelClass}>
-          {label}
-        </label>
-        <input
-          required
-          id={name}
-          name={name}
-          type={type}
-          placeholder={placeholder}
-          pattern={pattern}
-          className={inputClass}
-        />
+const LoginForm = () => {
+  const navigation = useNavigation();
+  const isSubmitting = navigation.state === "submitting";
+
+  return (
+    <Form method="post" className="flex flex-col w-full">
+      {fields.map(({ label, name, type, placeholder, pattern }) => (
+        <div key={name}>
+          <label htmlFor={name} className={labelClass}>
+            {label}
+          </label>
+          <input
+            required
+            id={name}
+            name={name}
+            type={type}
+            placeholder={placeholder}
+            pattern={pattern}
+            className={inputClass}
+          />
+        </div>
+      ))}
+
+      <label htmlFor="message" className={labelClass}>
+        Your Message:
+      </label>
+      <textarea
+        required
+        id="message"
+        name="message"
+        placeholder="Enter your message here..."
+        rows="4"
+        className={inputClass}
+      ></textarea>
+
+      <div className="w-fit px-3 py-1 rounded-lg mt-1 text-xs md:text-md lg:text-lg mb-[8px] lg:mb-[15px] bg-[#659e69] hover:bg-[#499a4e] ml-auto">
+        <button
+          type="submit"
+          disabled={isSubmitting}
+          className="text-white no-underline bg-transparent border-none cursor-pointer"
+        >
+          {isSubmitting ? "Sending message..." : "Send Message"}
+        </button>
       </div>
-    ))}
-
-    <label htmlFor="message" className={labelClass}>
-      Your Message:
-    </label>
-    <textarea
-      required
-      id="message"
-      name="message"
-      placeholder="Enter your message here..."
-      rows="4"
-      className={inputClass}
-    ></textarea>
-
-    <div className="w-fit px-3 py-1 rounded-lg mt-1 text-xs md:text-md lg:text-lg mb-[8px] lg:mb-[15px] bg-[#659e69] hover:bg-[#499a4e] ml-auto">
-      <button
-        type="submit"
-        className="text-white no-underline bg-transparent border-none cursor-pointer"
-      >
-        Send Message
-      </button>
-    </div>
-  </Form>
-);
+    </Form>
+  );
+};
 
 export default LoginForm;

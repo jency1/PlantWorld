@@ -23,21 +23,25 @@ exports.submitContactForm = catchAsync(async (req, res, next) => {
 
   // 2. Send confirmation email to the user
   const emailMessage = `
-Hi ${name},
+  <div style="font-family: Arial, sans-serif; font-size: 16px; color: #333333; line-height: 1.6;">
+    <p>Hi <strong>${name}</strong>,</p>
 
-Thank you for reaching out to us at PlantWorld 🌿
+    <p>Thank you for reaching out to us at <span style="color: green; font-weight: bold;">PlantWorld 🌿</span>.</p>
 
-We’ve received your message and our team is currently reviewing it. We truly value your feedback and will get back to you as soon as possible!
+    <p>We’ve received your message and our team is currently reviewing it. We truly value your feedback and will get back to you as soon as possible!</p>
 
-Here’s a copy of your message for reference:
------------------------
-${message}
------------------------
+    <p><strong">Here’s a copy of your message for reference:</strong></p>
+    <p style="margin-left: 15px; font-style: italic;">
+      <hr />
+      ${message}
+      <hr />
+    </p>
 
-In the meantime, feel free to continue exploring our collection of beautiful plants and gardening tools.
+    <p>In the meantime, feel free to continue exploring our collection of beautiful plants and gardening tools.</p>
 
-With green regards,  
-The PlantWorld Team 🌱
+    <p>With green regards,<br />
+    <strong><span style="color: green;">The PlantWorld Team 🌱</span></strong></p>
+  </div>
 `;
 
   await sendEmail({
