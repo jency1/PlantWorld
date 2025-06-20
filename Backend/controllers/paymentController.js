@@ -16,7 +16,7 @@ function validateSignature(order_id, payment_id, signature, secret) {
 
 exports.checkout = catchAsync(async (req, res) => {
   const options = {
-    amount: Number(req.body.amount * 100),
+    amount: Number(req.body.amount), // ✅ already in paise
     currency: 'INR',
   };
 

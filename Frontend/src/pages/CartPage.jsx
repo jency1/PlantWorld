@@ -2,13 +2,14 @@ import React, { useEffect, useState } from "react";
 import CartItem from "../components/CartPage/CartItem";
 import { Link } from "react-router-dom";
 import { CartContext } from "../context/CartContext";
+import { useOrder } from "../context/OrderContext";
 
 const BASE_URL = import.meta.env.VITE_BASE_URL;
 
 const CartPage = () => {
   const { cart } = React.useContext(CartContext);
   const [totalAmount, setTotalAmount] = useState(0);
-
+  const { checkoutHandler } = useOrder();
   // console.log("Cart Item data : ", cart);
 
   // const totalAmount = cart.reduce(
@@ -88,7 +89,10 @@ const CartPage = () => {
               <h3 className="text-sm md:text-md lg:text-xl font-serif font-semibold">
                 Total Cost: ₹{totalAmount}
               </h3>
-              <button className="btn btn-success text-white text-xs md:text-base lg:text-md px-3 py-2 rounded-md transform transition duration-300 hover:scale-105">
+              <button
+                onClick={checkoutHandler}
+                className="btn btn-success text-white text-xs md:text-base lg:text-md px-3 py-2 rounded-md transform transition duration-300 hover:scale-105"
+              >
                 Proceed to Checkout
               </button>
             </div>

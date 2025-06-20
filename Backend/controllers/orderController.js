@@ -1,0 +1,115 @@
+// controllers/orderController.js
+const Order = require('../model/orderModel');
+const User = require('../model/userModel');
+const catchAsync = require('../utils/catchAsync');
+
+exports.createOrder = catchAsync(async (req, res) => {
+  const {
+    firstName,
+    lastName,
+    mobile,
+    email,
+    addressLine1,
+    addressLine2,
+    area,
+    city,
+    state,
+    pincode,
+    paymentId,
+  } = req.body;
+
+  // Get user and cart
+  const user = await User.findById(req.user.id).select('+cart');
+  if (!user || !user.cart || user.cart.length === 0) {
+    return res.status(400).json({ status: 'fail', message: 'Cart is empty' });
+  }
+
+  // Add 'total' field per item
+  const items = user.cart.map((item) => ({
+    plantId: item.plantId._id || item.plantId,
+    quantity: item.quantity,
+    price: item.price,
+    total: item.quantity * item.price,
+  }));
+
+  // Calculate overall order total
+  const orderTotal = items.reduce((acc, item) => acc + item.total, 0);
+
+  const expectedDelivery = new Date(Date.now() + 7 * 24 * 60 * 60 * 1000);
+
+  // Create order
+  const order = await Order.create({
+    user: req.user.id,
+    items,
+    orderTotal,
+    paymentId,
+    expectedDelivery,
+    status: [{ stage: 'Order Received' }],
+    firstName,
+    lastName,
+    mobile,
+    email,
+    addressLine1,
+    addressLine2,
+    area,
+    city,
+    state,
+    pincode,
+  });
+
+  // Link order to user and clear cart
+  user.orders.push(order._id);
+  user.cart = [];
+  await user.save({ validateBeforeSave: false });
+
+  res.status(201).json({
+    status: 'success',
+    order,
+  });
+});
+
+exports.getMyOrders = catchAsync(async (req, res) => {
+  const orders = await Order.find({ user: req.user.id }).populate(
+    'items.plantId'
+  );
+  res.status(200).json({
+    status: 'success',
+    results: orders.length,
+    orders,
+  });
+});
+
+exports.updateOrderStatus = catchAsync(async (req, res) => {
+  const { orderId } = req.params;
+  const { newStatus } = req.body;
+
+  if (!newStatus) {
+    return res.status(400).json({
+      status: 'fail',
+      message: 'New status is required',
+    });
+  }
+
+  const order = await Order.findById(orderId);
+
+  if (!order) {
+    return res.status(404).json({
+      status: 'fail',
+      message: 'Order not found',
+    });
+  }
+
+  // Append the new status with current timestamp
+  order.status.push({
+    stage: newStatus,
+    changedAt: new Date(),
+  });
+
+  await order.save();
+
+  res.status(200).json({
+    status: 'success',
+    message: `Order status updated to ${newStatus}`,
+    order,
+  });
+});

@@ -80,6 +80,12 @@ const userSchema = new mongoose.Schema({
       },
     },
   ],
+  orders: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'Order',
+    },
+  ],
 });
 
 userSchema.pre('save', async function (next) {

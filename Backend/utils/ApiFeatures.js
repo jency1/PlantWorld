@@ -24,49 +24,81 @@ class APIFeatures {
     if (this.queryString.search) {
       const searchRegex = new RegExp(this.queryString.search, 'i'); // case-insensitive
       console.log('Regex:', searchRegex);
-      this.query = this.query
-        .find({
-          $or: [
-            { name: searchRegex },
-            { description: searchRegex },
-            { shortDescription: searchRegex },
-          ],
-        })
-        .explain('executionStats'); // To get execution stats and see how MongoDB is interpreting the query
+      console.log('Running query with:', {
+        $or: [
+          { name: searchRegex },
+          { description: searchRegex },
+          { shortDescription: searchRegex },
+        ],
+      });
+      this.query = this.query.find({
+        $or: [
+          { name: searchRegex },
+          { description: searchRegex },
+          { shortDescription: searchRegex },
+        ],
+      });
+      // To get execution stats and see how MongoDB is interpreting the query
     }
 
     return this;
   }
 
-  filter() {
-    // console.log('shreya');
+  // filter() {
+  //   // console.log('shreya');
 
-    // 1A)filtering
+  //   // 1A)filtering
+  //   const queryObj = { ...this.queryString };
+  //   const excludedFields = ['page', 'sort', 'limit', 'fields'];
+  //   excludedFields.forEach((el) => delete queryObj[el]);
+
+  //   // Handle comma-separated values like 'Indoor,Outdoor'
+  //   Object.keys(queryObj).forEach((key) => {
+  //     if (typeof queryObj[key] === 'string' && queryObj[key].includes(',')) {
+  //       queryObj[key] = { $in: queryObj[key].split(',') };
+  //     }
+  //   });
+
+  //   // 1B)Advanced filtering
+  //   let queryString = JSON.stringify(queryObj);
+  //   queryString = queryString.replace(
+  //     /\b(gte|gt|lte|lt)\b/g,
+  //     (match) => `$${match}`
+  //   );
+
+  //   // console.log(JSON.parse(queryString));
+  //   // mongoose {tag:'Indoor' , price:{$gte:200}}
+  //   // req.query { tag: 'Indoor', price: { gte: '200' } }
+
+  //   this.query = this.query.find(JSON.parse(queryString));
+  //   return this;
+  //   // let query = Plant.find(JSON.parse(queryString));
+  // }
+
+  filter() {
     const queryObj = { ...this.queryString };
-    const excludedFields = ['page', 'sort', 'limit', 'fields'];
+    const excludedFields = ['page', 'sort', 'limit', 'fields', 'search'];
     excludedFields.forEach((el) => delete queryObj[el]);
 
-    // Handle comma-separated values like 'Indoor,Outdoor'
+    // Handle comma-separated values
     Object.keys(queryObj).forEach((key) => {
       if (typeof queryObj[key] === 'string' && queryObj[key].includes(',')) {
         queryObj[key] = { $in: queryObj[key].split(',') };
       }
     });
 
-    // 1B)Advanced filtering
-    let queryString = JSON.stringify(queryObj);
-    queryString = queryString.replace(
-      /\b(gte|gt|lte|lt)\b/g,
-      (match) => `$${match}`
-    );
+    if (Object.keys(queryObj).length > 0) {
+      // Only apply filter if there are actual filters
+      let queryString = JSON.stringify(queryObj);
+      queryString = queryString.replace(
+        /\b(gte|gt|lte|lt)\b/g,
+        (match) => `$${match}`
+      );
 
-    // console.log(JSON.parse(queryString));
-    // mongoose {tag:'Indoor' , price:{$gte:200}}
-    // req.query { tag: 'Indoor', price: { gte: '200' } }
+      this.query = this.query.find(JSON.parse(queryString));
+    }
 
-    this.query = this.query.find(JSON.parse(queryString));
     return this;
-    // let query = Plant.find(JSON.parse(queryString));
   }
 
   sort() {

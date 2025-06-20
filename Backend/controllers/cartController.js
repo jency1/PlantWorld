@@ -26,7 +26,8 @@ exports.addToCart = async (req, res) => {
         user.cart[existingItemIndex].price;
     } else {
       // Add new item to cart
-      user.cart.push({ plantId, quantity, price });
+      total = quantity * price;
+      user.cart.push({ plantId, quantity, price, total });
     }
 
     // Save user without triggering password validation

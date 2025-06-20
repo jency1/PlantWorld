@@ -11,15 +11,15 @@ import AboutUs from "./pages/AboutUs";
 import FAQs from "./pages/FAQs";
 import BlogPage from "./pages/BlogPage";
 import CartPage from "./pages/CartPage";
-
 import AppLayout from "./AppLayout";
 import ScrollToTop from "./ScrollToTop";
-import Payment from "./components/Payment/Payment";
 
 import { PlantContextProvider } from "./context/PlantsContext";
 import { AuthProvider } from "./context/AuthContext";
 import { CartProvider } from "./context/CartContext";
 import { NotificationProvider } from "./context/NotificationContext";
+import { OrderProvider } from "./context/OrderContext";
+import OrderSuccess from "./pages/OrderSuccess";
 
 const router = createBrowserRouter([
   {
@@ -31,7 +31,9 @@ const router = createBrowserRouter([
           <AuthProvider>
             <PlantContextProvider>
               <CartProvider>
-                <AppLayout />
+                <OrderProvider>
+                  <AppLayout />
+                </OrderProvider>
               </CartProvider>
             </PlantContextProvider>
           </AuthProvider>
@@ -71,6 +73,10 @@ const router = createBrowserRouter([
         path: "/cart",
         element: <CartPage />,
       },
+      {
+        path: "/order-success",
+        element: <OrderSuccess />,
+      },
     ],
   },
   {
@@ -84,24 +90,6 @@ const router = createBrowserRouter([
             <PlantContextProvider>
               <CartProvider>
                 <LoginPage />
-              </CartProvider>
-            </PlantContextProvider>
-          </AuthProvider>
-        </NotificationProvider>
-      </>
-    ),
-  },
-  {
-    path: "/payment",
-    element: (
-      <>
-        <ScrollToTop />
-
-        <NotificationProvider>
-          <AuthProvider>
-            <PlantContextProvider>
-              <CartProvider>
-                <Payment />
               </CartProvider>
             </PlantContextProvider>
           </AuthProvider>

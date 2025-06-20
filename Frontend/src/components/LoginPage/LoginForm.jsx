@@ -17,6 +17,7 @@ const LoginForm = ({ handleForgotPassword }) => {
     setLoading(true);
 
     try {
+      console.log("email", email);
       const response = await fetch(`${BASE_URL}/api/users/login`, {
         method: "POST",
         headers: {

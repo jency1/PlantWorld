@@ -2,9 +2,11 @@ import React, { useContext } from "react";
 import { FaPlus, FaMinus, FaTrash } from "react-icons/fa";
 import { CartContext } from "../../context/CartContext";
 
+
 const CartItem = ({ item }) => {
   const { handleIncrease, handleDecrease, deleteCartItem } =
     useContext(CartContext);
+ 
 
   // console.log("Plant Name: ", item.name);
   // console.log("Item Plant Id : ", item.plantId);
