@@ -6,14 +6,9 @@ import Feedback from "../components/HomePage/Feedback";
 import Blog from "../components/HomePage/Blog";
 import FeatureSection from "../components/HomePage/FeatureSection";
 
-// import DescriptionLayout from "../ProductDescription/DescriptionLayout";
-// import ShopPageLayout from "../ShopPage/ShopPageLayout";
-// import LoginPage from "../LoginPage/LoginPage";
-
 function HomePage() {
   return (
     <>
-      {/* <Navbar /> */}
       <Header />
       <FeaturedProducts />
       <ShopByCategory />
@@ -21,7 +16,6 @@ function HomePage() {
       <FollowOnInstagram />
       <FeatureSection />
       <Blog />
-      {/* <Footer /> */}
     </>
   );
 }

@@ -41,7 +41,7 @@ function Feedback() {
 
   return (
     <div className="container px-5 py-5">
-      <div className="lg:mt-4 mb-4 text-success font-bold text-2xl md:text-3xl lg:text-4xl text-center">
+      <div className="lg:mt-4 mb-4 text-success font-serif font-bold text-2xl md:text-3xl lg:text-4xl text-center">
         Our Customer Feedback
       </div>
       <div className="row justify-content-center">

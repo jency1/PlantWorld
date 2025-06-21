@@ -13,7 +13,7 @@ export default function FAQs() {
   return (
     <div className="bg-white py-12">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <h2 className="text-xl md:text-3xl lg:text-4xl text-success font-bold text-center mb-12">
+        <h2 className="text-xl md:text-3xl lg:text-4xl text-success font-bold text-center mb-12 font-serif">
           Frequently Asked Questions
         </h2>
 

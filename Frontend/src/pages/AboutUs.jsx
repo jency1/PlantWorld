@@ -6,7 +6,7 @@ export default function AboutUs() {
     <div className="bg-white pt-10 pb-24">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-20">
-          <h2 className="text-success font-bold text-2xl md:text-3xl lg:text-4xl">
+          <h2 className="text-success font-bold text-2xl md:text-3xl lg:text-4xl font-serif">
             About Us
           </h2>
           <p className="mt-4 max-w-5xl sm:text-base md:text-lg lg:text-xl text-gray-500 lg:mx-auto">

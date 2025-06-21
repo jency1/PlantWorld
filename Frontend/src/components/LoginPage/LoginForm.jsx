@@ -31,7 +31,7 @@ const LoginForm = ({ handleForgotPassword }) => {
         name="email"
         placeholder="xyz@example.com"
         required
-        className="w-full px-[6px] py-[3px] lg:px-[12px] lg:py-[8px] mb-3 rounded border border-gray-300 text-[14px] lg:text-[16px]"
+        className="w-full px-[6px] py-[3px] lg:px-[12px] lg:py-[8px] mb-3 rounded border border-gray-300 text-[0.8rem] lg:text-[1rem]"
       />
 
       <label htmlFor="password" className="mb-2 text-[0.8rem] lg:text-[1.1rem]">
@@ -43,7 +43,7 @@ const LoginForm = ({ handleForgotPassword }) => {
         name="password"
         placeholder="*****"
         required
-        className="w-full px-[6px] py-[3px] lg:px-[12px] lg:py-[8px] mb-3 rounded border border-gray-300 text-[14px] lg:text-[16px]"
+        className="w-full px-[6px] py-[3px] lg:px-[12px] lg:py-[8px] mb-3 rounded border border-gray-300 text-[0.8rem] lg:text-[1rem]"
       />
 
       <div className="text-right text-xs md:text-md lg:text-lg mb-[8px] lg:mb-[15px]">

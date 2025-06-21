@@ -16,7 +16,7 @@ const RightSection = ({ isSignup, setIsSignup, handleForgotPassword }) => (
     ) : (
       <LoginForm handleForgotPassword={handleForgotPassword} />
     )}
-    <div className="text-center text-xs mt-3 md:mt-auto md:text-md lg:text-lg mb-[8px] lg:mb-[15px]">
+    <div className="text-center text-xs mt-3 md:mt-auto md:text-md lg:text-lg mb-[8px] lg:mb-0">
       {isSignup ? (
         <>
           Already have an account?{" "}
