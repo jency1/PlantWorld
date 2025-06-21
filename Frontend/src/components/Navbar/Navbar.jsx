@@ -6,7 +6,6 @@ import Toolbar from "@mui/material/Toolbar";
 import IconButton from "@mui/material/IconButton";
 import Typography from "@mui/material/Typography";
 import Menu from "@mui/material/Menu";
-import MenuIcon from "@mui/icons-material/Menu";
 import Container from "@mui/material/Container";
 import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
@@ -17,15 +16,29 @@ import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
 import ListItemText from "@mui/material/ListItemText";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
+import Badge from "@mui/material/Badge";
+import ListItemButton from "@mui/material/ListItemButton";
+import CloseIcon from "@mui/icons-material/Close";
 
 import { FaUserAlt, FaSignOutAlt, FaSignInAlt } from "react-icons/fa";
+import MenuIcon from "@mui/icons-material/Menu";
+import HomeIcon from "@mui/icons-material/Home";
+import StoreIcon from "@mui/icons-material/Store";
+import InfoIcon from "@mui/icons-material/Info";
+import HelpIcon from "@mui/icons-material/Help";
+import ContactMailIcon from "@mui/icons-material/ContactMail";
+import ArticleIcon from "@mui/icons-material/Article";
+import AccountCircleIcon from "@mui/icons-material/AccountCircle";
+import LogoutIcon from "@mui/icons-material/Logout";
+import LoginIcon from "@mui/icons-material/Login";
 
 import { Link } from "react-router-dom";
 import { useContext } from "react";
 import { AuthContext } from "../../context/AuthContext";
+import { CartContext } from "../../context/CartContext";
 
-const pages = ["Home", "Shop", "About", "FAQ", "Contact", "Blog"];
-const links = ["/", "/shop", "/about", "/faqs", "/contact", "/blog"];
+const pages = ["Home", "Shop", "Blog", "About", "FAQ", "Contact"];
+const links = ["/", "/shop", "/blog", "/about", "/faqs", "/contact"];
 
 const theme = createTheme({
   palette: {
@@ -35,7 +48,17 @@ const theme = createTheme({
   },
 });
 
+const drawerIcons = [
+  <HomeIcon fontSize="small" />,
+  <StoreIcon fontSize="small" />,
+  <InfoIcon fontSize="small" />,
+  <HelpIcon fontSize="small" />,
+  <ContactMailIcon fontSize="small" />,
+  <ArticleIcon fontSize="small" />,
+];
+
 function Navbar() {
+  const { cart } = useContext(CartContext);
   const { isAuthenticated, logout } = useContext(AuthContext);
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
@@ -91,9 +114,15 @@ function Navbar() {
             >
               {isAuthenticated && (
                 <Link to="/cart" style={{ color: "white" }}>
-                  <ShoppingCartIcon
-                    style={{ fontSize: "24px", cursor: "pointer" }}
-                  />
+                  <Badge
+                    badgeContent={cart?.length || 0}
+                    color="error"
+                    overlap="circular"
+                  >
+                    <ShoppingCartIcon
+                      style={{ fontSize: "24px", cursor: "pointer" }}
+                    />
+                  </Badge>
                 </Link>
               )}
               <IconButton
@@ -104,27 +133,6 @@ function Navbar() {
               >
                 <MenuIcon />
               </IconButton>
-
-              {isAuthenticated ? (
-                <Tooltip title="Open settings">
-                  <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                    <Avatar alt="Profile" src="/Profile.jpg" />
-                  </IconButton>
-                </Tooltip>
-              ) : (
-                <Button
-                  onClick={() => (window.location.href = "/login")}
-                  sx={{
-                    color: "white",
-                    fontWeight: 600,
-                    fontSize: "0.875rem",
-                    minWidth: "auto",
-                    padding: "6px 8px",
-                  }}
-                >
-                  Login
-                </Button>
-              )}
             </Box>
 
             {/* Desktop Navigation */}
@@ -172,9 +180,15 @@ function Navbar() {
               {isAuthenticated && (
                 <Tooltip title="View Cart">
                   <Link to="/cart" style={{ color: "white" }}>
-                    <ShoppingCartIcon
-                      style={{ fontSize: "28px", cursor: "pointer" }}
-                    />
+                    <Badge
+                      badgeContent={cart?.length || 0}
+                      color="error"
+                      overlap="circular"
+                    >
+                      <ShoppingCartIcon
+                        style={{ fontSize: "28px", cursor: "pointer" }}
+                      />
+                    </Badge>
                   </Link>
                 </Tooltip>
               )}
@@ -278,75 +292,71 @@ function Navbar() {
         open={drawerOpen}
         onClose={() => toggleDrawer(false)}
       >
-        <Box
-          sx={{ width: 200, textAlign: "center", paddingTop: "20px" }}
-          role="presentation"
-          onClick={() => toggleDrawer(false)}
-          onKeyDown={() => toggleDrawer(false)}
-        >
+        <Box sx={{ width: 220, pt: 2, height: "100%" }} role="presentation">
+          {/* Close Button */}
+          <Box sx={{ display: "flex", justifyContent: "flex-end", pr: 1 }}>
+            <IconButton onClick={() => toggleDrawer(false)}>
+              <CloseIcon />
+            </IconButton>
+          </Box>
+
+          {/* Menu Items */}
           <List>
             {pages.map((page, i) => (
-              <ListItem
+              <Link
                 key={page + i}
-                sx={{
-                  "&:hover": {
-                    backgroundColor: "rgba(25, 135, 84, 0.7)",
-                  },
-                  textAlign: "center",
-                  backgroundColor: "rgba(25, 135, 84, 0.1)",
-                  color: "black",
-                }}
-              >
-                <Link
-                  to={links[i]}
-                  style={{
-                    textDecoration: "none",
-                    color: "inherit",
-                    fontSize: "inherit",
-                  }}
-                >
-                  <ListItemText primary={page} />
-                </Link>
-              </ListItem>
-            ))}
-          </List>
-          {isAuthenticated && (
-            <Tooltip title="View Cart">
-              <Link
-                to="/cart"
-                style={{
-                  display: "block",
-                  padding: "8px 16px",
-                  color: "black",
-                  textDecoration: "none",
-                }}
-              >
-                View Cart
-              </Link>
-            </Tooltip>
-          )}
-          {isAuthenticated ? (
-            <Box sx={{ padding: 2 }}>
-              <Link
-                to="/profile"
+                to={links[i]}
                 style={{ textDecoration: "none", color: "black" }}
               >
-                <Button fullWidth>Profile</Button>
+                <ListItem disablePadding>
+                  <ListItemButton sx={{ px: 2, py: 1 }}>
+                    {drawerIcons[i]}
+                    <ListItemText primary={page} sx={{ ml: 1 }} />
+                  </ListItemButton>
+                </ListItem>
               </Link>
-              <Button fullWidth onClick={logout}>
-                Logout
-              </Button>
-            </Box>
-          ) : (
-            <Box sx={{ padding: 2 }}>
+            ))}
+          </List>
+
+          {/* Cart Option */}
+          {isAuthenticated && (
+            <Link to="/cart" style={{ textDecoration: "none", color: "black" }}>
+              <ListItem disablePadding>
+                <ListItemButton sx={{ px: 2, py: 1 }}>
+                  <ShoppingCartIcon fontSize="small" />
+                  <ListItemText primary="View Cart" sx={{ ml: 1 }} />
+                </ListItemButton>
+              </ListItem>
+            </Link>
+          )}
+
+          {/* Auth Buttons */}
+          <Box sx={{ px: 2, mt: 2 }}>
+            {isAuthenticated ? (
+              <>
+                <Link
+                  to="/profile"
+                  style={{ textDecoration: "none", color: "black" }}
+                >
+                  <Button fullWidth startIcon={<AccountCircleIcon />}>
+                    Profile
+                  </Button>
+                </Link>
+                <Button fullWidth startIcon={<LogoutIcon />} onClick={logout}>
+                  Logout
+                </Button>
+              </>
+            ) : (
               <Link
                 to="/login"
                 style={{ textDecoration: "none", color: "black" }}
               >
-                <Button fullWidth>Login</Button>
+                <Button fullWidth startIcon={<LoginIcon />}>
+                  Login
+                </Button>
               </Link>
-            </Box>
-          )}
+            )}
+          </Box>
         </Box>
       </Drawer>
     </ThemeProvider>
