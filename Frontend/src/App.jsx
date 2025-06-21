@@ -6,6 +6,7 @@ import HomePage from "./pages/HomePage";
 import ShopPageLayout from "./pages/ShopPageLayout";
 import DescriptionLayout from "./pages/DescriptionLayout";
 import LoginPage from "./pages/LoginPage";
+import loginAction from "./actions/loginAction";
 import Contact from "./pages/Contact";
 import contactFormAction from "./actions/contactFormAction";
 import AboutUs from "./pages/AboutUs";
@@ -14,6 +15,9 @@ import BlogPage from "./pages/BlogPage";
 import CartPage from "./pages/CartPage";
 import OrderSuccessPage from "./pages/OrderSuccessPage";
 import ResetPasswordPage from "./pages/ResetPasswordPage";
+import resetPasswordAction from "./actions/resetPasswordAction";
+import AddressFormPage from "./pages/AddressFormPage";
+
 import AppLayout from "./AppLayout";
 import ScrollToTop from "./ScrollToTop";
 
@@ -22,8 +26,6 @@ import { AuthProvider } from "./context/AuthContext";
 import { CartProvider } from "./context/CartContext";
 import { NotificationProvider } from "./context/NotificationContext";
 import { OrderProvider } from "./context/OrderContext";
-import AddressFormPage from "./pages/AddressFormPage";
-import loginAction from "./actions/loginAction";
 
 const router = createBrowserRouter([
   {
@@ -89,6 +91,7 @@ const router = createBrowserRouter([
       {
         path: "/resetPassword/:token",
         element: <ResetPasswordPage />,
+        action: resetPasswordAction,
       },
     ],
   },
