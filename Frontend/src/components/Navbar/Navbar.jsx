@@ -101,7 +101,13 @@ function Navbar() {
                 textDecoration: "none",
               }}
             >
-              PlantWorld
+              <img
+                src="/logo/logo.png"
+                alt="PlantWorld"
+                width="150"
+                height="150"
+              />
+              {/* PlantWorld */}
             </Typography>
 
             {/* Mobile Right Side Menu Icon */}
