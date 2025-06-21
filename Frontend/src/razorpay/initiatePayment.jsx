@@ -45,6 +45,7 @@ export const useRazorpayPayment = () => {
         currency: "INR",
         name: "PlantWorld",
         description: "Plant Purchase",
+        image: "/logo/favicon.png",
         order_id: order.id,
         handler: async function (response) {
           try {
@@ -83,7 +84,7 @@ export const useRazorpayPayment = () => {
           address: "PlantWorld HQ",
         },
         theme: {
-          color: "#22c55e",
+          color: "#15803D",
         },
         method: {
           upi: true,
