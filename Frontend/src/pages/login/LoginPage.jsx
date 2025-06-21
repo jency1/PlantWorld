@@ -1,8 +1,8 @@
 import React, { useCallback, useState } from "react";
-import BackToHomeButton from "../components/LoginPage/BackToHomeButton";
-import LeftSection from "../components/LoginPage/LeftSection";
-import RightSection from "../components/LoginPage/RightSection";
-import ForgotPasswordModal from "../components/LoginPage/ForgotPasswordModal";
+import BackToHomeButton from "../../components/LoginPage/BackToHomeButton";
+import LeftSection from "../../components/LoginPage/LeftSection";
+import RightSection from "../../components/LoginPage/RightSection";
+import ForgotPasswordModal from "../../components/LoginPage/ForgotPasswordModal";
 
 const LoginPage = () => {
   const [isSignup, setIsSignup] = useState(false);

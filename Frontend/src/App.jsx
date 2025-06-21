@@ -3,20 +3,25 @@ import "./index.css";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 
 import HomePage from "./pages/HomePage";
-import ShopPageLayout from "./pages/ShopPageLayout";
-import DescriptionLayout from "./pages/DescriptionLayout";
-import LoginPage from "./pages/LoginPage";
-import loginAction from "./actions/loginAction";
+
+import ShopPageLayout from "./pages/shop/ShopPageLayout";
+import DescriptionLayout from "./pages/shop/DescriptionLayout";
+
 import Contact from "./pages/Contact";
 import contactFormAction from "./actions/contactFormAction";
+
 import AboutUs from "./pages/AboutUs";
 import FAQs from "./pages/FAQs";
 import BlogPage from "./pages/BlogPage";
-import CartPage from "./pages/CartPage";
-import OrderSuccessPage from "./pages/OrderSuccessPage";
-import ResetPasswordPage from "./pages/ResetPasswordPage";
+
+import LoginPage from "./pages/login/LoginPage";
+import loginAction from "./actions/loginAction";
+import ResetPasswordPage from "./pages/login/ResetPasswordPage";
 import resetPasswordAction from "./actions/resetPasswordAction";
-import AddressFormPage from "./pages/AddressFormPage";
+
+import CartPage from "./pages/cart and order/CartPage";
+import OrderSuccessPage from "./pages/cart and order/OrderSuccessPage";
+import AddressFormPage from "./pages/cart and order/AddressFormPage";
 
 import AppLayout from "./AppLayout";
 import ScrollToTop from "./ScrollToTop";

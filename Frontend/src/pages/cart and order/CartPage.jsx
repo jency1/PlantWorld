@@ -1,9 +1,9 @@
 import React, { useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { AuthContext } from "../context/AuthContext";
-import { CartContext } from "../context/CartContext";
+import { AuthContext } from "../../context/AuthContext";
+import { CartContext } from "../../context/CartContext";
 
-import CartItem from "../components/CartPage/CartItem";
+import CartItem from "../../components/CartPage/CartItem";
 import { Link } from "react-router-dom";
 import { FaTrash } from "react-icons/fa";
 

@@ -1,6 +1,6 @@
-import ProductDescription from "../components/ProductDescription/ProductDescription";
-import SimilarProducts from "../components/ProductDescription/SimilarProducts";
-import FeatureSection from "../components/HomePage/FeatureSection";
+import ProductDescription from "../../components/ProductDescription/ProductDescription";
+import SimilarProducts from "../../components/ProductDescription/SimilarProducts";
+import FeatureSection from "../../components/HomePage/FeatureSection";
 import { useParams } from "react-router-dom";
 
 function DescriptionLayout() {
