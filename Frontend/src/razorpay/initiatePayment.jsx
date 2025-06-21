@@ -11,7 +11,7 @@ export const useRazorpayPayment = () => {
   // Initiate Payment
   const initiatePayment = async ({ amount, key, user, onSuccess }) => {
     try {
-      console.log("Amount passed to Razorpay:", amount);
+      // console.log("Amount passed to Razorpay:", amount);
       if (!amount || typeof amount !== "number") {
         throw new Error("Invalid amount passed to Razorpay");
       }
@@ -26,8 +26,8 @@ export const useRazorpayPayment = () => {
       });
 
       const result = await res.json();
-      console.log("In initiatePayment");
-      console.log("Result: ", result);
+      // console.log("In initiatePayment");
+      // console.log("Result: ", result);
 
       if (!res.ok || !result.order) {
         showNotification(

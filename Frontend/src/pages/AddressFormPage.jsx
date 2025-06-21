@@ -3,6 +3,7 @@ import { Form } from "react-router-dom";
 import { OrderContext } from "../context/OrderContext";
 import { useNavigate } from "react-router-dom";
 import { IoIosArrowRoundBack } from "react-icons/io";
+import { NotificationContext } from "../context/NotificationContext";
 
 const labelClass = "mb-1 ml-1 text-[0.8rem] lg:text-[1.08rem]";
 const inputClass =
@@ -12,12 +13,43 @@ const gridRow = "grid grid-cols-1 md:grid-cols-2 gap-x-6 gap-y-1 md:gap-y-3";
 
 const AddressFormPage = () => {
   const navigate = useNavigate();
+  const { showNotification } = useContext(NotificationContext);
   const { setShippingInfo, checkoutHandler } = useContext(OrderContext);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     const formData = new FormData(e.target);
     const data = Object.fromEntries(formData.entries());
+
+    const requiredFields = [
+      "firstName",
+      "lastName",
+      "email",
+      "mobile",
+      "addressLine1",
+      "addressLine2",
+      "area",
+      "city",
+      "state",
+      "pincode",
+    ];
+
+    const missingFields = requiredFields.filter(
+      (field) => !data[field]?.trim()
+    );
+
+    if (missingFields.length > 0) {
+      showNotification(
+        "Please fill all shipping details before proceeding.",
+        "warning"
+      );
+      return;
+    }
+
+    if (!/^\d{6}$/.test(data.pincode)) {
+      showNotification("Please enter a valid 6-digit pincode.", "warning");
+      return;
+    }
 
     setShippingInfo(data);
     await checkoutHandler();

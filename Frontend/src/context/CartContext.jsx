@@ -127,7 +127,7 @@ export function CartProvider({ children }) {
       });
 
       const data = await response.json();
-      console.log("Add to cart data: ", data);
+      // console.log("Add to cart data: ", data);
 
       if (!response.ok) {
         showNotification("Failed to add item to cart.", "error");
@@ -258,6 +258,46 @@ export function CartProvider({ children }) {
     setCart([]);
     showNotification("Cart cleared.", "error");
   }
+
+  // const clearCart = async () => {
+  //   const token = checkAuthToken();
+  //   if (!token) {
+  //     return;
+  //   }
+
+  //   try {
+  //     const response = await fetch(`${BASE_URL}/api/users/clear-cart`, {
+  //       method: "DELETE",
+  //       headers: {
+  //         "Content-Type": "application/json",
+  //         Authorization: `Bearer ${token}`,
+  //       },
+  //     });
+
+  //     if (!response.ok) {
+  //       showNotification("Failed to clear cart", "error");
+  //       return;
+  //     }
+
+  //     setCart([]);
+
+  //     // Clear cart in localStorage user object
+  //     const storedUser = localStorage.getItem("user");
+  //     if (storedUser) {
+  //       const user = JSON.parse(storedUser);
+  //       user.cart = [];
+  //       localStorage.setItem("user", JSON.stringify(user));
+  //     }
+
+  //     showNotification("Cart cleared successfully.", "error");
+  //   } catch (error) {
+  //     showNotification(
+  //       "Error clearing the cart. Please try again later!",
+  //       "error"
+  //     );
+  //     console.error("Clear cart error:", error);
+  //   }
+  // };
 
   // Get the QUANTITY of a plant by its ID
   const getPlantQuantity = (plantId) => {

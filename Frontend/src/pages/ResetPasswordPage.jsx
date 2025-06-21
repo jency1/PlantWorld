@@ -12,7 +12,7 @@ const ResetPasswordPage = () => {
   const navigation = useNavigation();
   const actionData = useActionData();
   const { showNotification } = useNotification();
-  const loading = navigation.state === "submitting";
+  const isSubmitting = navigation.state === "submitting";
 
   useEffect(() => {
     if (actionData?.success) {
@@ -63,10 +63,10 @@ const ResetPasswordPage = () => {
 
         <button
           type="submit"
-          disabled={loading}
+          disabled={isSubmitting}
           className="bg-[#4ead54] text-white font-semibold py-2 w-full rounded-md hover:bg-[#499a4e] transition"
         >
-          {loading ? "Resetting..." : "Reset Password"}
+          {isSubmitting ? "Resetting..." : "Reset Password"}
         </button>
       </Form>
     </div>

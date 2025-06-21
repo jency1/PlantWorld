@@ -16,8 +16,8 @@ const CartPage = () => {
   const [totalAmount, setTotalAmount] = useState(0);
 
   const handleProceedToAddress = () => {
-    const updatedUser = { ...user, cart };
-    localStorage.setItem("user", JSON.stringify(updatedUser));
+    // const updatedUser = { ...user, cart };
+    // localStorage.setItem("user", JSON.stringify(updatedUser));
     navigate("/cart/address");
   };
 
