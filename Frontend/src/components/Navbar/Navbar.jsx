@@ -20,7 +20,6 @@ import Badge from "@mui/material/Badge";
 import ListItemButton from "@mui/material/ListItemButton";
 import CloseIcon from "@mui/icons-material/Close";
 
-import { FaUserAlt, FaSignOutAlt, FaSignInAlt } from "react-icons/fa";
 import MenuIcon from "@mui/icons-material/Menu";
 import HomeIcon from "@mui/icons-material/Home";
 import StoreIcon from "@mui/icons-material/Store";
@@ -31,6 +30,8 @@ import ArticleIcon from "@mui/icons-material/Article";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import LogoutIcon from "@mui/icons-material/Logout";
 import LoginIcon from "@mui/icons-material/Login";
+import SettingsIcon from "@mui/icons-material/Settings";
+import ReceiptLongIcon from "@mui/icons-material/ReceiptLong";
 
 import { Link } from "react-router-dom";
 import { useContext } from "react";
@@ -228,59 +229,122 @@ function Navbar() {
               }}
               open={Boolean(anchorElUser)}
               onClose={handleCloseUserMenu}
+              slotProps={{
+                paper: {
+                  sx: {
+                    width: 170,
+                    borderRadius: 2,
+                    boxShadow: 5,
+                    color: "#15803D",
+                    px: 2,
+                    py: 1.5,
+                  },
+                },
+              }}
             >
-              {isAuthenticated ? (
-                [
-                  <Link
-                    to="/"
-                    style={{ textDecoration: "none", color: "black" }}
-                    key="profile"
-                  >
-                    <MenuItem onClick={handleCloseUserMenu}>
-                      <Typography sx={{ textAlign: "center" }}>
-                        <FaUserAlt style={{ marginRight: "8px" }} />
-                        Profile
-                      </Typography>
-                    </MenuItem>
-                  </Link>,
-                  <MenuItem
-                    onClick={() => {
-                      handleCloseUserMenu();
-                      logout();
-                    }}
-                    key="logout"
-                  >
-                    <Typography sx={{ textAlign: "center" }}>
-                      <FaSignOutAlt style={{ marginRight: "8px" }} />
-                      Logout
-                    </Typography>
-                  </MenuItem>,
-                ]
-              ) : (
-                <Link
-                  to="/login"
-                  style={{ textDecoration: "none", color: "black" }}
-                >
-                  <MenuItem onClick={handleCloseUserMenu}>
-                    <Typography
+              {isAuthenticated
+                ? [
+                    <Link
+                      key="profile"
+                      to="/profile"
+                      style={{ textDecoration: "none", color: "inherit" }}
+                    >
+                      <MenuItem
+                        onClick={handleCloseUserMenu}
+                        sx={{
+                          px: 2,
+                          pb: 1.5,
+                          display: "flex",
+                          alignItems: "center",
+                          gap: 1,
+                        }}
+                      >
+                        <AccountCircleIcon fontSize="small" />
+                        <Typography>Profile</Typography>
+                      </MenuItem>
+                    </Link>,
+
+                    <Link
+                      key="myOrders"
+                      to="/myOrders"
+                      style={{ textDecoration: "none", color: "inherit" }}
+                    >
+                      <MenuItem
+                        key="orders"
+                        onClick={handleCloseUserMenu}
+                        sx={{
+                          px: 2,
+                          py: 1.5,
+                          display: "flex",
+                          alignItems: "center",
+                          gap: 1,
+                        }}
+                      >
+                        <ReceiptLongIcon fontSize="small" />
+                        <Typography>My Orders</Typography>
+                      </MenuItem>
+                    </Link>,
+
+                    <Link
+                      key="settings"
+                      to="/settings"
+                      style={{ textDecoration: "none", color: "inherit" }}
+                    >
+                      <MenuItem
+                        key="settings"
+                        onClick={handleCloseUserMenu}
+                        sx={{
+                          px: 2,
+                          py: 1.5,
+                          display: "flex",
+                          alignItems: "center",
+                          gap: 1,
+                        }}
+                      >
+                        <SettingsIcon fontSize="small" />
+                        <Typography>Settings</Typography>
+                      </MenuItem>
+                    </Link>,
+
+                    <MenuItem
+                      key="logout"
+                      onClick={() => {
+                        handleCloseUserMenu();
+                        logout();
+                      }}
                       sx={{
-                        my: 2,
-                        color: "white",
-                        display: "block",
-                        textAlign: "center",
-                        transition: "color 0.2s ease, transform 0.2s ease",
-                        "&:hover": {
-                          transform: "scale(1.1)",
-                          color: "yellow",
-                        },
+                        px: 2,
+                        py: 1.5,
+                        display: "flex",
+                        alignItems: "center",
+                        gap: 1,
                       }}
                     >
-                      <FaSignInAlt style={{ marginRight: "8px" }} />
-                      Login
-                    </Typography>
-                  </MenuItem>
-                </Link>
-              )}
+                      <LogoutIcon fontSize="small" />
+                      <Typography>Logout</Typography>
+                    </MenuItem>,
+                  ]
+                : [
+                    <Link
+                      key="login"
+                      to="/login"
+                      style={{ textDecoration: "none", color: "inherit" }}
+                    >
+                      <MenuItem
+                        onClick={handleCloseUserMenu}
+                        sx={{
+                          px: 2,
+                          py: 1.5,
+                          display: "flex",
+                          alignItems: "center",
+                          gap: 1,
+                        }}
+                      >
+                        <LoginIcon fontSize="small" />
+                        <Typography>Login</Typography>
+                      </MenuItem>
+                    </Link>,
+                  ]}
             </Menu>
           </Toolbar>
         </Container>
@@ -340,6 +404,22 @@ function Navbar() {
                 >
                   <Button fullWidth startIcon={<AccountCircleIcon />}>
                     Profile
+                  </Button>
+                </Link>
+                <Link
+                  to="/myOrders"
+                  style={{ textDecoration: "none", color: "black" }}
+                >
+                  <Button fullWidth startIcon={<ReceiptLongIcon />}>
+                    My Orders
+                  </Button>
+                </Link>
+                <Link
+                  to="/settings"
+                  style={{ textDecoration: "none", color: "black" }}
+                >
+                  <Button fullWidth startIcon={<SettingsIcon />}>
+                    Settings
                   </Button>
                 </Link>
                 <Button fullWidth startIcon={<LogoutIcon />} onClick={logout}>
