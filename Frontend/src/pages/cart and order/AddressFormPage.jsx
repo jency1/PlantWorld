@@ -14,7 +14,7 @@ const gridRow = "grid grid-cols-1 md:grid-cols-2 gap-x-6 gap-y-1 md:gap-y-3";
 const AddressFormPage = () => {
   const navigate = useNavigate();
   const { showNotification } = useContext(NotificationContext);
-  const { setShippingInfo, checkoutHandler } = useContext(OrderContext);
+  const { checkoutHandler } = useContext(OrderContext);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -51,8 +51,7 @@ const AddressFormPage = () => {
       return;
     }
 
-    setShippingInfo(data);
-    await checkoutHandler();
+    await checkoutHandler(data);
   };
 
   return (

@@ -12,46 +12,20 @@ const RAZORPAY_KEY = import.meta.env.VITE_RAZORPAY_KEY;
 export const OrderContext = createContext({
   createOrder: () => {},
   checkoutHandler: () => {},
-  setShippingInfo: (data) => {},
-  shippingInfo: null,
   loading: false,
 });
 
 export function OrderProvider({ children }) {
   const navigate = useNavigate();
+  const [loading, setLoading] = useState(false);
+
   const { initiatePayment } = useRazorpayPayment();
   const { showNotification } = useContext(NotificationContext);
   const { token, user } = useContext(AuthContext);
   const { clearCart, cart } = useContext(CartContext);
 
-  const [loading, setLoading] = useState(false);
-
-  const [shippingInfo, setShippingInfo] = useState({
-    firstName: "",
-    lastName: "",
-    mobile: "",
-    email: "",
-    addressLine1: "",
-    addressLine2: "",
-    area: "",
-    city: "",
-    state: "",
-    pincode: "",
-  });
-
-  // Autofill shipping info based on logged in user
-  useEffect(() => {
-    if (user) {
-      setShippingInfo((prev) => ({
-        ...prev,
-        email: user.email || "",
-        mobile: user.phoneNumber || "",
-      }));
-    }
-  }, [user]);
-
   // Create Order
-  const createOrder = async ({ paymentId }) => {
+  const createOrder = async ({ paymentId, shippingData }) => {
     try {
       const res = await fetch(`${BASE_URL}/api/orders`, {
         method: "POST",
@@ -59,7 +33,7 @@ export function OrderProvider({ children }) {
           "Content-Type": "application/json",
           Authorization: `Bearer ${token}`,
         },
-        body: JSON.stringify({ paymentId, ...shippingInfo }),
+        body: JSON.stringify({ paymentId, ...shippingData }),
       });
 
       if (!res.ok) {
@@ -96,7 +70,7 @@ export function OrderProvider({ children }) {
   };
 
   // Razorpay Checkout Handler
-  const checkoutHandler = async () => {
+  const checkoutHandler = async (shippingData) => {
     const totalAmount = cart.reduce(
       (acc, item) => acc + Number(item.quantity) * Number(item.price),
       0
@@ -118,7 +92,7 @@ export function OrderProvider({ children }) {
         amount: amountInPaise,
         key: RAZORPAY_KEY,
         user,
-        onSuccess: (paymentId) => createOrder({ paymentId }),
+        onSuccess: (paymentId) => createOrder({ paymentId, shippingData }),
       });
     } catch (err) {
       showNotification("Payment initiation failed.", "error");
@@ -131,11 +105,9 @@ export function OrderProvider({ children }) {
     () => ({
       createOrder,
       checkoutHandler,
-      setShippingInfo,
-      shippingInfo,
       loading,
     }),
-    [shippingInfo, cart, loading]
+    [cart, loading]
   );
 
   return (
