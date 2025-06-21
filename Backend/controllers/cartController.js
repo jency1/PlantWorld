@@ -148,8 +148,6 @@ exports.getCartTotal = async (req, res) => {
   }
 };
 
-// controllers/cartController.js
-
 exports.getCart = async (req, res) => {
   try {
     const userId = req.user.id;
@@ -173,6 +171,37 @@ exports.getCart = async (req, res) => {
     return res.status(500).json({
       status: 'error',
       message: 'Failed to retrieve cart',
+      error: err.message,
+    });
+  }
+};
+
+exports.clearCart = async (req, res) => {
+  try {
+    const userId = req.user.id;
+
+    const user = await User.findById(userId);
+
+    if (!user || !user.cart) {
+      return res.status(404).json({
+        status: 'fail',
+        message: 'User or cart not found',
+      });
+    }
+
+    user.cart = []; // Clear all items from the cart
+
+    await user.save({ validateBeforeSave: false });
+
+    res.status(200).json({
+      status: 'success',
+      message: 'Cart cleared successfully',
+      cart: user.cart,
+    });
+  } catch (err) {
+    res.status(500).json({
+      status: 'error',
+      message: 'Failed to clear cart',
       error: err.message,
     });
   }
