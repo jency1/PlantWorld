@@ -28,6 +28,7 @@ router.delete(
   cartController.deleteCartItem
 );
 router.get('/cart', authController.protect, cartController.getCart);
+router.delete('/clear-cart', authController.protect, cartController.clearCart);
 router.get('/cart/total', authController.protect, cartController.getCartTotal);
 
 router.route('/').get(userController.getAllUsers);
