@@ -11,17 +11,18 @@ export default function FAQs() {
   };
 
   return (
-    <div className="bg-white pt-10 pb-24">
+    <div className="bg-white py-12">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <h2 className="text-2xl md:text-3xl lg:text-4xl text-success font-bold tracking-tight text-center mb-16">
+        <h2 className="text-xl md:text-3xl lg:text-4xl text-success font-bold text-center mb-12">
           Frequently Asked Questions
         </h2>
 
-        <div className="md:flex md:space-x-16">
-          {faqs[0].image && (
+        <div className="flex flex-col md:flex-row md:space-x-10">
+          {faqs[0]?.image && (
             <FAQImage image={faqs[0].image} alt={faqs[0].question} />
           )}
-          <div className={faqs[0].image ? "md:w-2/3" : "w-full"}>
+
+          <div className={faqs[0]?.image ? "md:w-2/3 w-full" : "w-full"}>
             {faqs.map((faq, index) => (
               <FAQItem
                 key={index}
