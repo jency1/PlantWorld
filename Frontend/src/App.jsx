@@ -23,6 +23,10 @@ import CartPage from "./pages/cart and order/CartPage";
 import OrderSuccessPage from "./pages/cart and order/OrderSuccessPage";
 import AddressFormPage from "./pages/cart and order/AddressFormPage";
 
+import ProfilePage from "./pages/user/ProfilePage";
+import MyOrdersPage from "./pages/user/MyOrdersPage";
+import SettingsPage from "./pages/user/SettingsPage";
+
 import AppLayout from "./AppLayout";
 import ScrollToTop from "./ScrollToTop";
 
@@ -110,6 +114,30 @@ const router = createBrowserRouter([
         path: "/resetPassword/:token",
         element: <ResetPasswordPage />,
         action: resetPasswordAction,
+      },
+      {
+        path: "/profile",
+        element: (
+          <ProtectedRoute>
+            <ProfilePage />
+          </ProtectedRoute>
+        ),
+      },
+      {
+        path: "/myOrders",
+        element: (
+          <ProtectedRoute>
+            <MyOrdersPage />
+          </ProtectedRoute>
+        ),
+      },
+      {
+        path: "/settings",
+        element: (
+          <ProtectedRoute>
+            <SettingsPage />
+          </ProtectedRoute>
+        ),
       },
     ],
   },
