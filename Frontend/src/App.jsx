@@ -26,6 +26,7 @@ import { AuthProvider } from "./context/AuthContext";
 import { CartProvider } from "./context/CartContext";
 import { NotificationProvider } from "./context/NotificationContext";
 import { OrderProvider } from "./context/OrderContext";
+import ProtectedRoute from "./ProtectedRoute";
 
 const router = createBrowserRouter([
   {
@@ -78,15 +79,27 @@ const router = createBrowserRouter([
       },
       {
         path: "/cart",
-        element: <CartPage />,
+        element: (
+          <ProtectedRoute>
+            <CartPage />
+          </ProtectedRoute>
+        ),
       },
       {
         path: "/cart/address",
-        element: <AddressFormPage />,
+        element: (
+          <ProtectedRoute>
+            <AddressFormPage />
+          </ProtectedRoute>
+        ),
       },
       {
         path: "/order-success",
-        element: <OrderSuccessPage />,
+        element: (
+          <ProtectedRoute>
+            <OrderSuccessPage />
+          </ProtectedRoute>
+        ),
       },
       {
         path: "/resetPassword/:token",
