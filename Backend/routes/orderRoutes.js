@@ -20,4 +20,11 @@ router.patch(
   authController.protect,
   orderController.cancelOrder
 );
+
+router.get(
+  '/:orderId',
+  authController.protect,
+  authController.restrictTo('admin', 'owner'),
+  orderController.getOrderById
+);
 module.exports = router;

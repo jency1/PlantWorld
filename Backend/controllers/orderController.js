@@ -156,3 +156,21 @@ exports.cancelOrder = catchAsync(async (req, res) => {
     order,
   });
 });
+
+exports.getOrderById = catchAsync(async (req, res) => {
+  const { orderId } = req.params;
+
+  const order = await Order.findById(orderId).populate('items.plantId user');
+
+  if (!order) {
+    return res.status(404).json({
+      status: 'fail',
+      message: 'Order not found',
+    });
+  }
+
+  res.status(200).json({
+    status: 'success',
+    order,
+  });
+});
