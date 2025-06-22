@@ -11,7 +11,7 @@ const BASE_URL = import.meta.env.VITE_BASE_URL;
 
 const CartPage = () => {
   const navigate = useNavigate();
-  const { user } = useContext(AuthContext);
+  const { user, token } = useContext(AuthContext);
   const { cart, clearCart } = useContext(CartContext);
   const [totalAmount, setTotalAmount] = useState(0);
 
@@ -24,7 +24,6 @@ const CartPage = () => {
   useEffect(() => {
     const fetchTotalAmount = async () => {
       try {
-        const token = localStorage.getItem("token");
         const response = await fetch(`${BASE_URL}/api/users/cart/total`, {
           headers: {
             Authorization: `Bearer ${token}`,
