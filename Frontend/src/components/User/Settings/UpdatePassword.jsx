@@ -128,7 +128,7 @@ export default function UpdatePassword() {
         <button
           type="submit"
           disabled={loading}
-          className={`inline-block bg-green-600 hover:bg-green-700 text-white text-sm md:text-sm py-2 px-3 rounded transition duration-200 ${
+          className={`inline-block bg-green-700 hover:bg-green-800 text-white text-sm md:text-sm py-2 px-3 rounded transition duration-200 ${
             loading ? "opacity-50 cursor-not-allowed" : ""
           }`}
         >
