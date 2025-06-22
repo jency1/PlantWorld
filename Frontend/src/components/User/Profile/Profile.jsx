@@ -6,8 +6,8 @@ export default function Profile() {
   const { user } = useContext(AuthContext);
 
   return (
-    <div className="py-4 relative flex justify-center items-center bg-[#ecffed]">
-      <div className="flex flex-col w-[85%] md:w-[80%] lg:max-w-[55%] bg-white/80 rounded-[10px] shadow-lg mt-10 md:mt-12 mb-5 p-6 lg:p-10">
+    <div className="pb-5 relative flex justify-center items-center bg-[#ecffed]">
+      <div className="flex flex-col w-[85%] md:w-[80%] lg:max-w-[55%] rounded-[10px] mt-10 md:mt-8 mb-5 p-6 lg:p-10">
         <h2 className="text-success font-bold text-xl md:text-3xl text-center mb-8 font-serif">
           My Profile
         </h2>
