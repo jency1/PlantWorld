@@ -186,3 +186,24 @@ exports.getAllOrders = catchAsync(async (req, res) => {
     orders,
   });
 });
+
+exports.getMyOrderById = catchAsync(async (req, res) => {
+  const { orderId } = req.params;
+
+  const order = await Order.findOne({
+    _id: orderId,
+    user: req.user.id,
+  }).populate('items.plantId');
+
+  if (!order) {
+    return res.status(404).json({
+      status: 'fail',
+      message: 'Order not found or does not belong to you',
+    });
+  }
+
+  res.status(200).json({
+    status: 'success',
+    order,
+  });
+});

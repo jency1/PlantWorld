@@ -13,6 +13,12 @@ router.get(
 );
 router.get('/myorders', authController.protect, orderController.getMyOrders);
 
+router.get(
+  '/myorders/:orderId',
+  authController.protect,
+  orderController.getMyOrderById
+);
+
 router.patch(
   '/:orderId/status',
   authController.protect,
