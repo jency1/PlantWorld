@@ -6,6 +6,7 @@ import { NotificationContext } from "./NotificationContext";
 export const AuthContext = createContext({
   token: null,
   user: null,
+  setUser: () => {},
   isAuthenticated: false,
   login: (token, userData) => {},
   logout: () => {},
@@ -52,6 +53,7 @@ export function AuthProvider({ children }) {
       value={{
         token,
         user,
+        setUser,
         isAuthenticated: !!token,
         login,
         logout,

@@ -21,7 +21,7 @@ export function CartProvider({ children }) {
   const [cart, setCart] = useState([]);
   const [cartLoading, setCartLoading] = useState(true);
   const [addToCartLoading, setAddToCartLoading] = useState(false);
-  const { user, isAuthenticated } = useContext(AuthContext);
+  const { user, token, isAuthenticated } = useContext(AuthContext);
   const { showNotification } = useContext(NotificationContext);
 
   // Sync user.cart into cart state after login
@@ -66,7 +66,6 @@ export function CartProvider({ children }) {
 
   // Helper to check for token and handle error
   const checkAuthToken = () => {
-    const token = localStorage.getItem("token");
     if (!token) {
       showNotification("Please login to proceed.", "error");
       console.error("Token Authorization error");

@@ -50,16 +50,16 @@ export function OrderProvider({ children }) {
       clearCart();
       localStorage.removeItem("cart");
 
-      // Add new order to localStorage user object
-      const storedUser = JSON.parse(localStorage.getItem("user"));
-      if (storedUser) {
-        const updatedUser = {
-          ...storedUser,
-          orders: [...(storedUser.orders || []), newOrder], // Add new order
-          cart: [],
-        };
-        localStorage.setItem("user", JSON.stringify(updatedUser));
-      }
+      // // Add new order to localStorage user object
+      // const storedUser = JSON.parse(localStorage.getItem("user"));
+      // if (storedUser) {
+      //   const updatedUser = {
+      //     ...storedUser,
+      //     orders: [...(storedUser.orders || []), newOrder], // Add new order
+      //     cart: [],
+      //   };
+      //   localStorage.setItem("user", JSON.stringify(updatedUser));
+      // }
 
       showNotification("Order placed successfully!", "success");
       navigate("/order-success");
