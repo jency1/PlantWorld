@@ -5,7 +5,12 @@ const authController = require('../controllers/authController');
 const router = express.Router();
 
 router.post('/', authController.protect, orderController.createOrder);
-
+router.get(
+  '/',
+  authController.protect,
+  authController.restrictTo('admin', 'owner'),
+  orderController.getAllOrders
+);
 router.get('/myorders', authController.protect, orderController.getMyOrders);
 
 router.patch(

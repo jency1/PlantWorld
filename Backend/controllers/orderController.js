@@ -174,3 +174,15 @@ exports.getOrderById = catchAsync(async (req, res) => {
     order,
   });
 });
+
+exports.getAllOrders = catchAsync(async (req, res) => {
+  const orders = await Order.find()
+    .populate('items.plantId')
+    .populate('user', 'name email');
+
+  res.status(200).json({
+    status: 'success',
+    results: orders.length,
+    orders,
+  });
+});
