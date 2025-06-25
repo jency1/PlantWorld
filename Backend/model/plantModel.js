@@ -42,6 +42,16 @@ const plantSchema = new mongoose.Schema({
 
     trim: true,
   },
+  quantity: {
+    type: Number,
+    required: [true, 'A plant must have a quantity'],
+    min: [0, 'Quantity cannot be negative'],
+  },
+  availability: {
+    type: String,
+    enum: ['In Stock', 'Out Of Stock', 'Up Coming'],
+    default: 'In Stock',
+  },
   color: {
     type: [String],
     required: [true, 'A plant must have at least one color'],
