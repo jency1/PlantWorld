@@ -9,10 +9,6 @@ const faqSchema = new mongoose.Schema({
     type: String,
     required: [true, 'FAQ must have an answer'],
   },
-  image: {
-    type: String,
-    default: '',
-  },
 });
 
 const FAQ = mongoose.model('FAQ', faqSchema);

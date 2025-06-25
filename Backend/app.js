@@ -11,6 +11,7 @@ const imageRouter = require('./routes/imageRoutes');
 const AppError = require('./utils/appError');
 const contactRoutes = require('./routes/contactRoutes');
 const globalErrorHandler = require('./controllers/errorController');
+const faqRouter = require('./routes/faqRoutes');
 
 const app = express();
 
@@ -37,6 +38,7 @@ app.use('/api/payment', paymentRouter);
 app.use('/images', imageRouter);
 app.use('/api/contact', contactRoutes);
 app.use('/api/orders', orderRouter);
+app.use('/api/faqs', faqRouter);
 
 app.all('*', (req, res, next) => {
   next(new AppError(`Can't find ${req.originalUrl} on this server`, 404));
