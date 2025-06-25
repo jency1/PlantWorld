@@ -290,3 +290,69 @@ exports.clearCart = async (req, res) => {
     });
   }
 };
+
+exports.checkCartAvailability = async (req, res) => {
+  try {
+    const userId = req.user.id;
+    const user = await User.findById(userId).populate('cart.plantId');
+
+    if (!user || !user.cart || user.cart.length === 0) {
+      return res.status(400).json({
+        status: 'fail',
+        message: 'Cart is empty or user not found',
+      });
+    }
+
+    const unavailableItems = [];
+
+    for (const item of user.cart) {
+      const plant = await require('./../model/plantModel').findById(
+        item.plantId._id || item.plantId
+      );
+
+      if (!plant) {
+        unavailableItems.push({
+          name: '[Deleted Plant]',
+          message: 'Plant no longer exists',
+        });
+        continue;
+      }
+
+      if (plant.quantity < item.quantity) {
+        unavailableItems.push({
+          name: plant.name,
+          requested: item.quantity,
+          available: plant.quantity,
+          message: `Only ${plant.quantity} left in stock`,
+        });
+      } else if (plant.availability === 'Out Of Stock') {
+        unavailableItems.push({
+          name: plant.name,
+          requested: item.quantity,
+          available: 0,
+          message: 'Currently out of stock',
+        });
+      }
+    }
+
+    if (unavailableItems.length > 0) {
+      return res.status(200).json({
+        status: 'fail',
+        message:
+          'Some items in your cart are no longer available in the desired quantity',
+        unavailableItems,
+      });
+    }
+
+    return res.status(200).json({
+      status: 'success',
+      message: 'All items in cart are available for checkout',
+    });
+  } catch (err) {
+    res.status(500).json({
+      status: 'error',
+      message: 'Failed to check cart availability',
+      error: err.message,
+    });
+  }
+};
