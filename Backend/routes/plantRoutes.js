@@ -25,6 +25,11 @@ router
 
 router.route('/plantTotal').get(plantController.getTotalPlants);
 
+router.get(
+  '/availability/:availability',
+  plantController.getPlantsByAvailability
+);
+
 router
   .route('/:id')
   .get(plantController.getPlant)

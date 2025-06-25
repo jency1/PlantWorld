@@ -110,6 +110,32 @@ exports.getPlant = catchAsync(async (req, res, next) => {
 //   });
 // });
 
+// exports.updatePlant = catchAsync(async (req, res, next) => {
+//   // If a new image is uploaded, update imageCover
+//   if (req.file) {
+//     const host = req.get('host');
+//     const protocol = req.protocol;
+//     const imageUrl = `${protocol}://${host}/images/${req.file.filename}`;
+//     req.body.imageCover = imageUrl;
+//   }
+
+//   const updatedPlant = await Plant.findByIdAndUpdate(req.params.id, req.body, {
+//     new: true,
+//     runValidators: true,
+//   });
+
+//   if (!updatedPlant) {
+//     return next(new AppError('No plant found with that ID', 404));
+//   }
+
+//   res.status(200).json({
+//     status: 'success',
+//     data: {
+//       plant: updatedPlant,
+//     },
+//   });
+// });
+
 exports.updatePlant = catchAsync(async (req, res, next) => {
   // If a new image is uploaded, update imageCover
   if (req.file) {
@@ -119,14 +145,27 @@ exports.updatePlant = catchAsync(async (req, res, next) => {
     req.body.imageCover = imageUrl;
   }
 
+  // Fetch plant by ID
+  const plant = await Plant.findById(req.params.id);
+
+  if (!plant) {
+    return next(new AppError('No plant found with that ID', 404));
+  }
+
+  // Set availability based on updated quantity (if quantity is being updated)
+  if (req.body.quantity !== undefined) {
+    if (req.body.quantity === 0) {
+      req.body.availability = 'Out Of Stock';
+    } else if (plant.availability === 'Out Of Stock') {
+      req.body.availability = 'In Stock';
+    }
+  }
+
+  // Apply update
   const updatedPlant = await Plant.findByIdAndUpdate(req.params.id, req.body, {
     new: true,
     runValidators: true,
   });
-
-  if (!updatedPlant) {
-    return next(new AppError('No plant found with that ID', 404));
-  }
 
   res.status(200).json({
     status: 'success',
@@ -189,5 +228,27 @@ exports.getTotalPlants = catchAsync(async (req, res, next) => {
     status: 'success',
     totalPlants, // 👈 clearer and more meaningful than `results`
     data: null,
+  });
+});
+
+exports.getPlantsByAvailability = catchAsync(async (req, res, next) => {
+  // Normalize: 'in-stock' -> 'In Stock'
+  const availabilityParam = req.params.availability;
+
+  const normalizedAvailability = availabilityParam
+    .split('-') // ['in', 'stock']
+    .map((word) => word.charAt(0).toUpperCase() + word.slice(1).toLowerCase()) // ['In', 'Stock']
+    .join(' '); // 'In Stock'
+
+  console.log('Normalized availability:', normalizedAvailability);
+
+  const plants = await Plant.find({ availability: normalizedAvailability });
+
+  res.status(200).json({
+    status: 'success',
+    results: plants.length,
+    data: {
+      plants,
+    },
   });
 });

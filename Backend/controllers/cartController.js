@@ -2,6 +2,47 @@
 const User = require('./../model/userModel');
 // const User = require('../models/userModel'); // adjust the path if needed
 
+// exports.addToCart = async (req, res) => {
+//   try {
+//     const { plantId, quantity, price } = req.body;
+//     const userId = req.user.id;
+
+//     const user = await User.findById(userId);
+
+//     if (!user.cart) {
+//       user.cart = []; // Initialize cart if undefined
+//     }
+
+//     const existingItemIndex = user.cart.findIndex(
+//       (item) => item.plantId && item.plantId.toString() === plantId
+//     );
+
+//     if (existingItemIndex >= 0) {
+//       // If item already in cart, update quantity and price
+//       user.cart[existingItemIndex].quantity += quantity;
+//       user.cart[existingItemIndex].price = price;
+//       user.cart[existingItemIndex].total =
+//         user.cart[existingItemIndex].quantity *
+//         user.cart[existingItemIndex].price;
+//     } else {
+//       // Add new item to cart
+//       total = quantity * price;
+//       user.cart.push({ plantId, quantity, price, total });
+//     }
+
+//     // Save user without triggering password validation
+//     await user.save({ validateBeforeSave: false });
+
+//     res.status(200).json({ status: 'success', cart: user.cart });
+//   } catch (err) {
+//     res.status(500).json({
+//       status: 'error',
+//       message: 'Failed to add to cart',
+//       error: err.message,
+//     });
+//   }
+// };
+
 exports.addToCart = async (req, res) => {
   try {
     const { plantId, quantity, price } = req.body;
@@ -13,9 +54,38 @@ exports.addToCart = async (req, res) => {
       user.cart = []; // Initialize cart if undefined
     }
 
+    const Plant = require('./../model/plantModel');
+    const plant = await Plant.findById(plantId);
+    if (!plant) {
+      return res
+        .status(404)
+        .json({ status: 'fail', message: 'Plant not found' });
+    }
+
+    // Check availability
+    if (plant.availability === 'Out Of Stock') {
+      return res.status(400).json({
+        status: 'fail',
+        message: 'This plant is currently out of stock',
+      });
+    }
+
+    // Check if enough stock is available
     const existingItemIndex = user.cart.findIndex(
       (item) => item.plantId && item.plantId.toString() === plantId
     );
+
+    const totalRequestedQty =
+      existingItemIndex >= 0
+        ? user.cart[existingItemIndex].quantity + quantity
+        : quantity;
+
+    if (totalRequestedQty > plant.quantity) {
+      return res.status(400).json({
+        status: 'fail',
+        message: `Only ${plant.quantity} quantities are in stock`,
+      });
+    }
 
     if (existingItemIndex >= 0) {
       // If item already in cart, update quantity and price
@@ -62,6 +132,20 @@ exports.updateCart = async (req, res) => {
       return res
         .status(404)
         .json({ status: 'fail', message: 'Item not found in cart' });
+    }
+
+    const plant = await require('./../model/plantModel').findById(plantId);
+    if (!plant) {
+      return res
+        .status(404)
+        .json({ status: 'fail', message: 'Plant not found' });
+    }
+
+    if (quantity !== undefined && quantity > plant.quantity) {
+      return res.status(400).json({
+        status: 'fail',
+        message: `Only ${plant.quantity} quantities are in stock`,
+      });
     }
 
     if (quantity !== undefined) item.quantity = quantity;

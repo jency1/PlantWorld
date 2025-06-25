@@ -46,6 +46,7 @@ const plantSchema = new mongoose.Schema({
     type: Number,
     required: [true, 'A plant must have a quantity'],
     min: [0, 'Quantity cannot be negative'],
+    default: 20,
   },
   availability: {
     type: String,

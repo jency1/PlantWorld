@@ -2,6 +2,78 @@
 const Order = require('../model/orderModel');
 const User = require('../model/userModel');
 const catchAsync = require('../utils/catchAsync');
+const Plant = require('../model/plantModel');
+
+// exports.createOrder = catchAsync(async (req, res) => {
+//   const {
+//     firstName,
+//     lastName,
+//     mobile,
+//     email,
+//     addressLine1,
+//     addressLine2,
+//     area,
+//     city,
+//     state,
+//     pincode,
+//     paymentId,
+//   } = req.body;
+
+//   // Get user and cart
+//   const user = await User.findById(req.user.id).select('+cart');
+//   if (!user || !user.cart || user.cart.length === 0) {
+//     return res.status(400).json({ status: 'fail', message: 'Cart is empty' });
+//   }
+
+//   // Add 'total' field per item
+//   const items = user.cart.map((item) => ({
+//     plantId: item.plantId._id || item.plantId,
+//     quantity: item.quantity,
+//     price: item.price,
+//     total: item.quantity * item.price,
+//   }));
+
+//   // Calculate overall order total
+//   const orderTotal = items.reduce((acc, item) => acc + item.total, 0);
+
+//   const expectedDelivery = new Date(Date.now() + 7 * 24 * 60 * 60 * 1000);
+
+//   // Create order
+//   const order = await Order.create({
+//     user: req.user.id,
+//     items,
+//     orderTotal,
+//     paymentId,
+//     expectedDelivery,
+//     status: [{ stage: 'Order Received' }],
+//     firstName,
+//     lastName,
+//     mobile,
+//     email,
+//     addressLine1,
+//     addressLine2,
+//     area,
+//     city,
+//     state,
+//     pincode,
+//   });
+
+//   // Link order to user and clear cart
+//   user.orders.push(order._id);
+//   user.cart = [];
+//   await user.save({ validateBeforeSave: false });
+
+//   res.status(201).json({
+//     status: 'success',
+//     order,
+//   });
+// });
+
+// controllers/orderController.js
+// const Order = require('../model/orderModel');
+// const User = require('../model/userModel');
+// const Plant = require('../model/plantModel');
+// const catchAsync = require('../utils/catchAsync');
 
 exports.createOrder = catchAsync(async (req, res) => {
   const {
@@ -18,13 +90,14 @@ exports.createOrder = catchAsync(async (req, res) => {
     paymentId,
   } = req.body;
 
-  // Get user and cart
-  const user = await User.findById(req.user.id).select('+cart');
+  // 1. Get user and cart
+  const user = await User.findById(req.user.id).populate('cart.plantId');
+
   if (!user || !user.cart || user.cart.length === 0) {
     return res.status(400).json({ status: 'fail', message: 'Cart is empty' });
   }
 
-  // Add 'total' field per item
+  // 2. Prepare items for order
   const items = user.cart.map((item) => ({
     plantId: item.plantId._id || item.plantId,
     quantity: item.quantity,
@@ -32,12 +105,11 @@ exports.createOrder = catchAsync(async (req, res) => {
     total: item.quantity * item.price,
   }));
 
-  // Calculate overall order total
+  // 3. Calculate total
   const orderTotal = items.reduce((acc, item) => acc + item.total, 0);
+  const expectedDelivery = new Date(Date.now() + 7 * 24 * 60 * 60 * 1000); // +7 days
 
-  const expectedDelivery = new Date(Date.now() + 7 * 24 * 60 * 60 * 1000);
-
-  // Create order
+  // 4. Create order
   const order = await Order.create({
     user: req.user.id,
     items,
@@ -57,11 +129,27 @@ exports.createOrder = catchAsync(async (req, res) => {
     pincode,
   });
 
-  // Link order to user and clear cart
+  // 5. Subtract quantity from each plant
+  for (const item of items) {
+    const plant = await Plant.findById(item.plantId);
+    if (plant) {
+      plant.quantity -= item.quantity;
+
+      if (plant.quantity <= 0) {
+        plant.quantity = 0;
+        plant.availability = 'Out Of Stock';
+      }
+
+      await plant.save({ validateBeforeSave: false });
+    }
+  }
+
+  // 6. Clear cart and push order to user
   user.orders.push(order._id);
   user.cart = [];
   await user.save({ validateBeforeSave: false });
 
+  // 7. Response
   res.status(201).json({
     status: 'success',
     order,
