@@ -10,16 +10,16 @@ import ShopPageLayout from "./pages/CLIENT/shop/ShopPageLayout";
 import DescriptionLayout from "./pages/CLIENT/shop/DescriptionLayout";
 
 import Contact from "./pages/CLIENT/Contact";
-import contactFormAction from "./actions/CLIENT/contactFormAction";
+import contactFormAction from "./actions/contactFormAction";
 
 import AboutUs from "./pages/CLIENT/AboutUs";
 import FAQs from "./pages/CLIENT/FAQs";
 import BlogPage from "./pages/CLIENT/BlogPage";
 
 import LoginPage from "./pages/CLIENT/login/LoginPage";
-import loginAction from "./actions/CLIENT/loginAction";
+import loginAction from "./actions/loginAction";
 import ResetPasswordPage from "./pages/CLIENT/login/ResetPasswordPage";
-import resetPasswordAction from "./actions/CLIENT/resetPasswordAction";
+import resetPasswordAction from "./actions/resetPasswordAction";
 
 import CartPage from "./pages/CLIENT/cart and order/CartPage";
 import OrderSuccessPage from "./pages/CLIENT/cart and order/OrderSuccessPage";
@@ -191,6 +191,7 @@ const router = createBrowserRouter([
         </NotificationProvider>
       </>
     ),
+    action: loginAction,
   },
   {
     path: "/admin",

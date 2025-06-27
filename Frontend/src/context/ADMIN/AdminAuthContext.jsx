@@ -1,9 +1,7 @@
 import { createContext, useState, useEffect, useContext } from "react";
 import { useNavigate } from "react-router-dom";
-
 import { NotificationContext } from "../NotificationContext";
 
-// Context structure
 export const AdminAuthContext = createContext({
   adminToken: null,
   admin: null,
@@ -12,16 +10,19 @@ export const AdminAuthContext = createContext({
   isAdminAuthenticated: false,
 });
 
-// Provider
 export function AdminAuthProvider({ children }) {
   const [adminToken, setAdminToken] = useState(
     localStorage.getItem("adminToken")
   );
-  const [admin, setAdmin] = useState(null);
+  const [admin, setAdmin] = useState(() => {
+    const storedAdmin = localStorage.getItem("admin");
+    return storedAdmin ? JSON.parse(storedAdmin) : null;
+  });
 
   const navigate = useNavigate();
   const { showNotification } = useContext(NotificationContext);
 
+  // Auto-load admin from localStorage if token exists
   useEffect(() => {
     if (adminToken && !admin) {
       const storedAdmin = localStorage.getItem("admin");
@@ -32,6 +33,11 @@ export function AdminAuthProvider({ children }) {
   }, [adminToken, admin]);
 
   const loginAdmin = (token, adminData) => {
+    if (adminData?.role !== "admin") {
+      showNotification("Access denied. Not an admin account.", "error");
+      return;
+    }
+
     setAdminToken(token);
     setAdmin(adminData);
     localStorage.setItem("adminToken", token);
@@ -55,7 +61,7 @@ export function AdminAuthProvider({ children }) {
         admin,
         loginAdmin,
         logoutAdmin,
-        isAdminAuthenticated: !!adminToken,
+        isAdminAuthenticated: !!adminToken && admin?.role === "admin",
       }}
     >
       {children}

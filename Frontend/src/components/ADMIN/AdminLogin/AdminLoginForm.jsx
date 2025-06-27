@@ -1,21 +1,28 @@
-import { Form, useActionData, useNavigation } from "react-router-dom";
+import {
+  Form,
+  useActionData,
+  useNavigation,
+  useNavigate,
+} from "react-router-dom";
 import { useEffect, useContext } from "react";
-
-import { AuthContext } from "../../../context/CLIENT/AuthContext";
+import { AdminAuthContext } from "../../../context/ADMIN/AdminAuthContext";
 import { useNotification } from "../../../context/NotificationContext";
 
-const LoginForm = ({ handleForgotPassword }) => {
-  const { login } = useContext(AuthContext);
+const AdminLoginForm = ({ handleForgotPassword }) => {
+  const { loginAdmin } = useContext(AdminAuthContext);
   const { showNotification } = useNotification();
   const actionData = useActionData();
   const navigation = useNavigation();
   const loading = navigation.state === "submitting";
 
-  // Handle login on successful response
   useEffect(() => {
     if (actionData?.success && actionData.token && actionData.user) {
-      showNotification("Login successful!", "success");
-      login(actionData.token, actionData.user);
+      if (actionData.user.role === "admin") {
+        loginAdmin(actionData.token, actionData.user);
+        showNotification("Admin Login successful!", "success");
+      } else {
+        showNotification("Access denied. Not an admin account.", "error");
+      }
     } else if (actionData?.error) {
       showNotification(actionData.error, "error");
     }
@@ -30,7 +37,7 @@ const LoginForm = ({ handleForgotPassword }) => {
         type="email"
         id="email"
         name="email"
-        placeholder="xyz@example.com"
+        placeholder="admin@example.com"
         required
         className="w-full px-[6px] py-[3px] lg:px-[12px] lg:py-[8px] mb-3 rounded border border-gray-300 text-[0.8rem] lg:text-[1rem]"
       />
@@ -62,7 +69,8 @@ const LoginForm = ({ handleForgotPassword }) => {
         disabled={loading}
         className={`w-full bg-[#4ead54] text-white font-bold px-[2px] py-[3px] lg:px-[12px] lg:py-[10px] rounded border-none text-[0.8rem] lg:text-[1.1rem] cursor-pointer transition-colors duration-300 ${
           loading ? "opacity-60 cursor-not-allowed" : "hover:bg-[#499a4e]"
-        }`}
+        }
+        `}
       >
         {loading ? (
           <div className="flex items-center justify-center">
@@ -77,4 +85,4 @@ const LoginForm = ({ handleForgotPassword }) => {
   );
 };
 
-export default LoginForm;
+export default AdminLoginForm;

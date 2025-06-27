@@ -20,7 +20,7 @@ const LoginPage = () => {
   return (
     <div className="relative flex justify-center items-center min-h-screen bg-[#ecffed] p-2 md:p-4">
       <BackToHomeButton />
-      <div className="flex w-[90%] md:w-[80%] max-w-[1200px] bg-white/80 rounded-[10px] shadow-lg flex-col sm:flex-row mt-10 mb-2 md:mt-3">
+      <div className="flex w-[90%] md:w-[80%] max-w-[1200px] bg-white/80 rounded-[10px] shadow-lg flex-col sm:flex-row mt-16 lg:mt-10 mb-4 md:mt-3">
         <LeftSection />
         <RightSection
           isSignup={isSignup}
