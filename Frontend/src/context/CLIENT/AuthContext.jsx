@@ -1,7 +1,7 @@
 import { createContext, useState, useEffect, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 
-import { NotificationContext } from "./NotificationContext";
+import { NotificationContext } from "../NotificationContext";
 
 // Context structure
 export const AuthContext = createContext({

@@ -9,7 +9,7 @@ import {
 } from "@mui/material";
 import WarningAmberIcon from "@mui/icons-material/WarningAmber";
 
-import { useNotification } from "../../../../context/CLIENT/NotificationContext";
+import { useNotification } from "../../../../context/NotificationContext";
 import { AuthContext } from "../../../../context/CLIENT/AuthContext";
 
 export default function CancelOrder({

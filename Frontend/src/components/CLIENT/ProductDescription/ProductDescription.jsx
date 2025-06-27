@@ -3,7 +3,7 @@ import { FaMinus, FaPlus } from "react-icons/fa";
 import { FcInfo } from "react-icons/fc";
 
 import LoadingSpinner from "../../../ui/LoadingSpinner";
-import { useNotification } from "../../../context/CLIENT/NotificationContext";
+import { useNotification } from "../../../context/NotificationContext";
 import { CartContext } from "../../../context/CLIENT/CartContext";
 
 export default function ProductDescription({ plantId }) {

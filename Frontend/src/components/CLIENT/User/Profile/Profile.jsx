@@ -3,7 +3,7 @@ import { MdEdit } from "react-icons/md";
 
 import EditFieldDialog from "./EditFieldDialog";
 import { AuthContext } from "../../../../context/CLIENT/AuthContext";
-import { useNotification } from "../../../../context/CLIENT/NotificationContext";
+import { useNotification } from "../../../../context/NotificationContext";
 
 export default function Profile() {
   const { user, token, setUser } = useContext(AuthContext);

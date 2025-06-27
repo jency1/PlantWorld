@@ -3,7 +3,7 @@ import { useActionData } from "react-router-dom";
 import Logo from "./Logo";
 import LoginForm from "./LoginForm";
 
-import { useNotification } from "../../../context/CLIENT/NotificationContext";
+import { useNotification } from "../../../context/NotificationContext";
 
 const RightSection = () => {
   const actionData = useActionData(); // get data returned from contactFormAction

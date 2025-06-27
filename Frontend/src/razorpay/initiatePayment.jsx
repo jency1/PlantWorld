@@ -1,5 +1,5 @@
 import { useContext } from "react";
-import { NotificationContext } from "../context/CLIENT/NotificationContext";
+import { NotificationContext } from "../context/NotificationContext";
 import { AuthContext } from "../context/CLIENT/AuthContext";
 
 const BASE_URL = import.meta.env.VITE_BASE_URL;

@@ -5,7 +5,7 @@ import EmptyOrdersMessage from "./EmptyOrdersMessage";
 
 import LoadingSpinner from "../../../../ui/LoadingSpinner";
 import { AuthContext } from "../../../../context/CLIENT/AuthContext";
-import { NotificationContext } from "../../../../context/CLIENT/NotificationContext";
+import { NotificationContext } from "../../../../context/NotificationContext";
 
 export default function Orders() {
   const { token } = useContext(AuthContext);

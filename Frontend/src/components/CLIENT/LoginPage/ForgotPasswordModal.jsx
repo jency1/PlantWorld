@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useNotification } from "../../../context/CLIENT/NotificationContext";
+import { useNotification } from "../../../context/NotificationContext";
 
 const ForgotPasswordModal = ({ handleClose }) => {
   const [email, setEmail] = useState("");

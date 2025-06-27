@@ -1,6 +1,6 @@
 import { createContext, useContext, useEffect, useState } from "react";
 
-import { NotificationContext } from "./NotificationContext";
+import { NotificationContext } from "../NotificationContext";
 
 export const PlantContext = createContext({
   plants: [],

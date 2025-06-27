@@ -1,7 +1,7 @@
 import { createContext, useContext, useState, useMemo, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
-import { NotificationContext } from "./NotificationContext";
+import { NotificationContext } from "../NotificationContext";
 import { AuthContext } from "./AuthContext";
 import { CartContext } from "./CartContext";
 import { useRazorpayPayment } from "../../razorpay/initiatePayment";

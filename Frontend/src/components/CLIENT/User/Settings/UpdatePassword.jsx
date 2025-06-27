@@ -2,7 +2,7 @@ import React, { useState, useContext } from "react";
 import { Form } from "react-router-dom";
 
 import { AuthContext } from "../../../../context/CLIENT/AuthContext";
-import { useNotification } from "../../../../context/CLIENT/NotificationContext";
+import { useNotification } from "../../../../context/NotificationContext";
 
 const BASE_URL = import.meta.env.VITE_BASE_URL;
 

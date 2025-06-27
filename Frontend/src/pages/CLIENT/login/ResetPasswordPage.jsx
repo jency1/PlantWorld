@@ -6,7 +6,7 @@ import {
 } from "react-router-dom";
 import { useEffect } from "react";
 
-import { useNotification } from "../../../context/CLIENT/NotificationContext";
+import { useNotification } from "../../../context/NotificationContext";
 
 const ResetPasswordPage = () => {
   const navigate = useNavigate();

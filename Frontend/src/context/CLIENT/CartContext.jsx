@@ -1,7 +1,7 @@
 import { createContext, useContext, useEffect, useState } from "react";
 
 import { AuthContext } from "./AuthContext";
-import { NotificationContext } from "./NotificationContext";
+import { NotificationContext } from "../NotificationContext";
 
 export const CartContext = createContext({
   cart: [],

@@ -33,7 +33,7 @@ import ScrollToTop from "./ScrollToTop";
 import { PlantContextProvider } from "./context/CLIENT/PlantsContext";
 import { AuthProvider } from "./context/CLIENT/AuthContext";
 import { CartProvider } from "./context/CLIENT/CartContext";
-import { NotificationProvider } from "./context/CLIENT/NotificationContext";
+import { NotificationProvider } from "./context/NotificationContext";
 import { OrderProvider } from "./context/CLIENT/OrderContext";
 import ProtectedRoute from "./ProtectedRoute";
 

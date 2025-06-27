@@ -2,7 +2,7 @@ import { Form, useActionData, useNavigation } from "react-router-dom";
 import { useEffect, useContext } from "react";
 
 import { AuthContext } from "../../../context/CLIENT/AuthContext";
-import { useNotification } from "../../../context/CLIENT/NotificationContext";
+import { useNotification } from "../../../context/NotificationContext";
 
 const LoginForm = ({ handleForgotPassword }) => {
   const { login } = useContext(AuthContext);

@@ -2,7 +2,7 @@ import React, { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 import { AuthContext } from "../../../../context/CLIENT/AuthContext";
-import { useNotification } from "../../../../context/CLIENT/NotificationContext";
+import { useNotification } from "../../../../context/NotificationContext";
 
 export default function DeleteAccount() {
   const { token, logout } = useContext(AuthContext);

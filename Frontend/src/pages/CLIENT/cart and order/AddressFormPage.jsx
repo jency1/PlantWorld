@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { IoIosArrowRoundBack } from "react-icons/io";
 
 import { OrderContext } from "../../../context/CLIENT/OrderContext";
-import { NotificationContext } from "../../../context/CLIENT/NotificationContext";
+import { NotificationContext } from "../../../context/NotificationContext";
 
 const labelClass = "mb-1 ml-1 text-[0.8rem] lg:text-[1.08rem]";
 const inputClass =
