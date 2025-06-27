@@ -179,7 +179,7 @@ const router = createBrowserRouter([
     action: loginAction,
   },
 
-  // ADMIN
+  // ADMIN - Login page (unprotected)
   {
     path: "/admin/login",
     element: (
@@ -188,9 +188,7 @@ const router = createBrowserRouter([
         <NotificationProvider>
           <AdminAuthProvider>
             <PlantContextProvider>
-              <AdminProtectedRoute>
-                <AdminLayout />
-              </AdminProtectedRoute>
+              <AdminLoginPage />
             </PlantContextProvider>
           </AdminAuthProvider>
         </NotificationProvider>
@@ -198,6 +196,8 @@ const router = createBrowserRouter([
     ),
     action: loginAction,
   },
+
+  // ADMIN - Protected routes
   {
     path: "/admin",
     element: (
@@ -215,11 +215,30 @@ const router = createBrowserRouter([
       </>
     ),
     children: [
-      { path: "dashboard", element: <AdminDashboard /> },
-      { path: "plants", element: <ManagePlants /> },
-      { path: "users", element: <ManageUsers /> },
-      { path: "orders", element: <ManageOrders /> },
-      { path: "faqs", element: <ManageFaqs /> },
+      {
+        path: "",
+        element: <AdminDashboard />,
+      },
+      {
+        path: "dashboard",
+        element: <AdminDashboard />,
+      },
+      {
+        path: "plants",
+        element: <ManagePlants />,
+      },
+      {
+        path: "users",
+        element: <ManageUsers />,
+      },
+      {
+        path: "orders",
+        element: <ManageOrders />,
+      },
+      {
+        path: "faqs",
+        element: <ManageFaqs />,
+      },
     ],
   },
 ]);

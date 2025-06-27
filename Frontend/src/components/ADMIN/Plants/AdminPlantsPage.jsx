@@ -1,67 +1,68 @@
 import React, { useContext, useEffect, useState } from "react";
-import {
-  Box,
-  Button,
-  Dialog,
-  DialogTitle,
-  DialogContent,
-  DialogActions,
-  TextField,
-  Typography,
-} from "@mui/material";
-import { DataGrid } from "@mui/x-data-grid";
+import { Box, Button, Container, Typography } from "@mui/material";
 import { PlantContext } from "../../../context/PlantsContext";
-import { format } from "date-fns";
+
+import PlantTable from "./PlantTable";
+import PlantDialog from "./PlantDialog";
+import ConfirmationDialog from "../../../ui/ConfirmationDialog";
 
 const AdminPlantsPage = () => {
-  const { plants, fetchAllPlants, addPlant, updatePlantById } =
+  const { plants, fetchAllPlants, addPlant, updatePlantById, deletePlantById } =
     useContext(PlantContext);
 
+  const [confirmOpen, setConfirmOpen] = useState(false);
+  const [plantToDelete, setPlantToDelete] = useState(null);
   const [selectedPlant, setSelectedPlant] = useState(null);
   const [openDialog, setOpenDialog] = useState(false);
-  const [formData, setFormData] = useState({
-    image: "",
+
+  const defaultFormData = {
     plantName: "",
-    quantity: 0,
+    imageCover: "",
+    imagePreview: "",
     price: 0,
+    quantity: 0,
     createdAt: new Date(),
-    plantCare: "",
+    plantCareTips: ["", "", "", ""],
     shortDescription: "",
     description: "",
     category: "",
     tag: "",
     availability: "In Stock",
-    ratingsAverage: 0,
+    ratingsAverage: 1,
     ratingsQuantity: 0,
     plantId: "",
-  });
+  };
+
+  const [formData, setFormData] = useState(defaultFormData);
 
   useEffect(() => {
-    console.log("Fetching all plants...");
     fetchAllPlants();
   }, []);
 
+  // Confirm Delete
+  const handleConfirmDelete = async () => {
+    if (plantToDelete?._id) {
+      await deletePlantById(plantToDelete._id);
+      fetchAllPlants();
+    }
+    setConfirmOpen(false);
+    setPlantToDelete(null);
+  };
+
+  // Open dialog for edit/add
   const handleOpenDialog = (plant) => {
     setSelectedPlant(plant);
     setFormData(
       plant
-        ? { ...plant }
-        : {
-            image: "",
-            plantName: "",
-            quantity: 0,
-            price: 0,
-            createdAt: new Date(),
-            plantCare: "",
-            shortDescription: "",
-            description: "",
-            category: "",
-            tag: "",
-            availability: "In Stock",
-            ratingsAverage: 0,
-            ratingsQuantity: 0,
-            plantId: "",
+        ? {
+            ...plant,
+            imagePreview: plant.imageCover || "",
+            plantId: plant._id || "",
+            plantCareTips: Array.isArray(plant.plantCareTips)
+              ? plant.plantCareTips
+              : ["", "", "", ""],
           }
+        : defaultFormData
     );
     setOpenDialog(true);
   };
@@ -71,161 +72,86 @@ const AdminPlantsPage = () => {
     setSelectedPlant(null);
   };
 
-  const handleInputChange = (e) => {
-    const { name, value } = e.target;
-    setFormData((prev) => ({ ...prev, [name]: value }));
-  };
-
+  // Save (Add / Update)
   const handleSave = async () => {
-    if (selectedPlant) {
-      await updatePlantById(selectedPlant._id, formData);
-    } else {
-      await addPlant(formData);
+    const form = new FormData();
+    for (let key in formData) {
+      if (key === "imageCover" && typeof formData[key] !== "string") {
+        form.append(key, formData[key]);
+      } else if (key === "plantCareTips") {
+        form.append(key, JSON.stringify(formData[key]));
+      } else {
+        form.append(key, formData[key]);
+      }
     }
+
+    if (selectedPlant) {
+      await updatePlantById(selectedPlant._id, form);
+    } else {
+      await addPlant(form);
+    }
+
     fetchAllPlants();
     handleCloseDialog();
   };
 
-  const columns = [
-    { field: "_id", headerName: "ID", flex: 1 },
-    {
-      field: "image",
-      headerName: "Image",
-      width: 80,
-      renderCell: (params) => (
-        <img
-          src={params.value}
-          alt="plant"
-          style={{ width: 40, height: 40, objectFit: "cover", borderRadius: 4 }}
-        />
-      ),
-    },
-    { field: "plantName", headerName: "Plant Name", flex: 1 },
-    { field: "quantity", headerName: "Qty", width: 80 },
-    { field: "price", headerName: "Price", width: 100 },
-    {
-      field: "createdAt",
-      headerName: "Created At",
-      width: 150,
-      valueFormatter: (params) =>
-        params?.value ? format(new Date(params.value), "dd MMM yyyy") : "-",
-    },
-    {
-      field: "actions",
-      headerName: "Actions",
-      width: 120,
-      renderCell: (params) => (
-        <Button
-          variant="outlined"
-          size="small"
-          onClick={() => handleOpenDialog(params.row)}
-        >
-          View
-        </Button>
-      ),
-    },
-  ];
-
   return (
-    <Box m="20px">
-      <Box
-        display="flex"
-        justifyContent="space-between"
-        alignItems="center"
-        mb={2}
-      >
-        <Typography variant="h5">Manage Plants</Typography>
-        <Button variant="contained" onClick={() => handleOpenDialog(null)}>
-          Add New Plant
-        </Button>
-      </Box>
-
-      <Box
-        sx={{
-          height: "75vh",
-          "& .MuiDataGrid-root": {
-            border: "none",
-          },
-          "& .MuiDataGrid-cell": {
-            borderBottom: "none",
-          },
-          "& .MuiDataGrid-columnHeaders": {
-            backgroundColor: "#4ead54",
-            color: "#fff",
-            fontSize: "1rem",
-          },
-          "& .MuiDataGrid-virtualScroller": {
-            backgroundColor: "#f5fef5",
-          },
-          "& .MuiDataGrid-footerContainer": {
-            borderTop: "none",
-            backgroundColor: "#4ead54",
-            color: "#fff",
-          },
-        }}
-      >
-        <DataGrid
-          rows={plants}
-          getRowId={(row) => row._id}
-          columns={columns}
-          pageSizeOptions={[10, 20, 50]}
-          checkboxSelection
-        />
-      </Box>
-
-      <Dialog
-        open={openDialog}
-        onClose={handleCloseDialog}
-        maxWidth="md"
-        fullWidth
-      >
-        <DialogTitle>
-          {selectedPlant ? "Edit Plant Details" : "Add New Plant"}
-        </DialogTitle>
-        <DialogContent dividers>
-          <Box
+    <Container maxWidth="xl">
+      <Box m="20px">
+        <Box display="flex" justifyContent="end" alignItems="center" mb={2}>
+          <Button
+            variant="contained"
+            onClick={() => handleOpenDialog(null)}
             sx={{
-              display: "grid",
-              gridTemplateColumns: { xs: "1fr", sm: "1fr 1fr" },
-              gap: 2,
-              mt: 1,
+              backgroundColor: "#4caf50",
+              color: "#fff",
+              "&:hover": {
+                backgroundColor: "#43a047",
+              },
             }}
           >
-            {Object.entries(formData).map(
-              ([key, value]) =>
-                key !== "_id" && (
-                  <TextField
-                    key={key}
-                    name={key}
-                    label={key}
-                    value={value}
-                    onChange={handleInputChange}
-                    fullWidth
-                    multiline={[
-                      "description",
-                      "plantCare",
-                      "shortDescription",
-                    ].includes(key)}
-                    rows={
-                      ["description", "plantCare", "shortDescription"].includes(
-                        key
-                      )
-                        ? 3
-                        : 1
-                    }
-                  />
-                )
-            )}
-          </Box>
-        </DialogContent>
-        <DialogActions>
-          <Button onClick={handleCloseDialog}>Cancel</Button>
-          <Button variant="contained" onClick={handleSave}>
-            {selectedPlant ? "Update" : "Add"}
+            Add New Plant
           </Button>
-        </DialogActions>
-      </Dialog>
-    </Box>
+        </Box>
+
+        {plants?.length === 0 && (
+          <Typography variant="body1" color="error" mb={2}>
+            No plant data found.
+          </Typography>
+        )}
+
+        <PlantTable
+          plants={plants}
+          onEdit={handleOpenDialog}
+          onDelete={(plant) => {
+            setPlantToDelete(plant);
+            setConfirmOpen(true);
+          }}
+        />
+
+        <PlantDialog
+          open={openDialog}
+          onClose={handleCloseDialog}
+          onSave={handleSave}
+          selectedPlant={selectedPlant}
+          formData={formData}
+          setFormData={setFormData}
+        />
+
+        <ConfirmationDialog
+          open={confirmOpen}
+          title="Delete Plant"
+          message={`Are you sure you want to delete "${
+            plantToDelete?.name || "this plant"
+          }"?`}
+          onCancel={() => {
+            setConfirmOpen(false);
+            setPlantToDelete(null);
+          }}
+          onConfirm={handleConfirmDelete}
+        />
+      </Box>
+    </Container>
   );
 };
 

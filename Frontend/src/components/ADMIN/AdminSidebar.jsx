@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import {
   Drawer,
   List,
@@ -23,6 +23,7 @@ import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 
 import { useNavigate, useLocation } from "react-router-dom";
 import { AdminAuthContext } from "../../context/ADMIN/AdminAuthContext";
+import ConfirmationDialog from "../../ui/ConfirmationDialog";
 
 const drawerWidth = 240;
 
@@ -33,6 +34,7 @@ const AdminSidebar = ({ mobileOpen, handleDrawerToggle }) => {
   const navigate = useNavigate();
 
   const { logoutAdmin } = useContext(AdminAuthContext);
+  const [confirmLogoutOpen, setConfirmLogoutOpen] = useState(false);
 
   const navItems = [
     { text: "Dashboard", icon: <DashboardIcon />, path: "/admin/dashboard" },
@@ -45,7 +47,7 @@ const AdminSidebar = ({ mobileOpen, handleDrawerToggle }) => {
 
   const handleItemClick = (path) => {
     if (path === "/admin/logout") {
-      logoutAdmin();
+      setConfirmLogoutOpen(true);
     } else {
       navigate(path);
     }
@@ -53,6 +55,11 @@ const AdminSidebar = ({ mobileOpen, handleDrawerToggle }) => {
     if (isMobile) {
       handleDrawerToggle();
     }
+  };
+
+  const handleConfirmLogout = () => {
+    logoutAdmin();
+    setConfirmLogoutOpen(false);
   };
 
   const drawerContent = (
@@ -90,7 +97,7 @@ const AdminSidebar = ({ mobileOpen, handleDrawerToggle }) => {
 
         <Typography
           variant="h6"
-          sx={{ fontWeight: 600, color: "green", fontSize: "1.1rem" }}
+          sx={{ fontWeight: 600, color: "green", fontSize: "1.5rem" }}
         >
           Admin
         </Typography>
@@ -189,6 +196,14 @@ const AdminSidebar = ({ mobileOpen, handleDrawerToggle }) => {
       >
         {drawerContent}
       </Drawer>
+
+      <ConfirmationDialog
+        open={confirmLogoutOpen}
+        title="Logout Confirmation"
+        message="Are you sure you want to logout?"
+        onCancel={() => setConfirmLogoutOpen(false)}
+        onConfirm={handleConfirmLogout}
+      />
     </>
   );
 };

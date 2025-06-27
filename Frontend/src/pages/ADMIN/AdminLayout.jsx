@@ -1,13 +1,13 @@
 import React, { useState } from "react";
 import { Box, Toolbar, CssBaseline } from "@mui/material";
-import { useLocation } from "react-router-dom";
+import { useLocation, Outlet } from "react-router-dom";
 
 import Header from "../../components/ADMIN/AdminHeader";
 import AdminSidebar from "../../components/ADMIN/AdminSidebar";
 
 const drawerWidth = 240;
 
-const AdminLayout = ({ children }) => {
+const AdminLayout = () => {
   const [mobileOpen, setMobileOpen] = useState(false);
   const location = useLocation();
 
@@ -28,10 +28,10 @@ const AdminLayout = ({ children }) => {
     <Box sx={{ display: "flex", width: "100%" }}>
       <CssBaseline />
 
-      {/* Header */}
+      {/* Header - fixed */}
       <Header handleDrawerToggle={handleDrawerToggle} pageTitle={pageTitle} />
 
-      {/* Sidebar */}
+      {/* Sidebar - fixed */}
       <AdminSidebar
         mobileOpen={mobileOpen}
         handleDrawerToggle={handleDrawerToggle}
@@ -42,14 +42,15 @@ const AdminLayout = ({ children }) => {
         component="main"
         sx={{
           flexGrow: 1,
-          width: { lg: `calc(100% - ${drawerWidth}px)` },
-          backgroundColor: "#f9fff9",
-          minHeight: "100vh",
+          bgcolor: "#f9fff9",
           p: { xs: 2, sm: 3 },
+          marginLeft: { xs: 0, md: `${drawerWidth}px` },
+          width: { xs: "100%", md: `calc(100% - ${drawerWidth}px)` },
+          minHeight: "100vh",
+          pt: { xs: 8, sm: 9 },
         }}
       >
-        <Toolbar />
-        {children}
+        <Outlet />
       </Box>
     </Box>
   );

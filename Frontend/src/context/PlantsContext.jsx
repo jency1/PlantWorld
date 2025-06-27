@@ -19,7 +19,7 @@ export function PlantContextProvider({ children }) {
   const [totalPages, setTotalPages] = useState(0);
   const [error, setError] = useState(null);
 
-  const { showNotificaton } = useContext(NotificationContext);
+  const { showNotification } = useContext(NotificationContext);
   const { isAdminLoggedIn, adminToken } = useContext(AdminAuthContext);
 
   const BASE_URL = import.meta.env.VITE_BASE_URL;
@@ -111,20 +111,20 @@ export function PlantContextProvider({ children }) {
       }
 
       const data = await response.json();
+      // console.log("Admin Plants Fetched data : ", data);
+      // showNotification("Loaded all plants successfully", "success");
 
       setPlants(data?.data?.plants || []);
-
-      showNotificaton("Loaded all plants successfully", "success");
     } catch (err) {
       console.error("Error fetching all plants:", err);
-      showNotificaton("Failed to load all plants", "error");
+      showNotification("Failed to load all plants", "error");
     }
   }
 
   // Add Plant - Admin Only
   async function addPlant(enteredPlantData) {
     if (!isAdminLoggedIn) {
-      showNotificaton("Unauthorized: Admin access required", "warning");
+      showNotification("Unauthorized: Admin access required", "warning");
       return;
     }
 
@@ -145,18 +145,18 @@ export function PlantContextProvider({ children }) {
       const savedPlant = await response.json();
       setPlants((prev) => [savedPlant, ...prev]);
 
-      showNotificaton("Plant added successfully", "success");
+      showNotification("Plant added successfully", "success");
     } catch (err) {
       console.error("Add Plant Error:", err);
       setError("Unable to add plant. Please try again later.");
-      showNotificaton("Failed to add plant", "error");
+      showNotification("Failed to add plant", "error");
     }
   }
 
   // Update Plant - Admin Only
   async function updatePlantById(id, updatedData) {
     if (!isAdminLoggedIn) {
-      showNotificaton("Unauthorized: Admin access required", "warning");
+      showNotification("Unauthorized: Admin access required", "warning");
       return;
     }
 
@@ -182,18 +182,18 @@ export function PlantContextProvider({ children }) {
         )
       );
 
-      showNotificaton("Plant updated successfully", "success");
+      showNotification("Plant updated successfully", "success");
     } catch (err) {
       console.error("Update Plant Error:", err);
       setError("Unable to update plant. Please try again later.");
-      showNotificaton("Failed to update plant", "error");
+      showNotification("Failed to update plant", "error");
     }
   }
 
   // Delete Plant - Admin Only
   async function deletePlantById(id) {
     if (!isAdminLoggedIn) {
-      showNotificaton("Unauthorized: Admin access required", "warning");
+      showNotification("Unauthorized: Admin access required", "warning");
       return;
     }
 
@@ -211,11 +211,11 @@ export function PlantContextProvider({ children }) {
 
       setPlants((prev) => prev.filter((plant) => plant._id !== id));
 
-      showNotificaton("Plant deleted successfully", "success");
+      showNotification("Plant deleted successfully", "success");
     } catch (err) {
       console.error("Delete Plant Error:", err);
       setError("Unable to delete plant. Please try again later.");
-      showNotificaton("Failed to delete plant", "error");
+      showNotification("Failed to delete plant", "error");
     }
   }
 
