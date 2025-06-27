@@ -3,6 +3,8 @@ import { Form } from "react-router-dom";
 import { AuthContext } from "../../../context/AuthContext";
 import { useNotification } from "../../../context/NotificationContext";
 
+const BASE_URL = import.meta.env.VITE_BASE_URL;
+
 export default function UpdatePassword() {
   const { token } = useContext(AuthContext);
   const { showNotification } = useNotification();
@@ -36,23 +38,21 @@ export default function UpdatePassword() {
     try {
       setLoading(true);
 
-      const res = await fetch(
-        `${import.meta.env.VITE_BASE_URL}/api/users/updateMyPassword`,
-        {
-          method: "PATCH",
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${token}`,
-          },
-          body: JSON.stringify({
-            passwordCurrent: form.passwordCurrent,
-            password: form.password,
-            passwordConfirm: form.passwordConfirm,
-          }),
-        }
-      );
+      const res = await fetch(`${BASE_URL}/api/users/updateMyPassword`, {
+        method: "PATCH",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify({
+          passwordCurrent: form.passwordCurrent,
+          password: form.password,
+          passwordConfirm: form.passwordConfirm,
+        }),
+      });
 
       const data = await res.json();
+
       if (!res.ok) {
         throw new Error(data.message || "Failed to update password.");
       }

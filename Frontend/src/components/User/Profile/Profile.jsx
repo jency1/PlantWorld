@@ -27,6 +27,39 @@ export default function Profile() {
 
   const handleSave = async (field, value) => {
     try {
+      // Trim leading/trailing spaces
+      const trimmedValue = value.trim();
+
+      // Validation for phone number
+      if (field === "phoneNumber") {
+        const phoneRegex = /^[0-9]{10}$/;
+        if (!phoneRegex.test(trimmedValue)) {
+          return showNotification(
+            "Phone number must be exactly 10 digits and numeric only.",
+            "warning"
+          );
+        }
+        if (trimmedValue === (user?.phoneNumber || "")) {
+          return showNotification(
+            "New phone number must be different.",
+            "info"
+          );
+        }
+      }
+
+      // Validation for name
+      if (field === "name") {
+        if (trimmedValue === (user?.name || "").trim()) {
+          return showNotification("New name must be different.", "info");
+        }
+        if (trimmedValue.length < 3) {
+          return showNotification(
+            "Name must be at least 3 characters long.",
+            "warning"
+          );
+        }
+      }
+
       const res = await fetch(`${BASE_URL}/api/users/updateMe`, {
         method: "PATCH",
         headers: {
