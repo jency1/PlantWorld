@@ -2,6 +2,8 @@ import "./index.css";
 
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 
+// CLIENT
+
 import HomePage from "./pages/CLIENT/HomePage";
 
 import ShopPageLayout from "./pages/CLIENT/shop/ShopPageLayout";
@@ -30,15 +32,30 @@ import SettingsPage from "./pages/CLIENT/user/SettingsPage";
 import AppLayout from "./pages/CLIENT/AppLayout";
 import ScrollToTop from "./ScrollToTop";
 
-import { PlantContextProvider } from "./context/CLIENT/PlantsContext";
 import { AuthProvider } from "./context/CLIENT/AuthContext";
 import { CartProvider } from "./context/CLIENT/CartContext";
-import { NotificationProvider } from "./context/NotificationContext";
 import { OrderProvider } from "./context/CLIENT/OrderContext";
+import { PlantContextProvider } from "./context/CLIENT/PlantsContext";
 import ProtectedRoute from "./ProtectedRoute";
+
+import { NotificationProvider } from "./context/NotificationContext";
+
+// ADMIN
+
+import AdminProtectedRoute from "./AdminProtectedRoute";
+import AdminLayout from "./pages/ADMIN/AdminLayout";
+
+import AdminLoginPage from "./pages/ADMIN/AdminLoginPage";
+import AdminDashboard from "./pages/ADMIN/AdminDashboard";
+import ManageUsers from "./pages/ADMIN/ManageUsers";
+import ManageOrders from "./pages/ADMIN/ManageOrders";
+import ManageFaqs from "./pages/ADMIN/ManageFaqs";
+
+import { AdminAuthProvider } from "./context/ADMIN/AdminAuthContext";
 
 const router = createBrowserRouter([
   {
+    // USER
     element: (
       <>
         <ScrollToTop />
@@ -159,6 +176,42 @@ const router = createBrowserRouter([
       </>
     ),
     action: loginAction,
+  },
+
+  // ADMIN
+  {
+    path: "/admin/login",
+    element: (
+      <>
+        <ScrollToTop />
+        <NotificationProvider>
+          <AdminAuthProvider>
+            <AdminLoginPage />
+          </AdminAuthProvider>
+        </NotificationProvider>
+      </>
+    ),
+  },
+  {
+    path: "/admin",
+    element: (
+      <>
+        <ScrollToTop />
+        <NotificationProvider>
+          <AdminAuthProvider>
+            <AdminProtectedRoute>
+              <AdminLayout />
+            </AdminProtectedRoute>
+          </AdminAuthProvider>
+        </NotificationProvider>
+      </>
+    ),
+    children: [
+      { path: "dashboard", element: <AdminDashboard /> },
+      { path: "users", element: <ManageUsers /> },
+      { path: "orders", element: <ManageOrders /> },
+      { path: "faqs", element: <ManageFaqs /> },
+    ],
   },
 ]);
 
