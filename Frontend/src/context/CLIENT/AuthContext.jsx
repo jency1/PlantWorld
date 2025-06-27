@@ -21,10 +21,11 @@ export function AuthProvider({ children }) {
   const navigate = useNavigate();
   const { showNotification } = useContext(NotificationContext);
 
+  // If there's a token, and we don't already have user data,
+  // try to fetch user data directly from the login response
+
   useEffect(() => {
     if (token && !user) {
-      // If there's a token, and we don't already have user data,
-      // try to fetch user data directly from the login response
       const storedUser = localStorage.getItem("user");
       if (storedUser) {
         setUser(JSON.parse(storedUser));

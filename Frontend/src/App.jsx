@@ -27,7 +27,7 @@ import ProfilePage from "./pages/CLIENT/user/ProfilePage";
 import MyOrdersPage from "./pages/CLIENT/user/MyOrdersPage";
 import SettingsPage from "./pages/CLIENT/user/SettingsPage";
 
-import AppLayout from "./AppLayout";
+import AppLayout from "./pages/CLIENT/AppLayout";
 import ScrollToTop from "./ScrollToTop";
 
 import { PlantContextProvider } from "./context/CLIENT/PlantsContext";
