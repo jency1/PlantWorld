@@ -1,15 +1,16 @@
 import { createContext, useContext, useEffect, useState } from "react";
-
-import { NotificationContext } from "../NotificationContext";
+import { NotificationContext } from "./NotificationContext";
+import { AdminAuthContext } from "../context/ADMIN/AdminAuthContext";
 
 export const PlantContext = createContext({
   plants: [],
   totalPages: 0,
-  addPlant: (plant) => {},
+  fetchPlants: (page, limit) => {},
   getPlantById: (id) => {},
+  addPlant: (plant) => {},
   updatePlantById: (id, updatedData) => {},
   deletePlantById: (id) => {},
-  fetchPlants: (page, limit) => {},
+  fetchAllPlants: () => {},
 });
 
 export function PlantContextProvider({ children }) {
@@ -19,16 +20,18 @@ export function PlantContextProvider({ children }) {
   const [error, setError] = useState(null);
 
   const { showNotificaton } = useContext(NotificationContext);
+  const { isAdminLoggedIn, adminToken } = useContext(AdminAuthContext);
 
   const BASE_URL = import.meta.env.VITE_BASE_URL;
 
-  // Fetch total plants
+  // Fetch total plant count
   useEffect(() => {
     async function fetchTotalPlants() {
       try {
         const response = await fetch(`${BASE_URL}/api/plants/plantTotal`);
+
         if (!response.ok) {
-          throw new Error("Failed to fetch total plant count.");
+          throw new Error("Failed to fetch total plant count");
         }
 
         const json = await response.json();
@@ -39,73 +42,98 @@ export function PlantContextProvider({ children }) {
       } catch (err) {
         console.error("Error fetching total plant count:", err);
         setError("Unable to fetch plant count. Please try again later.");
+        showNotificaton("Unable to fetch plant count", "error");
       }
     }
 
     fetchTotalPlants();
   }, [BASE_URL]);
 
-  // Load Plants - fetch paginated plants with filters
+  // Fetch paginated plant list with filters
   async function fetchPlants(
     page = 1,
     limit = 12,
     minPrice = 0,
     maxPrice = 5000,
     searchTerm,
-    tag,
-    categories,
-    availability
+    tag = [],
+    categories = [],
+    availability = []
   ) {
     try {
-      // Constructing query parameters
       let query = `page=${page}&limit=${limit}&price[gte]=${minPrice}&price[lte]=${maxPrice}`;
 
       if (searchTerm) {
         query += `&search=${encodeURIComponent(searchTerm)}`;
       }
-
-      if (tag.length > 0) {
+      if (tag.length) {
         query += `&tag=${tag.map(encodeURIComponent).join(",")}`;
       }
-
-      if (categories.length > 0) {
+      if (categories.length) {
         query += `&category=${categories.map(encodeURIComponent).join(",")}`;
       }
-
-      if (availability.length > 0) {
+      if (availability.length) {
         query += `&availability=${availability
           .map(encodeURIComponent)
           .join(",")}`;
       }
 
-      // console.log("Fetching with query:", query);
-
       const response = await fetch(`${BASE_URL}/api/plants/?${query}`);
 
       if (!response.ok) {
-        showNotificaton("Failed to fetch plants.", error);
         throw new Error("Failed to fetch plants");
       }
 
       const data = await response.json();
-      //   console.log("Backend Response:", json);
 
-      const fetchedPlants = data?.data?.plants || [];
-
-      setPlants(fetchedPlants);
-    } catch (error) {
-      console.error("Error fetching plants:", error);
+      setPlants(data?.data?.plants || []);
+    } catch (err) {
+      console.error("Error fetching plants:", err);
       setError("Unable to fetch plants. Please try again later.");
+      showNotificaton("Failed to load plant data", "error");
     }
   }
 
-  // Add Plant
+  // Get Plant by ID
+  function getPlantById(id) {
+    return plants.find((plant) => plant._id === id);
+  }
+
+  //Fetch All Plants - Admin Only
+  async function fetchAllPlants() {
+    try {
+      const response = await fetch(
+        `${BASE_URL}/api/plants?limit=10000000000000000`
+      );
+
+      if (!response.ok) {
+        throw new Error("Failed to fetch all plants");
+      }
+
+      const data = await response.json();
+
+      setPlants(data?.data?.plants || []);
+
+      showNotificaton("Loaded all plants successfully", "success");
+    } catch (err) {
+      console.error("Error fetching all plants:", err);
+      showNotificaton("Failed to load all plants", "error");
+    }
+  }
+
+  // Add Plant - Admin Only
   async function addPlant(enteredPlantData) {
+    if (!isAdminLoggedIn) {
+      showNotificaton("Unauthorized: Admin access required", "warning");
+      return;
+    }
+
     try {
       const response = await fetch(`${BASE_URL}/api/plants/`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
+          Authorization: `Bearer ${adminToken}`,
         },
         body: JSON.stringify(enteredPlantData),
       });
@@ -115,25 +143,29 @@ export function PlantContextProvider({ children }) {
       }
 
       const savedPlant = await response.json();
-      setPlants((prevPlants) => [savedPlant, ...prevPlants]);
-    } catch (error) {
-      console.error("Error adding plant:", error);
+      setPlants((prev) => [savedPlant, ...prev]);
+
+      showNotificaton("Plant added successfully", "success");
+    } catch (err) {
+      console.error("Add Plant Error:", err);
       setError("Unable to add plant. Please try again later.");
+      showNotificaton("Failed to add plant", "error");
     }
   }
 
-  // Get Plant By Id
-  function getPlantById(id) {
-    return plants.find((plant) => plant._id === id);
-  }
-
-  // Update Plant
+  // Update Plant - Admin Only
   async function updatePlantById(id, updatedData) {
+    if (!isAdminLoggedIn) {
+      showNotificaton("Unauthorized: Admin access required", "warning");
+      return;
+    }
+
     try {
       const response = await fetch(`${BASE_URL}/api/plants/${id}`, {
         method: "PATCH",
         headers: {
           "Content-Type": "application/json",
+          Authorization: `Bearer ${adminToken}`,
         },
         body: JSON.stringify(updatedData),
       });
@@ -143,49 +175,65 @@ export function PlantContextProvider({ children }) {
       }
 
       const updatedPlant = await response.json();
-      setPlants((prevPlants) =>
-        prevPlants.map((plant) =>
+
+      setPlants((prev) =>
+        prev.map((plant) =>
           plant._id === id ? { ...plant, ...updatedPlant } : plant
         )
       );
-    } catch (error) {
-      console.error("Error updating plant:", error);
+
+      showNotificaton("Plant updated successfully", "success");
+    } catch (err) {
+      console.error("Update Plant Error:", err);
       setError("Unable to update plant. Please try again later.");
+      showNotificaton("Failed to update plant", "error");
     }
   }
 
-  // Delete Plant
+  // Delete Plant - Admin Only
   async function deletePlantById(id) {
+    if (!isAdminLoggedIn) {
+      showNotificaton("Unauthorized: Admin access required", "warning");
+      return;
+    }
+
     try {
       const response = await fetch(`${BASE_URL}/api/plants/${id}`, {
         method: "DELETE",
+        headers: {
+          Authorization: `Bearer ${adminToken}`,
+        },
       });
 
       if (!response.ok) {
         throw new Error("Failed to delete plant");
       }
 
-      setPlants((prevPlants) => prevPlants.filter((plant) => plant._id !== id));
-    } catch (error) {
-      console.error("Error deleting plant:", error);
+      setPlants((prev) => prev.filter((plant) => plant._id !== id));
+
+      showNotificaton("Plant deleted successfully", "success");
+    } catch (err) {
+      console.error("Delete Plant Error:", err);
       setError("Unable to delete plant. Please try again later.");
+      showNotificaton("Failed to delete plant", "error");
     }
   }
 
-  // Provide all values via context
-  const contextValue = {
-    plants: plants,
-    totalPages,
-    addPlant,
-    getPlantById,
-    updatePlantById,
-    deletePlantById,
-    fetchPlants,
-  };
-
   return (
-    <PlantContext.Provider value={contextValue}>
+    <PlantContext.Provider
+      value={{
+        plants,
+        totalPages,
+        fetchPlants,
+        getPlantById,
+        addPlant,
+        updatePlantById,
+        deletePlantById,
+        fetchAllPlants,
+      }}
+    >
       {children}
+
       {error && (
         <p className="text-red-700 bg-red-200 p-4 mt-4 rounded-md border border-red-400">
           {error}

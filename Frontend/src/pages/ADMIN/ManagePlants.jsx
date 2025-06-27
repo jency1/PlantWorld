@@ -1,9 +1,10 @@
 import React from "react";
+import AdminPlantsPage from "../../components/ADMIN/Plants/AdminPlantsPage";
 
 export default function ManagePlants() {
   return (
     <>
-      <h1>Manage Plants</h1>
+      <AdminPlantsPage />
     </>
   );
 }

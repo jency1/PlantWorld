@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import FilterComponent from "./FilterComponent.jsx";
 import Pagination from "../../../ui/Pagination.jsx";
 
-import { PlantContext } from "../../../context/CLIENT/PlantsContext.jsx";
+import { PlantContext } from "../../../context/PlantsContext.jsx";
 import { CartContext } from "../../../context/CLIENT/CartContext.jsx";
 
 function ShopPlants() {

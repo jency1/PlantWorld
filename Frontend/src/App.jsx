@@ -35,7 +35,7 @@ import ScrollToTop from "./ScrollToTop";
 import { AuthProvider } from "./context/CLIENT/AuthContext";
 import { CartProvider } from "./context/CLIENT/CartContext";
 import { OrderProvider } from "./context/CLIENT/OrderContext";
-import { PlantContextProvider } from "./context/CLIENT/PlantsContext";
+import { PlantContextProvider } from "./context/PlantsContext";
 import ProtectedRoute from "./ProtectedRoute";
 
 import { NotificationProvider } from "./context/NotificationContext";
@@ -187,7 +187,11 @@ const router = createBrowserRouter([
         <ScrollToTop />
         <NotificationProvider>
           <AdminAuthProvider>
-            <AdminLoginPage />
+            <PlantContextProvider>
+              <AdminProtectedRoute>
+                <AdminLayout />
+              </AdminProtectedRoute>
+            </PlantContextProvider>
           </AdminAuthProvider>
         </NotificationProvider>
       </>
@@ -201,9 +205,11 @@ const router = createBrowserRouter([
         <ScrollToTop />
         <NotificationProvider>
           <AdminAuthProvider>
-            <AdminProtectedRoute>
-              <AdminLayout />
-            </AdminProtectedRoute>
+            <PlantContextProvider>
+              <AdminProtectedRoute>
+                <AdminLayout />
+              </AdminProtectedRoute>
+            </PlantContextProvider>
           </AdminAuthProvider>
         </NotificationProvider>
       </>
