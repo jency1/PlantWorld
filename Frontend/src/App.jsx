@@ -47,6 +47,7 @@ import AdminLayout from "./pages/ADMIN/AdminLayout";
 
 import AdminLoginPage from "./pages/ADMIN/AdminLoginPage";
 import AdminDashboard from "./pages/ADMIN/AdminDashboard";
+import ManagePlants from "./pages/ADMIN/ManagePlants";
 import ManageUsers from "./pages/ADMIN/ManageUsers";
 import ManageOrders from "./pages/ADMIN/ManageOrders";
 import ManageFaqs from "./pages/ADMIN/ManageFaqs";
@@ -209,6 +210,7 @@ const router = createBrowserRouter([
     ),
     children: [
       { path: "dashboard", element: <AdminDashboard /> },
+      { path: "plants", element: <ManagePlants /> },
       { path: "users", element: <ManageUsers /> },
       { path: "orders", element: <ManageOrders /> },
       { path: "faqs", element: <ManageFaqs /> },
