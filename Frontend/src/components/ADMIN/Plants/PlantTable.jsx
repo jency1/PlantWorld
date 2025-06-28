@@ -1,18 +1,20 @@
 import React, { useState } from "react";
 import { DataGrid } from "@mui/x-data-grid";
 import { format } from "date-fns";
-
 import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
 import IconButton from "@mui/material/IconButton";
 import Tooltip from "@mui/material/Tooltip";
-import { Box } from "@mui/material";
+import { Box, useTheme, useMediaQuery } from "@mui/material";
 
 const PlantTable = ({ plants, onEdit, onDelete }) => {
   const [paginationModel, setPaginationModel] = useState({
     pageSize: 10,
     page: 0,
   });
+
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
 
   const columns = [
     {
@@ -34,14 +36,7 @@ const PlantTable = ({ plants, onEdit, onDelete }) => {
       headerName: "Image",
       flex: 0.2,
       renderCell: (params) => (
-        <div
-          style={{
-            display: "flex",
-            alignItems: "center",
-            width: "100%",
-            height: "100%",
-          }}
-        >
+        <Box display="flex" alignItems="center" width="100%" height="100%">
           <img
             src={params.value}
             alt="plant"
@@ -52,13 +47,17 @@ const PlantTable = ({ plants, onEdit, onDelete }) => {
               borderRadius: 4,
             }}
           />
-        </div>
+        </Box>
       ),
     },
-
     { field: "name", headerName: "Name", flex: 0.4 },
     { field: "quantity", headerName: "Quantity", flex: 0.2 },
-    { field: "price", headerName: "Price", flex: 0.2 },
+    {
+      field: "price",
+      headerName: "Price",
+      flex: 0.2,
+      renderCell: (params) => `₹${params.value}`,
+    },
     {
       field: "createdAt",
       headerName: "Created At",
@@ -100,8 +99,14 @@ const PlantTable = ({ plants, onEdit, onDelete }) => {
   ];
 
   return (
-    <Box sx={{ width: "100%", overflowX: "auto" }}>
-      <Box sx={{ minWidth: 700 }}>
+    <Box
+      sx={{
+        width: "100%",
+        overflowX: "auto",
+        px: { xs: 0, sm: 1 },
+      }}
+    >
+      <Box sx={{ minWidth: isMobile ? "810px" : "100%" }}>
         <DataGrid
           rows={plants}
           getRowId={(row) => row._id}
@@ -113,6 +118,7 @@ const PlantTable = ({ plants, onEdit, onDelete }) => {
           checkboxSelection
           showToolbar={true}
           sx={{
+            fontSize: isMobile ? "12px" : "14px",
             "& .MuiDataGrid-row": {
               alignItems: "center !important",
             },

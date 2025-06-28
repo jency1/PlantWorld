@@ -1,5 +1,12 @@
 import React, { useContext, useEffect, useState } from "react";
-import { Box, Button, Container, Typography } from "@mui/material";
+import {
+  Box,
+  Button,
+  Container,
+  Typography,
+  useTheme,
+  useMediaQuery,
+} from "@mui/material";
 
 import { PlantContext } from "../../../context/PlantsContext";
 import { NotificationContext } from "../../../context/NotificationContext";
@@ -9,6 +16,9 @@ import PlantDialog from "./PlantDialog";
 import ConfirmationDialog from "../../../ui/ConfirmationDialog";
 
 const AdminPlantsPage = () => {
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
+
   const { plants, fetchAllPlants, addPlant, updatePlantById, deletePlantById } =
     useContext(PlantContext);
   const { showNotification } = useContext(NotificationContext);
@@ -155,7 +165,12 @@ const AdminPlantsPage = () => {
 
   return (
     <Container maxWidth="xl">
-      <Box m="20px">
+      <Box
+        sx={{
+          m: isMobile ? "0px" : "1rem",
+          mt: "1rem",
+        }}
+      >
         {/* Add New Plant Button */}
         <Box display="flex" justifyContent="end" alignItems="center" mb={2}>
           <Button

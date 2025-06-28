@@ -9,6 +9,8 @@ import {
   Box,
   Typography,
   MenuItem,
+  useMediaQuery,
+  useTheme,
 } from "@mui/material";
 import { format } from "date-fns";
 
@@ -20,6 +22,9 @@ const PlantDialog = ({
   formData,
   setFormData,
 }) => {
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
+
   const [errors, setErrors] = useState({});
 
   // Handle Input Change
@@ -135,13 +140,38 @@ const PlantDialog = ({
   const availabilityOptions = ["In Stock", "Out of Stock", "Up Coming"];
 
   return (
-    <Dialog open={open} onClose={onClose} maxWidth="sm" fullWidth>
-      <DialogTitle sx={{ color: "#4caf50", fontWeight: "bold" }}>
+    <Dialog
+      open={open}
+      onClose={onClose}
+      maxWidth={isMobile ? "xs" : "md"}
+      fullWidth
+      PaperProps={{
+        sx: {
+          maxHeight: isMobile ? "70vh" : "85vh",
+          overflowY: "auto",
+        },
+      }}
+    >
+      <DialogTitle
+        sx={{
+          color: "#4caf50",
+          fontWeight: "bold",
+          fontSize: isMobile ? 16 : 20,
+        }}
+      >
         {selectedPlant ? "Edit Plant Details" : "Add New Plant"}
       </DialogTitle>
 
-      <DialogContent dividers>
-        <Box display="flex" flexDirection="column" gap={2}>
+      <DialogContent
+        dividers
+        sx={{ px: isMobile ? 1.5 : 3, overflowX: "auto" }}
+      >
+        <Box
+          display="flex"
+          flexDirection="column"
+          gap={2}
+          sx={{ fontSize: isMobile ? 13 : 14 }}
+        >
           {/* Image Upload */}
           <Box>
             <Typography variant="subtitle1" gutterBottom sx={labelStyles}>
@@ -336,6 +366,7 @@ const PlantDialog = ({
           onClick={onClose}
           sx={{
             color: "red",
+            fontSize: isMobile ? "13px" : "14px",
             "&:hover": { transform: "scale(1.1)" },
           }}
         >
@@ -347,6 +378,7 @@ const PlantDialog = ({
           sx={{
             backgroundColor: "#4caf50",
             color: "#fff",
+            fontSize: isMobile ? "13px" : "14px",
             "&:hover": {
               backgroundColor: "#43a047",
               transform: "scale(1.05)",

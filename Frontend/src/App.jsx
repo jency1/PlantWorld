@@ -53,6 +53,7 @@ import ManageOrders from "./pages/ADMIN/ManageOrders";
 import ManageFaqs from "./pages/ADMIN/ManageFaqs";
 
 import { AdminAuthProvider } from "./context/ADMIN/AdminAuthContext";
+import { AdminOrdersProvider } from "./context/ADMIN/AdminOrdersContext";
 
 const router = createBrowserRouter([
   {
@@ -187,9 +188,7 @@ const router = createBrowserRouter([
         <ScrollToTop />
         <NotificationProvider>
           <AdminAuthProvider>
-            <PlantContextProvider>
-              <AdminLoginPage />
-            </PlantContextProvider>
+            <AdminLoginPage />
           </AdminAuthProvider>
         </NotificationProvider>
       </>
@@ -206,9 +205,11 @@ const router = createBrowserRouter([
         <NotificationProvider>
           <AdminAuthProvider>
             <PlantContextProvider>
-              <AdminProtectedRoute>
-                <AdminLayout />
-              </AdminProtectedRoute>
+              <AdminOrdersProvider>
+                <AdminProtectedRoute>
+                  <AdminLayout />
+                </AdminProtectedRoute>
+              </AdminOrdersProvider>
             </PlantContextProvider>
           </AdminAuthProvider>
         </NotificationProvider>

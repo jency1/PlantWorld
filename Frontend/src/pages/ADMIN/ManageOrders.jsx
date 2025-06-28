@@ -1,9 +1,10 @@
 import React from "react";
+import AdminOrdersPage from "../../components/ADMIN/Orders/AdminOrdersPage";
 
-export default function ManageOrders() {
+export default function ManagePlants() {
   return (
     <>
-      <h1>Manage Orders</h1>
+      <AdminOrdersPage />
     </>
   );
 }
