@@ -10,7 +10,7 @@ function SimilarProducts() {
       <div className="row mx-8 px-8">
         <div className="col-6 col-md-3 text-center mt-3 md:mt-4 lg:mt-5">
           <img
-            src="/Featured Products/image1.jpg"
+            src="/frontend/Featured Products/image1.jpg"
             alt=""
             className="img-fluid custom-img"
           />
@@ -22,7 +22,7 @@ function SimilarProducts() {
 
         <div className="col-6 col-md-3 text-center mt-3 md:mt-4 lg:mt-5">
           <img
-            src="/Featured Products/image2.jpg"
+            src="/frontend//Featured Products/image2.jpg"
             alt=""
             className="img-fluid custom-img"
           />
@@ -34,7 +34,7 @@ function SimilarProducts() {
 
         <div className="col-6 col-md-3 text-center mt-3 md:mt-4 lg:mt-5">
           <img
-            src="/Featured Products/image3.jpg"
+            src="/frontend//Featured Products/image3.jpg"
             alt=""
             className="img-fluid custom-img"
           />
@@ -46,7 +46,7 @@ function SimilarProducts() {
 
         <div className="col-6 col-md-3 text-center mt-3 md:mt-4 lg:mt-5">
           <img
-            src="/Featured Products/image4.jpg"
+            src="/frontend//Featured Products/image4.jpg"
             alt=""
             className="img-fluid custom-img"
           />
