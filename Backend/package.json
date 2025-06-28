@@ -4,6 +4,7 @@
   "description": "e-commerce website for plants",
   "main": "app.js",
   "scripts": {
+    "start": "nodemon server.js",
     "start:dev": "nodemon server.js",
     "start:prod": "NODE_ENV=production nodemon server.js",
     "test": "echo \"Error: no test specified\" && exit 1",
@@ -30,5 +31,8 @@
   },
   "engines": {
     "node": ">=10.0.0"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.10"
   }
 }

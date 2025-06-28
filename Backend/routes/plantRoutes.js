@@ -12,6 +12,12 @@ router
   .get(plantController.aliasFeaturedProducts, plantController.getAllPlants);
 
 router.route('/plant-stats').get(plantController.getPlantStats);
+router.route('/plantTotal').get(plantController.getTotalPlants);
+
+router.get(
+  '/availability/:availability',
+  plantController.getPlantsByAvailability
+);
 
 // router
 //   .route('/')
@@ -21,19 +27,22 @@ router.route('/plant-stats').get(plantController.getPlantStats);
 router
   .route('/')
   .get(plantController.getAllPlants)
-  .post(upload.single('imageCover'), plantController.createPlant);
-
-router.route('/plantTotal').get(plantController.getTotalPlants);
-
-router.get(
-  '/availability/:availability',
-  plantController.getPlantsByAvailability
-);
+  .post(
+    authController.protect,
+    authController.restrictTo('admin', 'owner'),
+    upload.single('imageCover'),
+    plantController.createPlant
+  );
 
 router
   .route('/:id')
   .get(plantController.getPlant)
-  .patch(upload.single('imageCover'), plantController.updatePlant)
+  .patch(
+    authController.protect,
+    authController.restrictTo('admin', 'owner'),
+    upload.single('imageCover'),
+    plantController.updatePlant
+  )
   .delete(
     authController.protect,
     authController.restrictTo('admin', 'owner'),

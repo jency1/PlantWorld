@@ -20,7 +20,7 @@ export function PlantContextProvider({ children }) {
   const [error, setError] = useState(null);
 
   const { showNotification } = useContext(NotificationContext);
-  const { isAdminLoggedIn, adminToken } = useContext(AdminAuthContext);
+  const { isAdminAuthenticated, adminToken } = useContext(AdminAuthContext);
 
   const BASE_URL = import.meta.env.VITE_BASE_URL;
 
@@ -111,9 +111,6 @@ export function PlantContextProvider({ children }) {
       }
 
       const data = await response.json();
-      // console.log("Admin Plants Fetched data : ", data);
-      // showNotification("Loaded all plants successfully", "success");
-
       setPlants(data?.data?.plants || []);
     } catch (err) {
       console.error("Error fetching all plants:", err);
@@ -122,8 +119,8 @@ export function PlantContextProvider({ children }) {
   }
 
   // Add Plant - Admin Only
-  async function addPlant(enteredPlantData) {
-    if (!isAdminLoggedIn) {
+  async function addPlant(plantData) {
+    if (!isAdminAuthenticated || !adminToken) {
       showNotification("Unauthorized: Admin access required", "warning");
       return;
     }
@@ -132,30 +129,30 @@ export function PlantContextProvider({ children }) {
       const response = await fetch(`${BASE_URL}/api/plants/`, {
         method: "POST",
         headers: {
-          "Content-Type": "application/json",
           Authorization: `Bearer ${adminToken}`,
         },
-        body: JSON.stringify(enteredPlantData),
+        body: plantData,
       });
 
+      const result = await response.json();
+
       if (!response.ok) {
-        throw new Error("Failed to create plant");
+        throw new Error(result.message || "Failed to add plant");
       }
 
-      const savedPlant = await response.json();
-      setPlants((prev) => [savedPlant, ...prev]);
-
+      await fetchAllPlants();
       showNotification("Plant added successfully", "success");
+      return result;
     } catch (err) {
       console.error("Add Plant Error:", err);
-      setError("Unable to add plant. Please try again later.");
-      showNotification("Failed to add plant", "error");
+      showNotification(err.message || "Failed to add plant", "error");
+      throw err;
     }
   }
 
   // Update Plant - Admin Only
   async function updatePlantById(id, updatedData) {
-    if (!isAdminLoggedIn) {
+    if (!isAdminAuthenticated || !adminToken) {
       showNotification("Unauthorized: Admin access required", "warning");
       return;
     }
@@ -164,35 +161,30 @@ export function PlantContextProvider({ children }) {
       const response = await fetch(`${BASE_URL}/api/plants/${id}`, {
         method: "PATCH",
         headers: {
-          "Content-Type": "application/json",
           Authorization: `Bearer ${adminToken}`,
         },
-        body: JSON.stringify(updatedData),
+        body: updatedData,
       });
 
+      const result = await response.json();
+
       if (!response.ok) {
-        throw new Error("Failed to update plant");
+        throw new Error(result.message || "Failed to update plant");
       }
 
-      const updatedPlant = await response.json();
-
-      setPlants((prev) =>
-        prev.map((plant) =>
-          plant._id === id ? { ...plant, ...updatedPlant } : plant
-        )
-      );
-
+      await fetchAllPlants();
       showNotification("Plant updated successfully", "success");
+      return result;
     } catch (err) {
       console.error("Update Plant Error:", err);
-      setError("Unable to update plant. Please try again later.");
-      showNotification("Failed to update plant", "error");
+      showNotification(err.message || "Failed to update plant", "error");
+      throw err;
     }
   }
 
   // Delete Plant - Admin Only
   async function deletePlantById(id) {
-    if (!isAdminLoggedIn) {
+    if (!isAdminAuthenticated || !adminToken) {
       showNotification("Unauthorized: Admin access required", "warning");
       return;
     }
@@ -205,15 +197,25 @@ export function PlantContextProvider({ children }) {
         },
       });
 
-      if (!response.ok) {
-        throw new Error("Failed to delete plant");
+      // Handle all OK statuses (including 204)
+      if (response.ok) {
+        await fetchAllPlants();
+        showNotification("Plant deleted successfully", "success");
+        return;
       }
 
-      setPlants((prev) => prev.filter((plant) => plant._id !== id));
+      // If not OK, try to extract and show error
+      let errorMsg = "Failed to delete plant";
+      try {
+        const errorData = await response.json();
+        errorMsg = errorData.message || errorMsg;
+      } catch {
+        // JSON parse failed, keep default message
+      }
 
-      showNotification("Plant deleted successfully", "success");
+      throw new Error(errorMsg);
     } catch (err) {
-      console.error("Delete Plant Error:", err);
+      console.error("Delete Plant Error:", err.message);
       setError("Unable to delete plant. Please try again later.");
       showNotification("Failed to delete plant", "error");
     }
@@ -235,7 +237,7 @@ export function PlantContextProvider({ children }) {
       {children}
 
       {error && (
-        <p className="text-red-700 bg-red-200 p-4 mt-4 rounded-md border border-red-400">
+        <p className="text-red-700 bg-red-200 p-4 m-4 rounded-md border border-red-400 text-center">
           {error}
         </p>
       )}

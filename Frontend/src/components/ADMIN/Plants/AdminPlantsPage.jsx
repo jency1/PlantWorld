@@ -1,6 +1,8 @@
 import React, { useContext, useEffect, useState } from "react";
 import { Box, Button, Container, Typography } from "@mui/material";
+
 import { PlantContext } from "../../../context/PlantsContext";
+import { NotificationContext } from "../../../context/NotificationContext";
 
 import PlantTable from "./PlantTable";
 import PlantDialog from "./PlantDialog";
@@ -9,6 +11,7 @@ import ConfirmationDialog from "../../../ui/ConfirmationDialog";
 const AdminPlantsPage = () => {
   const { plants, fetchAllPlants, addPlant, updatePlantById, deletePlantById } =
     useContext(PlantContext);
+  const { showNotification } = useContext(NotificationContext);
 
   const [confirmOpen, setConfirmOpen] = useState(false);
   const [plantToDelete, setPlantToDelete] = useState(null);
@@ -16,8 +19,8 @@ const AdminPlantsPage = () => {
   const [openDialog, setOpenDialog] = useState(false);
 
   const defaultFormData = {
-    plantName: "",
-    imageCover: "",
+    name: "",
+    imageCover: null,
     imagePreview: "",
     price: 0,
     quantity: 0,
@@ -28,13 +31,12 @@ const AdminPlantsPage = () => {
     category: "",
     tag: "",
     availability: "In Stock",
-    ratingsAverage: 1,
-    ratingsQuantity: 0,
     plantId: "",
   };
 
   const [formData, setFormData] = useState(defaultFormData);
 
+  // Fetch All Plants
   useEffect(() => {
     fetchAllPlants();
   }, []);
@@ -42,7 +44,7 @@ const AdminPlantsPage = () => {
   // Confirm Delete
   const handleConfirmDelete = async () => {
     if (plantToDelete?._id) {
-      await deletePlantById(plantToDelete._id);
+      await deletePlantById(plantToDelete?._id);
       fetchAllPlants();
     }
     setConfirmOpen(false);
@@ -57,9 +59,9 @@ const AdminPlantsPage = () => {
         ? {
             ...plant,
             imagePreview: plant.imageCover || "",
-            plantId: plant._id || "",
+            plantId: plant?._id || "",
             plantCareTips: Array.isArray(plant.plantCareTips)
-              ? plant.plantCareTips
+              ? plant?.plantCareTips
               : ["", "", "", ""],
           }
         : defaultFormData
@@ -67,37 +69,94 @@ const AdminPlantsPage = () => {
     setOpenDialog(true);
   };
 
+  // Handle Dialog Close
   const handleCloseDialog = () => {
     setOpenDialog(false);
     setSelectedPlant(null);
+    setFormData(defaultFormData);
   };
 
   // Save (Add / Update)
-  const handleSave = async () => {
-    const form = new FormData();
-    for (let key in formData) {
-      if (key === "imageCover" && typeof formData[key] !== "string") {
-        form.append(key, formData[key]);
-      } else if (key === "plantCareTips") {
-        form.append(key, JSON.stringify(formData[key]));
-      } else {
-        form.append(key, formData[key]);
+  const handleSave = async (formData) => {
+    try {
+      if (!selectedPlant && !(formData.imageCover instanceof File)) {
+        showNotification(
+          "Please upload an image before adding a new plant.",
+          "info"
+        );
+        return;
       }
-    }
 
-    if (selectedPlant) {
-      await updatePlantById(selectedPlant._id, form);
-    } else {
-      await addPlant(form);
-    }
+      const form = new FormData();
 
-    fetchAllPlants();
-    handleCloseDialog();
+      // Handle image upload
+      if (formData?.imageCover instanceof File) {
+        form.append("imageCover", formData.imageCover);
+      }
+
+      // Handle plant care tips
+      if (formData?.plantCareTips.length < 1) {
+        showNotification(
+          "There should be atleast 1 plant care tip.",
+          "warning"
+        );
+        return;
+      }
+      if (formData?.plantCareTips) {
+        form.append("plantCareTips", JSON.stringify(formData.plantCareTips));
+      }
+
+      // Handle all other fields
+      const fieldsToAppend = [
+        "name",
+        "price",
+        "quantity",
+        "shortDescription",
+        "description",
+        "category",
+        "tag",
+        "availability",
+      ];
+
+      fieldsToAppend.forEach((field) => {
+        if (formData[field] !== undefined && formData[field] !== null) {
+          form.append(field, formData[field]);
+        }
+      });
+
+      // Debug logs
+      for (let [key, value] of form.entries()) {
+        console.log(`${key}:`, value);
+      }
+
+      try {
+        if (selectedPlant) {
+          await updatePlantById(selectedPlant._id, form);
+          showNotification("Plant updated successfully!", "success");
+        } else {
+          await addPlant(form);
+          showNotification("Plant added successfully!", "success");
+        }
+
+        fetchAllPlants();
+        handleCloseDialog();
+      } catch (err) {
+        console.error("Save failed:", err);
+        showNotification(
+          `Failed to ${selectedPlant ? "update" : "add"} plant: ${err.message}`,
+          "error"
+        );
+      }
+    } catch (err) {
+      console.error("Form preparation failed:", err);
+      showNotification("Failed to prepare form data", "error");
+    }
   };
 
   return (
     <Container maxWidth="xl">
       <Box m="20px">
+        {/* Add New Plant Button */}
         <Box display="flex" justifyContent="end" alignItems="center" mb={2}>
           <Button
             variant="contained"
@@ -115,9 +174,16 @@ const AdminPlantsPage = () => {
         </Box>
 
         {plants?.length === 0 && (
-          <Typography variant="body1" color="error" mb={2}>
-            No plant data found.
-          </Typography>
+          <Box
+            display="flex"
+            justifyContent="left"
+            alignItems="center"
+            minHeight="100px"
+          >
+            <Typography variant="h6" color="error">
+              No plants data found.
+            </Typography>
+          </Box>
         )}
 
         <PlantTable

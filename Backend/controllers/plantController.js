@@ -2,6 +2,8 @@ const AppError = require('../utils/appError');
 const Plant = require('./../model/plantModel');
 const APIFeatures = require('./../utils/ApiFeatures');
 const catchAsync = require('./../utils/catchAsync');
+const path = require('path');
+const fs = require('fs');
 
 exports.aliasFeaturedProducts = (req, res, next) => {
   req.query.limit = '8';
@@ -55,8 +57,18 @@ exports.createPlant = async (req, res, next) => {
 
     const imageUrl = `${protocol}://${host}/images/${imageFile.filename}`;
 
+    // Parse plantCareTips if sent as JSON string
+    if (req.body.plantCareTips && typeof req.body.plantCareTips === 'string') {
+      try {
+        req.body.plantCareTips = JSON.parse(req.body.plantCareTips);
+      } catch (err) {
+        return next(new AppError('Invalid plantCareTips format', 400));
+      }
+    }
+
     const newPlantData = {
       ...req.body,
+      plantCareTips: req.body.plantCareTips,
       imageCover: imageUrl, // ✅ store full access link
     };
 
@@ -136,44 +148,78 @@ exports.getPlant = catchAsync(async (req, res, next) => {
 //   });
 // });
 
-exports.updatePlant = catchAsync(async (req, res, next) => {
-  // If a new image is uploaded, update imageCover
-  if (req.file) {
-    const host = req.get('host');
-    const protocol = req.protocol;
-    const imageUrl = `${protocol}://${host}/images/${req.file.filename}`;
-    req.body.imageCover = imageUrl;
-  }
+exports.updatePlant = async (req, res, next) => {
+  try {
+    // Fetch plant by ID
+    const plant = await Plant.findById(req.params.id);
 
-  // Fetch plant by ID
-  const plant = await Plant.findById(req.params.id);
-
-  if (!plant) {
-    return next(new AppError('No plant found with that ID', 404));
-  }
-
-  // Set availability based on updated quantity (if quantity is being updated)
-  if (req.body.quantity !== undefined) {
-    if (req.body.quantity === 0) {
-      req.body.availability = 'Out Of Stock';
-    } else if (plant.availability === 'Out Of Stock') {
-      req.body.availability = 'In Stock';
+    if (!plant) {
+      return next(new AppError('No plant found with that ID', 404));
     }
+
+    // If a new image is uploaded, update imageCover
+    if (req.file) {
+      // Delete old image file
+      if (plant.imageCover) {
+        const imagePath = path.join(
+          __dirname,
+          '..',
+          'public',
+          'images',
+          path.basename(plant.imageCover)
+        );
+        if (fs.existsSync(imagePath)) {
+          fs.unlink(imagePath, (err) => {
+            if (err) console.error('Error deleting old image:', err);
+          });
+        }
+      }
+
+      const host = req.get('host');
+      const protocol = req.protocol;
+      const imageUrl = `${protocol}://${host}/images/${req.file.filename}`;
+      req.body.imageCover = imageUrl;
+    }
+
+    // Parse plantCareTips if it's a JSON string
+    if (req.body.plantCareTips && typeof req.body.plantCareTips === 'string') {
+      try {
+        req.body.plantCareTips = JSON.parse(req.body.plantCareTips);
+      } catch (err) {
+        return next(new AppError('Invalid plantCareTips format', 400));
+      }
+    }
+
+    // Set availability based on updated quantity (if quantity is being updated)
+    if (req.body.quantity !== undefined) {
+      if (req.body.quantity === 0) {
+        req.body.availability = 'Out Of Stock';
+      } else if (plant.availability === 'Out Of Stock') {
+        req.body.availability = 'In Stock';
+      }
+    }
+
+    // Apply update
+    const updatedPlant = await Plant.findByIdAndUpdate(
+      req.params.id,
+      req.body,
+      {
+        new: true,
+        runValidators: true,
+      }
+    );
+
+    res.status(200).json({
+      status: 'success',
+      data: {
+        plant: updatedPlant,
+      },
+    });
+  } catch (err) {
+    console.error('Update error:', err);
+    return next(new AppError(err.message || 'Error updating plant', 500));
   }
-
-  // Apply update
-  const updatedPlant = await Plant.findByIdAndUpdate(req.params.id, req.body, {
-    new: true,
-    runValidators: true,
-  });
-
-  res.status(200).json({
-    status: 'success',
-    data: {
-      plant: updatedPlant,
-    },
-  });
-});
+};
 
 exports.deletePlant = catchAsync(async (req, res, next) => {
   const plant = await Plant.findByIdAndDelete(req.params.id);

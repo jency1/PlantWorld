@@ -65,7 +65,7 @@ const PlantTable = ({ plants, onEdit, onDelete }) => {
       flex: 0.3,
       renderCell: (params) => {
         const date = params.row?.createdAt;
-        return date ? format(new Date(date), "dd/MM/yyyy") : "-";
+        return date ? format(new Date(date), "dd-MM-yyyy") : "-";
       },
     },
     {
@@ -119,6 +119,18 @@ const PlantTable = ({ plants, onEdit, onDelete }) => {
             "& .MuiDataGrid-cell": {
               display: "flex",
               alignItems: "center",
+            },
+            "& .MuiDataGrid-columnHeaderTitle": {
+              color: "#4caf50",
+              fontWeight: "bold",
+              fontFamily: "Poppins, Roboto, sans-serif",
+            },
+            "& .MuiTablePagination-root, & .MuiTablePagination-toolbar, & .MuiTablePagination-selectLabel, & .MuiTablePagination-input, & .MuiSelect-icon":
+              {
+                fontWeight: "bold",
+              },
+            "& .Mui-disabled": {
+              fontWeight: "bold",
             },
           }}
         />

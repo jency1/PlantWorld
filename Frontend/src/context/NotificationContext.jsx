@@ -1,5 +1,4 @@
 import { createContext, useState, useContext, useRef } from "react";
-
 import {
   AiOutlineCheckCircle,
   AiOutlineInfoCircle,
@@ -15,48 +14,24 @@ export const NotificationContext = createContext({
 
 export function NotificationProvider({ children }) {
   const [notification, setNotification] = useState(null);
-  const [progress, setProgress] = useState(100);
   const duration = 4000;
-
   const timerRef = useRef(null);
-  const intervalRef = useRef(null);
-
-  // Start progress countdown
-  const startProgress = () => {
-    let start = Date.now();
-    intervalRef.current = setInterval(() => {
-      const elapsed = Date.now() - start;
-      const percent = Math.max(0, 100 - (elapsed / duration) * 100);
-      setProgress(percent);
-    }, 50);
-  };
-
-  // Clear timers
-  const clearTimers = () => {
-    clearTimeout(timerRef.current);
-    clearInterval(intervalRef.current);
-    setProgress(100);
-  };
 
   const showNotification = (message, type = "info") => {
-    clearTimers();
+    clearTimeout(timerRef.current);
     setNotification({ message, type });
-    startProgress();
 
     timerRef.current = setTimeout(() => {
       setNotification(null);
-      setProgress(100);
     }, duration);
   };
 
   const closeNotification = () => {
-    clearTimers();
+    clearTimeout(timerRef.current);
     setNotification(null);
   };
 
-  const contextValue = {
-    showNotification,
-  };
+  const contextValue = { showNotification };
 
   return (
     <NotificationContext.Provider value={contextValue}>
@@ -77,9 +52,7 @@ export function NotificationProvider({ children }) {
         >
           {/* Top section: icon + message + close button */}
           <div className="flex justify-between items-center gap-2">
-            {/* Image and text */}
             <div className="flex items-center gap-2">
-              {/* icon */}
               {notification.type === "success" && (
                 <AiOutlineCheckCircle className="text-green-500 w-5 h-5" />
               )}
@@ -92,33 +65,23 @@ export function NotificationProvider({ children }) {
               {notification.type === "error" && (
                 <AiOutlineCloseCircle className="text-red-500 w-5 h-5" />
               )}
-
-              {/* <img src="/greenTick.jpg" alt="Success" className="w-auto h-5" /> */}
-
-              {/* message */}
               <span className="flex-1 text-xs lg:text-sm font-medium break-words">
                 {notification.message}
               </span>
             </div>
 
-            {/* Close button */}
             <button
               onClick={closeNotification}
               className="text-black hover:text-gray-600 text-xs font-bold leading-none"
             >
               <AiOutlineClose className="w-4 h-4 lg:w-5 lg:h-5" />
-              {/* <img
-                src="/closeIcon.jpg"
-                alt="Close"
-                className="w-auto h-4 lg:h-5"
-              /> */}
             </button>
           </div>
 
           {/* Progress bar */}
-          <div className="w-full h-[2px] md:h-[3px] mt-2 bg-gray-200 rounded overflow-hidden">
+          <div className="w-full h-[2px] md:h-[3px] mt-2 bg-gray-200 rounded overflow-hidden relative">
             <div
-              className={`h-full transition-all duration-100 ${
+              className={`h-full absolute left-0 top-0 ${
                 notification.type === "error"
                   ? "bg-red-500"
                   : notification.type === "success"
@@ -126,8 +89,7 @@ export function NotificationProvider({ children }) {
                   : notification.type === "warning"
                   ? "bg-yellow-500"
                   : "bg-blue-500"
-              }`}
-              style={{ width: `${progress}%` }}
+              } animate-progress-bar`}
             />
           </div>
         </div>

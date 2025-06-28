@@ -10,6 +10,7 @@ import {
   Typography,
   MenuItem,
 } from "@mui/material";
+import { format } from "date-fns";
 
 const PlantDialog = ({
   open,
@@ -21,12 +22,14 @@ const PlantDialog = ({
 }) => {
   const [errors, setErrors] = useState({});
 
+  // Handle Input Change
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
     setErrors((prev) => ({ ...prev, [name]: "" }));
   };
 
+  // Handle Image Change
   const handleImageChange = (e) => {
     const file = e.target.files[0];
     if (file) {
@@ -38,39 +41,73 @@ const PlantDialog = ({
     }
   };
 
+  // Handle Plant Care Tips Change
   const handleCareTipChange = (index, value) => {
     const updatedTips = [...(formData.plantCareTips || [])];
     updatedTips[index] = value;
     setFormData((prev) => ({ ...prev, plantCareTips: updatedTips }));
   };
 
+  // Form Validation
   const validateForm = () => {
     const newErrors = {};
-    if (!formData.plantName?.trim())
-      newErrors.plantName = "Plant name is required";
-    if (!formData.price || formData.price < 0)
+
+    if (!selectedPlant && !(formData.imageCover instanceof File)) {
+      newErrors.imageCover = "Please upload an image";
+    }
+
+    if (!formData.name?.trim()) {
+      newErrors.name = "Plant name is required";
+    }
+
+    if (!formData.price || formData.price < 0) {
       newErrors.price = "Enter a valid price";
-    if (!formData.quantity || formData.quantity < 0)
+    }
+
+    if (!formData.quantity || formData.quantity < 0) {
       newErrors.quantity = "Enter a valid quantity";
-    if (!formData.category) newErrors.category = "Select category";
-    if (!formData.tag) newErrors.tag = "Select tag";
-    if (!formData.description?.trim())
+    }
+
+    if (!formData.category) {
+      newErrors.category = "Select category";
+    }
+
+    if (!formData.tag) {
+      newErrors.tag = "Select tag";
+    }
+
+    if (!formData.description?.trim()) {
       newErrors.description = "Description is required";
-    if (
-      isNaN(parseFloat(formData.ratingsAverage)) ||
-      parseFloat(formData.ratingsAverage) < 1 ||
-      parseFloat(formData.ratingsAverage) > 5
-    ) {
-      newErrors.ratingsAverage = "Rating must be between 1.0 and 5.0";
+    }
+
+    if (!formData.shortDescription?.trim()) {
+      newErrors.shortDescription = "Short Description is required";
     }
 
     setErrors(newErrors);
+
     return Object.keys(newErrors).length === 0;
   };
 
+  // Handle Submit
   const handleSubmit = () => {
     if (validateForm()) {
-      onSave();
+      const submitData = {
+        ...formData,
+        price: parseFloat(formData.price),
+        quantity: parseInt(formData.quantity),
+        plantCareTips: (formData.plantCareTips || []).filter(
+          (tip) => tip.trim() !== ""
+        ),
+      };
+
+      delete submitData.imagePreview;
+
+      if (!submitData.imageCover || !(submitData.imageCover instanceof File)) {
+        delete submitData.imageCover;
+      }
+
+      onSave(submitData);
     }
   };
 
@@ -110,12 +147,14 @@ const PlantDialog = ({
             <Typography variant="subtitle1" gutterBottom sx={labelStyles}>
               Upload Plant Image
             </Typography>
+
             <input
               type="file"
               accept="image/*"
               onChange={handleImageChange}
               style={{ marginBottom: "10px" }}
             />
+
             {(formData.imagePreview || formData.imageCover) && (
               <img
                 src={
@@ -152,17 +191,28 @@ const PlantDialog = ({
             />
           )}
 
-          {/* Core Fields */}
+          {selectedPlant && (
+            <TextField
+              label="Created At"
+              value={format(new Date(formData.createdAt), "dd-MM-yyyy")}
+              fullWidth
+            />
+          )}
+
+          {/* CORE FIELDS */}
+
+          {/* Plant Name */}
           <TextField
-            name="plantName"
+            name="name"
             label="Plant Name"
-            value={formData.plantName}
+            value={formData.name}
             onChange={handleInputChange}
             fullWidth
-            error={!!errors.plantName}
-            helperText={errors.plantName}
+            error={!!errors.name}
+            helperText={errors.name}
           />
 
+          {/* Plant Price */}
           <TextField
             name="price"
             label="Price"
@@ -174,6 +224,7 @@ const PlantDialog = ({
             helperText={errors.price}
           />
 
+          {/* Plant Quantity */}
           <TextField
             name="quantity"
             label="Quantity"
@@ -185,14 +236,18 @@ const PlantDialog = ({
             helperText={errors.quantity}
           />
 
+          {/* Short Description */}
           <TextField
             name="shortDescription"
             label="Short Description"
             value={formData.shortDescription}
             onChange={handleInputChange}
             fullWidth
+            error={!!errors.shortDescription}
+            helperText={errors.shortDescription}
           />
 
+          {/* Description */}
           <TextField
             name="description"
             label="Description"
@@ -205,6 +260,7 @@ const PlantDialog = ({
             helperText={errors.description}
           />
 
+          {/* Category */}
           <TextField
             name="category"
             label="Category"
@@ -222,6 +278,7 @@ const PlantDialog = ({
             ))}
           </TextField>
 
+          {/* Tag */}
           <TextField
             name="tag"
             label="Tag"
@@ -239,6 +296,7 @@ const PlantDialog = ({
             ))}
           </TextField>
 
+          {/* Availability */}
           <TextField
             name="availability"
             label="Availability"
@@ -254,28 +312,7 @@ const PlantDialog = ({
             ))}
           </TextField>
 
-          <TextField
-            name="ratingsAverage"
-            label="Ratings (1.0 – 5.0)"
-            type="number"
-            value={formData.ratingsAverage}
-            inputProps={{ step: 0.1, min: 1, max: 5 }}
-            onChange={handleInputChange}
-            fullWidth
-            error={!!errors.ratingsAverage}
-            helperText={errors.ratingsAverage}
-          />
-
-          <TextField
-            name="ratingsQuantity"
-            label="Ratings Count"
-            type="number"
-            value={formData.ratingsQuantity}
-            onChange={handleInputChange}
-            fullWidth
-          />
-
-          {/* Care Tips */}
+          {/* Plant Care Tips */}
           <Box>
             <Typography variant="subtitle1" gutterBottom sx={labelStyles}>
               Plant Care Tips
