@@ -12,6 +12,7 @@ import {
 } from "@mui/material";
 import { AdminAuthContext } from "../../../context/ADMIN/AdminAuthContext";
 import { NotificationContext } from "../../../context/NotificationContext";
+import { AdminOrdersContext } from "../../../context/ADMIN/AdminOrdersContext";
 
 const statusOptions = [
   "Order Received",
@@ -23,6 +24,7 @@ const statusOptions = [
 
 const OrdersTable = ({ orders, onView }) => {
   const { adminToken } = useContext(AdminAuthContext);
+  const { fetchAllOrders } = useContext(AdminOrdersContext);
   const { showNotification } = useContext(NotificationContext);
 
   const [paginationModel, setPaginationModel] = useState({
@@ -43,7 +45,7 @@ const OrdersTable = ({ orders, onView }) => {
           "Content-Type": "application/json",
           Authorization: `Bearer ${adminToken}`,
         },
-        body: JSON.stringify(newStatus),
+        body: JSON.stringify({ newStatus }),
       });
 
       const result = await response.json();
@@ -53,6 +55,7 @@ const OrdersTable = ({ orders, onView }) => {
         throw new Error(result.message || "Failed to update status");
       }
 
+      fetchAllOrders();
       showNotification("Status updated successfully", "success");
     } catch (error) {
       showNotification("Error updating status", "error");
