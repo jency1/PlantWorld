@@ -254,50 +254,45 @@ export function CartProvider({ children }) {
   };
 
   // Clear Cart
-  function clearCart() {
-    setCart([]);
-    showNotification("Cart cleared.", "error");
-  }
 
-  // const clearCart = async () => {
-  //   const token = checkAuthToken();
-  //   if (!token) {
-  //     return;
-  //   }
+  const clearCart = async () => {
+    const token = checkAuthToken();
+    if (!token) {
+      return;
+    }
 
-  //   try {
-  //     const response = await fetch(`${BASE_URL}/api/users/clear-cart`, {
-  //       method: "DELETE",
-  //       headers: {
-  //         "Content-Type": "application/json",
-  //         Authorization: `Bearer ${token}`,
-  //       },
-  //     });
+    try {
+      const response = await fetch(`${BASE_URL}/api/users/clear-cart`, {
+        method: "DELETE",
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
 
-  //     if (!response.ok) {
-  //       showNotification("Failed to clear cart", "error");
-  //       return;
-  //     }
+      if (!response.ok) {
+        showNotification("Failed to clear cart", "error");
+        return;
+      }
 
-  //     setCart([]);
+      setCart([]);
 
-  //     // Clear cart in localStorage user object
-  //     const storedUser = localStorage.getItem("user");
-  //     if (storedUser) {
-  //       const user = JSON.parse(storedUser);
-  //       user.cart = [];
-  //       localStorage.setItem("user", JSON.stringify(user));
-  //     }
+      // Clear cart in localStorage user object
+      const storedUser = localStorage.getItem("user");
+      if (storedUser) {
+        const user = JSON.parse(storedUser);
+        user.cart = [];
+        localStorage.setItem("user", JSON.stringify(user));
+      }
 
-  //     showNotification("Cart cleared successfully.", "error");
-  //   } catch (error) {
-  //     showNotification(
-  //       "Error clearing the cart. Please try again later!",
-  //       "error"
-  //     );
-  //     console.error("Clear cart error:", error);
-  //   }
-  // };
+      showNotification("Cart cleared successfully.", "success");
+    } catch (error) {
+      showNotification(
+        "Error clearing the cart. Please try again later!",
+        "error"
+      );
+      console.error("Clear cart error:", error);
+    }
+  };
 
   // Get the QUANTITY of a plant by its ID
   const getPlantQuantity = (plantId) => {
