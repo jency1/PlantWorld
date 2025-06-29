@@ -35,9 +35,10 @@ import ScrollToTop from "./ScrollToTop";
 import { AuthProvider } from "./context/CLIENT/AuthContext";
 import { CartProvider } from "./context/CLIENT/CartContext";
 import { OrderProvider } from "./context/CLIENT/OrderContext";
-import { PlantContextProvider } from "./context/PlantsContext";
 import ProtectedRoute from "./ProtectedRoute";
 
+import { FaqContextProvider } from "./context/FaqContext";
+import { PlantContextProvider } from "./context/PlantsContext";
 import { NotificationProvider } from "./context/NotificationContext";
 
 // ADMIN
@@ -64,13 +65,15 @@ const router = createBrowserRouter([
 
         <NotificationProvider>
           <AuthProvider>
-            <PlantContextProvider>
-              <CartProvider>
-                <OrderProvider>
-                  <AppLayout />
-                </OrderProvider>
-              </CartProvider>
-            </PlantContextProvider>
+            <FaqContextProvider>
+              <PlantContextProvider>
+                <CartProvider>
+                  <OrderProvider>
+                    <AppLayout />
+                  </OrderProvider>
+                </CartProvider>
+              </PlantContextProvider>
+            </FaqContextProvider>
           </AuthProvider>
         </NotificationProvider>
       </>
@@ -204,13 +207,15 @@ const router = createBrowserRouter([
         <ScrollToTop />
         <NotificationProvider>
           <AdminAuthProvider>
-            <PlantContextProvider>
-              <AdminOrdersProvider>
-                <AdminProtectedRoute>
-                  <AdminLayout />
-                </AdminProtectedRoute>
-              </AdminOrdersProvider>
-            </PlantContextProvider>
+            <FaqContextProvider>
+              <PlantContextProvider>
+                <AdminOrdersProvider>
+                  <AdminProtectedRoute>
+                    <AdminLayout />
+                  </AdminProtectedRoute>
+                </AdminOrdersProvider>
+              </PlantContextProvider>
+            </FaqContextProvider>
           </AdminAuthProvider>
         </NotificationProvider>
       </>

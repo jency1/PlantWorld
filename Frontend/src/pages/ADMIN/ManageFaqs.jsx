@@ -1,9 +1,10 @@
 import React from "react";
+import AdminFaqsPage from "../../components/ADMIN/Faqs/AdminFaqPage";
 
-export default function ManageFaqs() {
+export default function ManagePlants() {
   return (
     <>
-      <h1>Manage Faqs</h1>
+      <AdminFaqsPage />
     </>
   );
 }
