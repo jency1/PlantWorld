@@ -43,7 +43,7 @@ const AdminLayout = () => {
         sx={{
           flexGrow: 1,
           bgcolor: "#f9fff9",
-          p: { xs: 2, sm: 3 },
+          mb: 5,
           marginLeft: { xs: 0, md: `${drawerWidth}px` },
           width: { xs: "100%", md: `calc(100% - ${drawerWidth}px)` },
           minHeight: "100vh",

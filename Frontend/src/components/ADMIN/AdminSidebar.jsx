@@ -116,12 +116,14 @@ const AdminSidebar = ({ mobileOpen, handleDrawerToggle }) => {
                 width: "100%",
                 maxWidth: "100%",
                 "&:hover": {
-                  backgroundColor: "#d1fadf",
+                  backgroundColor: "#43a047",
+                  color: "#fff",
                 },
                 "&.Mui-selected": {
-                  backgroundColor: "#c4f5c8",
+                  backgroundColor: "#4ead54",
+                  color: "#fff",
                   "&:hover": {
-                    backgroundColor: "#b9f0be",
+                    backgroundColor: "#43a047",
                   },
                 },
               }}
