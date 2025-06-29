@@ -4,6 +4,7 @@ import { AdminAuthContext } from "../context/ADMIN/AdminAuthContext";
 
 export const PlantContext = createContext({
   plants: [],
+  totalPlants: 0,
   totalPages: 0,
   fetchPlants: (page, limit) => {},
   getPlantById: (id) => {},
@@ -225,6 +226,7 @@ export function PlantContextProvider({ children }) {
     <PlantContext.Provider
       value={{
         plants,
+        totalPlants,
         totalPages,
         fetchPlants,
         getPlantById,

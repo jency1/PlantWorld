@@ -55,6 +55,7 @@ import ManageFaqs from "./pages/ADMIN/ManageFaqs";
 
 import { AdminAuthProvider } from "./context/ADMIN/AdminAuthContext";
 import { AdminOrdersProvider } from "./context/ADMIN/AdminOrdersContext";
+import { AdminUsersProvider } from "./context/ADMIN/AdminUsersContext";
 
 const router = createBrowserRouter([
   {
@@ -208,13 +209,15 @@ const router = createBrowserRouter([
         <NotificationProvider>
           <AdminAuthProvider>
             <FaqContextProvider>
-              <PlantContextProvider>
-                <AdminOrdersProvider>
-                  <AdminProtectedRoute>
-                    <AdminLayout />
-                  </AdminProtectedRoute>
-                </AdminOrdersProvider>
-              </PlantContextProvider>
+              <AdminUsersProvider>
+                <PlantContextProvider>
+                  <AdminOrdersProvider>
+                    <AdminProtectedRoute>
+                      <AdminLayout />
+                    </AdminProtectedRoute>
+                  </AdminOrdersProvider>
+                </PlantContextProvider>
+              </AdminUsersProvider>
             </FaqContextProvider>
           </AdminAuthProvider>
         </NotificationProvider>
