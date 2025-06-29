@@ -16,8 +16,20 @@ const FaqAccordionList = ({ faqs }) => {
 
   return (
     <Box>
-      {faqs.map((faq) => (
-        <Accordion key={faq._id} sx={{ mb: 3 }}>
+      {[...faqs].reverse().map((faq) => (
+        <Accordion
+          key={faq._id}
+          sx={{
+            my: 2,
+            boxShadow: "none",
+            border: "1px solid #e0e0e0",
+            backgroundColor: "#f9f9f9",
+            borderRadius: "8px",
+            "&:before": {
+              display: "none",
+            },
+          }}
+        >
           <AccordionSummary expandIcon={<ExpandMoreIcon />}>
             <Typography
               sx={{
