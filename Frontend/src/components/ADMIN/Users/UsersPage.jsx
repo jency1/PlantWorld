@@ -1,16 +1,19 @@
 import React, { useContext, useEffect, useState } from "react";
 import { Box, Container, Typography } from "@mui/material";
 
-import UsersTable from "./UsersTable";
+import LoadingSpinner from "../../../ui/LoadingSpinner";
 
 import { NotificationContext } from "../../../context/NotificationContext";
 import { AdminAuthContext } from "../../../context/ADMIN/AdminAuthContext";
+
+import UsersTable from "./UsersTable";
 
 const UsersPage = () => {
   const { showNotification } = useContext(NotificationContext);
   const { isAdminAuthenticated } = useContext(AdminAuthContext);
 
   const [users, setUsers] = useState([]);
+  const [loading, setLoading] = useState(false);
 
   const BASE_URL = import.meta.env.VITE_BASE_URL;
 
@@ -22,6 +25,8 @@ const UsersPage = () => {
       }
 
       try {
+        setLoading(true);
+
         const response = await fetch(`${BASE_URL}/api/users`, {
           method: "GET",
           headers: {
@@ -41,6 +46,8 @@ const UsersPage = () => {
       } catch (err) {
         showNotification("Failed to fetch users data.", "error");
         throw new Error(err.message || "Failed to fetch users data.");
+      } finally {
+        setLoading(false);
       }
     }
 
@@ -54,12 +61,26 @@ const UsersPage = () => {
           my: "1.5rem",
         }}
       >
-        {users?.length === 0 ? (
-          <Typography variant="h6" color="error">
-            No users data found.
-          </Typography>
+        {loading ? (
+          <Box
+            display="flex"
+            justifyContent="center"
+            alignItems="center"
+            minHeight="100vh"
+            width="100%"
+          >
+            <LoadingSpinner />
+          </Box>
         ) : (
-          <UsersTable users={[...users].reverse()} />
+          <>
+            {users?.length === 0 ? (
+              <Typography variant="h6" color="error">
+                No users data found.
+              </Typography>
+            ) : (
+              <UsersTable users={[...users].reverse()} />
+            )}
+          </>
         )}
       </Box>
     </Container>

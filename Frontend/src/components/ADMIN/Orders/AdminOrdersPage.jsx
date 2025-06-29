@@ -7,7 +7,7 @@ import {
   useMediaQuery,
 } from "@mui/material";
 
-import { NotificationContext } from "../../../context/NotificationContext";
+import LoadingSpinner from "../../../ui/LoadingSpinner";
 import { AdminOrdersContext } from "../../../context/ADMIN/AdminOrdersContext";
 
 import OrdersTable from "./OrdersTable";
@@ -18,14 +18,25 @@ const AdminOrdersPage = () => {
   const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
 
   const { orders, fetchAllOrders } = useContext(AdminOrdersContext);
-  const { showNotification } = useContext(NotificationContext);
 
-  const [selectedOrder, setSelectedOrder] = useState(null);
+  const [loading, setLoading] = useState(false);
   const [dialogOpen, setDialogOpen] = useState(false);
+  const [selectedOrder, setSelectedOrder] = useState(null);
 
+  // Fetch All Orders
   useEffect(() => {
-    // console.log("Orders from context:", orders);
-    fetchAllOrders();
+    const fetchOrders = async () => {
+      setLoading(true);
+      try {
+        await fetchAllOrders();
+      } catch (error) {
+        showNotification("Failed to fetch plants data", "error");
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchOrders();
   }, []);
 
   const handleView = (order) => {
@@ -46,19 +57,33 @@ const AdminOrdersPage = () => {
           mt: "1.5rem",
         }}
       >
-        {orders?.length === 0 ? (
-          <Typography variant="h6" color="error">
-            No orders data found.
-          </Typography>
+        {loading ? (
+          <Box
+            display="flex"
+            justifyContent="center"
+            alignItems="center"
+            minHeight="100vh"
+            width="100%"
+          >
+            <LoadingSpinner />
+          </Box>
         ) : (
-          <OrdersTable orders={[...orders].reverse()} onView={handleView} />
-        )}
+          <>
+            {orders?.length === 0 ? (
+              <Typography variant="h6" color="error">
+                No orders data found.
+              </Typography>
+            ) : (
+              <OrdersTable orders={[...orders].reverse()} onView={handleView} />
+            )}
 
-        <OrderDetailsDialog
-          open={dialogOpen}
-          onClose={handleDialogClose}
-          order={selectedOrder}
-        />
+            <OrderDetailsDialog
+              open={dialogOpen}
+              onClose={handleDialogClose}
+              order={selectedOrder}
+            />
+          </>
+        )}
       </Box>
     </Container>
   );

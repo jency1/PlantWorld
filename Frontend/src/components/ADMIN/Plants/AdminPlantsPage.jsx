@@ -13,20 +13,22 @@ import { NotificationContext } from "../../../context/NotificationContext";
 
 import PlantTable from "./PlantTable";
 import PlantDialog from "./PlantDialog";
+import LoadingSpinner from "../../../ui/LoadingSpinner";
 import ConfirmationDialog from "../../../ui/ConfirmationDialog";
 
 const AdminPlantsPage = () => {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
 
+  const { showNotification } = useContext(NotificationContext);
   const { plants, fetchAllPlants, addPlant, updatePlantById, deletePlantById } =
     useContext(PlantContext);
-  const { showNotification } = useContext(NotificationContext);
 
+  const [loading, setLoading] = useState(false);
+  const [openDialog, setOpenDialog] = useState(false);
   const [confirmOpen, setConfirmOpen] = useState(false);
   const [plantToDelete, setPlantToDelete] = useState(null);
   const [selectedPlant, setSelectedPlant] = useState(null);
-  const [openDialog, setOpenDialog] = useState(false);
 
   const defaultFormData = {
     name: "",
@@ -48,7 +50,18 @@ const AdminPlantsPage = () => {
 
   // Fetch All Plants
   useEffect(() => {
-    fetchAllPlants();
+    const fetchPlants = async () => {
+      setLoading(true);
+      try {
+        await fetchAllPlants();
+      } catch (error) {
+        showNotification("Failed to fetch plants data", "error");
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchPlants();
   }, []);
 
   // Confirm Delete
@@ -135,9 +148,9 @@ const AdminPlantsPage = () => {
       });
 
       // Debug logs
-      for (let [key, value] of form.entries()) {
-        console.log(`${key}:`, value);
-      }
+      // for (let [key, value] of form.entries()) {
+      //   console.log(`${key}:`, value);
+      // }
 
       try {
         if (selectedPlant) {
@@ -171,66 +184,80 @@ const AdminPlantsPage = () => {
           mt: "1rem",
         }}
       >
-        {/* Add New Plant Button */}
-        <Box display="flex" justifyContent="end" alignItems="center" mb={2}>
-          <Button
-            variant="contained"
-            onClick={() => handleOpenDialog(null)}
-            sx={{
-              backgroundColor: "#4caf50",
-              color: "#fff",
-              "&:hover": {
-                backgroundColor: "#43a047",
-              },
-            }}
-          >
-            Add New Plant
-          </Button>
-        </Box>
-
-        {plants?.length === 0 && (
+        {loading ? (
           <Box
             display="flex"
-            justifyContent="left"
+            justifyContent="center"
             alignItems="center"
-            minHeight="100px"
+            minHeight="100vh"
+            width="100%"
           >
-            <Typography variant="h6" color="error">
-              No plants data found.
-            </Typography>
+            <LoadingSpinner />
           </Box>
+        ) : (
+          <>
+            {/* Add New Plant Button */}
+            <Box display="flex" justifyContent="end" alignItems="center" mb={2}>
+              <Button
+                variant="contained"
+                onClick={() => handleOpenDialog(null)}
+                sx={{
+                  backgroundColor: "#4caf50",
+                  color: "#fff",
+                  "&:hover": {
+                    backgroundColor: "#43a047",
+                  },
+                }}
+              >
+                Add New Plant
+              </Button>
+            </Box>
+
+            {plants?.length === 0 ? (
+              <Box
+                display="flex"
+                justifyContent="left"
+                alignItems="center"
+                minHeight="100px"
+              >
+                <Typography variant="h6" color="error">
+                  No plants data found.
+                </Typography>
+              </Box>
+            ) : (
+              <PlantTable
+                plants={plants}
+                onEdit={handleOpenDialog}
+                onDelete={(plant) => {
+                  setPlantToDelete(plant);
+                  setConfirmOpen(true);
+                }}
+              />
+            )}
+
+            <PlantDialog
+              open={openDialog}
+              onClose={handleCloseDialog}
+              onSave={handleSave}
+              selectedPlant={selectedPlant}
+              formData={formData}
+              setFormData={setFormData}
+            />
+
+            <ConfirmationDialog
+              open={confirmOpen}
+              title="Delete Plant"
+              message={`Are you sure you want to delete "${
+                plantToDelete?.name || "this plant"
+              }"?`}
+              onCancel={() => {
+                setConfirmOpen(false);
+                setPlantToDelete(null);
+              }}
+              onConfirm={handleConfirmDelete}
+            />
+          </>
         )}
-
-        <PlantTable
-          plants={plants}
-          onEdit={handleOpenDialog}
-          onDelete={(plant) => {
-            setPlantToDelete(plant);
-            setConfirmOpen(true);
-          }}
-        />
-
-        <PlantDialog
-          open={openDialog}
-          onClose={handleCloseDialog}
-          onSave={handleSave}
-          selectedPlant={selectedPlant}
-          formData={formData}
-          setFormData={setFormData}
-        />
-
-        <ConfirmationDialog
-          open={confirmOpen}
-          title="Delete Plant"
-          message={`Are you sure you want to delete "${
-            plantToDelete?.name || "this plant"
-          }"?`}
-          onCancel={() => {
-            setConfirmOpen(false);
-            setPlantToDelete(null);
-          }}
-          onConfirm={handleConfirmDelete}
-        />
       </Box>
     </Container>
   );
