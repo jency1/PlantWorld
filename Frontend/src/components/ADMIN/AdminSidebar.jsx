@@ -37,7 +37,7 @@ const AdminSidebar = ({ mobileOpen, handleDrawerToggle }) => {
   const [confirmLogoutOpen, setConfirmLogoutOpen] = useState(false);
 
   const navItems = [
-    { text: "Dashboard", icon: <DashboardIcon />, path: "/admin/dashboard" },
+    // { text: "Dashboard", icon: <DashboardIcon />, path: "/admin/dashboard" },
     { text: "Plants", icon: <LocalFloristIcon />, path: "/admin/plants" },
     { text: "Orders", icon: <ShoppingCartIcon />, path: "/admin/orders" },
     { text: "Users", icon: <GroupIcon />, path: "/admin/users" },

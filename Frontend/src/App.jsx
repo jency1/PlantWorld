@@ -2,6 +2,8 @@ import "./index.css";
 
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 
+import ErrorPage from "./components/ErrorPage";
+
 // CLIENT
 
 import HomePage from "./pages/CLIENT/HomePage";
@@ -47,11 +49,11 @@ import AdminProtectedRoute from "./AdminProtectedRoute";
 import AdminLayout from "./pages/ADMIN/AdminLayout";
 
 import AdminLoginPage from "./pages/ADMIN/AdminLoginPage";
-import AdminDashboard from "./pages/ADMIN/AdminDashboard";
 import ManagePlants from "./pages/ADMIN/ManagePlants";
 import ManageUsers from "./pages/ADMIN/ManageUsers";
 import ManageOrders from "./pages/ADMIN/ManageOrders";
 import ManageFaqs from "./pages/ADMIN/ManageFaqs";
+// import AdminDashboard from "./pages/ADMIN/AdminDashboard";
 
 import { AdminAuthProvider } from "./context/ADMIN/AdminAuthContext";
 import { AdminOrdersProvider } from "./context/ADMIN/AdminOrdersContext";
@@ -79,6 +81,7 @@ const router = createBrowserRouter([
         </NotificationProvider>
       </>
     ),
+    errorElement: <ErrorPage />,
     children: [
       {
         path: "/",
@@ -166,6 +169,7 @@ const router = createBrowserRouter([
   },
   {
     path: "/login",
+    errorElement: <ErrorPage />,
     element: (
       <>
         <ScrollToTop />
@@ -187,6 +191,7 @@ const router = createBrowserRouter([
   // ADMIN - Login page (unprotected)
   {
     path: "/admin/login",
+    errorElement: <ErrorPage />,
     element: (
       <>
         <ScrollToTop />
@@ -226,12 +231,12 @@ const router = createBrowserRouter([
     children: [
       {
         path: "",
-        element: <AdminDashboard />,
+        element: <ManagePlants />,
       },
-      {
-        path: "dashboard",
-        element: <AdminDashboard />,
-      },
+      // {
+      //   path: "dashboard",
+      //   element: <AdminDashboard />,
+      // },
       {
         path: "plants",
         element: <ManagePlants />,

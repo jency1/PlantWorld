@@ -8,6 +8,6 @@ export default function AdminProtectedRoute({ children }) {
   return isAdminAuthenticated ? (
     children
   ) : (
-    <Navigate to="/admin/login" replace />
+    <Navigate to="/admin/plants" replace />
   );
 }
