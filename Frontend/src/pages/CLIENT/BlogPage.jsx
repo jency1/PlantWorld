@@ -1,5 +1,5 @@
-import BlogHeader from "../../components/CLIENT/BlogLayout/BlogHeader";
-import BlogSection from "../../components/CLIENT/BlogLayout/BlogSection";
+import BlogHeader from "../../components/CLIENT/Blog/BlogHeader";
+import BlogSection from "../../components/CLIENT/Blog/BlogSection";
 
 function BlogLayout() {
   return (

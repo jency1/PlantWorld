@@ -58,6 +58,7 @@ import ManageFaqs from "./pages/ADMIN/ManageFaqs";
 import { AdminAuthProvider } from "./context/ADMIN/AdminAuthContext";
 import { AdminOrdersProvider } from "./context/ADMIN/AdminOrdersContext";
 import { AdminUsersProvider } from "./context/ADMIN/AdminUsersContext";
+import BlogDetail from "./components/CLIENT/Blog/BlogDetail";
 
 const router = createBrowserRouter([
   {
@@ -99,6 +100,10 @@ const router = createBrowserRouter([
       {
         path: "/blog",
         element: <BlogPage />,
+      },
+      {
+        path: "/blog/:id",
+        element: <BlogDetail />,
       },
       {
         path: "/plant/description/:plantId",
