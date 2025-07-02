@@ -42,7 +42,7 @@ export function AdminAuthProvider({ children }) {
     setAdmin(adminData);
     localStorage.setItem("adminToken", token);
     localStorage.setItem("admin", JSON.stringify(adminData));
-    navigate("/admin/dashboard");
+    navigate("/admin/plants");
   };
 
   const logoutAdmin = () => {
