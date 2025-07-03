@@ -1,5 +1,7 @@
 # 🌿 PlantWorld
 
+> _"Bringing nature to your doorstep, one plant at a time."_
+
 **PlantWorld** is a fully responsive, e-commerce website for exploring and buying plants and gardening tools. It offers secure login, real-time order tracking, Razorpay payment, profile management, and an intuitive admin panel for complete control over products, orders, users, and FAQs.
 
 ---
