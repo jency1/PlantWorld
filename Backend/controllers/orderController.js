@@ -3,6 +3,7 @@ const Order = require('../model/orderModel');
 const User = require('../model/userModel');
 const catchAsync = require('../utils/catchAsync');
 const Plant = require('../model/plantModel');
+const sendEmail = require('../utils/email');
 
 // exports.createOrder = catchAsync(async (req, res) => {
 //   const {
@@ -90,22 +91,23 @@ exports.createOrder = catchAsync(async (req, res) => {
     paymentId,
   } = req.body;
 
-  // 1. Get user and cart
+  // 1. Get user and their cart
   const user = await User.findById(req.user.id).populate('cart.plantId');
 
   if (!user || !user.cart || user.cart.length === 0) {
     return res.status(400).json({ status: 'fail', message: 'Cart is empty' });
   }
 
-  // 2. Prepare items for order
+  // 2. Prepare order items
   const items = user.cart.map((item) => ({
     plantId: item.plantId._id || item.plantId,
     quantity: item.quantity,
     price: item.price,
     total: item.quantity * item.price,
+    plantRef: item.plantId, // for email use only
   }));
 
-  // 3. Calculate total
+  // 3. Calculate total and delivery date
   const orderTotal = items.reduce((acc, item) => acc + item.total, 0);
   const expectedDelivery = new Date(Date.now() + 7 * 24 * 60 * 60 * 1000); // +7 days
 
@@ -129,27 +131,65 @@ exports.createOrder = catchAsync(async (req, res) => {
     pincode,
   });
 
-  // 5. Subtract quantity from each plant
+  // 5. Update plant stock
   for (const item of items) {
     const plant = await Plant.findById(item.plantId);
     if (plant) {
       plant.quantity -= item.quantity;
-
       if (plant.quantity <= 0) {
         plant.quantity = 0;
         plant.availability = 'Out Of Stock';
       }
-
       await plant.save({ validateBeforeSave: false });
     }
   }
 
-  // 6. Clear cart and push order to user
+  // 6. Clear user cart and save order
   user.orders.push(order._id);
   user.cart = [];
   await user.save({ validateBeforeSave: false });
 
-  // 7. Response
+  // 7. Send confirmation email
+  const emailMessage = `
+    <div style="font-family: Arial, sans-serif; color: #333; font-size: 16px;">
+      <p>Hi <strong>${firstName} ${lastName}</strong>,</p>
+
+      <p>Thank you for your order at <strong style="color:green">PlantWorld 🌿</strong>!</p>
+
+      <p>Your order has been successfully placed and is now being processed.</p>
+
+      <p><strong>Order Total:</strong> ₹${orderTotal}</p>
+      <p><strong>Expected Delivery:</strong> ${expectedDelivery.toDateString()}</p>
+
+      <hr />
+      <h3>Order Summary:</h3>
+      ${items
+        .map(
+          (item) => `
+        <p>
+          <strong>Plant:</strong> ${item.plantRef.name}<br/>
+          <strong>Quantity:</strong> ${item.quantity}<br/>
+          <strong>Total:</strong> ₹${item.total}
+        </p>
+      `
+        )
+        .join('')}
+      <hr/>
+
+      <p>If you have any questions, feel free to reach out to us.</p>
+
+      <p>With green regards,<br/>
+      <strong style="color:green">The PlantWorld Team 🌱</strong></p>
+    </div>
+  `;
+
+  await sendEmail({
+    email,
+    subject: '🌿 Your PlantWorld Order Confirmation',
+    message: emailMessage,
+  });
+
+  // 8. Send response
   res.status(201).json({
     status: 'success',
     order,
