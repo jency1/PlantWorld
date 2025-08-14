@@ -8,7 +8,7 @@ router.post('/', authController.protect, orderController.createOrder);
 router.get(
   '/',
   authController.protect,
-  authController.restrictTo('admin', 'owner'),
+  authController.restrictTo('admin', 'owner', 'deliverypartner'),
   orderController.getAllOrders
 );
 router.get('/myorders', authController.protect, orderController.getMyOrders);
@@ -22,7 +22,7 @@ router.get(
 router.patch(
   '/:orderId/status',
   authController.protect,
-  authController.restrictTo('admin', 'owner'),
+  authController.restrictTo('admin', 'owner', 'deliverypartner'),
   orderController.updateOrderStatus
 );
 
@@ -35,7 +35,7 @@ router.patch(
 router.get(
   '/:orderId',
   authController.protect,
-  authController.restrictTo('admin', 'owner'),
+  authController.restrictTo('admin', 'owner', 'deliverypartner'),
   orderController.getOrderById
 );
 module.exports = router;
