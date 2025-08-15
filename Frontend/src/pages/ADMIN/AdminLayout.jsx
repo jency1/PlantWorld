@@ -15,7 +15,6 @@ const AdminLayout = () => {
 
   const currentPath = location.pathname.split("/").pop();
   const pageTitleMap = {
-    // dashboard: "Admin Dashboard",
     plants: "Manage Plants",
     orders: "Manage Orders",
     users: "Manage Users",

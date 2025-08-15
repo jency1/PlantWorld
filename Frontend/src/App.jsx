@@ -306,6 +306,10 @@ const router = createBrowserRouter([
         path: "",
         element: <DP_ManageOrders />,
       },
+      {
+        path: "orders",
+        element: <DP_ManageOrders />,
+      },
     ],
   },
 ]);
