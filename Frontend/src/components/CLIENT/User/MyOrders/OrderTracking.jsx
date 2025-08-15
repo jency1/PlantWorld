@@ -58,8 +58,8 @@ export default function OrderTracking({ status }) {
             },
           }}
         >
-          {statusStages.map((label) => (
-            <Step key={label}>
+          {statusStages.map((label, index) => (
+            <Step key={label} completed={index <= activeStep}>
               <StepLabel>{label}</StepLabel>
             </Step>
           ))}
