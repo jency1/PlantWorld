@@ -109,7 +109,7 @@ exports.createOrder = catchAsync(async (req, res) => {
 
   // 3. Calculate total and delivery date
   const orderTotal = items.reduce((acc, item) => acc + item.total, 0);
-  const expectedDelivery = new Date(Date.now() + 7 * 24 * 60 * 60 * 1000); // +7 days
+  const expectedDelivery = new Date(Date.now() + 8 * 24 * 60 * 60 * 1000); // +8 days
 
   // 4. Create order
   const order = await Order.create({
@@ -151,37 +151,68 @@ exports.createOrder = catchAsync(async (req, res) => {
 
   // 7. Send confirmation email
   const emailMessage = `
-    <div style="font-family: Arial, sans-serif; color: #333; font-size: 16px;">
-      <p>Hi <strong>${firstName} ${lastName}</strong>,</p>
+  <div style="font-family: Arial, sans-serif; color: #333; font-size: 16px;">
+    <p>Hi <strong>${firstName} ${lastName}</strong>,</p>
 
-      <p>Thank you for your order at <strong style="color:green">PlantWorld 🌿</strong>!</p>
+    <p>Thank you for your order at <strong style="color:green">PlantWorld 🌿</strong>!</p>
 
-      <p>Your order has been successfully placed and is now being processed.</p>
+    <p>Your order has been successfully placed and is now being processed.</p>
 
-      <p><strong>Order Total:</strong> ₹${orderTotal}</p>
-      <p><strong>Expected Delivery:</strong> ${expectedDelivery.toDateString()}</p>
+    <p><strong>Order Total:</strong> ₹${orderTotal}</p>
+    <p><strong>Expected Delivery:</strong> ${expectedDelivery.toDateString()}</p>
 
-      <hr />
-      <h3>Order Summary:</h3>
-      ${items
-        .map(
-          (item) => `
-        <p>
-          <strong>Plant:</strong> ${item.plantRef.name}<br/>
-          <strong>Quantity:</strong> ${item.quantity}<br/>
-          <strong>Total:</strong> ₹${item.total}
-        </p>
-      `
-        )
-        .join('')}
-      <hr/>
+    <hr />
+    <h3 style="text-align: left;">Order Summary:</h3>
 
-      <p>If you have any questions, feel free to reach out to us.</p>
+    <table style="width: 80%; border-collapse: collapse; font-size: 14px;">
+      <thead style="background-color: #e8f5e9; color: #2e7d32; font-weight: bold; text-align: left;">
+        <tr>
+          <th style="padding: 8px; border: 1px solid #c8e6c9; text-align: left;">#</th>
+          <th style="padding: 8px; border: 1px solid #c8e6c9; text-align: left;">Plant</th>
+          <th style="padding: 8px; border: 1px solid #c8e6c9; text-align: left;">Quantity</th>
+          <th style="padding: 8px; border: 1px solid #c8e6c9; text-align: left;">Price</th>
+          <th style="padding: 8px; border: 1px solid #c8e6c9; text-align: left;">Total</th>
+        </tr>
+      </thead>
+      <tbody>
+        ${items
+          .map(
+            (item, idx) => `
+          <tr>
+            <td style="padding: 8px; border: 1px solid #ddd; text-align: left;">${
+              idx + 1
+            }</td>
+            <td style="padding: 8px; border: 1px solid #ddd; text-align: left;">${
+              item.plantRef.name
+            }</td>
+            <td style="padding: 8px; border: 1px solid #ddd; text-align: left;">${
+              item.quantity
+            }</td>
+            <td style="padding: 8px; border: 1px solid #ddd; text-align: left;">₹${
+              item.price
+            }</td>
+            <td style="padding: 8px; border: 1px solid #ddd; text-align: left;">₹${
+              item.total
+            }</td>
+          </tr>
+        `
+          )
+          .join('')}
+        <tr style="font-weight: bold; background-color: #f1f8f5;">
+          <td colspan="4" style="padding: 8px; border: 1px solid #ddd; text-align: left;">Order Total</td>
+          <td style="padding: 8px; border: 1px solid #ddd; text-align: left;">₹${orderTotal}</td>
+        </tr>
+      </tbody>
+    </table>
 
-      <p>With green regards,<br/>
-      <strong style="color:green">The PlantWorld Team 🌱</strong></p>
-    </div>
-  `;
+    <hr />
+
+    <p>If you have any questions, feel free to reach out to us.</p>
+
+    <p>With green regards,<br/>
+    <strong style="color:green">The PlantWorld Team 🌱</strong></p>
+  </div>
+`;
 
   await sendEmail({
     email,
