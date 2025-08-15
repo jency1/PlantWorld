@@ -3,6 +3,7 @@ import { Form } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import { IoIosArrowRoundBack } from "react-icons/io";
 
+import { AuthContext } from "../../../context/CLIENT/AuthContext";
 import { OrderContext } from "../../../context/CLIENT/OrderContext";
 import { NotificationContext } from "../../../context/NotificationContext";
 
@@ -16,7 +17,13 @@ const AddressFormPage = () => {
   const navigate = useNavigate();
   const { showNotification } = useContext(NotificationContext);
   const { checkoutHandler } = useContext(OrderContext);
+  const { user } = useContext(AuthContext);
 
+  // Split full name into first and last
+  const fullName = user?.name || "";
+  const [firstName, lastName] = fullName.trim().split(" ", 2);
+
+  // Handle Submit
   const handleSubmit = async (e) => {
     e.preventDefault();
     const formData = new FormData(e.target);
@@ -72,6 +79,7 @@ const AddressFormPage = () => {
                 name="firstName"
                 placeholder="John"
                 className={inputClass}
+                defaultValue={firstName || ""}
               />
             </div>
             <div>
@@ -81,6 +89,7 @@ const AddressFormPage = () => {
                 name="lastName"
                 placeholder="Doe"
                 className={inputClass}
+                defaultValue={lastName || ""}
               />
             </div>
           </div>
@@ -94,7 +103,9 @@ const AddressFormPage = () => {
                 type="email"
                 name="email"
                 placeholder="abc@example.com"
-                className={inputClass}
+                className={`${inputClass} bg-gray-100 cursor-not-allowed`}
+                defaultValue={user?.email || ""}
+                readOnly
               />
             </div>
             <div>
@@ -104,6 +115,7 @@ const AddressFormPage = () => {
                 name="mobile"
                 placeholder="0123456789"
                 className={inputClass}
+                defaultValue={user?.phoneNumber || ""}
               />
             </div>
           </div>

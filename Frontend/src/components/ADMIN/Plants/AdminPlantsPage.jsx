@@ -147,11 +147,6 @@ const AdminPlantsPage = () => {
         }
       });
 
-      // Debug logs
-      // for (let [key, value] of form.entries()) {
-      //   console.log(`${key}:`, value);
-      // }
-
       try {
         if (selectedPlant) {
           await updatePlantById(selectedPlant._id, form);
