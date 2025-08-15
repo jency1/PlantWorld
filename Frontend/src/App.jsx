@@ -51,6 +51,8 @@ import DP_Layout from "./pages/DP/DP_Layout";
 
 import DP_LoginPage from "./pages/DP/DP_LoginPage";
 import DP_ManageOrders from "./pages/DP/DP_ManageOrders";
+import DP_Profile from "./pages/DP/DP_Profile";
+import DP_Settings from "./pages/DP/DP_Settings";
 
 import { DP_AuthProvider } from "./context/DP/DP_AuthContext";
 import { DP_OrdersProvider } from "./context/DP/DP_OrdersContext";
@@ -62,9 +64,10 @@ import AdminLayout from "./pages/ADMIN/AdminLayout";
 
 import AdminLoginPage from "./pages/ADMIN/AdminLoginPage";
 import ManagePlants from "./pages/ADMIN/ManagePlants";
-import ManageUsers from "./pages/ADMIN/ManageUsers";
 import ManageOrders from "./pages/ADMIN/ManageOrders";
+import ManageUsers from "./pages/ADMIN/ManageUsers";
 import ManageFaqs from "./pages/ADMIN/ManageFaqs";
+import AdminProfile from "./pages/ADMIN/AdminProfile";
 
 import { AdminAuthProvider } from "./context/ADMIN/AdminAuthContext";
 import { AdminOrdersProvider } from "./context/ADMIN/AdminOrdersContext";
@@ -253,16 +256,20 @@ const router = createBrowserRouter([
         element: <ManagePlants />,
       },
       {
-        path: "users",
-        element: <ManageUsers />,
-      },
-      {
         path: "orders",
         element: <ManageOrders />,
       },
       {
+        path: "users",
+        element: <ManageUsers />,
+      },
+      {
         path: "faqs",
         element: <ManageFaqs />,
+      },
+      {
+        path: "profile",
+        element: <AdminProfile />,
       },
     ],
   },
@@ -309,6 +316,14 @@ const router = createBrowserRouter([
       {
         path: "orders",
         element: <DP_ManageOrders />,
+      },
+      {
+        path: "profile",
+        element: <DP_Profile />,
+      },
+      {
+        path: "settings",
+        element: <DP_Settings />,
       },
     ],
   },
