@@ -49,12 +49,12 @@ const UsersTable = ({ users }) => {
       },
     },
     { field: "email", headerName: "Email", flex: 0.6 },
-    { field: "phoneNumber", headerName: "Phone No.", flex: 0.4 },
+    { field: "phoneNumber", headerName: "Phone No.", flex: 0.35 },
     { field: "_id", headerName: "Id", flex: 0.6 },
     {
       field: "cart",
       headerName: "Cart Items",
-      flex: 0.3,
+      flex: 0.25,
       renderCell: (params) => {
         return params.row.cart.length;
       },
@@ -80,6 +80,7 @@ const UsersTable = ({ users }) => {
           showToolbar={true}
           sx={{
             fontSize: isMobile ? "12px" : "14px",
+            paddingLeft: "5px",
             "& .MuiDataGrid-columnHeaderTitle": {
               color: "#4caf50",
               fontWeight: "bold",

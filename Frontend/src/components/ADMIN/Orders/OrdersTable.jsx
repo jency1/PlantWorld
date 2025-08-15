@@ -32,6 +32,8 @@ const OrdersTable = ({ orders, onView }) => {
     page: 0,
   });
 
+  console.log(orders);
+
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
   const BASE_URL = import.meta.env.VITE_BASE_URL;
@@ -67,7 +69,7 @@ const OrdersTable = ({ orders, onView }) => {
     {
       field: "serial",
       headerName: "No.",
-      flex: 0.15,
+      flex: 0.1,
       renderCell: (params) =>
         paginationModel.page * paginationModel.pageSize +
         params.api.getRowIndexRelativeToVisibleRows(params.id) +
@@ -77,52 +79,36 @@ const OrdersTable = ({ orders, onView }) => {
     },
     { field: "_id", headerName: "Order Id", flex: 0.4 },
     {
+      field: "fullName",
+      headerName: "Name",
+      flex: 0.3,
+      renderCell: (params) => params.row.user?.name || "N/A",
+    },
+    {
+      field: "mobile",
+      headerName: "Mobile No.",
+      flex: 0.25,
+    },
+    {
       field: "orderTotal",
       headerName: "Order Total",
       flex: 0.2,
-      renderCell: (params) => `₹${params.value}`,
+      renderCell: (params) => `₹${params?.value}`,
     },
     {
       field: "createdAt",
       headerName: "Created At",
-      flex: 0.3,
+      flex: 0.25,
       renderCell: (params) =>
-        format(new Date(params.row.createdAt), "dd-MM-yyyy"),
+        format(new Date(params?.row?.createdAt), "dd-MM-yyyy"),
     },
     {
       field: "status",
       headerName: "Status",
-      flex: 0.3,
-      renderCell: (params) => {
-        const order = params.row;
-        const currentStatus =
-          order.status?.[order.status.length - 1]?.stage || "Order Received";
-
-        return (
-          <Box display="flex" justifyContent="center">
-            <FormControl fullWidth size="small">
-              <Select
-                value={currentStatus}
-                onChange={(e) => handleStatusChange(order._id, e.target.value)}
-                sx={{
-                  fontSize: isMobile ? "12px" : "14px",
-                  minWidth: isMobile ? 120 : 160,
-                }}
-              >
-                {statusOptions.map((status) => (
-                  <MenuItem
-                    key={status}
-                    value={status}
-                    sx={{ fontSize: isMobile ? "12px" : "14px" }}
-                  >
-                    {status}
-                  </MenuItem>
-                ))}
-              </Select>
-            </FormControl>
-          </Box>
-        );
-      },
+      flex: 0.25,
+      valueGetter: (params) =>
+        params?.row?.status?.[params.row.status.length - 1]?.stage ||
+        "Order Received",
     },
     {
       field: "actions",
@@ -164,10 +150,11 @@ const OrdersTable = ({ orders, onView }) => {
           paginationModel={paginationModel}
           onPaginationModelChange={setPaginationModel}
           pageSizeOptions={[10, 20, 50]}
-          checkboxSelection
+          // checkboxSelection
           showToolbar={true}
           sx={{
             fontSize: isMobile ? "12px" : "14px",
+            paddingLeft: "5px",
             "& .MuiDataGrid-columnHeaderTitle": {
               color: "#4caf50",
               fontWeight: "bold",

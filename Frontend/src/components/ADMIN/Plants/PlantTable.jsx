@@ -115,10 +115,11 @@ const PlantTable = ({ plants, onEdit, onDelete }) => {
           paginationModel={paginationModel}
           onPaginationModelChange={setPaginationModel}
           pageSizeOptions={[10, 20, 50, 100]}
-          checkboxSelection
+          // checkboxSelection
           showToolbar={true}
           sx={{
             fontSize: isMobile ? "12px" : "14px",
+            paddingLeft: "5px",
             "& .MuiDataGrid-row": {
               alignItems: "center !important",
             },

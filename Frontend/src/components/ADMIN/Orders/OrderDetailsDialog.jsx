@@ -157,6 +157,10 @@ const OrderDetailsDialog = ({ open, onClose, order }) => {
             <span style={valueText}>₹{order?.orderTotal}</span>
           </Typography>
           <Typography>
+            <span style={keyText}>Order ID:</span>
+            <span style={valueText}>{order?._id}</span>
+          </Typography>
+          <Typography>
             <span style={keyText}>Status:</span>
             <span style={valueText}>{latestStatus}</span>
           </Typography>
@@ -169,7 +173,7 @@ const OrderDetailsDialog = ({ open, onClose, order }) => {
             <span style={valueText}>{order?.paymentId}</span>
           </Typography>
           <Typography>
-            <span style={keyText}>Created At:</span>
+            <span style={keyText}>Order Created At:</span>
             <span style={valueText}>
               {format(new Date(order?.createdAt), "dd-MM-yyyy")}
             </span>
