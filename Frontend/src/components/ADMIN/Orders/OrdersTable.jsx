@@ -1,32 +1,9 @@
 import React, { useContext, useState } from "react";
 import { DataGrid } from "@mui/x-data-grid";
 import { format } from "date-fns";
-import {
-  Button,
-  Box,
-  Select,
-  MenuItem,
-  FormControl,
-  useTheme,
-  useMediaQuery,
-} from "@mui/material";
-import { AdminAuthContext } from "../../../context/ADMIN/AdminAuthContext";
-import { NotificationContext } from "../../../context/NotificationContext";
-import { AdminOrdersContext } from "../../../context/ADMIN/AdminOrdersContext";
-
-const statusOptions = [
-  "Order Received",
-  "Order Shipped",
-  "Out for Delivery",
-  "Order Delivered",
-  "Order Cancelled",
-];
+import { Button, Box, useTheme, useMediaQuery } from "@mui/material";
 
 const OrdersTable = ({ orders, onView }) => {
-  const { adminToken } = useContext(AdminAuthContext);
-  const { fetchAllOrders } = useContext(AdminOrdersContext);
-  const { showNotification } = useContext(NotificationContext);
-
   const [paginationModel, setPaginationModel] = useState({
     pageSize: 10,
     page: 0,
@@ -36,34 +13,6 @@ const OrdersTable = ({ orders, onView }) => {
 
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
-  const BASE_URL = import.meta.env.VITE_BASE_URL;
-
-  // Handle Status Change
-  const handleStatusChange = async (orderId, newStatus) => {
-    try {
-      const response = await fetch(`${BASE_URL}/api/orders/${orderId}/status`, {
-        method: "PATCH",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${adminToken}`,
-        },
-        body: JSON.stringify({ newStatus }),
-      });
-
-      const result = await response.json();
-
-      if (!response.ok) {
-        showNotification("Failed to update status", "error");
-        throw new Error(result.message || "Failed to update status");
-      }
-
-      fetchAllOrders();
-      showNotification("Status updated successfully", "success");
-    } catch (error) {
-      showNotification("Error updating status", "error");
-      console.error("Error updating status:", error);
-    }
-  };
 
   const columns = [
     {
@@ -106,9 +55,12 @@ const OrdersTable = ({ orders, onView }) => {
       field: "status",
       headerName: "Status",
       flex: 0.25,
-      valueGetter: (params) =>
-        params?.row?.status?.[params.row.status.length - 1]?.stage ||
-        "Order Received",
+      renderCell: (params) => {
+        const statusArray = params?.row?.status || [];
+        return statusArray.length
+          ? statusArray[statusArray.length - 1]?.stage
+          : "Order Received";
+      },
     },
     {
       field: "actions",
@@ -150,7 +102,6 @@ const OrdersTable = ({ orders, onView }) => {
           paginationModel={paginationModel}
           onPaginationModelChange={setPaginationModel}
           pageSizeOptions={[10, 20, 50]}
-          // checkboxSelection
           showToolbar={true}
           sx={{
             fontSize: isMobile ? "12px" : "14px",
