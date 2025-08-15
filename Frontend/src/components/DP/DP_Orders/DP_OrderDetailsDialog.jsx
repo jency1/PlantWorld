@@ -243,6 +243,23 @@ const DP_OrderDetailsDialog = ({ open, onClose, order }) => {
                     </Box>
                   </Box>
                 ))}
+
+                {/* Total row */}
+                <Box
+                  component="tr"
+                  sx={{
+                    borderTop: "2px solid #2e7d32",
+                    backgroundColor: "#f1f8f5",
+                    fontWeight: 600,
+                  }}
+                >
+                  <Box component="td" sx={tableCellStyle} colSpan={4}>
+                    Total
+                  </Box>
+                  <Box component="td" sx={tableCellStyle}>
+                    <span style={valueText}>₹{order?.orderTotal}</span>
+                  </Box>
+                </Box>
               </Box>
             </Box>
           </Box>

@@ -9,8 +9,6 @@ const OrdersTable = ({ orders, onView }) => {
     page: 0,
   });
 
-  console.log(orders);
-
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
 
