@@ -52,7 +52,6 @@ import DP_Layout from "./pages/DP/DP_Layout";
 import DP_LoginPage from "./pages/DP/DP_LoginPage";
 import DP_ManageOrders from "./pages/DP/DP_ManageOrders";
 import DP_Profile from "./pages/DP/DP_Profile";
-import DP_Settings from "./pages/DP/DP_Settings";
 
 import { DP_AuthProvider } from "./context/DP/DP_AuthContext";
 import { DP_OrdersProvider } from "./context/DP/DP_OrdersContext";
@@ -320,10 +319,6 @@ const router = createBrowserRouter([
       {
         path: "profile",
         element: <DP_Profile />,
-      },
-      {
-        path: "settings",
-        element: <DP_Settings />,
       },
     ],
   },
