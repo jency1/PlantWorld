@@ -32,6 +32,7 @@ export function AdminAuthProvider({ children }) {
     }
   }, [adminToken, admin]);
 
+  // login
   const loginAdmin = (token, adminData) => {
     if (adminData?.role !== "admin") {
       showNotification("Access denied. Not an admin account.", "error");
@@ -45,6 +46,7 @@ export function AdminAuthProvider({ children }) {
     navigate("/admin/plants");
   };
 
+  // logout
   const logoutAdmin = () => {
     setAdminToken(null);
     setAdmin(null);

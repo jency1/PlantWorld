@@ -30,6 +30,7 @@ export function DP_AuthProvider({ children }) {
     }
   }, [dpToken, dp]);
 
+  // login
   const loginDP = (token, dpData) => {
     if (dpData?.role !== "deliverypartner") {
       showNotification(
@@ -46,6 +47,7 @@ export function DP_AuthProvider({ children }) {
     navigate("/deliveryPartner");
   };
 
+  // logout
   const logoutDP = () => {
     setDPToken(null);
     setDP(null);

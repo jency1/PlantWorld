@@ -1,4 +1,5 @@
 import React, { useContext, useState } from "react";
+import { useNavigate, useLocation } from "react-router-dom";
 import {
   Drawer,
   List,
@@ -21,7 +22,6 @@ import QuestionAnswerIcon from "@mui/icons-material/QuestionAnswer";
 import LogoutIcon from "@mui/icons-material/Logout";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 
-import { useNavigate, useLocation } from "react-router-dom";
 import { AdminAuthContext } from "../../context/ADMIN/AdminAuthContext";
 import ConfirmationDialog from "../../ui/ConfirmationDialog";
 
@@ -37,11 +37,11 @@ const AdminSidebar = ({ mobileOpen, handleDrawerToggle }) => {
   const [confirmLogoutOpen, setConfirmLogoutOpen] = useState(false);
 
   const navItems = [
-    // { text: "Dashboard", icon: <DashboardIcon />, path: "/admin/dashboard" },
     { text: "Plants", icon: <LocalFloristIcon />, path: "/admin/plants" },
     { text: "Orders", icon: <ShoppingCartIcon />, path: "/admin/orders" },
     { text: "Users", icon: <GroupIcon />, path: "/admin/users" },
     { text: "FAQs", icon: <QuestionAnswerIcon />, path: "/admin/faqs" },
+    { text: "Profile", icon: <AccountCircleIcon />, path: "/admin/profile" },
     { text: "Logout", icon: <LogoutIcon />, path: "/admin/logout" },
   ];
 
@@ -57,6 +57,7 @@ const AdminSidebar = ({ mobileOpen, handleDrawerToggle }) => {
     }
   };
 
+  // Logout
   const handleConfirmLogout = () => {
     logoutAdmin();
     setConfirmLogoutOpen(false);

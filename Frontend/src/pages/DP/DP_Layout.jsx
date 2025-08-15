@@ -15,8 +15,8 @@ const DP_Layout = () => {
 
   const currentPath = location.pathname.split("/").pop();
   const pageTitleMap = {
-    orders: "Orders",
-    profile: "Profile",
+    orders: "My Orders",
+    profile: "My Profile",
     settings: "Settings",
     login: "Login",
   };
