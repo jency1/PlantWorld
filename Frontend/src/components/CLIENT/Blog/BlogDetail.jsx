@@ -48,10 +48,8 @@ const BlogDetail = () => {
             {blog.title}
           </h1>
           <div className="text-gray-800 leading-relaxed">
-            {/* Iterate over the fullContent array to render each block */}
             {blog.fullContent.map((block, index) => {
               if (block.type === "paragraph") {
-                // Render a paragraph, using dangerouslySetInnerHTML for potential HTML like strong tags
                 return (
                   <p
                     key={index}
@@ -60,8 +58,7 @@ const BlogDetail = () => {
                   />
                 );
               } else if (block.type === "heading") {
-                // Dynamically render h2, h3, etc., for headings
-                const HeadingTag = `h${block.level || 3}`; // Default to h3 if level is not specified
+                const HeadingTag = `h${block.level || 3}`;
                 return (
                   <HeadingTag
                     key={index}
@@ -70,7 +67,6 @@ const BlogDetail = () => {
                   />
                 );
               } else if (block.type === "list") {
-                // Render an unordered list
                 return (
                   <ul key={index} className="list-disc pl-5 mb-4">
                     {block.items.map((item, itemIndex) => (
@@ -83,10 +79,9 @@ const BlogDetail = () => {
                   </ul>
                 );
               } else if (block.type === "separator") {
-                // Render a horizontal rule for separators
                 return <hr key={index} className="my-8 border-gray-300" />;
               }
-              return null; // Return null for any unhandled block types
+              return null;
             })}
           </div>
         </div>
