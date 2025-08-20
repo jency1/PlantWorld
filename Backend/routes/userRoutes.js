@@ -38,4 +38,10 @@ router.get('/cart/total', authController.protect, cartController.getCartTotal);
 
 router.route('/').get(userController.getAllUsers);
 
+router.post(
+  '/add-delivery-partner',
+  authController.protect,
+  authController.restrictTo('admin'),
+  userController.addDeliveryPartner
+);
 module.exports = router;
