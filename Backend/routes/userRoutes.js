@@ -37,12 +37,5 @@ router.get(
 router.get('/cart/total', authController.protect, cartController.getCartTotal);
 
 router.route('/').get(userController.getAllUsers);
-// .post(console.log('hello'));
-
-// router
-//   .route('/:id')
-//   .get(console.log('hello'))
-//   .patch(console.log('hello'))
-//   .delete(console.log('hello'));
 
 module.exports = router;

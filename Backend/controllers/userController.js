@@ -67,3 +67,28 @@ exports.deleteMe = catchAsync(async (req, res, next) => {
     data: null,
   });
 });
+
+exports.addDeliveryPartner = catchAsync(async (req, res, next) => {
+  const { name, email, password, passwordConfirm, phoneNumber } = req.body;
+
+  if (!name || !email || !password || !passwordConfirm || !phoneNumber) {
+    return next(new AppError('All fields are required', 400));
+  }
+
+  const newDeliveryPartner = await User.create({
+    name,
+    email,
+    phoneNumber,
+    password,
+    passwordConfirm,
+    role: 'deliverypartner', // Force role to deliverypartner
+  });
+
+  res.status(201).json({
+    status: 'success',
+    message: 'Delivery Partner added successfully',
+    data: {
+      user: newDeliveryPartner,
+    },
+  });
+});
