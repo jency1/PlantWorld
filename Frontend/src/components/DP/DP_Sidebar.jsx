@@ -44,6 +44,11 @@ const DP_Sidebar = ({ mobileOpen, handleDrawerToggle }) => {
       icon: <AccountCircleIcon />,
       path: "/deliveryPartner/profile",
     },
+    {
+      text: "Settings",
+      icon: <SettingsIcon />,
+      path: "/deliveryPartner/settings",
+    },
     { text: "Logout", icon: <LogoutIcon />, path: "/deliveryPartner/logout" },
   ];
 

@@ -73,6 +73,8 @@ import deliveryPartnerAction from "./actions/ADMIN/deliveryPartnerAction";
 import { AdminAuthProvider } from "./context/ADMIN/AdminAuthContext";
 import { AdminOrdersProvider } from "./context/ADMIN/AdminOrdersContext";
 import { AdminUsersProvider } from "./context/ADMIN/AdminUsersContext";
+import DP_Settings from "./pages/DP/DP_Settings";
+import updatePasswordAction from "./actions/DP/updatePasswordAction";
 
 const router = createBrowserRouter([
   {
@@ -326,6 +328,11 @@ const router = createBrowserRouter([
       {
         path: "profile",
         element: <DP_Profile />,
+      },
+      {
+        path: "settings",
+        element: <DP_Settings />,
+        action: updatePasswordAction,
       },
     ],
   },
