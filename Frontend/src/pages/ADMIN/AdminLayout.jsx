@@ -19,6 +19,8 @@ const AdminLayout = () => {
     orders: "Manage Orders",
     users: "Manage Users",
     faqs: "Manage FAQs",
+    deliveryPartner: "Add Delivery Partner",
+    profile: "Manage Profile",
     login: "Login",
   };
   const pageTitle = pageTitleMap[currentPath] || "Admin Panel";

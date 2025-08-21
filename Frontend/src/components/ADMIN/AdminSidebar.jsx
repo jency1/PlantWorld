@@ -21,6 +21,7 @@ import GroupIcon from "@mui/icons-material/Group";
 import QuestionAnswerIcon from "@mui/icons-material/QuestionAnswer";
 import LogoutIcon from "@mui/icons-material/Logout";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
+import LocalShippingIcon from "@mui/icons-material/LocalShipping";
 
 import { AdminAuthContext } from "../../context/ADMIN/AdminAuthContext";
 import ConfirmationDialog from "../../ui/ConfirmationDialog";
@@ -41,6 +42,11 @@ const AdminSidebar = ({ mobileOpen, handleDrawerToggle }) => {
     { text: "Orders", icon: <ShoppingCartIcon />, path: "/admin/orders" },
     { text: "Users", icon: <GroupIcon />, path: "/admin/users" },
     { text: "FAQs", icon: <QuestionAnswerIcon />, path: "/admin/faqs" },
+    {
+      text: "Delivery Partner",
+      icon: <LocalShippingIcon />,
+      path: "/admin/deliveryPartner",
+    },
     { text: "Profile", icon: <AccountCircleIcon />, path: "/admin/profile" },
     { text: "Logout", icon: <LogoutIcon />, path: "/admin/logout" },
   ];

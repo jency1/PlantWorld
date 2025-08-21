@@ -15,7 +15,7 @@ import ShopPageLayout from "./pages/CLIENT/shop/ShopPageLayout";
 import DescriptionLayout from "./pages/CLIENT/shop/DescriptionLayout";
 
 import Contact from "./pages/CLIENT/Contact";
-import contactFormAction from "./actions/contactFormAction";
+import contactFormAction from "./actions/CLIENT/contactFormAction";
 
 import AboutUs from "./pages/CLIENT/AboutUs";
 import FAQs from "./pages/CLIENT/FAQs";
@@ -23,9 +23,9 @@ import BlogPage from "./pages/CLIENT/BlogPage";
 import BlogDetail from "./components/CLIENT/Blog/BlogDetail";
 
 import LoginPage from "./pages/CLIENT/login/LoginPage";
-import loginAction from "./actions/loginAction";
+import loginAction from "./actions/CLIENT/loginAction";
 import ResetPasswordPage from "./pages/CLIENT/login/ResetPasswordPage";
-import resetPasswordAction from "./actions/resetPasswordAction";
+import resetPasswordAction from "./actions/CLIENT/resetPasswordAction";
 
 import CartPage from "./pages/CLIENT/cart and order/CartPage";
 import OrderSuccessPage from "./pages/CLIENT/cart and order/OrderSuccessPage";
@@ -67,6 +67,8 @@ import ManageOrders from "./pages/ADMIN/ManageOrders";
 import ManageUsers from "./pages/ADMIN/ManageUsers";
 import ManageFaqs from "./pages/ADMIN/ManageFaqs";
 import AdminProfile from "./pages/ADMIN/AdminProfile";
+import ManageDeliveryPartner from "./pages/ADMIN/ManageDeliveryPartner";
+import deliveryPartnerAction from "./actions/ADMIN/deliveryPartnerAction";
 
 import { AdminAuthProvider } from "./context/ADMIN/AdminAuthContext";
 import { AdminOrdersProvider } from "./context/ADMIN/AdminOrdersContext";
@@ -265,6 +267,11 @@ const router = createBrowserRouter([
       {
         path: "faqs",
         element: <ManageFaqs />,
+      },
+      {
+        path: "deliveryPartner",
+        element: <ManageDeliveryPartner />,
+        action: deliveryPartnerAction,
       },
       {
         path: "profile",
