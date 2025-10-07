@@ -44,12 +44,33 @@
 
 ### 🛠️ Admin Side
 - 🔐 Secure Admin Login
-- 🌿 Manage Plants: Add, Edit, Delete
+- 🌿 Manage Plants: Add, Edit, Delete,  and View plant details  
 - 📦 Manage Orders: Update tracking status, View User and Order Details
 - 👥 Manage Users: View
-- ❓ Manage FAQs
+- ❓ Manage FAQs: View and add FAQs
+- 🚚 Manage Delivery Partners: Add new delivery partner
+- 👤 Profile: View personal details  
+- 🚪 Logout: Securely logout  
 - 🎯 Protected admin routes
 - 🧩 Utility-first clean UI with Tailwind & MUI
+
+### 🚚 Delivery Partner Panel
+- 🔐 Secure Delivery Partner Login  
+- 📦 View all assigned orders with complete details  
+- 👤 View Customer Information and Delivery Address  
+- 🧾 View detailed Order Summary with all items  
+- 🔄 Update real-time Order Status:  
+  - Order Shipped  
+  - Out for Delivery  
+  - Order Received  
+  - Order Delivered  
+  - Order Cancelled
+- 👥 Profile Section: View personal details
+- ⚙️ Settings Section: Update password
+- 🚪 Logout Section: Securely logout from the system 
+- 🚫 Admin can only view status updates, not modify  
+- 🎯 Protected delivery partner routes  
+- 🧩 Utility-first clean UI with Tailwind & MUI  
 
 ---
 
